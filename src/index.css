@@ -2,29 +2,26 @@
 
 @layer base {
   :root {
-    --color-navy: #071A2B;
-    --color-emerald: #087A5A;
-    --color-dark-green: #04513E;
-    --color-ivory: #F8F7F3;
-    --color-charcoal: #17202A;
-    --color-gold: #C6A15B;
+    --color-brand-blue: #002B99;
+    --color-brand-green: #00A859;
+    --color-navy: #00174D;
+    --color-charcoal: #1E293B;
     
-    --font-sans: 'Manrope', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Manrope', system-ui, -apple-system, sans-serif;
     --font-heading: 'Plus Jakarta Sans', 'Manrope', system-ui, sans-serif;
-    --font-serif: 'Playfair Display', Georgia, serif;
   }
 
   body {
     font-family: var(--font-sans);
-    color: #17202A;
-    background-color: #F8F7F3;
+    color: #1E293B;
+    background-color: #FFFFFF;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
 }
 

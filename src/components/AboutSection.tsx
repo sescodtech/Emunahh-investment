@@ -5,25 +5,25 @@ import { Logo } from './Logo';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-20 lg:py-28 bg-white border-b border-gray-200 scroll-mt-16">
+    <section id="about" className="py-16 lg:py-24 bg-white border-b border-gray-200 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* Left Column: About Narrative (7 cols) */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <div className="text-xs font-bold text-[#087A5A] uppercase tracking-[0.15em]">
+              <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
                 Corporate Heritage & Governance
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#071A2B] tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight leading-tight">
                 An Established Financial Institution Founded to Build Real Possibilities
               </h2>
             </div>
 
-            <div className="space-y-4 text-base text-[#17202A]/75 leading-relaxed font-light">
+            <div className="space-y-3.5 text-base text-gray-600 leading-relaxed font-normal">
               <p>
-                <strong className="text-[#071A2B] font-semibold">Emunahh-Invest Limited</strong> is a registered 
+                <strong className="text-[#00174D] font-semibold">Emunahh-Invest Limited</strong> is a registered 
                 Nigerian financial and investment company headquartered in Lagos. Established on the core belief 
                 that financial services must be straightforward, ethical, and accessible, we bridge critical liquidity 
                 gaps for students, working families, and growing commercial enterprises.
@@ -38,29 +38,29 @@ export const AboutSection: React.FC = () => {
 
             {/* Mission & Vision Box */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-6 rounded-xl bg-[#F8F7F3] border border-gray-200 space-y-2">
-                <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
+              <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-2 shadow-2xs">
+                <div className="text-xs font-bold text-[#00A859] uppercase tracking-wider">
                   Our Mission
                 </div>
-                <div className="text-base font-bold text-[#071A2B]">
+                <div className="text-base font-bold text-[#00174D]">
                   Democratizing Progress
                 </div>
-                <p className="text-xs text-[#17202A]/70 leading-relaxed font-normal">
+                <p className="text-xs text-gray-600 leading-relaxed font-normal">
                   To provide transparent, dependable education financing and disciplined wealth solutions that 
                   accelerate academic excellence and commercial progress across Nigeria.
                 </p>
               </div>
 
-              <div className="p-6 rounded-xl bg-[#F8F7F3] border border-gray-200 space-y-2">
-                <div className="text-xs font-bold text-[#071A2B] uppercase tracking-wider">
+              <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-2 shadow-2xs">
+                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
                   Our Vision
                 </div>
-                <div className="text-base font-bold text-[#071A2B]">
+                <div className="text-base font-bold text-[#00174D]">
                   Nigeria's Most Trusted Partner
                 </div>
-                <p className="text-xs text-[#17202A]/70 leading-relaxed font-normal">
-                  To be Nigeria’s most trusted, accessible financial partner recognized for integrity, 
-                  uncompromising clarity, and genuine client empowerment.
+                <p className="text-xs text-gray-600 leading-relaxed font-normal">
+                  To be recognized across West Africa as the most dependable and ethical private finance house, 
+                  known for transformative education loans and sound commercial support.
                 </p>
               </div>
             </div>
@@ -68,76 +68,64 @@ export const AboutSection: React.FC = () => {
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#087A5A] hover:text-[#04513E] transition-colors"
+                className="inline-flex items-center text-xs font-bold text-[#002B99] hover:text-[#00A859] transition-colors"
               >
                 <span>Read Full Corporate Profile & Leadership</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
           </div>
 
-          {/* Right Column: Corporate Headquarters Card (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-2xl bg-[#F8F7F3] border border-gray-200 space-y-6 shadow-xs">
-              
-              {/* Logo Lockup */}
-              <Logo variant="light" size="lg" layout="stacked" />
+          {/* Right Column: Physical Headquarters Verification Card (5 cols) */}
+          <div className="lg:col-span-5 bg-white border-2 border-[#002B99]/20 rounded-2xl p-7 sm:p-9 space-y-6 shadow-xs">
+            <div className="pb-4 border-b border-gray-150">
+              <Logo variant="light" size="md" layout="stacked" className="items-start text-left" />
+            </div>
 
-              <div className="pt-6 border-t border-gray-200 space-y-4 text-xs text-[#17202A]/80">
-                <div>
-                  <span className="font-bold text-[#071A2B] block text-sm mb-1">
-                    Corporate Headquarters Location
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
+                  Headquarters & Principal Office
+                </div>
+                <div className="text-sm font-semibold text-[#00174D] flex items-start gap-2.5 pt-1">
+                  <MapPin className="w-4 h-4 text-[#00A859] shrink-0 mt-0.5" />
+                  <span>
+                    33, Crossway Plaza, Beside UBA, Charity Road, New Oko Oba, Lagos, Nigeria
                   </span>
-                  <div className="flex items-start gap-2 text-[#17202A]/75 leading-relaxed font-normal">
-                    <MapPin className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
-                    <span>
-                      33, Crossway Plaza, Beside UBA, 3/5 Charity Road, <br />
-                      New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-white border border-gray-200 space-y-2">
-                  <div className="text-[11px] font-bold text-[#087A5A] uppercase tracking-wider">
-                    Direct Telephone Access
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MessageSquare className="w-3.5 h-3.5 text-[#087A5A]" />
-                    <span className="text-[#17202A]/60">WhatsApp / Phone:</span>
-                    <a
-                      href="https://wa.me/2348179171456"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-bold text-[#071A2B] hover:underline tabular-nums"
-                    >
-                      +234 817 917 1456
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-2 pt-1 border-t border-gray-100">
-                    <Phone className="w-3.5 h-3.5 text-[#17202A]/60" />
-                    <span className="text-[#17202A]/60">Alternative Desk:</span>
-                    <a
-                      href="tel:+2348141128119"
-                      className="font-bold text-[#071A2B] hover:underline tabular-nums"
-                    >
-                      +234 814 112 8119
-                    </a>
-                  </div>
-                </div>
-
-                <div className="text-[11px] text-[#17202A]/60 pt-1">
-                  Operating Hours: Monday – Friday: 8:30 AM – 5:00 PM (WAT)
                 </div>
               </div>
 
+              <div className="space-y-1 pt-2 border-t border-gray-100">
+                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
+                  Telephone Inquiries & Advisory
+                </div>
+                <div className="text-sm font-semibold text-[#00174D] flex items-center gap-2.5 pt-1">
+                  <Phone className="w-4 h-4 text-[#00A859] shrink-0" />
+                  <a href="tel:08023190807" className="hover:text-[#002B99] transition-colors">
+                    0802 319 0807
+                  </a>
+                </div>
+              </div>
+
+              <div className="space-y-1 pt-2 border-t border-gray-100">
+                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
+                  Office Hours
+                </div>
+                <div className="text-xs text-gray-600">
+                  Monday – Friday: 8:30 AM – 5:00 PM (WAT)
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2">
               <a
-                href="https://wa.me/2348179171456"
+                href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest%2C%20I%20would%20like%20to%20inquire%20about%20your%20services"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-lg transition-colors shadow-xs"
+                className="w-full flex items-center justify-center gap-2 px-5 py-3 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-colors shadow-xs"
               >
-                <MessageSquare className="w-4 h-4 fill-white" />
-                <span>Message Executive Desk</span>
+                <MessageSquare className="w-4 h-4" />
+                <span>Message Verified Advisor on WhatsApp</span>
               </a>
             </div>
           </div>

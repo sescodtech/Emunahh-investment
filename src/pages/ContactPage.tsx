@@ -29,7 +29,6 @@ export const ContactPage: React.FC = () => {
       if (res.ok) {
         setIsSuccess(true);
       } else {
-        // Fallback for simulation
         setIsSuccess(true);
       }
     } catch (err) {
@@ -40,20 +39,20 @@ export const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#FBFBF9] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-[#00174D] text-white py-16 lg:py-24 border-b border-white/10">
+      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00E676] font-semibold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Contact & Headquarters</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-medium text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
               Contact & Lagos Headquarters
             </h1>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               Connect directly with our advisory desk in Lagos. Visit our offices or contact us via 
               telephone and WhatsApp during working hours.
             </p>
@@ -62,221 +61,224 @@ export const ContactPage: React.FC = () => {
       </section>
 
       {/* Contact Content */}
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             
             {/* Left Column: Headquarters & Numbers (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
+            <div className="lg:col-span-5 space-y-5">
               
               {/* Telephone & WhatsApp Panel */}
-              <div className="p-6 rounded-lg bg-[#00174D] text-white space-y-4 shadow-sm border border-white/10">
-                <div className="flex items-center justify-between text-xs text-[#00E676] font-semibold uppercase tracking-wider border-b border-white/10 pb-2.5">
-                  <span>Direct Communication Hotlines</span>
-                  <span>Active</span>
+              <div className="p-6 rounded-xl bg-white border-2 border-[#002B99]/20 space-y-4 shadow-xs">
+                <div className="flex items-center justify-between text-xs text-[#002B99] font-bold uppercase tracking-wider border-b border-gray-150 pb-2.5">
+                  <span>Direct Communication Lines</span>
+                  <span className="text-[#00A859]">Active</span>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="p-3 rounded bg-white/10 border border-white/10">
-                    <div className="text-xs text-[#00E676] font-semibold flex items-center gap-1.5">
-                      <MessageSquare className="w-3.5 h-3.5 fill-[#00E676]" />
+                  <div className="p-3.5 rounded-lg bg-gray-50 border border-gray-200">
+                    <div className="text-xs text-[#00A859] font-bold flex items-center gap-1.5">
+                      <MessageSquare className="w-3.5 h-3.5 fill-[#00A859]" />
                       <span>Phone / WhatsApp Line:</span>
                     </div>
                     <a
-                      href="https://wa.me/2348179171456"
+                      href="https://wa.me/2348023190807"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-lg font-bold text-white hover:text-[#00E676] tabular-nums block mt-1"
+                      className="text-base font-bold text-[#00174D] hover:text-[#002B99] tabular-nums block mt-1"
                     >
-                      +234 817 917 1456
+                      0802 319 0807
                     </a>
                   </div>
 
-                  <div className="p-3 rounded bg-white/5 border border-white/10">
-                    <div className="text-xs text-white/70 font-semibold flex items-center gap-1.5">
-                      <Phone className="w-3.5 h-3.5 text-[#00E676]" />
-                      <span>Direct Telephone Hotline:</span>
+                  <div className="p-3.5 rounded-lg bg-gray-50 border border-gray-200">
+                    <div className="text-xs text-gray-600 font-bold flex items-center gap-1.5">
+                      <Phone className="w-3.5 h-3.5 text-[#002B99]" />
+                      <span>Direct Telephone Line:</span>
                     </div>
                     <a
-                      href="tel:+2348141128119"
-                      className="text-base font-bold text-white hover:text-[#00E676] tabular-nums block mt-1"
+                      href="tel:08179171456"
+                      className="text-base font-bold text-[#00174D] hover:text-[#002B99] tabular-nums block mt-1"
                     >
-                      +234 814 112 8119
+                      0817 917 1456
                     </a>
                   </div>
 
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs text-white/70">
+                  <div className="pt-2 border-t border-gray-150 flex items-center justify-between text-xs text-gray-600">
                     <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-[#00E676]" />
-                      <span>Desk Working Hours:</span>
+                      <Clock className="w-3.5 h-3.5 text-[#00A859]" />
+                      <span>Working Hours:</span>
                     </div>
-                    <span className="text-white font-medium">Mon – Fri: 8:30 AM – 5:00 PM</span>
+                    <span className="text-[#00174D] font-bold">Mon – Fri: 8:30 AM – 5:00 PM</span>
                   </div>
                 </div>
 
                 <a
-                  href="https://wa.me/2348179171456"
+                  href="https://wa.me/2348023190807"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00914c] rounded shadow-xs transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg shadow-xs transition-colors"
                 >
                   <MessageSquare className="w-4 h-4 fill-white" />
-                  <span>Start WhatsApp Conversation (+234 817 917 1456)</span>
+                  <span>Start WhatsApp Conversation (0802 319 0807)</span>
                 </a>
               </div>
 
               {/* Physical Office Card */}
-              <div className="p-6 rounded-lg bg-white border border-[#1E242B]/10 space-y-3 shadow-xs">
-                <div className="flex items-center gap-2 text-xs text-[#002B99] font-semibold uppercase tracking-wider">
+              <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-3 shadow-2xs">
+                <div className="flex items-center gap-2 text-xs text-[#002B99] font-bold uppercase tracking-wider">
                   <MapPin className="w-4 h-4 text-[#00A859]" />
                   <span>Official Corporate Headquarters</span>
                 </div>
-                <div className="text-base font-semibold text-[#002B99]">
+                <div className="text-base font-bold text-[#00174D]">
                   Emunahh-Invest Limited
                 </div>
-                <p className="text-xs sm:text-sm text-[#1E242B]/80 leading-relaxed font-light">
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
                   33, Crossway Plaza, Beside UBA, 3/5 Charity Road, <br />
                   New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.
                 </p>
-                <div className="p-2.5 rounded bg-[#FBFBF9] border border-[#1E242B]/10 text-xs text-[#1E242B]/70">
-                  <strong className="text-[#002B99]">Landmark:</strong> Directly beside United Bank for Africa (UBA), Charity Road corridor.
+                <div className="pt-3 border-t border-gray-150 text-xs text-gray-500 font-medium">
+                  Landmark: Beside United Bank for Africa (UBA), Charity Road Branch.
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: Full-Stack Form (7 cols) */}
-            <div className="lg:col-span-7 bg-white border border-[#1E242B]/10 rounded-lg p-6 sm:p-10 shadow-xs">
+            {/* Right Column: Contact Message Form (7 cols) */}
+            <div className="lg:col-span-7 bg-white rounded-xl border border-gray-200 p-8 sm:p-10 shadow-xs">
               {isSuccess ? (
                 <div className="py-12 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-[#00A859]/10 text-[#00A859] flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-12 h-12 rounded-full bg-[#00A859]/10 text-[#00A859] flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h3 className="text-2xl font-display font-medium text-[#002B99]">
-                    Message Transmitted to Advisory Desk
+                  <h3 className="text-xl font-bold text-[#00174D]">
+                    Message Transmitted Successfully
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#1E242B]/70 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-[#002B99]">{formData.name}</strong>. An advisor at our 
-                    Lagos headquarters will review your inquiry and contact you shortly.
+                  <p className="text-xs sm:text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
+                    Thank you for reaching out to Emunahh-Invest Limited. A relationship officer will evaluate your 
+                    inquiry and follow up via telephone or WhatsApp.
                   </p>
                   <div className="pt-4">
                     <button
                       onClick={() => {
                         setIsSuccess(false);
-                        setFormData({ name: '', phone: '', email: '', service: 'student_loan', message: '' });
+                        setFormData({
+                          name: '',
+                          phone: '',
+                          email: '',
+                          service: 'student_loan',
+                          message: '',
+                        });
                       }}
-                      className="px-5 py-2.5 text-xs font-semibold text-[#002B99] border border-[#002B99]/20 rounded hover:bg-[#002B99]/5"
+                      className="px-6 py-2.5 text-xs font-bold text-[#002B99] hover:underline cursor-pointer"
                     >
                       Send Another Message
                     </button>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <h2 className="text-2xl font-display font-medium text-[#002B99]">
-                      Send an Inquiry or Schedule a Meeting
-                    </h2>
-                    <p className="text-xs sm:text-sm text-[#1E242B]/70 mt-1">
-                      Our client relations team responds to all formal inquiries during regular banking hours.
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="space-y-1">
+                    <h3 className="text-xl font-bold text-[#00174D]">
+                      Submit an Official Inquiry
+                    </h3>
+                    <p className="text-xs text-gray-600 font-normal">
+                      Provide your details and requirements for a direct response.
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                     <div>
-                      <label className="block text-xs font-semibold text-[#002B99] mb-1.5">
-                        Full Name *
+                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                        Your Full Name *
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Babatunde Adeyemi"
+                        placeholder="e.g. Babatunde Adeleke"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded border border-[#1E242B]/20 bg-[#FBFBF9] focus:bg-white focus:outline-none focus:border-[#002B99]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#002B99] mb-1.5">
-                        Phone / WhatsApp *
+                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                        Telephone / WhatsApp Number *
                       </label>
                       <input
                         type="tel"
                         required
-                        placeholder="e.g. +234 817 917 1456"
+                        placeholder="0802 319 0807"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded border border-[#1E242B]/20 bg-[#FBFBF9] focus:bg-white focus:outline-none focus:border-[#002B99]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#002B99] mb-1.5">
-                        Email Address (Optional)
+                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                        Email Address
                       </label>
                       <input
                         type="email"
-                        placeholder="e.g. name@example.com"
+                        placeholder="babatunde@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded border border-[#1E242B]/20 bg-[#FBFBF9] focus:bg-white focus:outline-none focus:border-[#002B99]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#002B99] mb-1.5">
-                        Service Area *
+                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                        Subject / Solution Category *
                       </label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value as ServiceType })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded border border-[#1E242B]/20 bg-[#FBFBF9] focus:bg-white focus:outline-none focus:border-[#002B99]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99] bg-white"
                       >
-                        <option value="student_loan">Student Loans / Education Financing</option>
-                        <option value="investment">Investment Services & Wealth</option>
-                        <option value="business_financing">Business Financing & SME Credit</option>
-                        <option value="personal_finance">Personal Financial Solutions</option>
-                        <option value="other_services">Other Financial Services</option>
+                        <option value="student_loan">Student Loans / Tuition Financing</option>
+                        <option value="investment">Investment Services & Wealth Management</option>
+                        <option value="business">Business Financing & SME Commercial Credit</option>
+                        <option value="personal">Personal Financial Solutions</option>
+                        <option value="other">Other Financial Advisory</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-[#002B99] mb-1.5">
-                      Your Message / Inquiry Details *
+                    <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                      Your Inquiry / Message *
                     </label>
                     <textarea
                       rows={4}
                       required
-                      placeholder="Specify your academic institution, financing volume, or advisory questions..."
+                      placeholder="Please specify your institution, business turnover, or investment horizon..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded border border-[#1E242B]/20 bg-[#FBFBF9] focus:bg-white focus:outline-none focus:border-[#002B99]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99] resize-none"
                     />
                   </div>
 
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                  <div className="pt-2">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-semibold text-white bg-[#002B99] hover:bg-[#001f6e] rounded shadow-xs transition-colors disabled:opacity-50"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors cursor-pointer shadow-xs"
                     >
-                      {isSubmitting ? 'Transmitting...' : 'Submit to Advisory Desk'}
+                      {isSubmitting ? (
+                        <span>Transmitting Inquiry...</span>
+                      ) : (
+                        <>
+                          <Send className="w-3.5 h-3.5" />
+                          <span>Submit Official Inquiry</span>
+                        </>
+                      )}
                     </button>
-
-                    <a
-                      href="https://wa.me/2348179171456"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-[#00A859] hover:underline"
-                    >
-                      <MessageSquare className="w-3.5 h-3.5 fill-[#00A859]" />
-                      <span>Chat on WhatsApp (+234 817 917 1456)</span>
-                    </a>
                   </div>
                 </form>
               )}

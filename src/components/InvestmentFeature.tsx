@@ -32,65 +32,51 @@ export const InvestmentFeature: React.FC<InvestmentFeatureProps> = ({ onOpenAppl
   ];
 
   return (
-    <section id="investments" className="py-20 lg:py-28 bg-[#071A2B] text-white border-b border-white/10 scroll-mt-16 relative overflow-hidden">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 -right-32 w-96 h-96 bg-[#087A5A]/15 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+    <section id="investments" className="py-16 lg:py-24 bg-white border-b border-gray-200 scroll-mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl space-y-3 mb-16">
-          <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-[0.15em]">
+        <div className="max-w-3xl space-y-3 mb-14">
+          <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
             Institutional Wealth & Private Capital
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight leading-tight">
             Wealth Growth Built on Prudence, Security, and Legal Certainty
           </h2>
-          <p className="text-base sm:text-lg text-white/80 leading-relaxed font-light">
+          <p className="text-base text-gray-600 leading-relaxed font-normal">
             We partner with corporate treasuries, high-earning Nigerian professionals, and diaspora families 
             to protect and grow capital through disciplined real-economy asset allocation.
           </p>
         </div>
 
         {/* Boardroom Image & Principles Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-14">
           
           {/* Boardroom Editorial Photography (6 cols) */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-[#04513E]/30">
+          <div className="lg:col-span-6">
+            <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
               <img
                 src="/src/assets/images/african_investment_meeting_1790151240660.jpg"
                 alt="Executive wealth consultation in Lagos boardroom with Emunahh-Invest"
-                className="w-full h-[400px] sm:h-[460px] object-cover object-center"
+                className="w-full h-[380px] sm:h-[440px] object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#071A2B] via-transparent to-transparent opacity-80 pointer-events-none" />
-              
-              <div className="absolute bottom-6 left-6 right-6 bg-[#071A2B]/95 backdrop-blur-md border border-white/15 rounded-xl p-4 sm:p-5 text-white shadow-xl">
-                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#C6A15B] mb-1">
-                  <span>Executive Wealth Desk</span>
-                  <span className="text-[#087A5A]">Direct Partner Access</span>
-                </div>
-                <div className="text-xs text-white/80 font-light leading-relaxed">
-                  Confidential, face-to-face portfolio consultations held at our New Oko Oba corporate office in Lagos.
-                </div>
-              </div>
             </div>
           </div>
 
-          {/* 4 Pillars Grid (6 cols) */}
+          {/* 4 Principles Grid (6 cols) */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {principles.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-[#087A5A]/50 transition-all space-y-3"
+                  className="p-5 rounded-xl bg-white border border-gray-200 hover:border-[#002B99]/40 hover:shadow-2xs transition-all space-y-2.5"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#087A5A]/20 text-[#087A5A] flex items-center justify-center">
-                    <Icon className="w-5 h-5" />
+                  <div className="w-9 h-9 rounded-lg bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-[#00A859]" />
                   </div>
-                  <h3 className="text-base font-bold text-white tracking-tight">{item.title}</h3>
-                  <p className="text-xs text-white/70 leading-relaxed font-light">{item.desc}</p>
+                  <h3 className="text-sm font-bold text-[#00174D] tracking-tight">{item.title}</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed font-normal">{item.desc}</p>
                 </div>
               );
             })}
@@ -98,30 +84,30 @@ export const InvestmentFeature: React.FC<InvestmentFeatureProps> = ({ onOpenAppl
 
         </div>
 
-        {/* Client Profiles Bar */}
-        <div className="p-8 rounded-2xl bg-white/5 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Action Panel in Brand Styling */}
+        <div className="p-7 sm:p-9 rounded-xl bg-white border-2 border-[#002B99]/20 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xs">
           <div className="space-y-1 text-center md:text-left">
-            <div className="text-xs text-[#C6A15B] font-bold uppercase tracking-wider">
+            <div className="text-xs text-[#00A859] font-bold uppercase tracking-wider">
               Bespoke Portfolio Structuring
             </div>
-            <div className="text-xl font-bold text-white tracking-tight">
+            <div className="text-lg sm:text-xl font-bold text-[#00174D] tracking-tight">
               Ready to deploy capital with verified institutional oversight?
             </div>
-            <div className="text-xs text-white/60">
+            <div className="text-xs text-gray-500">
               Corporate Treasuries · Working Professionals · Diaspora Nigerians
             </div>
           </div>
 
-          <div className="flex items-center gap-4 shrink-0">
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
             <Link
               to="/investments"
-              className="px-6 py-3 text-xs font-bold text-[#071A2B] bg-white hover:bg-gray-100 rounded-lg transition-colors shadow-xs"
+              className="w-full sm:w-auto text-center px-6 py-3 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors shadow-xs"
             >
               Explore Investment Services
             </Link>
             <Link
               to="/contact"
-              className="px-6 py-3 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-lg transition-colors"
+              className="w-full sm:w-auto text-center px-6 py-3 text-xs font-bold text-[#00A859] bg-white hover:bg-gray-50 border border-[#00A859] rounded-lg transition-colors"
             >
               Book In-Person Briefing
             </Link>

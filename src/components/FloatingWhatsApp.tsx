@@ -3,13 +3,13 @@ import React from 'react';
 export const FloatingWhatsApp: React.FC = () => {
   return (
     <a
-      href="https://wa.me/2348179171456?text=Hello%20Emunahh-Invest,%20I%20would%20like%20to%20make%20an%20inquiry."
+      href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest,%20I%20would%20like%20to%20make%20an%20inquiry."
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp with Emunahh-Invest Limited"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 group focus:outline-none focus:ring-4 focus:ring-[#25D366]/40"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 group focus:outline-none focus:ring-4 focus:ring-[#25D366]/40 cursor-pointer"
     >
-      {/* Official WhatsApp SVG Icon */}
+      {/* Standard Official WhatsApp Icon */}
       <svg
         className="w-8 h-8 fill-white transition-transform group-hover:scale-110"
         viewBox="0 0 24 24"

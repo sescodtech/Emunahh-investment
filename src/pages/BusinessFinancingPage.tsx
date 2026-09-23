@@ -32,104 +32,120 @@ export const BusinessFinancingPage: React.FC<BusinessFinancingPageProps> = ({ on
   ];
 
   return (
-    <div className="bg-[#FBFBF9] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-[#00174D] text-white py-16 lg:py-24 border-b border-white/10">
+      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00E676] font-semibold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Services</span>
               <span>/</span>
               <span>Business Financing</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-medium text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
               Business Financing & SME Commercial Credit
             </h1>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               Capital that understands the speed and rhythm of Nigerian enterprise. 
               We finance retail merchants, contractors, and registered SMEs with practical 
               cash-flow-based underwriting.
             </p>
 
-            <div className="pt-4 flex flex-wrap gap-4">
+            <div className="pt-3 flex flex-wrap gap-3.5">
               <button
                 onClick={() => onOpenApply('business_financing')}
-                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-[#00174D] bg-white hover:bg-[#F5F5F0] rounded transition-all shadow-sm"
+                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-all shadow-xs cursor-pointer"
               >
-                <span>Apply for Business Financing</span>
-                <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#00A859]" />
+                <span>Apply for Commercial Credit</span>
+                <ArrowUpRight className="w-4 h-4 ml-1.5" />
               </button>
 
               <a
-                href="https://wa.me/2348179171456?text=Hello%20Emunahh,%20I%20am%20inquiring%20about%20Business%20Financing"
+                href="https://wa.me/2348023190807?text=Hello%20Emunahh,%20I%20am%20inquiring%20about%20Business%20Financing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00914c] rounded transition-all shadow-xs"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-all shadow-xs"
               >
                 <MessageSquare className="w-4 h-4 fill-white" />
-                <span>WhatsApp Business Desk (+234 817 917 1456)</span>
+                <span>WhatsApp Commercial Desk (0802 319 0807)</span>
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
+      {/* Main Details */}
+      <section className="py-14 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-14">
           
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div key={idx} className="bg-white p-8 rounded-lg border border-[#1E242B]/10 space-y-3 shadow-xs">
-                  <div className="w-10 h-10 rounded bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#00A859]" />
+                <div key={idx} className="bg-white p-7 rounded-xl border border-gray-200 space-y-3 shadow-2xs flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="w-10 h-10 rounded-lg bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#00A859]" />
+                    </div>
+                    <h3 className="text-base font-bold text-[#00174D]">{item.title}</h3>
+                    <p className="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
                   </div>
-                  <h3 className="text-xl font-semibold text-[#002B99]">{item.title}</h3>
-                  <p className="text-xs sm:text-sm text-[#1E242B]/70 leading-relaxed font-light">{item.desc}</p>
+                  <button
+                    onClick={() => onOpenApply('business_financing')}
+                    className="pt-4 border-t border-gray-100 text-xs font-bold text-[#002B99] hover:text-[#00A859] flex items-center justify-between cursor-pointer w-full"
+                  >
+                    <span>Request Details</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
                 </div>
               );
             })}
           </div>
 
-          {/* Underwriting Approach */}
-          <div className="bg-[#00174D] text-white p-8 sm:p-12 rounded-lg grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="text-xs text-[#00E676] font-semibold uppercase tracking-wider">
-                Underwriting Philosophy
+          <div className="bg-white border-2 border-[#002B99]/20 p-8 sm:p-10 rounded-xl space-y-6 shadow-xs">
+            <div className="max-w-2xl space-y-2">
+              <div className="text-xs text-[#00A859] font-bold uppercase tracking-wider">
+                Fast-Track Commercial Eligibility
               </div>
-              <h2 className="text-2xl sm:text-3xl font-display font-medium text-white">
-                Underwritten on Commercial Flow, Not Impossible Collateral
-              </h2>
-              <p className="text-xs sm:text-sm text-white/80 leading-relaxed font-light">
-                Traditional commercial banks often demand immovable physical property collateral that locks out 
-                vibrant, profitable trading companies. At Emunahh-Invest, we evaluate verifiable bank statement 
-                velocity, inventory turnover rates, and verifiable purchase contracts.
+              <h3 className="text-xl sm:text-2xl font-bold text-[#00174D]">
+                What Your Business Needs to Access Credit
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600">
+                We focus on your actual business performance rather than bureaucratic obstacles.
               </p>
             </div>
 
-            <div className="lg:col-span-5 bg-white/5 border border-white/10 p-6 rounded-lg space-y-3 text-xs text-white/85">
-              <div className="font-semibold text-white text-sm">Key Qualification Documents:</div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
-                <span>CAC Business Registration Certificate (BN or RC)</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-gray-700">
+              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
+                <span className="font-bold text-[#00174D] block">CAC Registration:</span>
+                <span>Active Business Name or Limited Liability Company registration certificate.</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
-                <span>6 to 12 Months Active Corporate Bank Statements</span>
+              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
+                <span className="font-bold text-[#00174D] block">Turnover Records:</span>
+                <span>6 to 12 months verified corporate or trading bank account statements.</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
-                <span>Valid Government ID of Business Proprietor / Directors</span>
+              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
+                <span className="font-bold text-[#00174D] block">Physical Operation:</span>
+                <span>Verifiable shop, warehouse, or office address located in Lagos State.</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#00E676] shrink-0" />
-                <span>Verifiable Business Location & Utility Bill</span>
+              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
+                <span className="font-bold text-[#00174D] block">KYC Identification:</span>
+                <span>Valid national identification (NIN, Voter's Card, or Passport) of proprietors.</span>
               </div>
+            </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-150">
+              <span className="text-xs text-gray-500">
+                Average approval turnaround: 48 to 72 hours following statement review.
+              </span>
+              <button
+                onClick={() => onOpenApply('business_financing')}
+                className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors cursor-pointer"
+              >
+                Apply for SME Credit Now
+              </button>
             </div>
           </div>
 

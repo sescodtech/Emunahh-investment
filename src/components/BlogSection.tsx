@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, BookOpen, Clock, X, ArrowLeft, UserCheck, MessageSquare } from 'lucide-react';
+import { ArrowUpRight, Clock, X, ArrowLeft, MessageSquare } from 'lucide-react';
 
 interface BlogPost {
   id: string;
@@ -66,31 +66,29 @@ export const BlogSection: React.FC = () => {
   ];
 
   return (
-    <section id="blog" className="py-20 lg:py-28 bg-[#FBFBF9] border-b border-[#1E242B]/10 scroll-mt-20">
+    <section id="blog" className="py-16 lg:py-24 bg-white border-b border-gray-200 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#1E242B]/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-gray-150">
           <div className="max-w-2xl space-y-3">
-            <div className="flex items-center gap-2 text-xs text-[#00A859] font-semibold tracking-wider uppercase">
-              <span>Financial Education & Insights</span>
-              <span aria-hidden="true">·</span>
-              <span>Emunahh Knowledge Base</span>
+            <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
+              Financial Education & Insights
             </div>
-            <h2 className="text-3xl sm:text-4xl font-display font-medium text-[#002B99] tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight leading-tight">
               Practical Perspectives for Nigerian Scholars & Enterprises
             </h2>
-            <p className="text-sm sm:text-base text-[#1E242B]/75 leading-relaxed font-light">
+            <p className="text-sm text-gray-600 leading-relaxed font-normal">
               Clear, honest analysis on navigating education financing, structuring commercial credit, 
               and protecting family wealth in Nigeria.
             </p>
           </div>
 
           <a
-            href="https://wa.me/2348179171456?text=Hello%20Emunahh,%20I%20have%20questions%20regarding%20your%20financial%20advisory%20articles."
+            href="https://wa.me/2348023190807?text=Hello%20Emunahh,%20I%20have%20questions%20regarding%20your%20financial%20advisory%20articles."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#002B99] hover:text-[#00A859] transition-colors py-1 self-start md:self-end"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#002B99] hover:text-[#00A859] transition-colors py-1 self-start md:self-end"
           >
             <span>Ask an Advisor on WhatsApp</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -98,36 +96,35 @@ export const BlogSection: React.FC = () => {
         </div>
 
         {/* Blog Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10">
           {posts.map((post) => (
             <article
               key={post.id}
-              className="bg-white rounded-lg border border-[#1E242B]/10 p-7 flex flex-col justify-between hover:border-[#002B99]/30 transition-all shadow-xs group"
+              className="bg-white rounded-xl border border-gray-200 p-7 flex flex-col justify-between hover:border-[#002B99]/40 hover:shadow-xs transition-all group"
             >
               <div>
-                {/* Zero-Pill Metadata Line */}
-                <div className="flex items-center gap-2 text-xs text-[#1E242B]/50 pb-4 mb-4 border-b border-[#1E242B]/10 font-medium">
-                  <span className="text-[#00A859] font-semibold">{post.category}</span>
+                <div className="flex items-center gap-2 text-xs text-gray-500 pb-3 mb-3 border-b border-gray-100 font-medium">
+                  <span className="text-[#00A859] font-bold">{post.category}</span>
                   <span aria-hidden="true">·</span>
                   <span>{post.readTime}</span>
                   <span aria-hidden="true">·</span>
                   <span>{post.date}</span>
                 </div>
 
-                <h3 className="text-lg font-semibold text-[#002B99] group-hover:text-[#001f6e] leading-snug mb-3 transition-colors">
+                <h3 className="text-base font-bold text-[#00174D] group-hover:text-[#002B99] leading-snug mb-2 transition-colors">
                   {post.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-[#1E242B]/70 leading-relaxed font-normal mb-6">
+                <p className="text-xs text-gray-600 leading-relaxed font-normal">
                   {post.excerpt}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#1E242B]/10 flex items-center justify-between">
-                <span className="text-[11px] text-[#1E242B]/50">{post.author}</span>
+              <div className="pt-6 mt-6 border-t border-gray-100 flex items-center justify-between">
+                <span className="text-xs text-gray-500">{post.author}</span>
                 <button
                   onClick={() => setSelectedPost(post)}
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#002B99] hover:text-[#00A859] transition-colors"
+                  className="text-xs font-bold text-[#002B99] hover:text-[#00A859] flex items-center gap-1 cursor-pointer"
                 >
                   <span>Read Article</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -139,79 +136,61 @@ export const BlogSection: React.FC = () => {
 
       </div>
 
-      {/* Article Reader Modal */}
+      {/* Reader Modal */}
       {selectedPost && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080F1D]/80 backdrop-blur-sm overflow-y-auto"
-          onClick={() => setSelectedPost(null)}
-        >
-          <div
-            className="relative w-full max-w-3xl bg-white rounded-lg shadow-2xl border border-[#1E242B]/15 overflow-hidden my-8 p-6 sm:p-10"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-[#1E242B]/10 mb-6">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="bg-white rounded-xl max-w-2xl w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border border-gray-200 shadow-xl">
+            <div className="flex items-center justify-between border-b border-gray-150 pb-4">
               <button
                 onClick={() => setSelectedPost(null)}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#1E242B]/70 hover:text-[#002B99]"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#002B99] hover:text-[#00174D] cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to Articles</span>
               </button>
-
               <button
                 onClick={() => setSelectedPost(null)}
-                aria-label="Close article"
-                className="p-1 rounded text-[#1E242B]/60 hover:text-[#1E242B] hover:bg-[#1E242B]/5"
+                className="text-gray-400 hover:text-gray-700 p-1 cursor-pointer"
+                aria-label="Close dialog"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Zero-Pill Metadata */}
-            <div className="flex items-center gap-2 text-xs text-[#00A859] font-medium mb-3">
-              <span>{selectedPost.category}</span>
-              <span aria-hidden="true" className="text-[#1E242B]/30">·</span>
-              <span className="text-[#1E242B]/60">{selectedPost.readTime}</span>
-              <span aria-hidden="true" className="text-[#1E242B]/30">·</span>
-              <span className="text-[#1E242B]/60">{selectedPost.date}</span>
+            <div className="space-y-3">
+              <div className="text-xs font-bold text-[#00A859] uppercase tracking-wider">
+                {selectedPost.category} · {selectedPost.readTime}
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#00174D] leading-tight">
+                {selectedPost.title}
+              </h2>
+              <div className="text-xs text-gray-500">
+                Published by {selectedPost.author} · {selectedPost.date}
+              </div>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-display font-medium text-[#002B99] leading-tight mb-4">
-              {selectedPost.title}
-            </h2>
-
-            <div className="flex items-center gap-2 text-xs text-[#1E242B]/60 mb-6 pb-6 border-b border-[#1E242B]/10">
-              <UserCheck className="w-4 h-4 text-[#00A859]" />
-              <span>Written by {selectedPost.author} · Emunahh-Invest Limited</span>
-            </div>
-
-            {/* Content Body */}
-            <div className="space-y-4 text-sm sm:text-base text-[#1E242B]/85 leading-relaxed font-light">
-              {selectedPost.content.map((paragraph, pIdx) => (
-                <p key={pIdx}>{paragraph}</p>
+            <div className="space-y-4 text-sm text-gray-700 leading-relaxed border-t border-gray-150 pt-4">
+              {selectedPost.content.map((p, idx) => (
+                <p key={idx}>{p}</p>
               ))}
             </div>
 
-            {/* Direct Consultation prompt inside blog */}
-            <div className="mt-8 p-5 rounded-lg bg-[#002B99]/5 border border-[#002B99]/15 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <div className="text-xs font-semibold text-[#002B99]">Have questions regarding this topic?</div>
-                <div className="text-xs text-[#1E242B]/70 mt-0.5">
-                  Discuss your scenario with an Emunahh advisor at our Lagos headquarters or on WhatsApp.
-                </div>
-              </div>
+            <div className="border-t border-gray-150 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
               <a
-                href={`https://wa.me/2348179171456?text=Hello%20Emunahh,%20I%20just%20read%20your%20article%20on%20"${encodeURIComponent(selectedPost.title)}"%20and%20would%20like%20to%20consult.`}
+                href="https://wa.me/2348023190807"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00914c] rounded transition-colors whitespace-nowrap shrink-0"
+                className="inline-flex items-center gap-2 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] px-4 py-2.5 rounded-lg transition-colors"
               >
-                <MessageSquare className="w-3.5 h-3.5 fill-white" />
-                <span>Chat on WhatsApp (+234 817 917 1456)</span>
+                <MessageSquare className="w-4 h-4" />
+                <span>Discuss with Our Financial Desk</span>
               </a>
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="text-xs font-bold text-gray-600 hover:text-gray-900 cursor-pointer"
+              >
+                Close Article
+              </button>
             </div>
           </div>
         </div>

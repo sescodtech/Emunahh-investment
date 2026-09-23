@@ -26,9 +26,9 @@ export const TrustStrip: React.FC = () => {
   ];
 
   return (
-    <section className="bg-[#F8F7F3] border-b border-gray-200/80 py-12">
+    <section className="bg-white border-b border-gray-200 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-200/70">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-150">
           {pillars.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -36,13 +36,13 @@ export const TrustStrip: React.FC = () => {
                 key={index}
                 className={`${index > 0 ? 'md:pl-8' : ''} pt-6 md:pt-0 space-y-2`}
               >
-                <div className="w-10 h-10 rounded-lg bg-[#071A2B] text-[#087A5A] flex items-center justify-center shadow-xs">
-                  <Icon className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-lg bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
+                  <Icon className="w-5 h-5 text-[#00A859]" />
                 </div>
-                <h3 className="text-sm font-bold text-[#071A2B] tracking-tight leading-snug pt-1">
+                <h3 className="text-sm font-bold text-[#00174D] tracking-tight leading-snug pt-1">
                   {item.title}
                 </h3>
-                <p className="text-xs text-[#17202A]/70 leading-relaxed font-normal">
+                <p className="text-xs text-gray-600 leading-relaxed font-normal">
                   {item.desc}
                 </p>
               </div>

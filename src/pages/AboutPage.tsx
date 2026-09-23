@@ -5,20 +5,20 @@ import { Logo } from '../components/Logo';
 
 export const AboutPage: React.FC = () => {
   return (
-    <div className="bg-[#FBFBF9] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-[#00174D] text-white py-16 lg:py-24 border-b border-white/10">
+      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00E676] font-semibold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>About Us</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-medium text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
               About Emunahh-Invest Limited
             </h1>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               A registered Nigerian financial and investment company dedicated to expanding educational 
               accessibility, safeguarding wealth, and fueling commercial enterprise.
             </p>
@@ -27,20 +27,20 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* Main Corporate Profile */}
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <div className="text-xs text-[#00A859] font-semibold uppercase tracking-wider">
+              <div className="text-xs text-[#00A859] font-bold uppercase tracking-wider">
                 Corporate Identity
               </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-medium text-[#002B99]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight">
                 Building Real Possibilities Through Ethical, Transparent Finance
               </h2>
-              <div className="space-y-4 text-sm sm:text-base text-[#1E242B]/80 leading-relaxed font-light">
+              <div className="space-y-4 text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
                 <p>
-                  <strong className="text-[#002B99] font-semibold">Emunahh-Invest Limited</strong> is a registered 
+                  <strong className="text-[#00174D] font-semibold">Emunahh-Invest Limited</strong> is a registered 
                   Nigerian financial and investment institution headquartered in the commercial hub of Lagos. 
                   Founded to bring transparency, dignity, and accessibility to Nigerian financial services, 
                   we eliminate the friction between aspirational individuals and the capital required to achieve their goals.
@@ -48,61 +48,97 @@ export const AboutPage: React.FC = () => {
                 <p>
                   Our specialized student loan division was established in response to the pressing tuition challenges 
                   faced by Nigerian families. By creating an institutional remittance framework that pays schools directly, 
-                  we safeguard academic progression and help thousands of students complete their tertiary education and 
-                  professional certifications on schedule.
+                  we ensure that students maintain uninterrupted enrollment while sponsors enjoy manageable, 
+                  structured repayments.
                 </p>
-                <p>
-                  Concurrently, our commercial financing and wealth advisory desks empower Lagos SMEs and private investors 
-                  with prudent capital allocations grounded in real-economy productivity rather than speculative bubbles.
-                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-5 rounded-xl border border-gray-200 bg-white space-y-1 shadow-2xs">
+                  <div className="text-xs font-bold text-[#00A859] uppercase">Mission</div>
+                  <div className="text-sm font-bold text-[#00174D]">Empowering Educational & Commercial Ambition</div>
+                  <div className="text-xs text-gray-600 leading-relaxed">
+                    Delivering transparent, ethical credit and wealth preservation that propels Nigerian families forward.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-xl border border-gray-200 bg-white space-y-1 shadow-2xs">
+                  <div className="text-xs font-bold text-[#002B99] uppercase">Vision</div>
+                  <div className="text-sm font-bold text-[#00174D]">The Benchmark for Trusted Finance</div>
+                  <div className="text-xs text-gray-600 leading-relaxed">
+                    To be the most respected non-bank financial institution in Lagos and West Africa.
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-white p-8 rounded-lg border border-[#1E242B]/10 shadow-xs space-y-6">
-              <Logo variant="light" size="lg" />
-              
-              <div className="space-y-3 pt-2 text-xs text-[#1E242B]/80">
-                <div className="font-semibold text-[#002B99] text-sm">Corporate Headquarters</div>
-                <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#00A859] shrink-0 mt-0.5" />
-                  <span>
-                    33, Crossway Plaza, Beside UBA, 3/5 Charity Road, <br />
-                    New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.
-                  </span>
+            <div className="lg:col-span-5 bg-white border-2 border-[#002B99]/20 p-8 rounded-2xl space-y-6 shadow-xs">
+              <Logo variant="light" size="lg" layout="stacked" className="items-start text-left" />
+
+              <div className="space-y-4 text-xs text-gray-700">
+                <div className="space-y-1">
+                  <span className="font-bold text-[#00174D] uppercase tracking-wider block">Headquarters:</span>
+                  <div className="flex items-start gap-2 text-gray-600 leading-relaxed">
+                    <MapPin className="w-4 h-4 text-[#00A859] shrink-0 mt-0.5" />
+                    <span>33, Crossway Plaza, Beside UBA, Charity Road, New Oko Oba, Lagos, Nigeria.</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2.5 pt-2 border-t border-[#1E242B]/10">
-                  <Phone className="w-4 h-4 text-[#002B99] shrink-0" />
-                  <span className="tabular-nums font-semibold text-[#002B99]">+234 817 917 1456 / +234 814 112 8119</span>
+                <div className="space-y-1 pt-2 border-t border-gray-150">
+                  <span className="font-bold text-[#00174D] uppercase tracking-wider block">Direct Line:</span>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <Phone className="w-4 h-4 text-[#00A859] shrink-0" />
+                    <span className="font-bold text-[#00174D]">0802 319 0807 / 0817 917 1456</span>
+                  </div>
+                </div>
+
+                <div className="space-y-1 pt-2 border-t border-gray-150">
+                  <span className="font-bold text-[#00174D] uppercase tracking-wider block">Operational Desks:</span>
+                  <div className="space-y-1 text-gray-600">
+                    <div>• Tertiary Education Financing Desk</div>
+                    <div>• Private Wealth & Portfolio Advisory</div>
+                    <div>• Commercial Trade & SME Credit Group</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Mission & Vision */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-lg bg-white border border-[#1E242B]/10 space-y-3 shadow-xs">
-              <div className="flex items-center gap-2 text-xs text-[#00A859] font-semibold uppercase tracking-wider">
-                <Compass className="w-4 h-4" />
-                <span>Our Mission</span>
-              </div>
-              <h3 className="text-xl font-semibold text-[#002B99]">Empowering Academic & Commercial Progress</h3>
-              <p className="text-xs sm:text-sm text-[#1E242B]/75 leading-relaxed font-light">
-                To provide transparent, dependable education financing and disciplined wealth solutions that 
-                accelerate academic excellence and commercial progress across Nigeria.
+          {/* Core Values */}
+          <div className="space-y-8 pt-8 border-t border-gray-200">
+            <div className="text-center max-w-2xl mx-auto space-y-2">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#00174D]">
+                Our Institutional Values
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-600">
+                The principles that govern every transaction, contract, and client interaction.
               </p>
             </div>
 
-            <div className="p-8 rounded-lg bg-white border border-[#1E242B]/10 space-y-3 shadow-xs">
-              <div className="flex items-center gap-2 text-xs text-[#00E676] font-semibold uppercase tracking-wider">
-                <Building2 className="w-4 h-4 text-[#00A859]" />
-                <span>Our Vision</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white p-7 rounded-xl border border-gray-200 space-y-3 shadow-2xs">
+                <ShieldCheck className="w-6 h-6 text-[#00A859]" />
+                <h3 className="text-base font-bold text-[#00174D]">Radical Transparency</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  No hidden compounding charges, ambiguous clauses, or surprise administrative levies. Every cost is disclosed upfront.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-[#002B99]">Nigeria's Most Trusted Finance Partner</h3>
-              <p className="text-xs sm:text-sm text-[#1E242B]/75 leading-relaxed font-light">
-                To be Nigeria’s most trusted, accessible financial partner recognized for integrity, 
-                uncompromising clarity, and genuine client empowerment.
-              </p>
+
+              <div className="bg-white p-7 rounded-xl border border-gray-200 space-y-3 shadow-2xs">
+                <Compass className="w-6 h-6 text-[#002B99]" />
+                <h3 className="text-base font-bold text-[#00174D]">Prudent Stewardship</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  We treat every naira entrusted to us with rigorous discipline, prioritizing capital preservation over speculative gambles.
+                </p>
+              </div>
+
+              <div className="bg-white p-7 rounded-xl border border-gray-200 space-y-3 shadow-2xs">
+                <Users className="w-6 h-6 text-[#00A859]" />
+                <h3 className="text-base font-bold text-[#00174D]">Human Dignity</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Financial challenges should never diminish a person’s respect. We engage every applicant with courtesy, responsiveness, and genuine counsel.
+                </p>
+              </div>
             </div>
           </div>
 

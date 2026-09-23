@@ -14,7 +14,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
   };
 
   return (
-    <footer className="bg-[#071A2B] text-white/75 border-t border-white/10 pt-16 pb-12">
+    <footer className="bg-[#00174D] text-white/80 border-t border-white/10 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Main Footer Content */}
@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               <Logo variant="dark" size="lg" />
             </Link>
 
-            <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm font-light">
+            <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm font-normal">
               Emunahh-Invest Limited is a registered Nigerian financial and investment company. 
               We provide dependable student loans, disciplined wealth solutions, and commercial 
               business financing in Lagos, Nigeria.
@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             {/* Complete Physical Address & Landmark */}
             <div className="space-y-3 pt-2 text-xs text-white/85">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#00A859] shrink-0 mt-0.5" />
                 <div className="leading-relaxed">
                   <span className="font-semibold text-white block">Corporate Headquarters:</span>
                   33, Crossway Plaza, Beside UBA, 3/5 Charity Road, <br />
@@ -45,20 +45,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
 
               {/* Exact Phone Numbers */}
               <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
-                <div className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-wider">
+                <div className="text-[11px] font-bold text-[#00E676] uppercase tracking-wider">
                   Direct Telephone Desk
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#087A5A]" />
+                  <MessageSquare className="w-3.5 h-3.5 text-[#00A859]" />
                   <span className="text-white/60">Phone / WhatsApp:</span>
                   <a
-                    href="https://wa.me/2348179171456"
+                    href="https://wa.me/2348023190807"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-white hover:text-[#C6A15B] transition-colors tabular-nums"
+                    className="font-bold text-white hover:text-[#00E676] transition-colors tabular-nums"
                   >
-                    +234 817 917 1456
+                    0802 319 0807
                   </a>
                 </div>
 
@@ -66,10 +66,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                   <Phone className="w-3.5 h-3.5 text-white/60" />
                   <span className="text-white/60">Alternative Desk:</span>
                   <a
-                    href="tel:+2348141128119"
-                    className="font-bold text-white hover:text-[#C6A15B] transition-colors tabular-nums"
+                    href="tel:08179171456"
+                    className="font-bold text-white hover:text-[#00E676] transition-colors tabular-nums"
                   >
-                    +234 814 112 8119
+                    0817 917 1456
                   </a>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/apply" className="hover:text-[#C6A15B] font-semibold transition-colors block pt-1">
+                <Link to="/apply" className="hover:text-[#00E676] font-semibold transition-colors block pt-1">
                   Online Application Portal →
                 </Link>
               </li>
@@ -122,100 +122,90 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             </div>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/" className="hover:text-white transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
                 <Link to="/about" className="hover:text-white transition-colors">
-                  About Us
+                  About Emunahh-Invest
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-white transition-colors text-[#087A5A] font-semibold">
-                  Resources & Insights
+                <Link to="/blog" className="hover:text-white transition-colors">
+                  Financial Insights & News
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="hover:text-white transition-colors">
-                  Contact Us
+                  Headquarters & Hours
                 </Link>
               </li>
               <li>
-                <Link to="/apply" className="hover:text-white transition-colors">
-                  Track Application
+                <Link to="/privacy-policy" className="hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="hover:text-white transition-colors">
+                  Terms of Service
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Hours & Direct WhatsApp (2 cols) */}
+          {/* Column 4: Hours & In-Person Walk-In (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <div className="text-xs font-bold text-white uppercase tracking-wider">
               Working Hours
             </div>
-            <div className="text-xs space-y-1 text-white/70">
-              <div className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#087A5A]" />
-                <span className="font-semibold text-white">Mon – Fri</span>
+            <div className="space-y-2 text-xs text-white/70">
+              <div className="flex items-start gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-[#00A859] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-white block font-medium">Mon – Fri:</span>
+                  8:30 AM – 5:00 PM
+                </div>
               </div>
-              <div className="text-white/80">8:30 AM – 5:00 PM (WAT)</div>
-              <div className="pt-2 text-[11px] text-white/50">
-                Closed on Saturdays, Sundays, & Statutory Public Holidays.
+              <div className="pt-2">
+                <span className="text-white block font-medium">Weekends & Public Holidays:</span>
+                Closed for in-person advisory (digital intake open)
               </div>
-            </div>
-
-            <div className="pt-3">
-              <a
-                href="https://wa.me/2348179171456"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold shadow-xs transition-colors"
-              >
-                <MessageSquare className="w-3.5 h-3.5 fill-white" />
-                <span>Chat on WhatsApp</span>
-              </a>
             </div>
           </div>
 
         </div>
 
-        {/* Regulatory Disclosure */}
-        <div className="py-6 border-b border-white/10 text-[11px] leading-relaxed text-white/50 space-y-1.5">
-          <div className="flex items-center gap-1.5 font-semibold text-white/70">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#087A5A]" />
-            <span>Institutional Notice & Governance</span>
+        {/* Regulatory Governance & Legal Statement */}
+        <div className="pt-8 pb-6 border-b border-white/10 space-y-3 text-[11px] text-white/50 leading-relaxed">
+          <div className="flex items-center gap-1.5 text-white/80 font-semibold uppercase tracking-wider text-[10px]">
+            <ShieldCheck className="w-4 h-4 text-[#00A859]" />
+            <span>Institutional Governance & Disclosures</span>
           </div>
           <p>
-            Emunahh-Invest Limited is a registered Nigerian financial and investment company. All financing facilities, 
-            including student loans, commercial credit, and personal solutions, are formalized through executed legal contracts 
-            with clear milestone obligations. Tuition disbursements are remitted directly to accredited tertiary institutions 
-            against verified institutional invoices to guarantee academic matriculation.
+            Emunahh-Invest Limited is an incorporated private limited liability financial and investment enterprise 
+            duly registered under the laws of the Federal Republic of Nigeria. We are committed to ethical credit, 
+            capital protection, and transparent institutional transactions. All student loans and enterprise credit facilities 
+            are subject to identity verification, underwriting approval, and execution of formal contract terms. 
+            We do not operate speculative cryptocurrency schemes, pyramid structures, or unauthorized deposit schemes.
           </p>
         </div>
 
-        {/* Bottom Bar: Copyright & Back to Top */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        {/* Bottom Credits & Back to Top */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <div>
             © {new Date().getFullYear()} Emunahh-Invest Limited. All rights reserved.
           </div>
 
           <div className="flex items-center gap-6">
-            <a
-              href="https://emunahhinvest.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
-            >
-              emunahhinvest.com
-            </a>
-            <span className="text-white/20">·</span>
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">
+              Privacy
+            </Link>
+            <Link to="/terms" className="hover:text-white transition-colors">
+              Terms
+            </Link>
             <button
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
+              className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
+              aria-label="Back to top"
             >
               <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5" />
+              <ArrowUp className="w-3.5 h-3.5 text-[#00A859]" />
             </button>
           </div>
         </div>

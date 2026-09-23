@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, MessageSquare, BookOpen, Clock, UserCheck, Search } from 'lucide-react';
+import { ArrowUpRight, MessageSquare, BookOpen, Clock, UserCheck, Search, X, ArrowLeft } from 'lucide-react';
 
 interface BlogPost {
   id: string;
@@ -93,20 +93,20 @@ export const BlogPage: React.FC = () => {
   });
 
   return (
-    <div className="bg-[#FBFBF9] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-[#00174D] text-white py-16 lg:py-24 border-b border-white/10">
+      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00E676] font-semibold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Insights & Blog</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-medium text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
               Financial Knowledge & Education Insights
             </h1>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               Clear, practical perspectives for Nigerian students, families, and growing businesses.
             </p>
           </div>
@@ -114,20 +114,20 @@ export const BlogPage: React.FC = () => {
       </section>
 
       {/* Main Blog Section */}
-      <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-12">
+      <section className="py-14 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10">
           
           {/* Controls: Search & Category Filter */}
-          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-8 border-b border-[#1E242B]/10">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pb-6 border-b border-gray-150">
             <div className="flex items-center flex-wrap gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-3.5 py-1.5 text-xs font-semibold rounded border transition-colors ${
+                  className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
                     activeCategory === cat
                       ? 'bg-[#002B99] text-white border-[#002B99]'
-                      : 'bg-white text-[#1E242B]/70 border-[#1E242B]/15 hover:border-[#1E242B]/30'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
                   }`}
                 >
                   {cat}
@@ -136,47 +136,47 @@ export const BlogPage: React.FC = () => {
             </div>
 
             <div className="relative w-full md:w-72">
-              <Search className="w-4 h-4 text-[#1E242B]/40 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3.5 py-2 text-xs rounded border border-[#1E242B]/20 bg-white focus:outline-none focus:border-[#002B99]"
+                className="w-full pl-9 pr-3.5 py-2 text-xs rounded-lg border border-gray-200 focus:outline-none focus:border-[#002B99]"
               />
             </div>
           </div>
 
-          {/* Articles Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post) => (
               <article
                 key={post.id}
-                className="bg-white rounded-lg border border-[#1E242B]/10 p-7 flex flex-col justify-between shadow-xs hover:border-[#002B99]/30 transition-all"
+                className="bg-white rounded-xl border border-gray-200 p-7 flex flex-col justify-between hover:border-[#002B99]/40 hover:shadow-xs transition-all group"
               >
                 <div>
-                  <div className="flex items-center gap-2 text-xs text-[#1E242B]/50 pb-3 mb-3 border-b border-[#1E242B]/10 font-medium">
-                    <span className="text-[#00A859] font-semibold">{post.category}</span>
+                  <div className="flex items-center gap-2 text-xs text-gray-500 pb-3 mb-3 border-b border-gray-100 font-medium">
+                    <span className="text-[#00A859] font-bold">{post.category}</span>
                     <span aria-hidden="true">·</span>
                     <span>{post.readTime}</span>
                     <span aria-hidden="true">·</span>
                     <span>{post.date}</span>
                   </div>
 
-                  <h2 className="text-lg font-semibold text-[#002B99] leading-snug mb-3">
+                  <h3 className="text-base font-bold text-[#00174D] group-hover:text-[#002B99] leading-snug mb-2 transition-colors">
                     {post.title}
-                  </h2>
+                  </h3>
 
-                  <p className="text-xs sm:text-sm text-[#1E242B]/70 leading-relaxed font-light mb-6">
+                  <p className="text-xs text-gray-600 leading-relaxed font-normal">
                     {post.excerpt}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#1E242B]/10 flex items-center justify-between">
-                  <span className="text-[11px] text-[#1E242B]/50">{post.author}</span>
+                <div className="pt-6 mt-6 border-t border-gray-100 flex items-center justify-between">
+                  <span className="text-xs text-gray-500">{post.author}</span>
                   <button
                     onClick={() => setSelectedPost(post)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#002B99] hover:text-[#00A859] transition-colors"
+                    className="text-xs font-bold text-[#002B99] hover:text-[#00A859] flex items-center gap-1 cursor-pointer"
                   >
                     <span>Read Article</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -191,46 +191,59 @@ export const BlogPage: React.FC = () => {
 
       {/* Reader Modal */}
       {selectedPost && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080F1D]/80 backdrop-blur-sm overflow-y-auto"
-          onClick={() => setSelectedPost(null)}
-        >
-          <div
-            className="relative w-full max-w-3xl bg-white rounded-lg shadow-2xl border border-[#1E242B]/15 overflow-hidden my-8 p-6 sm:p-10"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between pb-4 border-b border-[#1E242B]/10 mb-6">
-              <span className="text-xs font-semibold text-[#00A859]">{selectedPost.category}</span>
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="bg-white rounded-xl max-w-2xl w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto border border-gray-200 shadow-xl">
+            <div className="flex items-center justify-between border-b border-gray-150 pb-4">
               <button
                 onClick={() => setSelectedPost(null)}
-                className="text-xs font-semibold text-[#1E242B]/60 hover:text-[#002B99]"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#002B99] hover:text-[#00174D] cursor-pointer"
               >
-                Close
+                <ArrowLeft className="w-4 h-4" />
+                <span>Back to Articles</span>
+              </button>
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="text-gray-400 hover:text-gray-700 p-1 cursor-pointer"
+                aria-label="Close dialog"
+              >
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-display font-medium text-[#002B99] leading-tight mb-4">
-              {selectedPost.title}
-            </h2>
+            <div className="space-y-3">
+              <div className="text-xs font-bold text-[#00A859] uppercase tracking-wider">
+                {selectedPost.category} · {selectedPost.readTime}
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#00174D] leading-tight">
+                {selectedPost.title}
+              </h2>
+              <div className="text-xs text-gray-500">
+                Published by {selectedPost.author} · {selectedPost.date}
+              </div>
+            </div>
 
-            <div className="space-y-4 text-sm sm:text-base text-[#1E242B]/85 leading-relaxed font-light mb-8">
+            <div className="space-y-4 text-sm text-gray-700 leading-relaxed border-t border-gray-150 pt-4">
               {selectedPost.content.map((p, idx) => (
                 <p key={idx}>{p}</p>
               ))}
             </div>
 
-            <div className="p-4 rounded-lg bg-[#00174D] text-white flex items-center justify-between gap-4">
-              <span className="text-xs text-white/80">Need tailored guidance on this topic?</span>
+            <div className="border-t border-gray-150 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
               <a
-                href="https://wa.me/2348179171456"
+                href="https://wa.me/2348023190807"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00914c] rounded"
+                className="inline-flex items-center gap-2 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] px-4 py-2.5 rounded-lg transition-colors"
               >
-                WhatsApp Desk
+                <MessageSquare className="w-4 h-4" />
+                <span>Discuss with Our Financial Desk</span>
               </a>
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="text-xs font-bold text-gray-600 hover:text-gray-900 cursor-pointer"
+              >
+                Close Article
+              </button>
             </div>
           </div>
         </div>

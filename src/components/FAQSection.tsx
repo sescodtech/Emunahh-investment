@@ -71,111 +71,95 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 lg:py-28 bg-[#FBFBF9] border-b border-[#1E242B]/10 scroll-mt-20">
+    <section id="faq" className="py-16 lg:py-24 bg-white border-b border-gray-200 scroll-mt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-8">
         
         {/* Header */}
-        <div className="text-center space-y-3 mb-12">
-          <div className="inline-flex items-center gap-1.5 text-xs text-[#0E765E] font-semibold tracking-wider uppercase">
+        <div className="text-center space-y-3 mb-10">
+          <div className="inline-flex items-center gap-1.5 text-xs text-[#00A859] font-bold tracking-wider uppercase">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Clear Answers</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-medium text-[#0B1528] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm sm:text-base text-[#1E242B]/70 max-w-xl mx-auto font-light">
+          <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto font-normal">
             Everything you need to know about our student loans, investment services, and commercial facilities.
           </p>
         </div>
 
         {/* Category Filters */}
-        <div className="flex items-center justify-center flex-wrap gap-2 mb-10">
+        <div className="flex items-center justify-center flex-wrap gap-2 mb-8">
           <button
             onClick={() => setActiveCategory('all')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded border transition-colors ${
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
               activeCategory === 'all'
-                ? 'bg-[#0B1528] text-white border-[#0B1528]'
-                : 'bg-white text-[#1E242B]/70 border-[#1E242B]/10 hover:border-[#1E242B]/30'
+                ? 'bg-[#002B99] text-white border-[#002B99]'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
             }`}
           >
             All Questions
           </button>
           <button
             onClick={() => setActiveCategory('student')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded border transition-colors ${
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
               activeCategory === 'student'
-                ? 'bg-[#0B1528] text-white border-[#0B1528]'
-                : 'bg-white text-[#1E242B]/70 border-[#1E242B]/10 hover:border-[#1E242B]/30'
+                ? 'bg-[#002B99] text-white border-[#002B99]'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
             }`}
           >
             Student Loans
           </button>
           <button
             onClick={() => setActiveCategory('investment')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded border transition-colors ${
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
               activeCategory === 'investment'
-                ? 'bg-[#0B1528] text-white border-[#0B1528]'
-                : 'bg-white text-[#1E242B]/70 border-[#1E242B]/10 hover:border-[#1E242B]/30'
+                ? 'bg-[#002B99] text-white border-[#002B99]'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
             }`}
           >
             Investments
           </button>
           <button
             onClick={() => setActiveCategory('business')}
-            className={`px-3 py-1.5 text-xs font-semibold rounded border transition-colors ${
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
               activeCategory === 'business'
-                ? 'bg-[#0B1528] text-white border-[#0B1528]'
-                : 'bg-white text-[#1E242B]/70 border-[#1E242B]/10 hover:border-[#1E242B]/30'
+                ? 'bg-[#002B99] text-white border-[#002B99]'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
             }`}
           >
             Business Financing
           </button>
         </div>
 
-        {/* FAQ Accordion List */}
+        {/* Accordion List */}
         <div className="space-y-3">
           {filteredFaqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className="rounded-lg border border-[#1E242B]/10 bg-white overflow-hidden transition-all duration-200"
+                className="border border-gray-200 rounded-xl overflow-hidden bg-white transition-colors"
               >
                 <button
-                  type="button"
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4.5 text-left flex items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E765E]"
+                  className="w-full text-left p-5 flex items-center justify-between gap-4 font-bold text-sm text-[#00174D] hover:text-[#002B99] transition-colors cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base font-semibold text-[#0B1528] leading-snug">
-                    {faq.question}
-                  </span>
-                  <span className="w-7 h-7 rounded-full bg-[#1E242B]/5 flex items-center justify-center text-[#1E242B]/70 shrink-0">
-                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                  <span>{faq.question}</span>
+                  <span className="shrink-0 text-gray-400">
+                    {isOpen ? <Minus className="w-4 h-4 text-[#00A859]" /> : <Plus className="w-4 h-4" />}
                   </span>
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-[#1E242B]/75 leading-relaxed border-t border-[#1E242B]/5 animate-in fade-in duration-150">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
                     {faq.answer}
                   </div>
                 )}
               </div>
             );
           })}
-        </div>
-
-        {/* Still have questions footer */}
-        <div className="mt-12 text-center text-xs text-[#1E242B]/70">
-          <span>Have an unanswered question? </span>
-          <a
-            href="https://wa.me/2348179171456"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#0E765E] font-semibold hover:underline"
-          >
-            Speak directly with our advisory desk on WhatsApp
-          </a>
         </div>
 
       </div>

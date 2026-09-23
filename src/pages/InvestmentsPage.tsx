@@ -27,143 +27,128 @@ export const InvestmentsPage: React.FC<InvestmentsPageProps> = ({ onOpenApply })
   ];
 
   return (
-    <div className="bg-[#FBFBF9] min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-[#00174D] text-white py-16 lg:py-24 border-b border-white/10">
+      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00E676] font-semibold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Services</span>
               <span>/</span>
               <span>Investment Services</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-medium text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
               Investment Services & Wealth Management
             </h1>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-light">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               Disciplined, asset-backed wealth management anchored in capital preservation. 
               We partner with Nigerian professionals, family offices, and institutions to structure 
               dependable capital growth free from speculative volatility.
             </p>
 
-            <div className="pt-4 flex flex-wrap gap-4">
+            <div className="pt-3 flex flex-wrap gap-3.5">
               <button
                 onClick={() => onOpenApply('investment')}
-                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-[#00174D] bg-white hover:bg-[#F5F5F0] rounded transition-all shadow-sm"
+                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-all shadow-xs cursor-pointer"
               >
                 <span>Schedule Wealth Consultation</span>
-                <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#00A859]" />
+                <ArrowUpRight className="w-4 h-4 ml-1.5" />
               </button>
 
               <a
-                href="https://wa.me/2348179171456?text=Hello%20Emunahh,%20I%20would%20like%20to%20discuss%20Investment%20Services"
+                href="https://wa.me/2348023190807?text=Hello%20Emunahh,%20I%20am%20inquiring%20about%20Investment%20Services"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00914c] rounded transition-all shadow-xs"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-all shadow-xs"
               >
                 <MessageSquare className="w-4 h-4 fill-white" />
-                <span>WhatsApp Wealth Desk (+234 817 917 1456)</span>
+                <span>WhatsApp Wealth Desk (0802 319 0807)</span>
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Philosophy & Portfolios */}
-      <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
+      {/* Principles & Details */}
+      <section className="py-14 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-14">
           
-          {/* Principles Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-lg border border-[#1E242B]/10 space-y-3 shadow-xs">
-              <div className="w-10 h-10 rounded bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
-                <ShieldCheck className="w-5 h-5 text-[#00A859]" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#002B99]">Capital Preservation First</h3>
-              <p className="text-xs sm:text-sm text-[#1E242B]/70 leading-relaxed font-light">
-                Our primary mandate is protecting principal. We avoid speculative unhedged instruments, 
-                anchoring capital exclusively in real-economy commercial financing and verified credit assets.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-lg border border-[#1E242B]/10 space-y-3 shadow-xs">
-              <div className="w-10 h-10 rounded bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
-                <FileText className="w-5 h-5 text-[#00A859]" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#002B99]">Formal Written Contracts</h3>
-              <p className="text-xs sm:text-sm text-[#1E242B]/70 leading-relaxed font-light">
-                Every investment engagement is formalized with signed legal documentation 
-                outlining tenure, maturity dates, agreed schedules, and dispute resolution mechanisms.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-lg border border-[#1E242B]/10 space-y-3 shadow-xs">
-              <div className="w-10 h-10 rounded bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
-                <Scale className="w-5 h-5 text-[#00A859]" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#002B99]">Physical Accountability</h3>
-              <p className="text-xs sm:text-sm text-[#1E242B]/70 leading-relaxed font-light">
-                Unlike faceless web applications, our advisors meet with you in person at our Lagos 
-                headquarters (33 Crossway Plaza Beside UBA) for complete transparency.
-              </p>
-            </div>
-          </div>
-
-          {/* Solutions Bento Grid */}
-          <div className="space-y-8">
-            <div className="text-center max-w-2xl mx-auto space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-display font-medium text-[#002B99]">
-                Structured Wealth Frameworks
-              </h2>
-              <p className="text-xs sm:text-sm text-[#1E242B]/70">
-                Customized for your time horizon and liquidity objectives.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {portfolios.map((p, idx) => (
-                <div key={idx} className="bg-white p-8 rounded-lg border border-[#1E242B]/10 flex flex-col justify-between shadow-xs">
-                  <div className="space-y-3">
-                    <div className="text-xs font-semibold text-[#00A859] uppercase tracking-wider">{p.term}</div>
-                    <h3 className="text-xl font-semibold text-[#002B99]">{p.title}</h3>
-                    <p className="text-xs sm:text-sm text-[#1E242B]/70 leading-relaxed font-light">{p.desc}</p>
-                  </div>
-                  <div className="pt-6 mt-6 border-t border-[#1E242B]/10">
-                    <button
-                      onClick={() => onOpenApply('investment')}
-                      className="text-xs font-semibold text-[#002B99] hover:text-[#00A859] flex items-center gap-1"
-                    >
-                      <span>Inquire About This Profile</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {portfolios.map((item, idx) => (
+              <div key={idx} className="bg-white p-7 rounded-xl border border-gray-200 space-y-3 shadow-2xs flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="text-xs font-bold text-[#00A859] uppercase tracking-wider">{item.term}</div>
+                  <h3 className="text-lg font-bold text-[#00174D]">{item.title}</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
                 </div>
-              ))}
-            </div>
+                <button
+                  onClick={() => onOpenApply('investment')}
+                  className="pt-4 border-t border-gray-150 text-xs font-bold text-[#002B99] hover:text-[#00A859] flex items-center justify-between cursor-pointer w-full"
+                >
+                  <span>Request Facility Term Sheet</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
           </div>
 
-          {/* Call to Consult Strip */}
-          <div className="p-8 sm:p-12 rounded-lg bg-[#00174D] text-white flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center md:text-left">
-              <div className="text-xs text-[#00E676] font-semibold uppercase tracking-wider">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-white p-8 sm:p-10 rounded-xl border border-gray-200 shadow-xs">
+            <div className="lg:col-span-6 space-y-4">
+              <div className="text-xs text-[#00A859] font-bold uppercase tracking-wider">
+                Governance & Risk Architecture
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#00174D]">
+                Why Capital Preservation Precedes Return Expansion
+              </h2>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                In an unpredictable economic landscape, chasing unrealistic yield promises usually leads to 
+                loss of principal. At Emunahh-Invest, capital is allocated into verified corporate credit, 
+                collateralized real assets, and liquidity instruments with rigorous audit verification.
+              </p>
+              <div className="space-y-2 pt-2 text-xs text-gray-700">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#00A859]" />
+                  <span>Enforceable formal legal agreements signed in Lagos</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Scale className="w-4 h-4 text-[#00A859]" />
+                  <span>Transparent tenure benchmarks and maturity disbursement dates</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-[#00A859]" />
+                  <span>Quarterly portfolio review statements for corporate treasuries</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 bg-white border-2 border-[#002B99]/20 p-7 rounded-xl space-y-4 shadow-2xs">
+              <div className="text-xs text-[#002B99] uppercase tracking-wider font-bold">
                 Private Advisory Session
               </div>
-              <h3 className="text-2xl font-display font-medium text-white">
-                Book a Confidential Consultation with an Emunahh Wealth Strategist
-              </h3>
-              <p className="text-xs sm:text-sm text-white/70 max-w-xl">
-                Discuss your capital horizons at our New Oko Oba, Lagos headquarters or request a virtual briefing.
+              <div className="text-lg font-bold text-[#00174D]">
+                Consult Directly with Senior Wealth Advisors
+              </div>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Meet in person at our Lagos office or arrange a confidential telephone or video conference 
+                to discuss your capital deployment objectives and risk appetite.
               </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-              <a
-                href="tel:+2348179171456"
-                className="px-5 py-3 text-xs font-bold text-[#00174D] bg-white hover:bg-[#F5F5F0] rounded transition-colors text-center"
-              >
-                Call Hotline (+234 817 917 1456)
-              </a>
+              <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                <a
+                  href="tel:08023190807"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors shadow-xs"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Call 0802 319 0807</span>
+                </a>
+                <button
+                  onClick={() => onOpenApply('investment')}
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold text-[#00A859] bg-white border border-[#00A859] hover:bg-gray-50 rounded-lg transition-colors cursor-pointer"
+                >
+                  <span>Book In-Person Session</span>
+                </button>
+              </div>
             </div>
           </div>
 
