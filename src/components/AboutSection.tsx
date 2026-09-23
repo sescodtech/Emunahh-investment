@@ -4,27 +4,8 @@ import { MapPin, Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
 import { Logo } from './Logo';
 
 export const AboutSection: React.FC = () => {
-  const corporateValues = [
-    {
-      title: 'Integrity & Legal Certainty',
-      desc: 'We operate with uncompromised ethics. Every condition, repayment interval, and requirement is communicated truthfully in legally binding contracts.',
-    },
-    {
-      title: 'Educational Advancement',
-      desc: 'We view student financing as a foundational investment in Nigeria’s intellectual capital and future economic productivity.',
-    },
-    {
-      title: 'Physical Walk-In Accountability',
-      desc: 'We maintain open doors. Our clients can visit our physical headquarters, meet dedicated advisors, and receive face-to-face guidance.',
-    },
-    {
-      title: 'Disciplined Capital Growth',
-      desc: 'Prudent risk management governs all our financing and wealth portfolios, ensuring enduring stability and principal protection.',
-    },
-  ];
-
   return (
-    <section id="about" className="py-20 lg:py-28 bg-white border-b border-[#1E242B]/10 scroll-mt-20">
+    <section id="about" className="py-20 lg:py-28 bg-white border-b border-gray-200 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -32,17 +13,17 @@ export const AboutSection: React.FC = () => {
           {/* Left Column: About Narrative (7 cols) */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-3">
-              <div className="text-xs text-[#00A859] font-bold tracking-wider uppercase">
+              <div className="text-xs font-bold text-[#087A5A] uppercase tracking-[0.15em]">
                 Corporate Heritage & Governance
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-medium text-[#002B99] tracking-tight leading-tight">
-                A Financial Institution Founded to Build Real Possibilities
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#071A2B] tracking-tight leading-tight">
+                An Established Financial Institution Founded to Build Real Possibilities
               </h2>
             </div>
 
-            <div className="space-y-4 text-base text-[#1E242B]/75 leading-relaxed font-light">
+            <div className="space-y-4 text-base text-[#17202A]/75 leading-relaxed font-light">
               <p>
-                <strong className="text-[#002B99] font-semibold">Emunahh-Invest Limited</strong> is a registered 
+                <strong className="text-[#071A2B] font-semibold">Emunahh-Invest Limited</strong> is a registered 
                 Nigerian financial and investment company headquartered in Lagos. Established on the core belief 
                 that financial services must be straightforward, ethical, and accessible, we bridge critical liquidity 
                 gaps for students, working families, and growing commercial enterprises.
@@ -57,27 +38,27 @@ export const AboutSection: React.FC = () => {
 
             {/* Mission & Vision Box */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-6 rounded-lg bg-[#FBFBF9] border border-[#1E242B]/10 space-y-2">
-                <div className="text-xs font-bold text-[#00A859] uppercase tracking-wider">
+              <div className="p-6 rounded-xl bg-[#F8F7F3] border border-gray-200 space-y-2">
+                <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
                   Our Mission
                 </div>
-                <div className="text-base font-semibold text-[#002B99]">
+                <div className="text-base font-bold text-[#071A2B]">
                   Democratizing Progress
                 </div>
-                <p className="text-xs text-[#1E242B]/70 leading-relaxed font-light">
+                <p className="text-xs text-[#17202A]/70 leading-relaxed font-normal">
                   To provide transparent, dependable education financing and disciplined wealth solutions that 
                   accelerate academic excellence and commercial progress across Nigeria.
                 </p>
               </div>
 
-              <div className="p-6 rounded-lg bg-[#FBFBF9] border border-[#1E242B]/10 space-y-2">
-                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
+              <div className="p-6 rounded-xl bg-[#F8F7F3] border border-gray-200 space-y-2">
+                <div className="text-xs font-bold text-[#071A2B] uppercase tracking-wider">
                   Our Vision
                 </div>
-                <div className="text-base font-semibold text-[#002B99]">
+                <div className="text-base font-bold text-[#071A2B]">
                   Nigeria's Most Trusted Partner
                 </div>
-                <p className="text-xs text-[#1E242B]/70 leading-relaxed font-light">
+                <p className="text-xs text-[#17202A]/70 leading-relaxed font-normal">
                   To be Nigeria’s most trusted, accessible financial partner recognized for integrity, 
                   uncompromising clarity, and genuine client empowerment.
                 </p>
@@ -87,9 +68,9 @@ export const AboutSection: React.FC = () => {
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#002B99] hover:text-[#00A859] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#087A5A] hover:text-[#04513E] transition-colors"
               >
-                <span>Read Full Company Profile & Governance</span>
+                <span>Read Full Corporate Profile & Leadership</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
@@ -97,18 +78,18 @@ export const AboutSection: React.FC = () => {
 
           {/* Right Column: Corporate Headquarters Card (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-lg bg-[#FBFBF9] border border-[#1E242B]/10 space-y-6 shadow-xs">
+            <div className="p-8 rounded-2xl bg-[#F8F7F3] border border-gray-200 space-y-6 shadow-xs">
               
               {/* Logo Lockup */}
               <Logo variant="light" size="lg" layout="stacked" />
 
-              <div className="pt-6 border-t border-[#1E242B]/10 space-y-4 text-xs text-[#1E242B]/80">
+              <div className="pt-6 border-t border-gray-200 space-y-4 text-xs text-[#17202A]/80">
                 <div>
-                  <span className="font-bold text-[#002B99] block text-sm mb-1">
+                  <span className="font-bold text-[#071A2B] block text-sm mb-1">
                     Corporate Headquarters Location
                   </span>
-                  <div className="flex items-start gap-2 text-[#1E242B]/75 leading-relaxed font-light">
-                    <MapPin className="w-4 h-4 text-[#00A859] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2 text-[#17202A]/75 leading-relaxed font-normal">
+                    <MapPin className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
                     <span>
                       33, Crossway Plaza, Beside UBA, 3/5 Charity Road, <br />
                       New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.
@@ -116,35 +97,35 @@ export const AboutSection: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-3 rounded bg-white border border-[#1E242B]/10 space-y-2">
-                  <div className="text-[11px] font-bold text-[#00A859] uppercase tracking-wider">
+                <div className="p-4 rounded-xl bg-white border border-gray-200 space-y-2">
+                  <div className="text-[11px] font-bold text-[#087A5A] uppercase tracking-wider">
                     Direct Telephone Access
                   </div>
                   <div className="flex items-center gap-2">
-                    <MessageSquare className="w-3.5 h-3.5 text-[#00A859]" />
-                    <span className="text-[#1E242B]/60">WhatsApp / Phone:</span>
+                    <MessageSquare className="w-3.5 h-3.5 text-[#087A5A]" />
+                    <span className="text-[#17202A]/60">WhatsApp / Phone:</span>
                     <a
                       href="https://wa.me/2348179171456"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-bold text-[#002B99] hover:underline tabular-nums"
+                      className="font-bold text-[#071A2B] hover:underline tabular-nums"
                     >
                       +234 817 917 1456
                     </a>
                   </div>
-                  <div className="flex items-center gap-2 pt-1 border-t border-[#1E242B]/10">
-                    <Phone className="w-3.5 h-3.5 text-[#1E242B]/60" />
-                    <span className="text-[#1E242B]/60">Alternative Desk:</span>
+                  <div className="flex items-center gap-2 pt-1 border-t border-gray-100">
+                    <Phone className="w-3.5 h-3.5 text-[#17202A]/60" />
+                    <span className="text-[#17202A]/60">Alternative Desk:</span>
                     <a
                       href="tel:+2348141128119"
-                      className="font-bold text-[#002B99] hover:underline tabular-nums"
+                      className="font-bold text-[#071A2B] hover:underline tabular-nums"
                     >
                       +234 814 112 8119
                     </a>
                   </div>
                 </div>
 
-                <div className="text-[11px] text-[#1E242B]/60 pt-1">
+                <div className="text-[11px] text-[#17202A]/60 pt-1">
                   Operating Hours: Monday – Friday: 8:30 AM – 5:00 PM (WAT)
                 </div>
               </div>
@@ -153,10 +134,10 @@ export const AboutSection: React.FC = () => {
                 href="https://wa.me/2348179171456"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 text-xs font-bold text-white bg-[#00A859] hover:bg-[#00914c] rounded transition-colors shadow-xs"
+                className="w-full flex items-center justify-center gap-2 py-3 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-lg transition-colors shadow-xs"
               >
                 <MessageSquare className="w-4 h-4 fill-white" />
-                <span>Chat with Executive Desk</span>
+                <span>Message Executive Desk</span>
               </a>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, MessageSquare, Phone } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { ServiceType } from '../types';
 
 interface BusinessFeatureProps {
@@ -8,121 +8,117 @@ interface BusinessFeatureProps {
 }
 
 export const BusinessFeature: React.FC<BusinessFeatureProps> = ({ onOpenApply }) => {
-  const businessProducts = [
+  const products = [
     {
       title: 'Merchant Inventory Restocking',
-      desc: 'Rapid liquidity to purchase fast-moving trade inventory in bulk ahead of seasonal high-demand windows.',
+      desc: 'Rapid liquidity to acquire fast-moving trade goods in bulk ahead of seasonal high-demand periods.',
     },
     {
-      title: 'Working Capital Revolving Lines',
-      desc: 'Cover operational overhead, commercial receivables delays, and urgent vendor payments without liquidity stalls.',
+      title: 'Revolving Working Capital',
+      desc: 'Bridge commercial receivable lags and vendor obligations to keep operational velocity continuous.',
     },
     {
       title: 'Commercial Asset Financing',
-      desc: 'Acquire essential commercial delivery vehicles, heavy power generation plants, or production machinery.',
+      desc: 'Acquire essential commercial delivery vans, heavy generators, or manufacturing machinery.',
     },
     {
-      title: 'Contract & PO Execution',
-      desc: 'Short-term bridge capital to execute verified corporate purchase orders and government service supplies.',
+      title: 'Purchase Order & Contract Bridge',
+      desc: 'Short-term execution capital for verified supply contracts and corporate procurement orders.',
     },
   ];
 
   return (
-    <section id="business-financing" className="py-20 lg:py-28 bg-[#FBFBF9] border-b border-[#1E242B]/10 scroll-mt-20">
+    <section id="business-financing" className="py-20 lg:py-28 bg-[#F8F7F3] border-b border-gray-200 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Details & Underwriting Checklist (7 cols) */}
+          {/* Left Column: Commercial Velocity Narrative & Products (7 cols) */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-3">
-              <div className="text-xs text-[#00A859] font-bold tracking-wider uppercase">
+              <div className="text-xs font-bold text-[#087A5A] uppercase tracking-[0.15em]">
                 Commercial Enterprise & SME Credit
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-medium text-[#002B99] tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#071A2B] tracking-tight leading-tight">
                 Capital Underwritten on Commercial Velocity, Not Impossible Collateral
               </h2>
-              <p className="text-base sm:text-lg text-[#1E242B]/75 leading-relaxed font-light">
-                Traditional commercial banks lock out thriving Nigerian trading companies by demanding 
-                immovable property collateral. At Emunahh-Invest, we evaluate verifiable bank statement velocity 
+              <p className="text-base text-[#17202A]/75 leading-relaxed font-light">
+                Traditional commercial banks often lock out thriving Nigerian trading companies by demanding 
+                immovable property collateral. At Emunahh-Invest, we evaluate verifiable bank ledger velocity 
                 and inventory turnover.
               </p>
             </div>
 
-            {/* Products Grid */}
+            {/* 4 Commercial Facilities */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {businessProducts.map((bp, idx) => (
-                <div key={idx} className="bg-white p-5 rounded border border-[#1E242B]/10 space-y-1.5 shadow-xs">
-                  <div className="text-sm font-bold text-[#002B99]">{bp.title}</div>
-                  <p className="text-xs text-[#1E242B]/70 leading-relaxed font-light">{bp.desc}</p>
+              {products.map((p, idx) => (
+                <div key={idx} className="p-5 rounded-xl bg-white border border-gray-200 space-y-1.5 shadow-2xs">
+                  <h3 className="text-sm font-bold text-[#071A2B]">{p.title}</h3>
+                  <p className="text-xs text-[#17202A]/70 leading-relaxed font-normal">{p.desc}</p>
                 </div>
               ))}
             </div>
 
             {/* Underwriting Checklist Box */}
-            <div className="p-5 rounded bg-[#001033] text-white space-y-3">
-              <div className="text-xs font-bold text-[#00E676] uppercase tracking-wider">
-                Key Qualification Criteria
+            <div className="p-6 rounded-xl bg-[#071A2B] text-white space-y-3 shadow-xs">
+              <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-wider">
+                SME Qualification Criteria
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-white/85">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00E676] font-bold">✓</span>
-                  <span>Registered CAC Company / Enterprise</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
+                  <span>Registered CAC Enterprise / Company</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00E676] font-bold">✓</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
                   <span>6 to 12 Months Active Bank Statements</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00E676] font-bold">✓</span>
-                  <span>Verifiable Business Premises in Lagos</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
+                  <span>Verifiable Business Location in Lagos</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00E676] font-bold">✓</span>
-                  <span>Valid National Identity of Directors</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
+                  <span>Valid National Identity of Principals</span>
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row items-center gap-4 pt-1">
               <Link
                 to="/business-financing"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001f6e] rounded shadow-xs transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded transition-colors shadow-xs"
               >
-                <span>Explore Business Financing Hub</span>
+                <span>Explore Business Credit Hub</span>
                 <ArrowUpRight className="w-4 h-4 ml-1.5" />
               </Link>
 
-              <a
-                href="https://wa.me/2348179171456?text=Hello%20Emunahh,%20I%20am%20inquiring%20about%20Business%20Financing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00914c] rounded shadow-xs transition-colors"
+              <Link
+                to="/apply"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-[#071A2B] bg-white hover:bg-gray-50 border border-gray-200 rounded transition-colors"
               >
-                <MessageSquare className="w-4 h-4 fill-white" />
-                <span>WhatsApp: +234 817 917 1456</span>
-              </a>
+                <span>Apply for Commercial Facility</span>
+              </Link>
             </div>
           </div>
 
-          {/* Right Column: Photography (5 cols) */}
+          {/* Right Column: Commercial Photography (5 cols) */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-lg overflow-hidden border border-[#1E242B]/15 shadow-xl bg-[#001033]">
+            <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
               <img
                 src="/src/assets/images/lagos_commercial_enterprise_1790142716551.jpg"
-                alt="Nigerian business enterprise owners in Lagos"
-                className="w-full h-[440px] sm:h-[480px] object-cover object-center"
+                alt="Nigerian business enterprise founders in Lagos"
+                className="w-full h-[460px] sm:h-[500px] object-cover object-center"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#001033]/85 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#071A2B]/85 via-transparent to-transparent pointer-events-none" />
 
-              <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md rounded border border-white/20 p-4 text-[#002B99] shadow-lg">
-                <div className="text-[11px] font-bold text-[#00A859] uppercase tracking-wider">
-                  SME Working Capital & Asset Credit
+              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/40 shadow-lg text-[#071A2B]">
+                <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider mb-1">
+                  Commercial Enterprise Desk
                 </div>
-                <div className="text-xs font-medium text-[#1E242B]/85 mt-1">
-                  Empowering retail, distribution, and contracting enterprises across Lagos State.
+                <div className="text-xs text-[#17202A]/80 font-normal leading-relaxed">
+                  Backing retail, wholesale distributors, and service contractors across Lagos State.
                 </div>
               </div>
             </div>

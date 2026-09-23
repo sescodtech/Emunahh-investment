@@ -2,21 +2,29 @@
 
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --color-navy: #071A2B;
+    --color-emerald: #087A5A;
+    --color-dark-green: #04513E;
+    --color-ivory: #F8F7F3;
+    --color-charcoal: #17202A;
+    --color-gold: #C6A15B;
+    
+    --font-sans: 'Manrope', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', 'Manrope', system-ui, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
   }
 
   body {
     font-family: var(--font-sans);
-    color: #1E242B;
-    background-color: #FBFBF9;
+    color: #17202A;
+    background-color: #F8F7F3;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, .font-display {
-    font-family: var(--font-display);
-    letter-spacing: -0.015em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
   }
 }
 

@@ -14,7 +14,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
   };
 
   return (
-    <footer className="bg-[#00143D] text-white/75 border-t border-white/10 pt-16 pb-12">
+    <footer className="bg-[#071A2B] text-white/75 border-t border-white/10 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Main Footer Content */}
@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             {/* Complete Physical Address & Landmark */}
             <div className="space-y-3 pt-2 text-xs text-white/85">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#00E676] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
                 <div className="leading-relaxed">
                   <span className="font-semibold text-white block">Corporate Headquarters:</span>
                   33, Crossway Plaza, Beside UBA, 3/5 Charity Road, <br />
@@ -44,19 +44,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               </div>
 
               {/* Exact Phone Numbers */}
-              <div className="p-4 rounded-lg bg-white/5 border border-white/10 space-y-2">
-                <div className="text-[11px] font-bold text-[#00E676] uppercase tracking-wider">
-                  Contact & Hotlines
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+                <div className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-wider">
+                  Direct Telephone Desk
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#00E676]" />
+                  <MessageSquare className="w-3.5 h-3.5 text-[#087A5A]" />
                   <span className="text-white/60">Phone / WhatsApp:</span>
                   <a
                     href="https://wa.me/2348179171456"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-white hover:text-[#00E676] transition-colors tabular-nums"
+                    className="font-bold text-white hover:text-[#C6A15B] transition-colors tabular-nums"
                   >
                     +234 817 917 1456
                   </a>
@@ -64,10 +64,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
 
                 <div className="flex items-center gap-2 pt-1 border-t border-white/10">
                   <Phone className="w-3.5 h-3.5 text-white/60" />
-                  <span className="text-white/60">Telephone:</span>
+                  <span className="text-white/60">Alternative Desk:</span>
                   <a
                     href="tel:+2348141128119"
-                    className="font-bold text-white hover:text-[#00E676] transition-colors tabular-nums"
+                    className="font-bold text-white hover:text-[#C6A15B] transition-colors tabular-nums"
                   >
                     +234 814 112 8119
                   </a>
@@ -89,12 +89,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               </li>
               <li>
                 <Link to="/investments" className="hover:text-white transition-colors">
-                  Investment Services
+                  Investment Services & Wealth Management
                 </Link>
               </li>
               <li>
                 <Link to="/business-financing" className="hover:text-white transition-colors">
-                  Business Financing
+                  Business Financing & Commercial Credit
                 </Link>
               </li>
               <li>
@@ -104,11 +104,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               </li>
               <li>
                 <Link to="/other-services" className="hover:text-white transition-colors">
-                  Other Financial Services
+                  Other Financial Services & Advisory
                 </Link>
               </li>
               <li>
-                <Link to="/apply" className="hover:text-[#00E676] font-semibold transition-colors block pt-1">
+                <Link to="/apply" className="hover:text-[#C6A15B] font-semibold transition-colors block pt-1">
                   Online Application Portal →
                 </Link>
               </li>
@@ -132,8 +132,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-white transition-colors text-[#00E676] font-semibold">
-                  Blog & Insights
+                <Link to="/blog" className="hover:text-white transition-colors text-[#087A5A] font-semibold">
+                  Resources & Insights
                 </Link>
               </li>
               <li>
@@ -156,12 +156,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             </div>
             <div className="text-xs space-y-1 text-white/70">
               <div className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#00E676]" />
+                <Clock className="w-3.5 h-3.5 text-[#087A5A]" />
                 <span className="font-semibold text-white">Mon – Fri</span>
               </div>
               <div className="text-white/80">8:30 AM – 5:00 PM (WAT)</div>
               <div className="pt-2 text-[11px] text-white/50">
-                Closed on Saturdays, Sundays, & Statutory Holidays.
+                Closed on Saturdays, Sundays, & Statutory Public Holidays.
               </div>
             </div>
 
@@ -170,7 +170,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                 href="https://wa.me/2348179171456"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold shadow-xs transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold shadow-xs transition-colors"
               >
                 <MessageSquare className="w-3.5 h-3.5 fill-white" />
                 <span>Chat on WhatsApp</span>
@@ -183,14 +183,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
         {/* Regulatory Disclosure */}
         <div className="py-6 border-b border-white/10 text-[11px] leading-relaxed text-white/50 space-y-1.5">
           <div className="flex items-center gap-1.5 font-semibold text-white/70">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#00E676]" />
-            <span>Institutional Notice & Compliance</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-[#087A5A]" />
+            <span>Institutional Notice & Governance</span>
           </div>
           <p>
             Emunahh-Invest Limited is a registered Nigerian financial and investment company. All financing facilities, 
-            including student loans, business financing, and personal solutions, are governed by formal legal contracts 
-            and transparent terms. Tuition disbursements are remitted directly to accredited tertiary institutions 
-            against verified school invoices to guarantee academic clearance.
+            including student loans, commercial credit, and personal solutions, are formalized through executed legal contracts 
+            with clear milestone obligations. Tuition disbursements are remitted directly to accredited tertiary institutions 
+            against verified institutional invoices to guarantee academic matriculation.
           </p>
         </div>
 

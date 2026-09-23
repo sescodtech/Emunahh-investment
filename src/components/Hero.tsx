@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowDown, CheckCircle2 } from 'lucide-react';
 import { ServiceType } from '../types';
 
 interface HeroProps {
@@ -9,75 +9,126 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
   return (
-    <section className="bg-white py-16 lg:py-24 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="relative bg-[#071A2B] text-white py-16 lg:py-24 overflow-hidden border-b border-white/10">
+      {/* Subtle Financial Vector Grid / Atmospheric Accents */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(#FFFFFF 1px, transparent 1px), linear-gradient(90deg, #FFFFFF 1px, transparent 1px)`,
+          backgroundSize: '48px 48px',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Atmospheric Emerald Ambient Glows */}
+      <div
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-[#087A5A]/20 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-20 right-10 w-96 h-96 bg-[#04513E]/30 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Heading, Subhead & Professional CTAs (7 columns) */}
-          <div className="lg:col-span-7 space-y-6">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-medium text-[#00174D] tracking-tight leading-[1.15]">
+          {/* LEFT: Eyebrow, Headline, Supporting Text & CTAs (6 columns) */}
+          <div className="lg:col-span-6 space-y-7 z-10">
+            
+            {/* Small Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-white/5 border border-white/10 text-xs font-bold tracking-[0.14em] text-[#C6A15B] uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#087A5A]" aria-hidden="true" />
+              <span>EMUNAHH-INVEST LIMITED</span>
+            </div>
+
+            {/* Large Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.12]">
               Building Financial Possibilities. <br />
-              <span className="text-[#00A859] font-serif italic">
+              <span className="text-[#087A5A] font-serif italic font-normal">
                 Funding Your Next Chapter.
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl font-normal">
-              Emunahh-Invest Limited provides dependable student education loans, 
-              strategic investment services, and structured commercial financing for 
-              students, families, and businesses across Nigeria.
+            {/* Supporting Text */}
+            <p className="text-base sm:text-lg text-white/85 leading-relaxed font-light max-w-xl">
+              We provide accessible financial solutions designed to help students, 
+              individuals and businesses take meaningful steps toward their goals.
             </p>
 
-            {/* CTAs */}
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <Link
-                to="/apply"
-                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001f6e] rounded shadow-sm transition-colors"
+              <a
+                href="#solutions"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded transition-all shadow-sm group"
               >
-                <span>Apply for Financing</span>
-                <ArrowUpRight className="w-4 h-4 ml-1.5" />
-              </Link>
+                <span>Explore Our Solutions</span>
+                <ArrowDown className="w-4 h-4 ml-2 transition-transform group-hover:translate-y-0.5 text-[#C6A15B]" />
+              </a>
 
               <Link
                 to="/student-loans"
-                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold text-[#002B99] hover:text-[#001f6e] bg-[#002B99]/5 hover:bg-[#002B99]/10 rounded border border-[#002B99]/15 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-[#071A2B] bg-white hover:bg-[#F8F7F3] rounded transition-all shadow-sm group"
               >
-                <span>Student Loans</span>
-              </Link>
-
-              <Link
-                to="/investments"
-                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold text-gray-700 hover:text-[#002B99] border border-gray-200 hover:border-gray-300 rounded transition-colors"
-              >
-                <span>Investment Services</span>
+                <span>Apply for Student Loan</span>
+                <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#087A5A] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
 
-            {/* Quiet Corporate Proofpoints */}
-            <div className="pt-8 border-t border-gray-100 grid grid-cols-3 gap-6 text-gray-800">
-              <div>
-                <div className="text-xl sm:text-2xl font-bold text-[#002B99]">Education</div>
-                <div className="text-xs text-gray-500 mt-0.5">Student Tuition Financing</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-bold text-[#00A859]">Wealth</div>
-                <div className="text-xs text-gray-500 mt-0.5">Structured Investments</div>
-              </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-bold text-[#002B99]">Commercial</div>
-                <div className="text-xs text-gray-500 mt-0.5">SME Business Credit</div>
-              </div>
+            {/* Subtle Trust Indicators */}
+            <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-white/70">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#087A5A]" />
+                <span>Direct Tertiary Tuition Remittance</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#087A5A]" />
+                <span>Capital Preservation Mandate</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#087A5A]" />
+                <span>Commercial Flow Underwriting</span>
+              </span>
             </div>
+
           </div>
 
-          {/* Right Column: Clean Professional Image Frame (5 columns) */}
-          <div className="lg:col-span-5">
-            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-gray-50">
-              <img
-                src="/src/assets/images/lagos_financial_hq_1790142688340.jpg"
-                alt="Emunahh-Invest Limited Corporate Financial Building"
-                className="w-full h-[400px] sm:h-[460px] object-cover object-center"
-              />
+          {/* RIGHT: Large Integrated Editorial Image (6 columns) */}
+          <div className="lg:col-span-6 relative">
+            <div className="relative mx-auto max-w-lg lg:max-w-none">
+              
+              {/* Backing Frame & Accent Shadow */}
+              <div className="absolute -inset-2 bg-gradient-to-tr from-[#087A5A]/30 to-transparent rounded-2xl blur-lg pointer-events-none" />
+              
+              {/* Main Image Container */}
+              <div className="relative rounded-xl overflow-hidden border border-white/15 bg-[#04513E]/20 shadow-2xl">
+                <img
+                  src="/src/assets/images/nigerian_professional_hero_1790151218863.jpg"
+                  alt="Confident Nigerian student and young professional empowered by Emunahh-Invest"
+                  className="w-full h-[460px] sm:h-[520px] object-cover object-top filter brightness-[0.98] contrast-[1.03]"
+                />
+
+                {/* Subtle Image Gradient Scrim */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071A2B] via-transparent to-transparent opacity-80 pointer-events-none" />
+
+                {/* Floating Information Element */}
+                <div className="absolute bottom-6 left-6 right-6 bg-[#071A2B]/95 backdrop-blur-md border border-white/15 rounded-lg p-4 shadow-xl">
+                  <div className="flex items-center justify-between text-xs pb-1 mb-1 border-b border-white/10">
+                    <span className="text-[#C6A15B] font-bold uppercase tracking-wider text-[11px]">
+                      Verified Academic Progress
+                    </span>
+                    <span className="text-[#087A5A] font-semibold text-[11px]">
+                      100% Institution Payment
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/90 font-light leading-relaxed">
+                    Tuition is paid directly to accredited universities, polytechnics, ICAN, and the Nigerian Law School.
+                  </p>
+                </div>
+              </div>
+
+              {/* Decorative Geometric Gold Notch */}
+              <div className="hidden sm:block absolute -bottom-3 -right-3 w-12 h-12 border-b-2 border-r-2 border-[#C6A15B]/70 rounded-br pointer-events-none" />
             </div>
           </div>
 
