@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, MessageSquare, Phone, MapPin } from 'lucide-react';
+import { ArrowUpRight, Phone, MapPin } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { ServiceType } from '../types';
 
 interface FinalCTAProps {
@@ -48,10 +49,10 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenApply }) => {
               href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest,%20I%20would%20like%20to%20inquire%20about%20financing."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold text-white border border-white/30 hover:bg-white/10 rounded-lg transition-all whitespace-nowrap"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-xs font-bold text-white bg-[#25D366]/90 hover:bg-[#25D366] active:scale-95 rounded-lg transition-all shadow-xs whitespace-nowrap"
             >
-              <MessageSquare className="w-4 h-4 text-[#00A859]" />
-              <span>Chat on WhatsApp</span>
+              <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
+              <span>Direct WhatsApp Desk</span>
             </a>
           </div>
 

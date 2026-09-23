@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { ServiceType } from '../types';
+import commercialEnterpriseImage from '../assets/images/lagos_commercial_enterprise_1790142716551.jpg';
 
 interface BusinessFeatureProps {
   onOpenApply: (service?: ServiceType) => void;
@@ -106,7 +107,7 @@ export const BusinessFeature: React.FC<BusinessFeatureProps> = ({ onOpenApply })
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
               <img
-                src="/src/assets/images/lagos_commercial_enterprise_1790142716551.jpg"
+                src={commercialEnterpriseImage}
                 alt="Nigerian business enterprise founders in Lagos"
                 className="w-full h-[400px] sm:h-[450px] object-cover object-center"
               />

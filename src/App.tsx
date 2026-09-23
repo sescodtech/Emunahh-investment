@@ -15,6 +15,9 @@ import { AboutPage } from './pages/AboutPage';
 import { BlogPage } from './pages/BlogPage';
 import { ContactPage } from './pages/ContactPage';
 import { ApplyPage } from './pages/ApplyPage';
+import { TermsPage } from './pages/TermsPage';
+import { PrivacyPage } from './pages/PrivacyPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 import { ServiceType } from './types';
 
@@ -33,7 +36,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-[#FBFBF9] text-[#1E242B] font-sans antialiased selection:bg-[#00A859]/20 selection:text-[#002B99]">
+      <div className="min-h-screen flex flex-col bg-white text-[#1E242B] font-sans antialiased selection:bg-[#00A859]/20 selection:text-[#002B99]">
         {/* Multi-Page Sticky Navigation */}
         <Navbar onOpenApply={handleOpenApply} />
 
@@ -49,7 +52,11 @@ export default function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/apply" element={<ApplyPage />} />
-            <Route path="*" element={<HomePage onOpenApply={handleOpenApply} />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/terms-of-service" element={<TermsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
 

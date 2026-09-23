@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowDown, CheckCircle2 } from 'lucide-react';
 import { ServiceType } from '../types';
+import heroImage from '../assets/images/nigerian_professional_hero_1790151218863.jpg';
 
 interface HeroProps {
   onOpenApply: (service?: ServiceType) => void;
@@ -81,7 +82,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
               {/* Clean Image Container */}
               <div className="relative rounded-2xl overflow-hidden border border-gray-200/90 bg-gray-50 shadow-lg">
                 <img
-                  src="/src/assets/images/nigerian_professional_hero_1790151218863.jpg"
+                  src={heroImage}
                   alt="Confident Nigerian student and young professional empowered by Emunahh-Invest"
                   className="w-full h-[440px] sm:h-[480px] object-cover object-top"
                 />

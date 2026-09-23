@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, School, ShieldCheck, CheckCircle2, FileText, ArrowRight } from 'lucide-react';
 import { ServiceType } from '../types';
+import graduateImage from '../assets/images/nigerian_graduate_success_1790142702336.jpg';
 
 interface StudentLoanFeatureProps {
   onOpenApply: (service?: ServiceType) => void;
@@ -63,7 +64,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
               <img
-                src="/src/assets/images/nigerian_graduate_success_1790142702336.jpg"
+                src={graduateImage}
                 alt="Nigerian student graduating successfully with family support"
                 className="w-full h-[400px] sm:h-[450px] object-cover object-center"
               />

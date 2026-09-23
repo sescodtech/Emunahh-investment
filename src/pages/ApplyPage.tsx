@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, MessageSquare, Phone, ArrowUpRight, Search, FileText } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { ServiceType } from '../types';
 
 export const ApplyPage: React.FC = () => {
@@ -192,9 +193,9 @@ export const ApplyPage: React.FC = () => {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg shadow-xs"
+                    className="inline-flex items-center gap-2.5 px-6 py-3 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-95 rounded-lg shadow-xs transition-all"
                   >
-                    <MessageSquare className="w-4 h-4 fill-white" />
+                    <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                     <span>Fast-Track on WhatsApp (0802 319 0807)</span>
                   </a>
 

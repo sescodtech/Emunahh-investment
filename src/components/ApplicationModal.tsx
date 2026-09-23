@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, MessageSquare, Phone, ArrowUpRight, GraduationCap, Building2, TrendingUp } from 'lucide-react';
+import { X, CheckCircle2, Phone, ArrowUpRight, GraduationCap, Building2, TrendingUp } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { ServiceType } from '../types';
 
 interface ApplicationModalProps {
@@ -165,9 +166,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   href={getWhatsAppContinuationUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-colors shadow-xs"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-95 rounded-lg transition-all shadow-xs"
                 >
-                  <MessageSquare className="w-4 h-4 fill-white" />
+                  <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                   <span>Fast-Track on WhatsApp (0802 319 0807)</span>
                 </a>
 

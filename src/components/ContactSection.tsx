@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, MessageSquare, Send, CheckCircle2, ArrowUpRight, Clock } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { ServiceType } from '../types';
 
 export const ContactSection: React.FC = () => {
@@ -101,9 +102,9 @@ export const ContactSection: React.FC = () => {
                 href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest%20Limited,%20I%20would%20like%20to%20inquire%20about%20your%20services."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-colors shadow-xs"
+                className="w-full inline-flex items-center justify-center gap-2.5 py-3 px-4 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-95 rounded-lg transition-all shadow-xs"
               >
-                <MessageSquare className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                 <span>Start Direct Chat on WhatsApp</span>
               </a>
             </div>
@@ -146,9 +147,9 @@ export const ContactSection: React.FC = () => {
                     href={getWhatsAppMessageUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-colors"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-95 rounded-lg transition-all shadow-xs"
                   >
-                    <MessageSquare className="w-4 h-4" />
+                    <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                     <span>Send via WhatsApp for Instant Response</span>
                   </a>
                   <button

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, MessageSquare, Send, CheckCircle2, Clock, ArrowUpRight } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { ServiceType } from '../types';
 
 export const ContactPage: React.FC = () => {
@@ -115,12 +116,12 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <a
-                  href="https://wa.me/2348023190807"
+                  href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest%20Limited,%20I%20would%20like%20to%20inquire%20about%20your%20services."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg shadow-xs transition-colors"
+                  className="w-full flex items-center justify-center gap-2.5 px-4 py-3 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-95 rounded-lg shadow-xs transition-all"
                 >
-                  <MessageSquare className="w-4 h-4 fill-white" />
+                  <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                   <span>Start WhatsApp Conversation (0802 319 0807)</span>
                 </a>
               </div>

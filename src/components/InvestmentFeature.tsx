@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Shield, Clock, FileCheck2, Ban } from 'lucide-react';
 import { ServiceType } from '../types';
+import investmentMeetingImage from '../assets/images/african_investment_meeting_1790151240660.jpg';
 
 interface InvestmentFeatureProps {
   onOpenApply: (service?: ServiceType) => void;
@@ -56,7 +57,7 @@ export const InvestmentFeature: React.FC<InvestmentFeatureProps> = ({ onOpenAppl
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
               <img
-                src="/src/assets/images/african_investment_meeting_1790151240660.jpg"
+                src={investmentMeetingImage}
                 alt="Executive wealth consultation in Lagos boardroom with Emunahh-Invest"
                 className="w-full h-[380px] sm:h-[440px] object-cover object-center"
               />
