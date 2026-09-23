@@ -1,0 +1,6 @@
+{
+  "name": "Emunahh-Invest Limited",
+  "description": "Official website for Emunahh-Invest Limited – Nigerian financial and investment company providing student education financing, wealth investment solutions, and commercial business capital.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
