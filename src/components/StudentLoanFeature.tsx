@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, School, ShieldCheck, CheckCircle2, FileText, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, ShieldCheck, School } from 'lucide-react';
 import { ServiceType } from '../types';
 import graduateImage from '../assets/images/nigerian_graduate_success_1790142702336.jpg';
 
@@ -9,164 +9,167 @@ interface StudentLoanFeatureProps {
 }
 
 export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenApply }) => {
-  const verifiedCoverage = [
-    { title: 'Federal & State Universities', desc: 'UNILAG, UI, OAU, LASU, UNN, ABU, FUTA, and all accredited public tertiary institutions.' },
-    { title: 'Accredited Private Universities', desc: 'Covenant, Babcock, Bowen, Landmark, Pan-Atlantic, and licensed private institutions.' },
-    { title: 'Professional Qualifications', desc: 'Nigerian Law School, ICAN, ACCA, CIBN, CITN, and medical board licensing.' },
-    { title: 'Postgraduate & Executive Education', desc: 'Masters degrees, PGDs, and professional certifications across Nigeria.' },
+  const steps = [
+    {
+      num: '01',
+      title: 'ENQUIRY',
+      desc: 'Submit your tertiary admission or invoice details for preliminary eligibility assessment.',
+    },
+    {
+      num: '02',
+      title: 'APPLICATION',
+      desc: 'Provide verified academic registration and sponsor income documentation.',
+    },
+    {
+      num: '03',
+      title: 'REVIEW',
+      desc: 'Underwriting verification of institutional invoice and sponsor repayment capacity.',
+    },
+    {
+      num: '04',
+      title: 'DECISION',
+      desc: 'Formal contract execution followed by direct tuition remittance to the institution.',
+    },
   ];
 
-  const processSteps = [
-    {
-      step: '01',
-      title: 'Online Intake & School Invoice',
-      desc: 'Submit admission confirmation or course registration alongside the official university fee invoice or Remita schedule.',
-    },
-    {
-      step: '02',
-      title: 'Sponsor & Document Verification',
-      desc: 'Our credit desk verifies student matriculation details and confirms the co-sponsor’s verifiable cash flow.',
-    },
-    {
-      step: '03',
-      title: 'Execution of Repayment Schedule',
-      desc: 'A straightforward, legally binding contract is executed with clear, predictable monthly milestone dates.',
-    },
-    {
-      step: '04',
-      title: 'Direct Institutional Remittance',
-      desc: 'Tuition is paid straight to the accredited institution bank account, securing uninterrupted classroom and exam matriculation.',
-    },
+  const coverageList = [
+    'Federal & State Universities across Nigeria',
+    'Accredited Private Universities',
+    'Nigerian Law School & Professional Exams (ICAN, ACCA)',
+    'Postgraduate Masters & PGD Programs',
   ];
 
   return (
-    <section id="student-loans" className="py-16 lg:py-24 bg-white border-b border-gray-200 scroll-mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section id="student-loans" className="py-20 lg:py-28 bg-[#071A2B] text-white border-b border-white/10 scroll-mt-16 relative overflow-hidden">
+      
+      {/* Subtle Background Geometry */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#087A5A]/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-3 mb-14">
-          <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
-            Education Financing & Human Capital
+        {/* Eyebrow and Headline */}
+        <div className="max-w-3xl space-y-4 mb-16">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-[#C6A15B]" />
+            <span className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-[0.2em]">
+              EDUCATION FINANCING
+            </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight leading-tight">
-            Academic Aspirations Should Never Pause for Tuition Deadlines
+          
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-[-0.03em] leading-tight">
+            YOUR EDUCATION IS AN INVESTMENT IN YOUR FUTURE.
           </h2>
-          <p className="text-base text-gray-600 leading-relaxed font-normal">
+
+          <p className="text-base sm:text-lg text-white/75 leading-relaxed font-normal">
             Emunahh-Invest provides structured student loans that remit tuition directly to accredited institutions, 
-            allowing scholars to focus on excellence while sponsors manage repayments with predictable dignity.
+            allowing scholars to focus on academic excellence while sponsors manage repayments with predictable dignity.
           </p>
         </div>
 
-        {/* Split Grid: Editorial African Graduation Image & Verified Scope */}
+        {/* Split Section: Authentic African Student Image & Coverage */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-16">
           
-          {/* Left Column: Editorial African Graduation Image (6 cols) */}
+          {/* Authentic Nigerian Graduate Image with Navy Framing (6 cols) */}
           <div className="lg:col-span-6">
-            <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
+            <div className="relative rounded-lg overflow-hidden border border-white/15 bg-white/5 shadow-2xl">
               <img
                 src={graduateImage}
-                alt="Nigerian student graduating successfully with family support"
-                className="w-full h-[400px] sm:h-[450px] object-cover object-center"
+                alt="Proud Nigerian graduate with family supported by Emunahh-Invest student loan"
+                className="w-full h-[420px] sm:h-[480px] object-cover object-center"
               />
+              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#071A2B] via-[#071A2B]/80 to-transparent">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-semibold text-[#C6A15B]">Direct-to-Institution Remittance</span>
+                  <span className="text-white/60">Zero Fund Diversion</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Institutions & Document Protocol (6 cols) */}
-          <div className="lg:col-span-6 space-y-6">
+          {/* Institutional Scope & Requirements (6 cols) */}
+          <div className="lg:col-span-6 space-y-7">
             <div className="space-y-3">
-              <h3 className="text-xl sm:text-2xl font-bold text-[#00174D] tracking-tight">
-                Covering Nigeria’s Accredited Institutions
+              <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
+                Institutional Coverage
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                Designed for Nigeria's Accredited Academic Institutions
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed font-normal">
-                From undergraduate degrees to the Nigerian Law School and chartered accounting exams, 
-                our educational facilities eliminate the crisis of sudden semester deadlines.
+              <p className="text-sm text-white/70 leading-relaxed font-normal">
+                Tuition financing covers recognized undergraduate programs, vocational professional institutions, 
+                and postgraduate degrees across the federation.
               </p>
             </div>
 
-            {/* Institutions Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {verifiedCoverage.map((item, idx) => (
-                <div key={idx} className="p-4 rounded-xl border border-gray-200 bg-white space-y-1 shadow-2xs">
-                  <div className="text-xs font-bold text-[#002B99]">{item.title}</div>
-                  <div className="text-[11px] text-gray-600 leading-relaxed">{item.desc}</div>
+            {/* Coverage Badges */}
+            <div className="space-y-2.5">
+              {coverageList.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 p-3.5 rounded-md bg-white/5 border border-white/10 text-xs text-white/90 font-medium"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-[#087A5A] shrink-0" />
+                  <span>{item}</span>
                 </div>
               ))}
             </div>
 
-            {/* Document Protocol Checklist */}
-            <div className="p-5 rounded-xl bg-white border border-[#002B99]/20 space-y-2.5">
-              <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider flex items-center gap-1.5">
-                <FileText className="w-4 h-4 text-[#00A859]" />
-                <span>Standard Review Documentation</span>
-              </div>
-              <ul className="space-y-1.5 text-xs text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
-                  <span>Official Admission Letter or active student course registration form</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
-                  <span>Official university fee schedule / institutional invoice (Remita RRR)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
-                  <span>Valid National Identity Card / NIN of student and sponsor</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
-                  <span>Verified co-sponsor bank statements & proof of lawful income</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
-              <Link
-                to="/student-loans"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors shadow-xs"
-              >
-                <span>Read Student Loans Guide</span>
-                <ArrowUpRight className="w-4 h-4 ml-1.5" />
-              </Link>
-
+            {/* Application CTAs */}
+            <div className="flex flex-col sm:flex-row items-center gap-3.5 pt-2">
               <Link
                 to="/apply"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-[#00A859] bg-white hover:bg-gray-50 border border-[#00A859] rounded-lg transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-md transition-all shadow-md group"
               >
-                <span>Start Loan Application</span>
+                <span>APPLY FOR STUDENT LOAN</span>
+                <ArrowUpRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+
+              <Link
+                to="/student-loans"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white/80 hover:text-white bg-transparent border border-white/20 hover:border-white/40 rounded-md transition-all"
+              >
+                <span>Review Full Guidelines</span>
               </Link>
             </div>
+
           </div>
 
         </div>
 
-        {/* 4-Step Structured Process (Replaces interactive calculator) */}
-        <div className="rounded-xl bg-white border border-gray-200 p-7 sm:p-9 shadow-xs">
-          <div className="max-w-2xl mb-8 space-y-2">
-            <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
-              Clear 4-Step Process
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#00174D] tracking-tight">
-              How Student Loan Facilities Are Disbursed
-            </h3>
-            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-              Structured transparently from initial application to institutional settlement within 48 to 72 hours.
-            </p>
+        {/* 4-Step Process Strip: Exactly as requested */}
+        <div className="pt-12 border-t border-white/10">
+          <div className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-[0.2em] mb-6">
+            APPLICATION & DISBURSEMENT PROCESS
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((step, idx) => (
-              <div key={idx} className="space-y-2 relative">
-                <div className="w-8 h-8 rounded-lg bg-[#002B99] text-white flex items-center justify-center text-xs font-bold font-mono">
-                  {step.step}
+            {steps.map((step, idx) => (
+              <div
+                key={idx}
+                className="p-6 rounded-lg bg-white/5 border border-white/10 relative space-y-3"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-base font-bold text-[#087A5A]">
+                    {step.num}
+                  </span>
+                  <span className="text-[10px] uppercase font-bold text-white/40 tracking-wider">
+                    Step {idx + 1}
+                  </span>
                 </div>
-                <h4 className="text-sm font-bold text-[#00174D] pt-1">
+
+                <h4 className="text-sm font-bold text-white tracking-tight">
                   {step.title}
                 </h4>
-                <p className="text-xs text-gray-600 leading-relaxed">
+
+                <p className="text-xs text-white/70 leading-relaxed font-normal">
                   {step.desc}
                 </p>
               </div>
             ))}
+          </div>
+
+          <div className="pt-6 text-[11px] text-white/50 text-center sm:text-left">
+            * All facilities subject to identity verification, institutional invoice validation, and sponsor underwriting approval.
           </div>
         </div>
 

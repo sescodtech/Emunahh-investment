@@ -2,26 +2,67 @@
 
 @layer base {
   :root {
-    --color-brand-blue: #002B99;
-    --color-brand-green: #00A859;
-    --color-navy: #00174D;
-    --color-charcoal: #1E293B;
-    
-    --font-sans: 'Plus Jakarta Sans', 'Manrope', system-ui, -apple-system, sans-serif;
-    --font-heading: 'Plus Jakarta Sans', 'Manrope', system-ui, sans-serif;
+    /* Brand Palette: Emunahh-Invest Limited */
+    --color-primary-navy: #071A2B;
+    --color-emerald: #087A5A;
+    --color-dark-emerald: #04513E;
+    --color-warm-ivory: #F8F7F3;
+    --color-white: #FFFFFF;
+    --color-charcoal: #17202A;
+    --color-gold-accent: #C6A15B;
+
+    --font-manrope: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  body {
-    font-family: var(--font-sans);
-    color: #1E293B;
+  html {
+    font-family: var(--font-manrope);
+    color: #17202A;
     background-color: #FFFFFF;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+  body {
+    font-family: var(--font-manrope);
+    font-weight: 400;
+    line-height: 1.6;
+    color: #17202A;
+    background-color: #FFFFFF;
+  }
+
+  /* Strict Editorial Typography Hierarchy */
+  h1 {
+    font-family: var(--font-manrope);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  h2 {
+    font-family: var(--font-manrope);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-family: var(--font-manrope);
+    font-weight: 600;
     letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  h4, h5, h6 {
+    font-family: var(--font-manrope);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  button, a {
+    font-family: var(--font-manrope);
   }
 }
 

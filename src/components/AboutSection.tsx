@@ -1,133 +1,150 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
-import { Logo } from './Logo';
+import { MapPin, Phone, MessageSquare, ArrowUpRight, Compass, Eye, ShieldCheck } from 'lucide-react';
+import { useContent } from '../context/ContentContext';
+import hqImage from '../assets/images/lagos_financial_hq_1790142688340.jpg';
 
 export const AboutSection: React.FC = () => {
+  const { content } = useContent();
+  const about = content.about;
+  const contact = content.contact;
+
   return (
-    <section id="about" className="py-16 lg:py-24 bg-white border-b border-gray-200 scroll-mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section id="about" className="py-20 lg:py-28 bg-white border-b border-[#071A2B]/10 scroll-mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        {/* Asymmetrical Editorial Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: About Narrative (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-3">
-              <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
-                Corporate Heritage & Governance
+          {/* Left Column: Large Image & Headquarters Card (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            
+            {/* Large Professional Image */}
+            <div className="relative rounded-lg overflow-hidden border-2 border-[#071A2B] bg-[#071A2B] shadow-xl">
+              <img
+                src={hqImage}
+                alt="Emunahh-Invest Limited Headquarters Lagos"
+                className="w-full h-[360px] sm:h-[420px] object-cover object-center"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#071A2B] via-[#071A2B]/75 to-transparent text-white">
+                <div className="text-[10px] font-bold text-[#C6A15B] uppercase tracking-[0.16em]">
+                  Physical Headquarters
+                </div>
+                <div className="text-sm font-bold text-white">
+                  33, Crossway Plaza, New Oko Oba, Lagos
+                </div>
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight leading-tight">
-                An Established Financial Institution Founded to Build Real Possibilities
+            </div>
+
+            {/* Quick Contact & Walk-In Box */}
+            <div className="p-6 rounded-lg bg-[#F8F7F3] border border-[#071A2B]/12 space-y-4 shadow-2xs">
+              <div className="text-xs font-bold text-[#071A2B] uppercase tracking-wider flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#087A5A]" />
+                <span>Headquarters & Advisory Desk</span>
+              </div>
+              
+              <p className="text-xs text-[#17202A]/80 leading-relaxed">
+                {contact.officeAddress}
+              </p>
+
+              <div className="pt-2 border-t border-[#071A2B]/8 flex items-center justify-between text-xs">
+                <div>
+                  <span className="text-[#17202A]/60 block text-[11px]">Direct Phone:</span>
+                  <a href={`tel:${contact.phone.replace(/[^0-9+]/g, '')}`} className="font-bold text-[#071A2B] hover:text-[#087A5A]">
+                    {contact.phone}
+                  </a>
+                </div>
+                <a
+                  href={`https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 bg-[#087A5A] text-white text-[11px] font-bold rounded-md hover:bg-[#04513E] transition-colors"
+                >
+                  WhatsApp Desk
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Company Story, Mission, Vision, Values (7 cols) */}
+          <div className="lg:col-span-7 space-y-8">
+            
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-[#C6A15B]" />
+                <span className="text-[11px] font-bold text-[#087A5A] uppercase tracking-[0.2em]">
+                  {about.title}
+                </span>
+              </div>
+              
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071A2B] tracking-[-0.03em] leading-tight">
+                {about.headline}
               </h2>
             </div>
 
-            <div className="space-y-3.5 text-base text-gray-600 leading-relaxed font-normal">
-              <p>
-                <strong className="text-[#00174D] font-semibold">Emunahh-Invest Limited</strong> is a registered 
-                Nigerian financial and investment company headquartered in Lagos. Established on the core belief 
-                that financial services must be straightforward, ethical, and accessible, we bridge critical liquidity 
-                gaps for students, working families, and growing commercial enterprises.
-              </p>
-              <p>
-                In an era dominated by opaque algorithms and impersonal mobile loan apps, we take pride in human-centered, 
-                responsible financing. Our specialized student loan division ensures that tuition deadlines do not derail 
-                promising Nigerian futures, while our wealth advisory and business financing desks provide solid capital 
-                foundations for long-term prosperity.
-              </p>
+            <div className="space-y-4 text-base text-[#17202A]/80 leading-relaxed font-normal">
+              <p>{about.intro}</p>
+              <p>{about.secondaryIntro}</p>
             </div>
 
-            {/* Mission & Vision Box */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-2 shadow-2xs">
-                <div className="text-xs font-bold text-[#00A859] uppercase tracking-wider">
+            {/* Mission & Vision Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+              
+              <div className="p-6 rounded-lg bg-[#F8F7F3] border border-[#071A2B]/10 space-y-2.5">
+                <div className="w-8 h-8 rounded-md bg-[#087A5A] text-white flex items-center justify-center">
+                  <Compass className="w-4 h-4" />
+                </div>
+                <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
                   Our Mission
                 </div>
-                <div className="text-base font-bold text-[#00174D]">
-                  Democratizing Progress
-                </div>
-                <p className="text-xs text-gray-600 leading-relaxed font-normal">
-                  To provide transparent, dependable education financing and disciplined wealth solutions that 
-                  accelerate academic excellence and commercial progress across Nigeria.
+                <p className="text-xs text-[#17202A]/80 leading-relaxed">
+                  {about.mission}
                 </p>
               </div>
 
-              <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-2 shadow-2xs">
-                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
+              <div className="p-6 rounded-lg bg-[#F8F7F3] border border-[#071A2B]/10 space-y-2.5">
+                <div className="w-8 h-8 rounded-md bg-[#071A2B] text-white flex items-center justify-center">
+                  <Eye className="w-4 h-4 text-[#C6A15B]" />
+                </div>
+                <div className="text-xs font-bold text-[#071A2B] uppercase tracking-wider">
                   Our Vision
                 </div>
-                <div className="text-base font-bold text-[#00174D]">
-                  Nigeria's Most Trusted Partner
-                </div>
-                <p className="text-xs text-gray-600 leading-relaxed font-normal">
-                  To be recognized across West Africa as the most dependable and ethical private finance house, 
-                  known for transformative education loans and sound commercial support.
+                <p className="text-xs text-[#17202A]/80 leading-relaxed">
+                  {about.vision}
                 </p>
+              </div>
+
+            </div>
+
+            {/* Core Values Strip */}
+            <div className="pt-4 border-t border-[#071A2B]/10">
+              <div className="text-[11px] font-bold text-[#071A2B] uppercase tracking-[0.16em] mb-4">
+                Core Governance Values
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {about.values.map((v, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#087A5A] mt-2 shrink-0" />
+                    <div className="text-xs leading-relaxed">
+                      <strong className="text-[#071A2B] font-bold block">{v.title}</strong>
+                      <span className="text-[#17202A]/70">{v.desc}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center text-xs font-bold text-[#002B99] hover:text-[#00A859] transition-colors"
+                className="inline-flex items-center text-xs font-bold text-[#087A5A] hover:text-[#04513E] transition-colors"
               >
                 <span>Read Full Corporate Profile & Leadership</span>
                 <ArrowUpRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
-          </div>
 
-          {/* Right Column: Physical Headquarters Verification Card (5 cols) */}
-          <div className="lg:col-span-5 bg-white border-2 border-[#002B99]/20 rounded-2xl p-7 sm:p-9 space-y-6 shadow-xs">
-            <div className="pb-4 border-b border-gray-150">
-              <Logo variant="light" size="md" layout="stacked" className="items-start text-left" />
-            </div>
-
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
-                  Headquarters & Principal Office
-                </div>
-                <div className="text-sm font-semibold text-[#00174D] flex items-start gap-2.5 pt-1">
-                  <MapPin className="w-4 h-4 text-[#00A859] shrink-0 mt-0.5" />
-                  <span>
-                    33, Crossway Plaza, Beside UBA, Charity Road, New Oko Oba, Lagos, Nigeria
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-1 pt-2 border-t border-gray-100">
-                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
-                  Telephone Inquiries & Advisory
-                </div>
-                <div className="text-sm font-semibold text-[#00174D] flex items-center gap-2.5 pt-1">
-                  <Phone className="w-4 h-4 text-[#00A859] shrink-0" />
-                  <a href="tel:08023190807" className="hover:text-[#002B99] transition-colors">
-                    0802 319 0807
-                  </a>
-                </div>
-              </div>
-
-              <div className="space-y-1 pt-2 border-t border-gray-100">
-                <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
-                  Office Hours
-                </div>
-                <div className="text-xs text-gray-600">
-                  Monday – Friday: 8:30 AM – 5:00 PM (WAT)
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-2">
-              <a
-                href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest%2C%20I%20would%20like%20to%20inquire%20about%20your%20services"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 px-5 py-3 text-xs font-bold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-colors shadow-xs"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>Message Verified Advisor on WhatsApp</span>
-              </a>
-            </div>
           </div>
 
         </div>

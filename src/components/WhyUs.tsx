@@ -1,92 +1,93 @@
 import React from 'react';
-import { Building2, School, ShieldAlert, BadgeCheck } from 'lucide-react';
+import { ShieldCheck, Award, Users, Clock } from 'lucide-react';
 
 export const WhyUs: React.FC = () => {
-  const differentiators = [
+  const values = [
     {
       num: '01',
-      icon: Building2,
-      title: 'Physical Accountability in Lagos',
-      tag: 'Walk-In Headquarters',
-      desc: 'Unlike faceless fintech apps, Emunahh-Invest operates a fully staffed corporate office at 33, Crossway Plaza, Beside UBA, New Oko Oba, Lagos. Walk in and discuss terms with senior advisors in person.',
+      title: 'Transparency',
+      subtitle: 'Zero Hidden Penalties',
+      desc: 'All repayment milestone dates, interest structures, and administrative criteria are formalized upfront in plain Nigerian English without compounding surprises or predatory catches.',
     },
     {
       num: '02',
-      icon: School,
-      title: 'Direct Institution Remittance',
-      tag: 'Zero Fund Diversion',
-      desc: 'Tuition and academic fees are paid straight to accredited university or examination accounts. This guarantees uninterrupted matriculation and protects sponsors from unintended fund diversion.',
+      title: 'Professionalism',
+      subtitle: 'Institutional Underwriting',
+      desc: 'Our credit and investment mandates follow rigorous governance standards, verified real-economy balance sheets, and formal legal contracts that protect both client and institution.',
     },
     {
       num: '03',
-      icon: ShieldAlert,
-      title: 'Zero Predatory Practices',
-      tag: 'Radical Transparency',
-      desc: 'No arbitrary compounding penalties, unexpected administration levies, or intrusive data scrapping. Every repayment milestone is formalized in plain Nigerian English in legally binding agreements.',
+      title: 'Accessibility',
+      subtitle: 'Walk-In Lagos Desk & Fast Intake',
+      desc: 'We operate an active corporate desk at 33, Crossway Plaza, New Oko Oba, Lagos. Real human advisors review loan invoices and investment structures with prompt turnaround.',
     },
     {
       num: '04',
-      icon: BadgeCheck,
-      title: 'Practical Commercial Underwriting',
-      tag: 'Cash-Flow Grounded',
-      desc: 'We underwrite SME credit on verified bank statement turnover, inventory velocity, and operational track records rather than requiring impossible landed property titles.',
+      title: 'Customer Focus',
+      subtitle: 'Real Milestones Over Arbitrary Quotas',
+      desc: 'Whether disbursing tuition directly to a university bursary or engineering cash-flow credit for an enterprise, our solutions are shaped around real individual and business outcomes.',
     },
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <section className="py-20 lg:py-28 bg-[#071A2B] text-white border-b border-white/10 relative overflow-hidden">
+      
+      {/* Editorial Decorative Watermark */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Heading */}
-        <div className="max-w-3xl space-y-3 mb-14">
-          <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
-            Institutional Distinction
+        {/* Editorial Header */}
+        <div className="max-w-3xl space-y-4 mb-16">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-[#C6A15B]" />
+            <span className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-[0.2em]">
+              WHY EMUNAHH-INVEST
+            </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight leading-tight">
-            Financial Services Engineered for Trust, Dignity, and Progress
+          
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-[-0.03em] leading-tight">
+            FINANCIAL DECISIONS DESERVE CLARITY.
           </h2>
-          <p className="text-base text-gray-600 leading-relaxed font-normal">
-            We bridge the gap between impersonal commercial banks and predatory digital lenders. 
+
+          <p className="text-base sm:text-lg text-white/70 leading-relaxed font-normal">
+            We bridge the gap between impersonal commercial banks and predatory digital apps. 
             Emunahh-Invest provides the discipline of an established institution with the accessible speed of a dedicated partner.
           </p>
         </div>
 
-        {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {differentiators.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="p-7 rounded-xl bg-white border border-gray-200 hover:border-[#002B99]/40 hover:shadow-xs transition-all flex flex-col justify-between"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                    <span className="font-mono text-sm font-bold text-[#002B99]">{item.num}</span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#00A859]">
-                      {item.tag}
-                    </span>
-                  </div>
+        {/* Editorial Spaced Flow: Typography & Lines rather than excessive boxes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 divide-y md:divide-y-0 md:divide-x divide-white/10">
+          {values.map((item, idx) => (
+            <div
+              key={idx}
+              className={`${idx > 0 ? 'md:pl-8 lg:pl-10' : ''} pt-8 md:pt-0 space-y-4 group`}
+            >
+              <div className="flex items-baseline justify-between">
+                <span className="font-mono text-2xl font-bold text-[#087A5A] group-hover:text-[#C6A15B] transition-colors">
+                  {item.num}
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white/40">
+                  Principle {idx + 1}
+                </span>
+              </div>
 
-                  <div className="w-10 h-10 rounded-lg bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#00A859]" />
-                  </div>
-
-                  <h3 className="text-base font-bold text-[#00174D] tracking-tight leading-snug">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-xs text-gray-600 leading-relaxed font-normal">
-                    {item.desc}
-                  </p>
-                </div>
-
-                <div className="pt-5 mt-5 border-t border-gray-100 text-xs font-semibold text-[#00A859]">
-                  Guaranteed by Legal Contract
+              <div className="space-y-1 pt-1">
+                <h3 className="text-xl font-bold text-white tracking-tight">
+                  {item.title}
+                </h3>
+                <div className="text-[11px] font-semibold text-[#C6A15B] uppercase tracking-wider">
+                  {item.subtitle}
                 </div>
               </div>
-            );
-          })}
+
+              <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-normal">
+                {item.desc}
+              </p>
+
+              <div className="pt-2">
+                <div className="h-0.5 w-10 bg-[#087A5A] group-hover:w-16 transition-all duration-300" />
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

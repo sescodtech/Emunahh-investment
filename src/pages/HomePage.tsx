@@ -4,11 +4,8 @@ import { TrustStrip } from '../components/TrustStrip';
 import { ServicesSection } from '../components/ServicesSection';
 import { StudentLoanFeature } from '../components/StudentLoanFeature';
 import { InvestmentFeature } from '../components/InvestmentFeature';
-import { BusinessFeature } from '../components/BusinessFeature';
-import { WhyUs } from '../components/WhyUs';
-import { ProcessTimeline } from '../components/ProcessTimeline';
-import { BlogSection } from '../components/BlogSection';
 import { AboutSection } from '../components/AboutSection';
+import { WhyUs } from '../components/WhyUs';
 import { FAQSection } from '../components/FAQSection';
 import { ContactSection } from '../components/ContactSection';
 import { FinalCTA } from '../components/FinalCTA';
@@ -21,18 +18,34 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onOpenApply }) => {
   return (
     <>
+      {/* 1. Hero: Warm Ivory Editorial Composition */}
       <Hero onOpenApply={onOpenApply} />
+
+      {/* 2. Hero Information Strip */}
       <TrustStrip />
+
+      {/* 3. Services: White Asymmetric Bento Grid */}
       <ServicesSection onOpenApply={onOpenApply} />
+
+      {/* 4. Student Loans: Dark Navy Feature with 4-Step Process */}
       <StudentLoanFeature onOpenApply={onOpenApply} />
+
+      {/* 5. Investment: Warm Ivory Wealth & Capital Preservation */}
       <InvestmentFeature onOpenApply={onOpenApply} />
-      <BusinessFeature onOpenApply={onOpenApply} />
-      <WhyUs />
-      <ProcessTimeline onOpenApply={onOpenApply} />
-      <BlogSection />
+
+      {/* 6. About Emunahh-Invest: White Editorial Layout */}
       <AboutSection />
+
+      {/* 7. Why Emunahh: Dark Navy Clarity & Core Principles */}
+      <WhyUs />
+
+      {/* 8. FAQs & Institutional Governance */}
       <FAQSection />
+
+      {/* 9. Lagos Walk-In & Advisory Contact Desk */}
       <ContactSection />
+
+      {/* 10. Final Call to Action: Emerald & Navy */}
       <FinalCTA onOpenApply={onOpenApply} />
     </>
   );

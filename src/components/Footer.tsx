@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUp, Phone, MapPin, MessageSquare, Clock, ShieldCheck } from 'lucide-react';
 import { Logo } from './Logo';
+import { useContent } from '../context/ContentContext';
 import { ServiceType } from '../types';
 
 interface FooterProps {
@@ -9,56 +10,57 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
+  const { content } = useContent();
+  const contact = content.contact;
+  const footerData = content.footer;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="bg-[#00174D] text-white/80 border-t border-white/10 pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+    <footer className="bg-[#071A2B] text-white/80 border-t border-white/10 pt-16 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Footer Content */}
+        {/* Main Footer Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
           
-          {/* Column 1: Brand & Full Corporate Address (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Column 1: Brand & Full Address (5 cols) */}
+          <div className="lg:col-span-5 space-y-5">
             <Link to="/" className="inline-block">
               <Logo variant="dark" size="lg" />
             </Link>
 
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm font-normal">
-              Emunahh-Invest Limited is a registered Nigerian financial and investment company. 
-              We provide dependable student loans, disciplined wealth solutions, and commercial 
-              business financing in Lagos, Nigeria.
+              {footerData.statement}
             </p>
 
-            {/* Complete Physical Address & Landmark */}
+            {/* Complete Approved Office Address */}
             <div className="space-y-3 pt-2 text-xs text-white/85">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#00A859] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
                 <div className="leading-relaxed">
                   <span className="font-semibold text-white block">Corporate Headquarters:</span>
-                  33, Crossway Plaza, Beside UBA, 3/5 Charity Road, <br />
-                  New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.
+                  {contact.officeAddress}
                 </div>
               </div>
 
-              {/* Exact Phone Numbers */}
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
-                <div className="text-[11px] font-bold text-[#00E676] uppercase tracking-wider">
-                  Direct Telephone Desk
+              {/* Direct Telephone Desk */}
+              <div className="p-4 rounded-lg bg-white/5 border border-white/10 space-y-2 max-w-sm">
+                <div className="text-[10px] font-bold text-[#C6A15B] uppercase tracking-wider">
+                  Approved Telephone & Advisory Desk
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#00A859]" />
+                  <MessageSquare className="w-3.5 h-3.5 text-[#087A5A]" />
                   <span className="text-white/60">Phone / WhatsApp:</span>
                   <a
-                    href="https://wa.me/2348023190807"
+                    href={`https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-white hover:text-[#00E676] transition-colors tabular-nums"
+                    className="font-bold text-white hover:text-[#087A5A] transition-colors tabular-nums"
                   >
-                    0802 319 0807
+                    {contact.whatsapp}
                   </a>
                 </div>
 
@@ -66,74 +68,74 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                   <Phone className="w-3.5 h-3.5 text-white/60" />
                   <span className="text-white/60">Alternative Desk:</span>
                   <a
-                    href="tel:08179171456"
-                    className="font-bold text-white hover:text-[#00E676] transition-colors tabular-nums"
+                    href={`tel:${contact.secondaryPhone.replace(/[^0-9+]/g, '')}`}
+                    className="font-bold text-white hover:text-[#087A5A] transition-colors tabular-nums"
                   >
-                    0817 917 1456
+                    {contact.secondaryPhone}
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Core Financial Services (3 cols) */}
+          {/* Column 2: Company (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <div className="text-xs font-bold text-white uppercase tracking-wider">
-              Core Services
-            </div>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <Link to="/student-loans" className="hover:text-white transition-colors">
-                  Student Loans / Education Financing
-                </Link>
-              </li>
-              <li>
-                <Link to="/investments" className="hover:text-white transition-colors">
-                  Investment Services & Wealth Management
-                </Link>
-              </li>
-              <li>
-                <Link to="/business-financing" className="hover:text-white transition-colors">
-                  Business Financing & Commercial Credit
-                </Link>
-              </li>
-              <li>
-                <Link to="/personal-finance" className="hover:text-white transition-colors">
-                  Personal Financial Solutions
-                </Link>
-              </li>
-              <li>
-                <Link to="/other-services" className="hover:text-white transition-colors">
-                  Other Financial Services & Advisory
-                </Link>
-              </li>
-              <li>
-                <Link to="/apply" className="hover:text-[#00E676] font-semibold transition-colors block pt-1">
-                  Online Application Portal →
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Corporate & Media Links (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <div className="text-xs font-bold text-white uppercase tracking-wider">
+            <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-wider">
               Company
             </div>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs">
               <li>
                 <Link to="/about" className="hover:text-white transition-colors">
                   About Emunahh-Invest
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="hover:text-white transition-colors">
-                  Financial Insights & News
+                <a href="/#solutions" className="hover:text-white transition-colors">
+                  Solutions Overview
+                </a>
+              </li>
+              <li>
+                <Link to="/student-loans" className="hover:text-white transition-colors">
+                  Student Loans
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-white transition-colors">
-                  Headquarters & Hours
+                <Link to="/investments" className="hover:text-white transition-colors">
+                  Investments
+                </Link>
+              </li>
+              <li>
+                <Link to="/business-financing" className="hover:text-white transition-colors">
+                  Business Financing
+                </Link>
+              </li>
+              <li>
+                <Link to="/personal-finance" className="hover:text-white transition-colors">
+                  Personal Finance
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Resources (2 cols) */}
+          <div className="lg:col-span-2 space-y-3">
+            <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-wider">
+              Resources
+            </div>
+            <ul className="space-y-2.5 text-xs">
+              <li>
+                <a href="/#faqs" className="hover:text-white transition-colors">
+                  FAQs & Verification
+                </a>
+              </li>
+              <li>
+                <Link to="/blog" className="hover:text-white transition-colors">
+                  Financial Insights
+                </Link>
+              </li>
+              <li>
+                <Link to="/apply" className="hover:text-[#087A5A] font-semibold transition-colors">
+                  Online Intake Portal
                 </Link>
               </li>
               <li>
@@ -149,22 +151,30 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             </ul>
           </div>
 
-          {/* Column 4: Hours & In-Person Walk-In (2 cols) */}
+          {/* Column 4: Contact & Hours (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <div className="text-xs font-bold text-white uppercase tracking-wider">
-              Working Hours
+            <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-wider">
+              Advisory Hours
             </div>
             <div className="space-y-2 text-xs text-white/70">
               <div className="flex items-start gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#00A859] shrink-0 mt-0.5" />
+                <Clock className="w-3.5 h-3.5 text-[#087A5A] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-white block font-medium">Mon – Fri:</span>
-                  8:30 AM – 5:00 PM
+                  8:30 AM – 5:00 PM (WAT)
                 </div>
               </div>
-              <div className="pt-2">
-                <span className="text-white block font-medium">Weekends & Public Holidays:</span>
-                Closed for in-person advisory (digital intake open)
+              <div className="pt-2 text-white/60">
+                <span className="text-white block font-medium">Weekends & Holidays:</span>
+                Digital intake open 24/7
+              </div>
+              <div className="pt-3">
+                <Link
+                  to="/admin/login"
+                  className="text-[11px] font-semibold text-white/40 hover:text-white transition-colors inline-block"
+                >
+                  Admin Portal →
+                </Link>
               </div>
             </div>
           </div>
@@ -172,17 +182,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
         </div>
 
         {/* Regulatory Governance & Legal Statement */}
-        <div className="pt-8 pb-6 border-b border-white/10 space-y-3 text-[11px] text-white/50 leading-relaxed">
+        <div className="pt-8 pb-6 border-b border-white/10 space-y-2.5 text-[11px] text-white/50 leading-relaxed">
           <div className="flex items-center gap-1.5 text-white/80 font-semibold uppercase tracking-wider text-[10px]">
-            <ShieldCheck className="w-4 h-4 text-[#00A859]" />
+            <ShieldCheck className="w-4 h-4 text-[#087A5A]" />
             <span>Institutional Governance & Disclosures</span>
           </div>
           <p>
-            Emunahh-Invest Limited is an incorporated private limited liability financial and investment enterprise 
-            duly registered under the laws of the Federal Republic of Nigeria. We are committed to ethical credit, 
-            capital protection, and transparent institutional transactions. All student loans and enterprise credit facilities 
-            are subject to identity verification, underwriting approval, and execution of formal contract terms. 
-            We do not operate speculative cryptocurrency schemes, pyramid structures, or unauthorized deposit schemes.
+            Emunahh-Invest Limited is an incorporated private limited liability financial and investment company 
+            duly registered under the laws of the Federal Republic of Nigeria. All student loans and enterprise facilities 
+            are subject to institutional verification, underwriting approval, and execution of formal contract terms. 
+            We strictly do not operate speculative cryptocurrency schemes, unauthorized deposits, or payday lending apps.
           </p>
         </div>
 
@@ -205,7 +214,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               aria-label="Back to top"
             >
               <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5 text-[#00A859]" />
+              <ArrowUp className="w-3.5 h-3.5 text-[#087A5A]" />
             </button>
           </div>
         </div>
