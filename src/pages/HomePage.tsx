@@ -6,7 +6,6 @@ import { StudentLoanFeature } from '../components/StudentLoanFeature';
 import { InvestmentFeature } from '../components/InvestmentFeature';
 import { AboutSection } from '../components/AboutSection';
 import { WhyUs } from '../components/WhyUs';
-import { SparklesBanner } from '../components/SparklesBanner';
 import { FAQSection } from '../components/FAQSection';
 import { ContactSection } from '../components/ContactSection';
 import { FinalCTA } from '../components/FinalCTA';
@@ -19,37 +18,34 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ onOpenApply }) => {
   return (
     <>
-      {/* 1. Hero: Warm Ivory Editorial Composition */}
+      {/* 1. Hero: Warm Off-White Editorial Composition with Subtle Particles */}
       <Hero onOpenApply={onOpenApply} />
 
-      {/* 2. Hero Information Strip */}
+      {/* 2. Hero Information Strip / Direct Category Routing */}
       <TrustStrip />
 
-      {/* 3. Services: White Asymmetric Bento Grid */}
+      {/* 3. Services: Clean Balanced Cards & Featured Education Financing */}
       <ServicesSection onOpenApply={onOpenApply} />
 
-      {/* 4. Student Loans: Dark Navy Feature with Ambient Sparkles & 4-Step Process */}
+      {/* 4. Student Loans: Deep Navy Feature with 4-Step Process */}
       <StudentLoanFeature onOpenApply={onOpenApply} />
 
       {/* 5. Investment: Warm Ivory Wealth & Capital Preservation */}
       <InvestmentFeature onOpenApply={onOpenApply} />
 
-      {/* 6. About Emunahh-Invest: White Editorial Layout */}
+      {/* 6. About Emunahh-Invest: Editorial Layout */}
       <AboutSection />
 
-      {/* 7. Why Emunahh: Dark Navy Clarity & Core Principles */}
+      {/* 7. Why Emunahh: Deep Navy Clarity & Core Principles */}
       <WhyUs />
 
-      {/* 8. Aceternity-inspired Radiant Sparkles Executive Statement */}
-      <SparklesBanner />
-
-      {/* 9. FAQs & Institutional Governance */}
+      {/* 8. FAQs & Institutional Governance */}
       <FAQSection />
 
-      {/* 10. Lagos Walk-In & Advisory Contact Desk */}
+      {/* 9. Lagos Walk-In & Advisory Contact Desk */}
       <ContactSection />
 
-      {/* 11. Final Call to Action: Emerald & Navy */}
+      {/* 10. Final Call to Action: Emerald & Navy */}
       <FinalCTA onOpenApply={onOpenApply} />
     </>
   );

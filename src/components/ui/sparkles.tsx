@@ -16,7 +16,6 @@ interface Particle {
   x: number;
   y: number;
   size: number;
-  baseAlpha: number;
   alpha: number;
   alphaSpeed: number;
   vx: number;
@@ -25,19 +24,23 @@ interface Particle {
 }
 
 export const SparklesCore: React.FC<SparklesCoreProps> = ({
-  id = 'tsparticles',
+  id = 'tsparticles-subtle',
   className = '',
   background = 'transparent',
-  minSize = 0.6,
-  maxSize = 1.6,
-  particleDensity = 80,
-  particleColor = '#FFFFFF',
+  minSize = 0.5,
+  maxSize = 1.2,
+  particleDensity = 25,
+  particleColor = '#087A5A',
   particleColors,
-  speed = 1,
+  speed = 0.6,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -56,9 +59,9 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
       canvas.height = rect.height * dpr;
       ctx.scale(dpr, dpr);
 
-      // Re-seed particles proportionally to canvas surface area
+      // Controlled low-density particle count to prevent visual clutter
       const area = (rect.width * rect.height) / 10000;
-      const targetCount = Math.max(15, Math.floor((area * particleDensity) / 10));
+      const targetCount = Math.max(8, Math.floor((area * particleDensity) / 12));
 
       particles = [];
       for (let i = 0; i < targetCount; i++) {
@@ -66,11 +69,10 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
           x: Math.random() * rect.width,
           y: Math.random() * rect.height,
           size: Math.random() * (maxSize - minSize) + minSize,
-          baseAlpha: Math.random() * 0.7 + 0.3,
-          alpha: Math.random() * 0.8 + 0.2,
-          alphaSpeed: (Math.random() * 0.02 + 0.008) * (Math.random() > 0.5 ? 1 : -1) * speed,
-          vx: (Math.random() - 0.5) * 0.35 * speed,
-          vy: (Math.random() * -0.4 - 0.1) * speed, // gently float upward
+          alpha: Math.random() * 0.35 + 0.1, // Subtle financial opacity (0.1 to 0.45 max)
+          alphaSpeed: (Math.random() * 0.008 + 0.003) * (Math.random() > 0.5 ? 1 : -1) * speed,
+          vx: (Math.random() - 0.5) * 0.15 * speed,
+          vy: (Math.random() * -0.2 - 0.05) * speed, // extremely gentle floating
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
@@ -86,7 +88,7 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
       if (!canvas || !ctx) return;
       const rect = canvas.getBoundingClientRect();
 
-      // Clear or paint background
+      // Clear background
       if (background === 'transparent') {
         ctx.clearRect(0, 0, rect.width, rect.height);
       } else {
@@ -94,45 +96,31 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
         ctx.fillRect(0, 0, rect.width, rect.height);
       }
 
-      // Draw each sparkle particle with soft radial glow
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Animate alpha (twinkle)
+        // Soft breathing twinkle
         p.alpha += p.alphaSpeed;
-        if (p.alpha > 0.95 || p.alpha < 0.15) {
+        if (p.alpha > 0.45 || p.alpha < 0.08) {
           p.alphaSpeed = -p.alphaSpeed;
         }
 
-        // Drift motion
         p.x += p.vx;
         p.y += p.vy;
 
-        // Wrap around boundaries
+        // Wrap boundaries
         if (p.x < 0) p.x = rect.width;
         if (p.x > rect.width) p.x = 0;
         if (p.y < 0) p.y = rect.height;
         if (p.y > rect.height) p.y = 0;
 
         ctx.save();
-        ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
+        ctx.globalAlpha = Math.max(0, Math.min(0.5, p.alpha));
         ctx.fillStyle = p.color;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
-
-        // Extra twinkle cross on larger particles for premium diamond/sparkle effect
-        if (p.size > 1.2 && p.alpha > 0.6) {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(p.x - p.size * 2, p.y);
-          ctx.lineTo(p.x + p.size * 2, p.y);
-          ctx.moveTo(p.x, p.y - p.size * 2);
-          ctx.lineTo(p.x, p.y + p.size * 2);
-          ctx.stroke();
-        }
 
         ctx.restore();
       }

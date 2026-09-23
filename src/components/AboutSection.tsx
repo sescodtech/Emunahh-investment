@@ -10,7 +10,7 @@ export const AboutSection: React.FC = () => {
   const contact = content.contact;
 
   return (
-    <section id="about" className="py-20 lg:py-28 bg-white border-b border-[#071A2B]/10 scroll-mt-16">
+    <section id="about" className="py-16 lg:py-22 bg-white border-b border-[#071A2B]/10 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Asymmetrical Editorial Layout */}

@@ -71,11 +71,11 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section id="faqs" className="py-20 lg:py-28 bg-[#F8F7F3] border-b border-[#071A2B]/10 scroll-mt-20">
+    <section id="faqs" className="py-16 lg:py-22 bg-[#F8F7F3] border-b border-[#071A2B]/10 scroll-mt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center space-y-3 mb-12">
+        <div className="text-center space-y-3 mb-10">
           <div className="inline-flex items-center gap-2 text-[11px] text-[#087A5A] font-bold tracking-[0.2em] uppercase">
             <HelpCircle className="w-4 h-4" />
             <span>TRANSPARENCY & CLARITY</span>

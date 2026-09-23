@@ -41,16 +41,16 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
   ];
 
   return (
-    <section id="student-loans" className="py-20 lg:py-28 bg-[#071A2B] text-white border-b border-white/10 scroll-mt-16 relative overflow-hidden">
+    <section id="student-loans" className="py-16 lg:py-22 bg-[#071A2B] text-white border-b border-white/10 scroll-mt-16 relative overflow-hidden">
       
       {/* Subtle Ambient Particle Sparkles Field */}
-      <div className="w-full absolute inset-0 h-full pointer-events-none opacity-60">
+      <div className="w-full absolute inset-0 h-full pointer-events-none opacity-40">
         <SparklesCore
           id="studentloansparkles"
           background="transparent"
-          minSize={0.6}
-          maxSize={1.4}
-          particleDensity={45}
+          minSize={0.5}
+          maxSize={1.2}
+          particleDensity={20}
           particleColors={['#FFFFFF', '#C6A15B', '#087A5A']}
           className="w-full h-full"
         />

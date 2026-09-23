@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import heroDefaultImage from '../assets/images/nigerian_professional_hero_1790151218863.jpg';
+import heroDefaultImage from '../assets/images/nigerian_businesswoman_hero_1790205199974.jpg';
 import graduateDefaultImage from '../assets/images/nigerian_graduate_success_1790142702336.jpg';
 import meetingDefaultImage from '../assets/images/african_investment_meeting_1790151240660.jpg';
 

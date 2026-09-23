@@ -30,13 +30,13 @@ export const WhyUs: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-[#071A2B] text-white border-b border-white/10 relative overflow-hidden">
+    <section className="py-16 lg:py-22 bg-[#071A2B] text-white border-b border-white/10 relative overflow-hidden">
       
       {/* Editorial Decorative Watermark */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Header */}
-        <div className="max-w-3xl space-y-4 mb-16">
+        <div className="max-w-3xl space-y-3.5 mb-12">
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-[#C6A15B]" />
             <span className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-[0.2em]">

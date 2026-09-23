@@ -14,7 +14,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenApply }) => {
   const contact = content.contact;
 
   return (
-    <section className="bg-white py-20 lg:py-28 border-b border-[#071A2B]/10">
+    <section className="bg-white py-16 lg:py-22 border-b border-[#071A2B]/10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="bg-[#087A5A] text-white rounded-xl p-8 sm:p-14 text-center space-y-6 shadow-xl relative overflow-hidden">
