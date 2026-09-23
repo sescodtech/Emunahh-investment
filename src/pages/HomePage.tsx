@@ -6,6 +6,7 @@ import { StudentLoanFeature } from '../components/StudentLoanFeature';
 import { InvestmentFeature } from '../components/InvestmentFeature';
 import { AboutSection } from '../components/AboutSection';
 import { WhyUs } from '../components/WhyUs';
+import { SparklesBanner } from '../components/SparklesBanner';
 import { FAQSection } from '../components/FAQSection';
 import { ContactSection } from '../components/ContactSection';
 import { FinalCTA } from '../components/FinalCTA';
@@ -27,7 +28,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenApply }) => {
       {/* 3. Services: White Asymmetric Bento Grid */}
       <ServicesSection onOpenApply={onOpenApply} />
 
-      {/* 4. Student Loans: Dark Navy Feature with 4-Step Process */}
+      {/* 4. Student Loans: Dark Navy Feature with Ambient Sparkles & 4-Step Process */}
       <StudentLoanFeature onOpenApply={onOpenApply} />
 
       {/* 5. Investment: Warm Ivory Wealth & Capital Preservation */}
@@ -39,13 +40,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenApply }) => {
       {/* 7. Why Emunahh: Dark Navy Clarity & Core Principles */}
       <WhyUs />
 
-      {/* 8. FAQs & Institutional Governance */}
+      {/* 8. Aceternity-inspired Radiant Sparkles Executive Statement */}
+      <SparklesBanner />
+
+      {/* 9. FAQs & Institutional Governance */}
       <FAQSection />
 
-      {/* 9. Lagos Walk-In & Advisory Contact Desk */}
+      {/* 10. Lagos Walk-In & Advisory Contact Desk */}
       <ContactSection />
 
-      {/* 10. Final Call to Action: Emerald & Navy */}
+      {/* 11. Final Call to Action: Emerald & Navy */}
       <FinalCTA onOpenApply={onOpenApply} />
     </>
   );

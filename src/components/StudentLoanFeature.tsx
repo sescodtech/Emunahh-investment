@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, CheckCircle2, ShieldCheck, School } from 'lucide-react';
 import { ServiceType } from '../types';
 import graduateImage from '../assets/images/nigerian_graduate_success_1790142702336.jpg';
+import { SparklesCore } from './ui/sparkles';
 
 interface StudentLoanFeatureProps {
   onOpenApply: (service?: ServiceType) => void;
@@ -42,8 +43,21 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
   return (
     <section id="student-loans" className="py-20 lg:py-28 bg-[#071A2B] text-white border-b border-white/10 scroll-mt-16 relative overflow-hidden">
       
-      {/* Subtle Background Geometry */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#087A5A]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Subtle Ambient Particle Sparkles Field */}
+      <div className="w-full absolute inset-0 h-full pointer-events-none opacity-60">
+        <SparklesCore
+          id="studentloansparkles"
+          background="transparent"
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={45}
+          particleColors={['#FFFFFF', '#C6A15B', '#087A5A']}
+          className="w-full h-full"
+        />
+      </div>
+
+      {/* Subtle Background Radial Glow */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#087A5A]/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -146,7 +160,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-lg bg-white/5 border border-white/10 relative space-y-3"
+                className="p-6 rounded-lg bg-white/5 border border-white/10 relative space-y-3 backdrop-blur-xs"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-base font-bold text-[#087A5A]">
