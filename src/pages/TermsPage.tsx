@@ -6,17 +6,17 @@ export const TermsPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
+      <section className="bg-[#F8F7F3] border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#087A5A] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Legal & Governance</span>
               <span>/</span>
               <span>Terms of Service</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071A2B] tracking-tight leading-tight">
               Terms of Service & Institutional Disclosures
             </h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
@@ -35,22 +35,22 @@ export const TermsPage: React.FC = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-8 space-y-12">
           
           {/* Quick Summary Card */}
-          <div className="p-6 sm:p-8 rounded-xl border-2 border-[#002B99]/20 bg-white shadow-xs space-y-4">
-            <div className="flex items-center gap-2.5 text-xs font-bold text-[#002B99] uppercase tracking-wider">
-              <Scale className="w-5 h-5 text-[#00A859]" />
+          <div className="p-6 sm:p-8 rounded-xl border border-gray-200 bg-[#F8F7F3] shadow-xs space-y-4">
+            <div className="flex items-center gap-2.5 text-xs font-bold text-[#071A2B] uppercase tracking-wider">
+              <Scale className="w-5 h-5 text-[#087A5A]" />
               <span>Core Operational Standards at a Glance</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1 text-xs text-gray-700">
-              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 space-y-1">
-                <span className="font-bold text-[#00174D] block">Institutional Remittance:</span>
+              <div className="p-4 rounded-lg bg-white border border-gray-200 space-y-1">
+                <span className="font-bold text-[#071A2B] block">Institutional Remittance:</span>
                 <span>All approved educational funding is paid directly to accredited schools, universities, or licensing bodies.</span>
               </div>
-              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 space-y-1">
-                <span className="font-bold text-[#00174D] block">Radical Transparency:</span>
+              <div className="p-4 rounded-lg bg-white border border-gray-200 space-y-1">
+                <span className="font-bold text-[#071A2B] block">Radical Transparency:</span>
                 <span>No compounding hidden charges, unexpected penalties, or unagreed administrative levies.</span>
               </div>
-              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 space-y-1">
-                <span className="font-bold text-[#00174D] block">Physical Legal Entity:</span>
+              <div className="p-4 rounded-lg bg-white border border-gray-200 space-y-1">
+                <span className="font-bold text-[#071A2B] block">Physical Legal Entity:</span>
                 <span>Fully registered Nigerian enterprise operating from 33 Crossway Plaza, New Oko Oba, Lagos.</span>
               </div>
             </div>
@@ -61,8 +61,8 @@ export const TermsPage: React.FC = () => {
             
             {/* Section 1 */}
             <div className="space-y-3 pb-8 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-[#00174D] flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#002B99]/10 text-[#002B99] text-xs flex items-center justify-center font-mono">1</span>
+              <h2 className="text-xl font-bold text-[#071A2B] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#071A2B]/10 text-[#071A2B] text-xs flex items-center justify-center font-mono">1</span>
                 <span>Corporate Identity & Scope of Authority</span>
               </h2>
               <p>
@@ -79,8 +79,8 @@ export const TermsPage: React.FC = () => {
 
             {/* Section 2 */}
             <div className="space-y-3 pb-8 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-[#00174D] flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#002B99]/10 text-[#002B99] text-xs flex items-center justify-center font-mono">2</span>
+              <h2 className="text-xl font-bold text-[#071A2B] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#071A2B]/10 text-[#071A2B] text-xs flex items-center justify-center font-mono">2</span>
                 <span>Student Loans & Tuition Remittance Protocols</span>
               </h2>
               <p>
@@ -110,8 +110,8 @@ export const TermsPage: React.FC = () => {
 
             {/* Section 3 */}
             <div className="space-y-3 pb-8 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-[#00174D] flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#002B99]/10 text-[#002B99] text-xs flex items-center justify-center font-mono">3</span>
+              <h2 className="text-xl font-bold text-[#071A2B] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#071A2B]/10 text-[#071A2B] text-xs flex items-center justify-center font-mono">3</span>
                 <span>Investment & Wealth Management Terms</span>
               </h2>
               <p>
@@ -136,8 +136,8 @@ export const TermsPage: React.FC = () => {
 
             {/* Section 4 */}
             <div className="space-y-3 pb-8 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-[#00174D] flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#002B99]/10 text-[#002B99] text-xs flex items-center justify-center font-mono">4</span>
+              <h2 className="text-xl font-bold text-[#071A2B] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#071A2B]/10 text-[#071A2B] text-xs flex items-center justify-center font-mono">4</span>
                 <span>Commercial Credit & Business Financing</span>
               </h2>
               <p>
@@ -157,8 +157,8 @@ export const TermsPage: React.FC = () => {
 
             {/* Section 5 */}
             <div className="space-y-3 pb-8 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-[#00174D] flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#002B99]/10 text-[#002B99] text-xs flex items-center justify-center font-mono">5</span>
+              <h2 className="text-xl font-bold text-[#071A2B] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#071A2B]/10 text-[#071A2B] text-xs flex items-center justify-center font-mono">5</span>
                 <span>KYC Verification & Anti-Money Laundering (AML)</span>
               </h2>
               <p>
@@ -178,8 +178,8 @@ export const TermsPage: React.FC = () => {
 
             {/* Section 6 */}
             <div className="space-y-3 pb-8 border-b border-gray-200">
-              <h2 className="text-xl font-bold text-[#00174D] flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#002B99]/10 text-[#002B99] text-xs flex items-center justify-center font-mono">6</span>
+              <h2 className="text-xl font-bold text-[#071A2B] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#071A2B]/10 text-[#071A2B] text-xs flex items-center justify-center font-mono">6</span>
                 <span>Governing Law & Dispute Resolution</span>
               </h2>
               <p>
@@ -191,14 +191,14 @@ export const TermsPage: React.FC = () => {
 
             {/* Section 7 */}
             <div className="space-y-3">
-              <h2 className="text-xl font-bold text-[#00174D] flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#002B99]/10 text-[#002B99] text-xs flex items-center justify-center font-mono">7</span>
+              <h2 className="text-xl font-bold text-[#071A2B] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#071A2B]/10 text-[#071A2B] text-xs flex items-center justify-center font-mono">7</span>
                 <span>Contact the Legal & Governance Desk</span>
               </h2>
               <p>
                 For official legal inquiries, contract clarification, or compliance questions, please contact our Lagos desk:
               </p>
-              <div className="p-5 rounded-xl bg-gray-50 border border-gray-200 space-y-2 text-xs">
+              <div className="p-5 rounded-xl bg-[#F8F7F3] border border-gray-200 space-y-2 text-xs">
                 <div><strong>Emunahh-Invest Limited</strong></div>
                 <div>Address: 33, Crossway Plaza, Beside UBA, 3/5 Charity Road, New Oko Oba, Lagos, Nigeria.</div>
                 <div>Direct Phone Lines: 0802 319 0807 / 0817 917 1456</div>
@@ -212,7 +212,7 @@ export const TermsPage: React.FC = () => {
           <div className="pt-6 border-t border-gray-200 flex flex-wrap items-center justify-between gap-4">
             <Link
               to="/privacy-policy"
-              className="text-xs font-bold text-[#002B99] hover:underline"
+              className="text-xs font-bold text-[#087A5A] hover:underline"
             >
               ← Review Privacy Policy
             </Link>
@@ -220,13 +220,13 @@ export const TermsPage: React.FC = () => {
             <div className="flex items-center gap-3">
               <Link
                 to="/"
-                className="px-5 py-2.5 text-xs font-bold text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 rounded-lg transition-colors"
+                className="px-5 py-2.5 text-xs font-bold text-[#071A2B] bg-[#F8F7F3] border border-gray-300 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 Return to Home
               </Link>
               <Link
                 to="/apply"
-                className="px-5 py-2.5 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors shadow-xs"
+                className="px-5 py-2.5 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-colors shadow-xs"
               >
                 Go to Application Portal
               </Link>

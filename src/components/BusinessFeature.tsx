@@ -37,10 +37,10 @@ export const BusinessFeature: React.FC<BusinessFeatureProps> = ({ onOpenApply })
           {/* Left Column: Commercial Velocity Narrative & Products (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <div className="text-xs font-bold text-[#00A859] uppercase tracking-[0.14em]">
+              <div className="text-xs font-bold text-[#087A5A] uppercase tracking-[0.14em]">
                 Commercial Enterprise & SME Credit
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00174D] tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#071A2B] tracking-tight leading-tight">
                 Capital Underwritten on Commercial Velocity, Not Impossible Collateral
               </h2>
               <p className="text-base text-gray-600 leading-relaxed font-normal">
@@ -53,33 +53,33 @@ export const BusinessFeature: React.FC<BusinessFeatureProps> = ({ onOpenApply })
             {/* 4 Commercial Facilities */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {products.map((p, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-white border border-gray-200 space-y-1 shadow-2xs">
-                  <h3 className="text-sm font-bold text-[#002B99]">{p.title}</h3>
+                <div key={idx} className="p-4 rounded-xl bg-white border border-gray-200 space-y-1 shadow-2xs hover:border-[#087A5A]/40 transition-colors">
+                  <h3 className="text-sm font-bold text-[#071A2B]">{p.title}</h3>
                   <p className="text-xs text-gray-600 leading-relaxed font-normal">{p.desc}</p>
                 </div>
               ))}
             </div>
 
             {/* Underwriting Checklist Box */}
-            <div className="p-5 rounded-xl bg-white border border-[#002B99]/20 space-y-2.5">
-              <div className="text-xs font-bold text-[#002B99] uppercase tracking-wider">
+            <div className="p-5 rounded-xl bg-[#F8F7F3] border border-gray-200 space-y-2.5">
+              <div className="text-xs font-bold text-[#071A2B] uppercase tracking-wider">
                 SME Qualification Criteria
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
                   <span>Registered CAC Enterprise / Company</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
                   <span>6 to 12 Months Active Bank Statements</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
                   <span>Verifiable Business Location in Lagos</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#00A859] font-bold">✓</span>
+                  <span className="text-[#087A5A] font-bold">✓</span>
                   <span>Valid National Identity of Principals</span>
                 </div>
               </div>
@@ -88,15 +88,15 @@ export const BusinessFeature: React.FC<BusinessFeatureProps> = ({ onOpenApply })
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
               <Link
                 to="/business-financing"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors shadow-xs"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-colors shadow-xs"
               >
                 <span>Explore Business Credit Hub</span>
-                <ArrowUpRight className="w-4 h-4 ml-1.5" />
+                <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#C6A15B]" />
               </Link>
 
               <Link
                 to="/apply"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-[#00A859] bg-white hover:bg-gray-50 border border-[#00A859] rounded-lg transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-[#087A5A] bg-white hover:bg-gray-50 border border-[#087A5A] rounded-lg transition-colors"
               >
                 <span>Apply for Commercial Facility</span>
               </Link>

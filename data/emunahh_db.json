@@ -234,5 +234,14 @@
     "replyToEmail": "contact@emunahhinvest.com",
     "websiteUrl": "https://emunahhinvest.com"
   },
-  "adminTokens": {}
+  "adminTokens": {
+    "token_1790317013008_5ren3gbbiej": {
+      "email": "admin@emunahhinvest.com",
+      "expiresAt": 1790921813008
+    },
+    "token_1790317143425_tczeu6dvnoh": {
+      "email": "admin@emunahhinvest.com",
+      "expiresAt": 1790921943425
+    }
+  }
 }

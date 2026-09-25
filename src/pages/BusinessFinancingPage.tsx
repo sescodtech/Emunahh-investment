@@ -34,17 +34,17 @@ export const BusinessFinancingPage: React.FC<BusinessFinancingPageProps> = ({ on
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
+      <section className="bg-[#F8F7F3] border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#087A5A] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Services</span>
               <span>/</span>
               <span>Business Financing</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071A2B] tracking-tight leading-tight">
               Business Financing & SME Commercial Credit
             </h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
@@ -56,17 +56,17 @@ export const BusinessFinancingPage: React.FC<BusinessFinancingPageProps> = ({ on
             <div className="pt-3 flex flex-wrap gap-3.5">
               <button
                 onClick={() => onOpenApply('business_financing')}
-                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-all shadow-xs cursor-pointer"
+                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-all shadow-xs cursor-pointer group"
               >
                 <span>Apply for Commercial Credit</span>
-                <ArrowUpRight className="w-4 h-4 ml-1.5" />
+                <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#C6A15B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
 
               <a
                 href="https://wa.me/2348023190807?text=Hello%20Emunahh,%20I%20am%20inquiring%20about%20Business%20Financing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#008f4c] rounded-lg transition-all shadow-xs"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-lg transition-all shadow-xs"
               >
                 <MessageSquare className="w-4 h-4 fill-white" />
                 <span>WhatsApp Commercial Desk (0802 319 0807)</span>
@@ -84,32 +84,32 @@ export const BusinessFinancingPage: React.FC<BusinessFinancingPageProps> = ({ on
             {products.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div key={idx} className="bg-white p-7 rounded-xl border border-gray-200 space-y-3 shadow-2xs flex flex-col justify-between">
+                <div key={idx} className="bg-white p-7 rounded-xl border border-gray-200 space-y-3 shadow-2xs hover:border-[#087A5A]/40 transition-colors flex flex-col justify-between">
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#002B99]/10 text-[#002B99] flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-[#00A859]" />
+                    <div className="w-10 h-10 rounded-lg bg-[#087A5A]/10 text-[#087A5A] flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#087A5A]" />
                     </div>
-                    <h3 className="text-base font-bold text-[#00174D]">{item.title}</h3>
+                    <h3 className="text-base font-bold text-[#071A2B]">{item.title}</h3>
                     <p className="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
                   </div>
                   <button
                     onClick={() => onOpenApply('business_financing')}
-                    className="pt-4 border-t border-gray-100 text-xs font-bold text-[#002B99] hover:text-[#00A859] flex items-center justify-between cursor-pointer w-full"
+                    className="pt-4 border-t border-gray-100 text-xs font-bold text-[#071A2B] hover:text-[#087A5A] flex items-center justify-between cursor-pointer w-full group"
                   >
                     <span>Request Details</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <ArrowUpRight className="w-4 h-4 text-[#C6A15B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </button>
                 </div>
               );
             })}
           </div>
 
-          <div className="bg-white border-2 border-[#002B99]/20 p-8 sm:p-10 rounded-xl space-y-6 shadow-xs">
+          <div className="bg-[#F8F7F3] border border-gray-200 p-8 sm:p-10 rounded-xl space-y-6 shadow-xs">
             <div className="max-w-2xl space-y-2">
-              <div className="text-xs text-[#00A859] font-bold uppercase tracking-wider">
+              <div className="text-xs text-[#087A5A] font-bold uppercase tracking-wider">
                 Fast-Track Commercial Eligibility
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#00174D]">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#071A2B]">
                 What Your Business Needs to Access Credit
               </h3>
               <p className="text-xs sm:text-sm text-gray-600">
@@ -118,31 +118,31 @@ export const BusinessFinancingPage: React.FC<BusinessFinancingPageProps> = ({ on
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-gray-700">
-              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
-                <span className="font-bold text-[#00174D] block">CAC Registration:</span>
+              <div className="p-4 rounded-lg bg-white border border-gray-200 space-y-1">
+                <span className="font-bold text-[#071A2B] block">CAC Registration:</span>
                 <span>Active Business Name or Limited Liability Company registration certificate.</span>
               </div>
-              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
-                <span className="font-bold text-[#00174D] block">Turnover Records:</span>
+              <div className="p-4 rounded-lg bg-white border border-gray-200 space-y-1">
+                <span className="font-bold text-[#071A2B] block">Turnover Records:</span>
                 <span>6 to 12 months verified corporate or trading bank account statements.</span>
               </div>
-              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
-                <span className="font-bold text-[#00174D] block">Physical Operation:</span>
+              <div className="p-4 rounded-lg bg-white border border-gray-200 space-y-1">
+                <span className="font-bold text-[#071A2B] block">Physical Operation:</span>
                 <span>Verifiable shop, warehouse, or office address located in Lagos State.</span>
               </div>
-              <div className="p-4 rounded-lg border border-gray-150 space-y-1">
-                <span className="font-bold text-[#00174D] block">KYC Identification:</span>
+              <div className="p-4 rounded-lg bg-white border border-gray-200 space-y-1">
+                <span className="font-bold text-[#071A2B] block">KYC Identification:</span>
                 <span>Valid national identification (NIN, Voter's Card, or Passport) of proprietors.</span>
               </div>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-150">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-200">
               <span className="text-xs text-gray-500">
                 Average approval turnaround: 48 to 72 hours following statement review.
               </span>
               <button
                 onClick={() => onOpenApply('business_financing')}
-                className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-colors cursor-pointer"
               >
                 Apply for SME Credit Now
               </button>

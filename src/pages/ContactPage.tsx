@@ -42,15 +42,15 @@ export const ContactPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-white border-b border-gray-200 py-14 lg:py-20">
+      <section className="bg-[#F8F7F3] border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#00A859] font-bold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#087A5A] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Contact & Headquarters</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00174D] tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071A2B] tracking-tight leading-tight">
               Contact & Lagos Headquarters
             </h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
@@ -71,36 +71,36 @@ export const ContactPage: React.FC = () => {
             <div className="lg:col-span-5 space-y-5">
               
               {/* Telephone & WhatsApp Panel */}
-              <div className="p-6 rounded-xl bg-white border-2 border-[#002B99]/20 space-y-4 shadow-xs">
-                <div className="flex items-center justify-between text-xs text-[#002B99] font-bold uppercase tracking-wider border-b border-gray-150 pb-2.5">
+              <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-4 shadow-xs">
+                <div className="flex items-center justify-between text-xs text-[#071A2B] font-bold uppercase tracking-wider border-b border-gray-150 pb-2.5">
                   <span>Direct Communication Lines</span>
-                  <span className="text-[#00A859]">Active</span>
+                  <span className="text-[#087A5A]">Active Desk</span>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="p-3.5 rounded-lg bg-gray-50 border border-gray-200">
-                    <div className="text-xs text-[#00A859] font-bold flex items-center gap-1.5">
-                      <MessageSquare className="w-3.5 h-3.5 fill-[#00A859]" />
+                  <div className="p-3.5 rounded-lg bg-[#F8F7F3] border border-gray-200">
+                    <div className="text-xs text-[#087A5A] font-bold flex items-center gap-1.5">
+                      <MessageSquare className="w-3.5 h-3.5 fill-[#087A5A]" />
                       <span>Phone / WhatsApp Line:</span>
                     </div>
                     <a
                       href="https://wa.me/2348023190807"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-base font-bold text-[#00174D] hover:text-[#002B99] tabular-nums block mt-1"
+                      className="text-base font-bold text-[#071A2B] hover:text-[#087A5A] tabular-nums block mt-1 transition-colors"
                     >
                       0802 319 0807
                     </a>
                   </div>
 
-                  <div className="p-3.5 rounded-lg bg-gray-50 border border-gray-200">
+                  <div className="p-3.5 rounded-lg bg-[#F8F7F3] border border-gray-200">
                     <div className="text-xs text-gray-600 font-bold flex items-center gap-1.5">
-                      <Phone className="w-3.5 h-3.5 text-[#002B99]" />
+                      <Phone className="w-3.5 h-3.5 text-[#071A2B]" />
                       <span>Direct Telephone Line:</span>
                     </div>
                     <a
                       href="tel:08179171456"
-                      className="text-base font-bold text-[#00174D] hover:text-[#002B99] tabular-nums block mt-1"
+                      className="text-base font-bold text-[#071A2B] hover:text-[#087A5A] tabular-nums block mt-1 transition-colors"
                     >
                       0817 917 1456
                     </a>
@@ -108,10 +108,10 @@ export const ContactPage: React.FC = () => {
 
                   <div className="pt-2 border-t border-gray-150 flex items-center justify-between text-xs text-gray-600">
                     <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-[#00A859]" />
+                      <Clock className="w-3.5 h-3.5 text-[#087A5A]" />
                       <span>Working Hours:</span>
                     </div>
-                    <span className="text-[#00174D] font-bold">Mon – Fri: 8:30 AM – 5:00 PM</span>
+                    <span className="text-[#071A2B] font-bold">Mon – Fri: 8:30 AM – 5:00 PM</span>
                   </div>
                 </div>
 
@@ -119,7 +119,7 @@ export const ContactPage: React.FC = () => {
                   href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest%20Limited,%20I%20would%20like%20to%20inquire%20about%20your%20services."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2.5 px-4 py-3 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-95 rounded-lg shadow-xs transition-all"
+                  className="w-full flex items-center justify-center gap-2.5 px-4 py-3 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] active:scale-95 rounded-lg shadow-xs transition-all"
                 >
                   <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                   <span>Start WhatsApp Conversation (0802 319 0807)</span>
@@ -128,11 +128,11 @@ export const ContactPage: React.FC = () => {
 
               {/* Physical Office Card */}
               <div className="p-6 rounded-xl bg-white border border-gray-200 space-y-3 shadow-2xs">
-                <div className="flex items-center gap-2 text-xs text-[#002B99] font-bold uppercase tracking-wider">
-                  <MapPin className="w-4 h-4 text-[#00A859]" />
+                <div className="flex items-center gap-2 text-xs text-[#071A2B] font-bold uppercase tracking-wider">
+                  <MapPin className="w-4 h-4 text-[#087A5A]" />
                   <span>Official Corporate Headquarters</span>
                 </div>
-                <div className="text-base font-bold text-[#00174D]">
+                <div className="text-base font-bold text-[#071A2B]">
                   Emunahh-Invest Limited
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
@@ -150,10 +150,10 @@ export const ContactPage: React.FC = () => {
             <div className="lg:col-span-7 bg-white rounded-xl border border-gray-200 p-8 sm:p-10 shadow-xs">
               {isSuccess ? (
                 <div className="py-12 text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-[#00A859]/10 text-[#00A859] flex items-center justify-center mx-auto">
+                  <div className="w-12 h-12 rounded-full bg-[#087A5A]/10 text-[#087A5A] flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#00174D]">
+                  <h3 className="text-xl font-bold text-[#071A2B]">
                     Message Transmitted Successfully
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
@@ -172,7 +172,7 @@ export const ContactPage: React.FC = () => {
                           message: '',
                         });
                       }}
-                      className="px-6 py-2.5 text-xs font-bold text-[#002B99] hover:underline cursor-pointer"
+                      className="px-6 py-2.5 text-xs font-bold text-[#087A5A] hover:underline cursor-pointer"
                     >
                       Send Another Message
                     </button>
@@ -181,7 +181,7 @@ export const ContactPage: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-1">
-                    <h3 className="text-xl font-bold text-[#00174D]">
+                    <h3 className="text-xl font-bold text-[#071A2B]">
                       Submit an Official Inquiry
                     </h3>
                     <p className="text-xs text-gray-600 font-normal">
@@ -191,7 +191,7 @@ export const ContactPage: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                     <div>
-                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                      <label className="block text-xs font-bold text-[#071A2B] mb-1.5">
                         Your Full Name *
                       </label>
                       <input
@@ -200,12 +200,12 @@ export const ContactPage: React.FC = () => {
                         placeholder="e.g. Babatunde Adeleke"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                      <label className="block text-xs font-bold text-[#071A2B] mb-1.5">
                         Telephone / WhatsApp Number *
                       </label>
                       <input
@@ -214,14 +214,14 @@ export const ContactPage: React.FC = () => {
                         placeholder="0802 319 0807"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                      <label className="block text-xs font-bold text-[#071A2B] mb-1.5">
                         Email Address
                       </label>
                       <input
@@ -229,18 +229,18 @@ export const ContactPage: React.FC = () => {
                         placeholder="babatunde@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                      <label className="block text-xs font-bold text-[#071A2B] mb-1.5">
                         Subject / Solution Category *
                       </label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value as ServiceType })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99] bg-white"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A] bg-white"
                       >
                         <option value="student_loan">Student Loans / Tuition Financing</option>
                         <option value="investment">Investment Services & Wealth Management</option>
@@ -252,7 +252,7 @@ export const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#00174D] mb-1.5">
+                    <label className="block text-xs font-bold text-[#071A2B] mb-1.5">
                       Your Inquiry / Message *
                     </label>
                     <textarea
@@ -261,7 +261,7 @@ export const ContactPage: React.FC = () => {
                       placeholder="Please specify your institution, business turnover, or investment horizon..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#002B99] resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-gray-200 text-xs focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A] resize-none"
                     />
                   </div>
 
@@ -269,13 +269,13 @@ export const ContactPage: React.FC = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 text-xs font-bold text-white bg-[#002B99] hover:bg-[#001F70] rounded-lg transition-colors cursor-pointer shadow-xs"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-colors cursor-pointer shadow-xs group"
                     >
                       {isSubmitting ? (
                         <span>Transmitting Inquiry...</span>
                       ) : (
                         <>
-                          <Send className="w-3.5 h-3.5" />
+                          <Send className="w-3.5 h-3.5 text-[#C6A15B] group-hover:translate-x-0.5 transition-transform" />
                           <span>Submit Official Inquiry</span>
                         </>
                       )}
