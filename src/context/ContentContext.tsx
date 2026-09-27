@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '../lib/supabase';
 import heroDefaultImage from '../assets/images/nigerian_businesswoman_hero_1790205199974.webp';
 import graduateDefaultImage from '../assets/images/nigerian_graduate_success_1790142702336.webp';
 import meetingDefaultImage from '../assets/images/african_investment_meeting_1790151240660.webp';
@@ -222,46 +223,24 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const fetchDynamicData = async () => {
     try {
       setIsLoading(true);
-      const [contentRes, servicesRes, settingsRes] = await Promise.allSettled([
-        fetch('/api/content'),
-        fetch('/api/services'),
-        fetch('/api/settings'),
+      const [contentRes, servicesRes, settingsRes] = await Promise.all([
+        supabase.from('site_content').select('content').eq('id',1).maybeSingle(),
+        supabase.from('services').select('id,slug,title,category,tagline,description,bullets,image_url,is_published,display_order').eq('is_published',true).order('display_order'),
+        supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url').eq('id',1).maybeSingle(),
       ]);
-
-      if (contentRes.status === 'fulfilled' && contentRes.value.ok) {
-        const data = await contentRes.value.json();
-        if (data.content) {
-          setContent((prev) => ({
-            ...prev,
-            ...data.content,
-            hero: {
-              ...prev.hero,
-              ...data.content.hero,
-              // Fallback to bundled image if imageUrl is empty or invalid
-              imageUrl: data.content.hero?.imageUrl || heroDefaultImage,
-            },
-          }));
-        }
+      if (!contentRes.error && contentRes.data?.content) {
+        const data:any = contentRes.data.content;
+        setContent(prev => ({...prev,...data,hero:{...prev.hero,...data.hero,imageUrl:data.hero?.imageUrl||heroDefaultImage.src}}));
       }
-
-      if (servicesRes.status === 'fulfilled' && servicesRes.value.ok) {
-        const data = await servicesRes.value.json();
-        if (data.services && Array.isArray(data.services) && data.services.length > 0) {
-          setServices(data.services);
-        }
+      if (!servicesRes.error && servicesRes.data?.length) {
+        setServices(servicesRes.data.map((s:any)=>({...s,imageUrl:s.image_url,isPublished:s.is_published,order:s.display_order})));
       }
-
-      if (settingsRes.status === 'fulfilled' && settingsRes.value.ok) {
-        const data = await settingsRes.value.json();
-        if (data) {
-          setSettings((prev) => ({ ...prev, ...data }));
-        }
+      if (!settingsRes.error && settingsRes.data) {
+        const s:any=settingsRes.data;
+        setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||''}));
       }
-    } catch (err) {
-      console.warn('Using bundled default content:', err);
-    } finally {
-      setIsLoading(false);
-    }
+    } catch (err) { console.warn('Using bundled default content:', err); }
+    finally { setIsLoading(false); }
   };
 
   useEffect(() => {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, Phone, MessageSquare, Send, CheckCircle2, Clock, ArrowUpRight } from 'lucide-react';
 import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { ServiceType } from '../types';
+import { submitContact } from '../lib/publicApi';
 
 export const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,19 +22,12 @@ export const ContactPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (res.ok) {
-        setIsSuccess(true);
-      } else {
-        setIsSuccess(true);
-      }
-    } catch (err) {
+      await submitContact(formData);
       setIsSuccess(true);
+    } catch (err) {
+      console.error(err);
+      setIsSuccess(false);
+      alert('Unable to send your inquiry right now. Please try again or contact us by phone/WhatsApp.');
     } finally {
       setIsSubmitting(false);
     }
