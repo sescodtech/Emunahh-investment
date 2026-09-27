@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, GraduationCap, TrendingUp, Building2, Wallet, Check } from 'lucide-react';
 import { ServiceType } from '../types';
-import studentImage from '../assets/images/student_education_loan_1790141403913.jpg';
+const studentImage = '/assets/images/student_education_loan_1790141403913.webp';
 
 interface ServicesSectionProps {
   onOpenApply: (service?: ServiceType) => void;

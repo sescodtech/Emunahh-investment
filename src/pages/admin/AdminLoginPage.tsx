@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ShieldCheck, Lock, Mail, Eye, EyeOff, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Logo } from '../../components/Logo';
+import { isSupabaseConfigured, sendPasswordReset, signIn } from '../../lib/supabaseAuth';
 
 export const AdminLoginPage: React.FC = () => {
-  const [email, setEmail] = useState('admin@emunahhinvest.com');
-  const [password, setPassword] = useState('AdminEmunahh2026!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -20,115 +21,43 @@ export const AdminLoginPage: React.FC = () => {
     e.preventDefault();
     setError(null);
 
-    if (!email || !password) {
-      setError('Please provide both administrator email and password.');
+    if (!email.trim() || !password) {
+      setError('Please provide your administrator email and password.');
       return;
     }
 
-    const trimmedEmail = email.trim().toLowerCase();
-    const isMasterAdmin =
-      trimmedEmail === 'admin@emunahhinvest.com' &&
-      password === 'AdminEmunahh2026!';
+    if (!isSupabaseConfigured()) {
+      setError('Administrator authentication is not configured yet. Add the Supabase environment variables before signing in.');
+      return;
+    }
 
     try {
       setIsLoading(true);
-
-      // Attempt live server authentication with a 5-second timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ email: trimmedEmail, password }),
-        signal: controller.signal,
-      }).catch((err) => {
-        console.warn('Backend fetch failed, evaluating authorization:', err);
-        return null;
-      });
-
-      clearTimeout(timeoutId);
-
-      if (res) {
-        const contentType = res.headers.get('content-type') || '';
-        if (contentType.includes('application/json')) {
-          const data = await res.json().catch(() => null);
-
-          if (data && res.ok && data.token) {
-            localStorage.setItem('emunahh_admin_token', data.token);
-            localStorage.setItem('emunahh_admin_user', JSON.stringify(data.user));
-            navigate('/admin');
-            return;
-          }
-
-          if (data && res.status === 401) {
-            setError(data.error || 'Invalid administrator email or password.');
-            return;
-          }
-        }
-      }
-
-      // If server is warming up or network was interrupted, but credentials are the valid master credentials:
-      if (isMasterAdmin) {
-        const fallbackToken = `token_${Date.now()}_auth_${Math.random().toString(36).substring(2, 9)}`;
-        const fallbackUser = {
-          email: 'admin@emunahhinvest.com',
-          name: 'Executive Administrator',
-          role: 'ADMIN',
-        };
-        localStorage.setItem('emunahh_admin_token', fallbackToken);
-        localStorage.setItem('emunahh_admin_user', JSON.stringify(fallbackUser));
-        navigate('/admin');
-        return;
-      }
-
-      setError('Authentication failed. Please verify administrator email and password.');
+      await signIn(email, password);
+      navigate('/admin');
     } catch (err) {
-      if (isMasterAdmin) {
-        const fallbackToken = `token_${Date.now()}_auth_${Math.random().toString(36).substring(2, 9)}`;
-        const fallbackUser = {
-          email: 'admin@emunahhinvest.com',
-          name: 'Executive Administrator',
-          role: 'ADMIN',
-        };
-        localStorage.setItem('emunahh_admin_token', fallbackToken);
-        localStorage.setItem('emunahh_admin_user', JSON.stringify(fallbackUser));
-        navigate('/admin');
-        return;
-      }
-      setError('Invalid administrator email or password.');
+      setError(err instanceof Error ? err.message : 'Unable to sign in. Please verify your credentials.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleQuickSignIn = () => {
-    setEmail('admin@emunahhinvest.com');
-    setPassword('AdminEmunahh2026!');
-    setError(null);
-    const token = `token_${Date.now()}_admin_instant`;
-    const user = {
-      email: 'admin@emunahhinvest.com',
-      name: 'Executive Administrator',
-      role: 'ADMIN',
-    };
-    localStorage.setItem('emunahh_admin_token', token);
-    localStorage.setItem('emunahh_admin_user', JSON.stringify(user));
-    navigate('/admin');
-  };
-
-  const handleResetPassword = (e: React.FormEvent) => {
+  const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!resetEmail) return;
-    setForgotSent(true);
-    setTimeout(() => {
-      setShowForgotModal(false);
-      setForgotSent(false);
-      setResetEmail('');
-    }, 3000);
+    setError(null);
+    if (!resetEmail.trim()) return;
+
+    if (!isSupabaseConfigured()) {
+      setError('Supabase authentication is not configured yet.');
+      return;
+    }
+
+    try {
+      await sendPasswordReset(resetEmail);
+      setForgotSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to send the recovery email.');
+    }
   };
 
   return (
@@ -251,28 +180,6 @@ export const AdminLoginPage: React.FC = () => {
             </button>
 
           </form>
-
-          {/* Preset Credentials Hint for Testing */}
-          <div className="mt-6 pt-5 border-t border-gray-100">
-            <div className="p-3.5 bg-[#e3fff2] border border-[#0d0a64]/10 rounded-md text-[11px] text-[#17202A]/80 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-[#0d0a64]">Authorized Administrator Credentials:</span>
-                <span className="text-[10px] text-[#e7020b] font-bold uppercase">Master Desk</span>
-              </div>
-              <div className="space-y-0.5">
-                <div>Email: <code className="text-[#e7020b] font-semibold bg-white px-1.5 py-0.5 rounded border border-gray-200">admin@emunahhinvest.com</code></div>
-                <div>Password: <code className="text-[#e7020b] font-semibold bg-white px-1.5 py-0.5 rounded border border-gray-200">AdminEmunahh2026!</code></div>
-              </div>
-              <button
-                type="button"
-                onClick={handleQuickSignIn}
-                className="w-full mt-2 py-2 px-3 bg-[#0d0a64] hover:bg-[#a3140a] text-white text-[11px] font-bold rounded transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#e3fff2]" />
-                <span>Instant Sign In as Executive Admin</span>
-              </button>
-            </div>
-          </div>
 
           <div className="mt-4 text-center">
             <Link to="/" className="text-xs font-semibold text-[#0d0a64] hover:text-[#e7020b] transition-colors">

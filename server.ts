@@ -195,7 +195,6 @@ interface DatabaseSchema {
   emailLogs: EmailLog[];
   media: MediaItem[];
   settings: SiteSettings;
-  adminTokens: Record<string, { email: string; expiresAt: number }>;
 }
 
 // Initial Database Seeding
@@ -208,7 +207,7 @@ const initialData: DatabaseSchema = {
       description: 'Practical financial solutions designed to support students, individuals and businesses in achieving meaningful financial goals.',
       primaryCta: 'EXPLORE OUR SOLUTIONS',
       secondaryCta: 'GET STARTED',
-      imageUrl: '/src/assets/images/nigerian_professional_hero_1790151218863.jpg',
+      imageUrl: '/assets/images/nigerian_professional_hero_1790151218863.webp',
     },
     about: {
       title: 'CORPORATE HERITAGE & DISCIPLINE',
@@ -262,7 +261,7 @@ const initialData: DatabaseSchema = {
         'Coverage across accredited federal, state, and private universities',
         'Applicable for Nigerian Law School, ICAN, and postgraduate courses',
       ],
-      imageUrl: '/src/assets/images/nigerian_graduate_success_1790142702336.jpg',
+      imageUrl: '/assets/images/nigerian_graduate_success_1790142702336.webp',
       isPublished: true,
       order: 1,
     },
@@ -278,7 +277,7 @@ const initialData: DatabaseSchema = {
         'Goal-aligned tenures (6, 12, and 24-month horizon placements)',
         'Fully formalized legal contracts and regulatory governance',
       ],
-      imageUrl: '/src/assets/images/african_investment_meeting_1790151240660.jpg',
+      imageUrl: '/assets/images/african_investment_meeting_1790151240660.webp',
       isPublished: true,
       order: 2,
     },
@@ -294,7 +293,7 @@ const initialData: DatabaseSchema = {
         'Revolving operational working capital for established SMEs',
         'Practical underwriting based on verifiable commercial flow',
       ],
-      imageUrl: '/src/assets/images/lagos_commercial_enterprise_1790142716551.jpg',
+      imageUrl: '/assets/images/lagos_commercial_enterprise_1790142716551.webp',
       isPublished: true,
       order: 3,
     },
@@ -310,7 +309,7 @@ const initialData: DatabaseSchema = {
         'Transparent milestone repayment schedules in plain terms',
         'No invasive automated data scraping or arbitrary charges',
       ],
-      imageUrl: '/src/assets/images/lagos_financial_hq_1790142688340.jpg',
+      imageUrl: '/assets/images/lagos_financial_hq_1790142688340.webp',
       isPublished: true,
       order: 4,
     },
@@ -388,24 +387,24 @@ const initialData: DatabaseSchema = {
   media: [
     {
       id: 'med-1',
-      filename: 'nigerian_professional_hero_1790151218863.jpg',
-      url: '/src/assets/images/nigerian_professional_hero_1790151218863.jpg',
+      filename: 'nigerian_professional_hero_1790151218863.webp',
+      url: '/assets/images/nigerian_professional_hero_1790151218863.webp',
       title: 'Hero Professional Executive',
       uploadedAt: new Date().toISOString(),
       category: 'hero',
     },
     {
       id: 'med-2',
-      filename: 'nigerian_graduate_success_1790142702336.jpg',
-      url: '/src/assets/images/nigerian_graduate_success_1790142702336.jpg',
+      filename: 'nigerian_graduate_success_1790142702336.webp',
+      url: '/assets/images/nigerian_graduate_success_1790142702336.webp',
       title: 'Student Loan Graduation Success',
       uploadedAt: new Date().toISOString(),
       category: 'service',
     },
     {
       id: 'med-3',
-      filename: 'african_investment_meeting_1790151240660.jpg',
-      url: '/src/assets/images/african_investment_meeting_1790151240660.jpg',
+      filename: 'african_investment_meeting_1790151240660.webp',
+      url: '/assets/images/african_investment_meeting_1790151240660.webp',
       title: 'Investment Advisory Boardroom',
       uploadedAt: new Date().toISOString(),
       category: 'about',
@@ -424,7 +423,6 @@ const initialData: DatabaseSchema = {
     websiteUrl: 'https://emunahhinvest.com',
     logoUrl: '',
   },
-  adminTokens: {},
 };
 
 // Database Loader & Persister
@@ -463,20 +461,52 @@ function saveDb(data: DatabaseSchema): void {
 let db: DatabaseSchema = loadDb();
 
 // Admin Authentication Middleware
-function authenticateAdmin(req: Request, res: Response, next: NextFunction) {
+// Production authentication is delegated to Supabase Auth. No admin password or
+// session secret is stored in this codebase. The authenticated Supabase user must
+// have app_metadata.role or user_metadata.role set to "admin".
+async function authenticateAdmin(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Unauthorized. Admin credentials required.' });
+  const supabaseUrl = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
+  const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || '';
+
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized. A valid Supabase session is required.' });
   }
 
-  const token = authHeader.split(' ')[1];
-  const session = db.adminTokens[token];
-
-  if (!session || session.expiresAt < Date.now()) {
-    return res.status(401).json({ error: 'Session expired. Please log in again.' });
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return res.status(503).json({ error: 'Supabase authentication is not configured on the server.' });
   }
 
-  next();
+  const accessToken = authHeader.slice('Bearer '.length).trim();
+  if (!accessToken) {
+    return res.status(401).json({ error: 'Invalid authentication token.' });
+  }
+
+  try {
+    const response = await fetch(`${supabaseUrl}/auth/v1/user`, {
+      headers: {
+        apikey: supabaseAnonKey,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      return res.status(401).json({ error: 'Your administrator session is invalid or expired.' });
+    }
+
+    const user = await response.json() as { app_metadata?: Record<string, unknown>; user_metadata?: Record<string, unknown>; email?: string };
+    const role = user.app_metadata?.role || user.user_metadata?.role;
+
+    if (role !== 'admin') {
+      return res.status(403).json({ error: 'This account is not authorized for the administrator portal.' });
+    }
+
+    (req as Request & { adminUser?: typeof user }).adminUser = user;
+    return next();
+  } catch (error) {
+    console.error('Supabase admin authentication error:', error);
+    return res.status(503).json({ error: 'Unable to verify the administrator session.' });
+  }
 }
 
 // Resend Email Dispatch Helper
@@ -786,35 +816,12 @@ app.get('/api/applications/:ref', (req: Request, res: Response) => {
 // ADMIN AUTH & MANAGEMENT ROUTES
 // ==========================================
 
-// Admin Login
+// Legacy admin login endpoint intentionally disabled.
+// The frontend authenticates directly with Supabase Auth.
 app.post('/api/admin/login', (req: Request, res: Response) => {
-  const { email, password } = req.body;
-
-  // Standard secure admin credentials (can also be configured via process.env.ADMIN_PASSWORD)
-  const configuredAdminEmail = (process.env.ADMIN_EMAIL || 'admin@emunahhinvest.com').toLowerCase();
-  const configuredAdminPassword = process.env.ADMIN_PASSWORD || 'AdminEmunahh2026!';
-
-  if (email && email.toLowerCase().trim() === configuredAdminEmail && password === configuredAdminPassword) {
-    const token = `token_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-    // Session valid for 7 days
-    db.adminTokens[token] = {
-      email: configuredAdminEmail,
-      expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    };
-    saveDb(db);
-
-    return res.json({
-      success: true,
-      token,
-      user: {
-        email: configuredAdminEmail,
-        name: 'Executive Administrator',
-        role: 'ADMIN',
-      },
-    });
-  }
-
-  return res.status(401).json({ error: 'Invalid administrator email or password.' });
+  res.status(410).json({
+    error: 'The legacy administrator login has been disabled. Use Supabase Auth through the administrator portal.',
+  });
 });
 
 // Verify Current Admin
@@ -822,7 +829,7 @@ app.get('/api/admin/me', authenticateAdmin, (req: Request, res: Response) => {
   res.json({
     authenticated: true,
     user: {
-      email: 'admin@emunahhinvest.com',
+      email: (req as Request & { adminUser?: { email?: string } }).adminUser?.email || '',
       role: 'ADMIN',
       company: db.settings.companyName,
     },
@@ -830,14 +837,9 @@ app.get('/api/admin/me', authenticateAdmin, (req: Request, res: Response) => {
 });
 
 // Admin Logout
-app.post('/api/admin/logout', (req: Request, res: Response) => {
-  const authHeader = req.headers.authorization;
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.split(' ')[1];
-    delete db.adminTokens[token];
-    saveDb(db);
-  }
-  res.json({ success: true, message: 'Logged out successfully.' });
+// Supabase owns the session. The browser calls Supabase logout directly.
+app.post('/api/admin/logout', authenticateAdmin, (req: Request, res: Response) => {
+  res.json({ success: true, message: 'Administrator session verified. Sign-out is handled by Supabase Auth.' });
 });
 
 // Admin Dashboard Overview Stats
@@ -1124,7 +1126,7 @@ app.get('/api/admin/media', authenticateAdmin, (req: Request, res: Response) => 
   res.json({ media: db.media });
 });
 
-app.post('/api/admin/media/upload', authenticateAdmin, (req: Request, res: Response) => {
+app.post('/api/admin/media/upload', authenticateAdmin, async (req: Request, res: Response) => {
   try {
     const { title, base64Data, filename, category } = req.body;
 
@@ -1132,21 +1134,63 @@ app.post('/api/admin/media/upload', authenticateAdmin, (req: Request, res: Respo
       return res.status(400).json({ error: 'Base64 image data and filename are required.' });
     }
 
-    const matches = base64Data.match(/^data:([A-Za-z-+/]+);base64,(.+)$/);
+    const matches = base64Data.match(/^data:([A-Za-z0-9.+/-]+);base64,(.+)$/);
     if (!matches || matches.length !== 3) {
       return res.status(400).json({ error: 'Invalid base64 image data format.' });
     }
 
-    const buffer = Buffer.from(matches[2], 'base64');
-    const safeFilename = `${Date.now()}_${filename.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
-    const filePath = path.join(UPLOADS_DIR, safeFilename);
+    const contentType = matches[1];
+    if (!contentType.startsWith('image/')) {
+      return res.status(415).json({ error: 'Only image uploads are supported.' });
+    }
 
-    fs.writeFileSync(filePath, buffer);
+    const buffer = Buffer.from(matches[2], 'base64');
+    const maxBytes = 8 * 1024 * 1024;
+    if (buffer.length > maxBytes) {
+      return res.status(413).json({ error: 'Image is too large. Please upload an image below 8 MB.' });
+    }
+
+    const safeFilename = filename.toLowerCase().replace(/[^a-z0-9._-]/g, '-');
+    const storagePath = `${category || 'general'}/${Date.now()}-${safeFilename}`;
+    const supabaseUrl = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+    const bucket = process.env.SUPABASE_STORAGE_BUCKET || 'emunahh-media';
+
+    let publicUrl = '';
+
+    if (supabaseUrl && serviceRoleKey) {
+      const storageResponse = await fetch(`${supabaseUrl}/storage/v1/object/${bucket}/${encodeURIComponent(storagePath).replace(/%2F/g, '/')}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${serviceRoleKey}`,
+          apikey: serviceRoleKey,
+          'Content-Type': contentType,
+          'x-upsert': 'true',
+        },
+        body: buffer,
+      });
+
+      if (!storageResponse.ok) {
+        const errorText = await storageResponse.text();
+        console.error('[Supabase Storage Error]', errorText);
+        return res.status(502).json({ error: 'The image could not be stored in Supabase Storage.' });
+      }
+
+      publicUrl = `${supabaseUrl}/storage/v1/object/public/${bucket}/${storagePath}`;
+    } else {
+      if (process.env.VERCEL) {
+        return res.status(503).json({ error: 'Cloud media storage is not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY before uploading media on Vercel.' });
+      }
+
+      const filePath = path.join(UPLOADS_DIR, safeFilename);
+      fs.writeFileSync(filePath, buffer);
+      publicUrl = `/uploads/${safeFilename}`;
+    }
 
     const mediaItem: MediaItem = {
       id: `med-${Date.now()}`,
       filename: safeFilename,
-      url: `/uploads/${safeFilename}`,
+      url: publicUrl,
       title: title || filename,
       size: buffer.length,
       uploadedAt: new Date().toISOString(),
@@ -1156,30 +1200,48 @@ app.post('/api/admin/media/upload', authenticateAdmin, (req: Request, res: Respo
     db.media.unshift(mediaItem);
     saveDb(db);
 
-    res.status(201).json({ success: true, media: mediaItem });
+    return res.status(201).json({ success: true, media: mediaItem });
   } catch (err) {
     console.error('Media upload error:', err);
-    res.status(500).json({ error: 'Failed to save media upload.' });
+    return res.status(500).json({ error: 'Failed to save media upload.' });
   }
 });
 
-app.delete('/api/admin/media/:id', authenticateAdmin, (req: Request, res: Response) => {
+app.delete('/api/admin/media/:id', authenticateAdmin, async (req: Request, res: Response) => {
   const { id } = req.params;
   const item = db.media.find((m) => m.id === id);
-  if (item && item.url.startsWith('/uploads/')) {
-    const filePath = path.join(UPLOADS_DIR, item.filename);
-    if (fs.existsSync(filePath)) {
-      try {
-        fs.unlinkSync(filePath);
-      } catch (err) {
-        console.warn('Failed to delete file from disk:', err);
-      }
-    }
+
+  if (!item) {
+    return res.status(404).json({ error: 'Media item not found.' });
   }
 
-  db.media = db.media.filter((m) => m.id !== id);
-  saveDb(db);
-  res.json({ success: true, message: 'Media item deleted.' });
+  try {
+    const supabaseUrl = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+    const bucket = process.env.SUPABASE_STORAGE_BUCKET || 'emunahh-media';
+
+    if (supabaseUrl && serviceRoleKey && item.url.includes('/storage/v1/object/public/')) {
+      const marker = `/storage/v1/object/public/${bucket}/`;
+      const index = item.url.indexOf(marker);
+      if (index >= 0) {
+        const storagePath = decodeURIComponent(item.url.slice(index + marker.length));
+        await fetch(`${supabaseUrl}/storage/v1/object/${bucket}/${storagePath.split('/').map(encodeURIComponent).join('/')}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey },
+        });
+      }
+    } else if (item.url.startsWith('/uploads/')) {
+      const filePath = path.join(UPLOADS_DIR, item.filename);
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+    }
+
+    db.media = db.media.filter((m) => m.id !== id);
+    saveDb(db);
+    return res.json({ success: true, message: 'Media item deleted.' });
+  } catch (err) {
+    console.error('Media delete error:', err);
+    return res.status(500).json({ error: 'Failed to delete media item.' });
+  }
 });
 
 // Admin Settings

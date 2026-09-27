@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 import { Logo } from '../../components/Logo';
 import { useContent } from '../../context/ContentContext';
+import { authHeaders, getAccessToken, getStoredUser, restoreSession, signOut } from '../../lib/supabaseAuth';
 
 type AdminTab =
   | 'overview'
@@ -119,26 +120,25 @@ export const AdminDashboardPage: React.FC = () => {
 
   // Verification & Auth check
   useEffect(() => {
-    const storedToken = localStorage.getItem('emunahh_admin_token');
-    const storedUser = localStorage.getItem('emunahh_admin_user');
+    let active = true;
 
-    if (!storedToken) {
-      navigate('/admin/login');
-      return;
-    }
+    const restoreAdmin = async () => {
+      const session = await restoreSession();
+      if (!active || !session?.access_token) {
+        navigate('/admin/login', { replace: true });
+        return;
+      }
 
-    setToken(storedToken);
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+      const currentUser = session.user || getStoredUser();
+      setToken(session.access_token);
+      setUser(currentUser);
+      fetchInitialData(session.access_token);
+    };
 
-    fetchInitialData(storedToken);
+    restoreAdmin();
+    return () => { active = false; };
   }, [navigate]);
 
-  const authHeaders = (t?: string) => ({
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${t || token}`,
-  });
 
   const fetchInitialData = async (authToken: string) => {
     try {
@@ -159,17 +159,6 @@ export const AdminDashboardPage: React.FC = () => {
 
       if (statsRes.status === 'fulfilled' && statsRes.value.ok) {
         setStats(await statsRes.value.json());
-      } else {
-        setStats((prev: any) => ({
-          ...prev,
-          totalStudentLoans: 12,
-          newStudentLoans: 4,
-          totalInvestments: 8,
-          newInvestments: 2,
-          totalMessages: 9,
-          newMessages: 3,
-          activeServices: 5,
-        }));
       }
 
       if (contentRes.status === 'fulfilled' && contentRes.value.ok) {
@@ -229,8 +218,7 @@ export const AdminDashboardPage: React.FC = () => {
     } catch (e) {
       // ignore
     }
-    localStorage.removeItem('emunahh_admin_token');
-    localStorage.removeItem('emunahh_admin_user');
+    await signOut(token || getAccessToken());
     navigate('/admin/login');
   };
 

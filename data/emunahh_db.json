@@ -7,7 +7,7 @@
       "description": "Practical financial solutions designed to support students, individuals and businesses in achieving meaningful financial goals.",
       "primaryCta": "EXPLORE OUR SOLUTIONS",
       "secondaryCta": "GET STARTED",
-      "imageUrl": "/src/assets/images/nigerian_businesswoman_hero_1790205199974.jpg"
+      "imageUrl": "/assets/images/nigerian_businesswoman_hero_1790205199974.webp"
     },
     "about": {
       "title": "CORPORATE HERITAGE & DISCIPLINE",
@@ -43,7 +43,7 @@
     "studentLoans": {
       "heading": "YOUR EDUCATION IS AN INVESTMENT IN YOUR FUTURE.",
       "tagline": "Tuition Protection Facility",
-      "description": "Direct institutional tuition remittance for accredited Nigerian universities, postgraduate programs, and professional exam bodies—ensuring studies continue without disruption."
+      "description": "Direct institutional tuition remittance for accredited Nigerian universities, postgraduate programs, and professional exam bodies\u2014ensuring studies continue without disruption."
     },
     "contact": {
       "officeAddress": "33, Crossway Plaza, Beside UBA, 3/5 Charity Road, New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.",
@@ -51,7 +51,7 @@
       "secondaryPhone": "+234 817 917 1456",
       "email": "contact@emunahhinvest.com",
       "whatsapp": "0802 319 0807",
-      "hours": "Monday – Friday: 8:30 AM – 5:00 PM (WAT)",
+      "hours": "Monday \u2013 Friday: 8:30 AM \u2013 5:00 PM (WAT)",
       "socialTwitter": "https://twitter.com/emunahhinvest",
       "socialLinkedIn": "https://linkedin.com/company/emunahh-invest"
     },
@@ -73,7 +73,7 @@
         "Coverage across accredited federal, state, and private universities",
         "Applicable for Nigerian Law School, ICAN, and postgraduate courses"
       ],
-      "imageUrl": "/src/assets/images/nigerian_graduate_success_1790142702336.jpg",
+      "imageUrl": "/assets/images/nigerian_graduate_success_1790142702336.webp",
       "isPublished": true,
       "order": 1
     },
@@ -89,7 +89,7 @@
         "Goal-aligned tenures (6, 12, and 24-month horizon placements)",
         "Fully formalized legal contracts and regulatory governance"
       ],
-      "imageUrl": "/src/assets/images/african_investment_meeting_1790151240660.jpg",
+      "imageUrl": "/assets/images/african_investment_meeting_1790151240660.webp",
       "isPublished": true,
       "order": 2
     },
@@ -105,7 +105,7 @@
         "Revolving operational working capital for established SMEs",
         "Practical underwriting based on verifiable commercial flow"
       ],
-      "imageUrl": "/src/assets/images/lagos_commercial_enterprise_1790142716551.jpg",
+      "imageUrl": "/assets/images/lagos_commercial_enterprise_1790142716551.webp",
       "isPublished": true,
       "order": 3
     },
@@ -121,7 +121,7 @@
         "Transparent milestone repayment schedules in plain terms",
         "No invasive automated data scraping or arbitrary charges"
       ],
-      "imageUrl": "/src/assets/images/lagos_financial_hq_1790142688340.jpg",
+      "imageUrl": "/assets/images/lagos_financial_hq_1790142688340.webp",
       "isPublished": true,
       "order": 4
     }
@@ -136,7 +136,7 @@
       "institution": "University of Lagos (UNILAG)",
       "course": "B.Sc. Economics (Final Year)",
       "purpose": "Final session tuition fee and faculty clearance.",
-      "amount": "₦450,000",
+      "amount": "\u20a6450,000",
       "message": "Need prompt settlement before course registration portal closes.",
       "status": "NEW",
       "createdAt": "2026-09-23T21:03:59.339Z"
@@ -150,7 +150,7 @@
       "institution": "Nigerian Law School (Bwari, Abuja)",
       "course": "Bar Part II Vocational Training",
       "purpose": "Bar school hostel accommodation and academic syllabus tuition.",
-      "amount": "₦1,200,000",
+      "amount": "\u20a61,200,000",
       "message": "Sponsor is a civil servant with verified salary payroll statements.",
       "status": "CONTACTED",
       "createdAt": "2026-09-22T23:03:59.344Z"
@@ -164,7 +164,7 @@
       "email": "adeyemi.olukoya@example.com",
       "phone": "+234 802 888 1234",
       "investmentInterest": "Fixed Wealth Placement (12 Months)",
-      "amount": "₦15,000,000",
+      "amount": "\u20a615,000,000",
       "message": "Seeking corporate treasury placement for medical practice reserve funds with capital preservation focus.",
       "status": "IN PROGRESS",
       "createdAt": "2026-09-21T23:03:59.344Z"
@@ -199,24 +199,24 @@
   "media": [
     {
       "id": "med-1",
-      "filename": "nigerian_professional_hero_1790151218863.jpg",
-      "url": "/src/assets/images/nigerian_professional_hero_1790151218863.jpg",
+      "filename": "nigerian_professional_hero_1790151218863.webp",
+      "url": "/assets/images/nigerian_professional_hero_1790151218863.webp",
       "title": "Hero Professional Executive",
       "uploadedAt": "2026-09-23T23:03:59.344Z",
       "category": "hero"
     },
     {
       "id": "med-2",
-      "filename": "nigerian_graduate_success_1790142702336.jpg",
-      "url": "/src/assets/images/nigerian_graduate_success_1790142702336.jpg",
+      "filename": "nigerian_graduate_success_1790142702336.webp",
+      "url": "/assets/images/nigerian_graduate_success_1790142702336.webp",
       "title": "Student Loan Graduation Success",
       "uploadedAt": "2026-09-23T23:03:59.344Z",
       "category": "service"
     },
     {
       "id": "med-3",
-      "filename": "african_investment_meeting_1790151240660.jpg",
-      "url": "/src/assets/images/african_investment_meeting_1790151240660.jpg",
+      "filename": "african_investment_meeting_1790151240660.webp",
+      "url": "/assets/images/african_investment_meeting_1790151240660.webp",
       "title": "Investment Advisory Boardroom",
       "uploadedAt": "2026-09-23T23:03:59.344Z",
       "category": "about"
@@ -233,15 +233,5 @@
     "emailSenderName": "Emunahh-Invest Advisory Desk",
     "replyToEmail": "contact@emunahhinvest.com",
     "websiteUrl": "https://emunahhinvest.com"
-  },
-  "adminTokens": {
-    "token_1790317013008_5ren3gbbiej": {
-      "email": "admin@emunahhinvest.com",
-      "expiresAt": 1790921813008
-    },
-    "token_1790317143425_tczeu6dvnoh": {
-      "email": "admin@emunahhinvest.com",
-      "expiresAt": 1790921943425
-    }
   }
 }

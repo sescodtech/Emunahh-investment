@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, CheckCircle2, ShieldCheck, School } from 'lucide-react';
 import { ServiceType } from '../types';
-import graduateImage from '../assets/images/nigerian_graduate_success_1790142702336.jpg';
+const graduateImage = '/assets/images/nigerian_graduate_success_1790142702336.webp';
 import { SparklesCore } from './ui/sparkles';
 
 interface StudentLoanFeatureProps {
