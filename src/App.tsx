@@ -8,22 +8,22 @@ import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { ApplicationModal } from './components/ApplicationModal';
 import { ContentProvider } from './context/ContentContext';
 
-import { HomePage } from './pages/HomePage';
-import { StudentLoansPage } from './pages/StudentLoansPage';
-import { InvestmentsPage } from './pages/InvestmentsPage';
-import { BusinessFinancingPage } from './pages/BusinessFinancingPage';
-import { PersonalFinancePage } from './pages/PersonalFinancePage';
-import { OtherServicesPage } from './pages/OtherServicesPage';
-import { AboutPage } from './pages/AboutPage';
-import { BlogPage } from './pages/BlogPage';
-import { ContactPage } from './pages/ContactPage';
-import { ApplyPage } from './pages/ApplyPage';
-import { TermsPage } from './pages/TermsPage';
-import { PrivacyPage } from './pages/PrivacyPage';
-import { NotFoundPage } from './pages/NotFoundPage';
+import { HomePage } from './views/HomePage';
+import { StudentLoansPage } from './views/StudentLoansPage';
+import { InvestmentsPage } from './views/InvestmentsPage';
+import { BusinessFinancingPage } from './views/BusinessFinancingPage';
+import { PersonalFinancePage } from './views/PersonalFinancePage';
+import { OtherServicesPage } from './views/OtherServicesPage';
+import { AboutPage } from './views/AboutPage';
+import { BlogPage } from './views/BlogPage';
+import { ContactPage } from './views/ContactPage';
+import { ApplyPage } from './views/ApplyPage';
+import { TermsPage } from './views/TermsPage';
+import { PrivacyPage } from './views/PrivacyPage';
+import { NotFoundPage } from './views/NotFoundPage';
 
-import { AdminLoginPage } from './pages/admin/AdminLoginPage';
-import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+import { AdminLoginPage } from './views/admin/AdminLoginPage';
+import { AdminDashboardPage } from './views/admin/AdminDashboardPage';
 
 import { ServiceType } from './types';
 
