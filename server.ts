@@ -29,14 +29,28 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Static uploads route
-const UPLOADS_DIR = path.join(__dirname, 'data', 'uploads');
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+// On Vercel's read-only filesystem, only /tmp is writable, and even that does
+// not persist between invocations or across function instances. Uploaded
+// files (e.g. an admin-uploaded logo) will therefore work within a single
+// warm request but are not a durable production storage layer on Vercel —
+// see the deployment notes in README for a persistent alternative.
+const UPLOADS_DIR = process.env.VERCEL
+  ? path.join('/tmp', 'emunahh-uploads')
+  : path.join(__dirname, 'data', 'uploads');
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+} catch (err) {
+  console.error('Could not create uploads directory (non-fatal):', err);
 }
 app.use('/uploads', express.static(UPLOADS_DIR));
 
 // DB Persistence File
-const DB_FILE = path.join(__dirname, 'data', 'emunahh_db.json');
+// Same caveat as UPLOADS_DIR above: /tmp on Vercel is not durable storage.
+const DB_FILE = process.env.VERCEL
+  ? path.join('/tmp', 'emunahh_db.json')
+  : path.join(__dirname, 'data', 'emunahh_db.json');
 
 // Types
 export interface ServiceRecord {
@@ -1209,4 +1223,11 @@ async function setupServer() {
   });
 }
 
-setupServer();
+// Only boot a persistent, listening server outside Vercel's serverless
+// runtime. On Vercel, `api/[...slug].ts` imports `app` directly and Vercel's
+// own static hosting (see vercel.json) serves the built SPA.
+if (!process.env.VERCEL) {
+  setupServer();
+}
+
+export default app;
