@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { ServiceType } from '../types';
-const commercialEnterpriseImage = '/assets/images/lagos_commercial_enterprise_1790142716551.webp';
+import commercialEnterpriseImage from '../assets/images/lagos_commercial_enterprise_1790142716551.webp';
 
 interface BusinessFeatureProps {
   onOpenApply: (service?: ServiceType) => void;

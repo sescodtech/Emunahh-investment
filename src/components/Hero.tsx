@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { useContent } from '../context/ContentContext';
 import { ServiceType } from '../types';
 import { SparklesCore } from './ui/sparkles';
-const defaultHeroImg = '/assets/images/nigerian_businesswoman_hero_1790205199974.webp';
+import defaultHeroImg from '../assets/images/nigerian_businesswoman_hero_1790205199974.webp';
 
 interface HeroProps {
   onOpenApply: (service?: ServiceType) => void;

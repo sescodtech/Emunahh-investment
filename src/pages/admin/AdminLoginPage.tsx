@@ -22,21 +22,21 @@ export const AdminLoginPage: React.FC = () => {
     setError(null);
 
     if (!email.trim() || !password) {
-      setError('Please provide your administrator email and password.');
+      setError('Please enter your administrator email and password.');
       return;
     }
 
     if (!isSupabaseConfigured()) {
-      setError('Administrator authentication is not configured yet. Add the Supabase environment variables before signing in.');
+      setError('Supabase authentication is not configured. Add the NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY environment variables.');
       return;
     }
 
     try {
       setIsLoading(true);
       await signIn(email, password);
-      navigate('/admin');
+      navigate('/admin', { replace: true });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to sign in. Please verify your credentials.');
+      setError(err instanceof Error ? err.message : 'Unable to authenticate this administrator account.');
     } finally {
       setIsLoading(false);
     }
@@ -47,16 +47,11 @@ export const AdminLoginPage: React.FC = () => {
     setError(null);
     if (!resetEmail.trim()) return;
 
-    if (!isSupabaseConfigured()) {
-      setError('Supabase authentication is not configured yet.');
-      return;
-    }
-
     try {
       await sendPasswordReset(resetEmail);
       setForgotSent(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to send the recovery email.');
+      setError(err instanceof Error ? err.message : 'Unable to send the password recovery email.');
     }
   };
 

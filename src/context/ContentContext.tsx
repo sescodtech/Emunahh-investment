@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-const heroDefaultImage = '/assets/images/nigerian_businesswoman_hero_1790205199974.webp';
-const graduateDefaultImage = '/assets/images/nigerian_graduate_success_1790142702336.webp';
-const meetingDefaultImage = '/assets/images/african_investment_meeting_1790151240660.webp';
+import heroDefaultImage from '../assets/images/nigerian_businesswoman_hero_1790205199974.webp';
+import graduateDefaultImage from '../assets/images/nigerian_graduate_success_1790142702336.webp';
+import meetingDefaultImage from '../assets/images/african_investment_meeting_1790151240660.webp';
 
 export interface SiteContent {
   hero: {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, ArrowUpRight, Compass, Eye, ShieldCheck, Check } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
 import { WhatsAppIcon } from './WhatsAppIcon';
-const hqImage = '/assets/images/lagos_financial_hq_1790142688340.webp';
+import hqImage from '../assets/images/lagos_financial_hq_1790142688340.webp';
 
 export const AboutSection: React.FC = () => {
   const { content } = useContent();

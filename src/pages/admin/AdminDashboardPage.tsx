@@ -30,7 +30,7 @@ import {
 } from 'lucide-react';
 import { Logo } from '../../components/Logo';
 import { useContent } from '../../context/ContentContext';
-import { authHeaders, getAccessToken, getStoredUser, restoreSession, signOut } from '../../lib/supabaseAuth';
+import { getAccessToken, restoreAdminSession, signOut } from '../../lib/supabaseAuth';
 
 type AdminTab =
   | 'overview'
@@ -123,22 +123,29 @@ export const AdminDashboardPage: React.FC = () => {
     let active = true;
 
     const restoreAdmin = async () => {
-      const session = await restoreSession();
-      if (!active || !session?.access_token) {
+      const restored = await restoreAdminSession();
+      if (!active || !restored) {
         navigate('/admin/login', { replace: true });
         return;
       }
 
-      const currentUser = session.user || getStoredUser();
-      setToken(session.access_token);
-      setUser(currentUser);
-      fetchInitialData(session.access_token);
+      setToken(restored.session.access_token);
+      setUser({
+        email: restored.user.email,
+        name: restored.user.user_metadata?.full_name || restored.user.email,
+        role: 'ADMIN',
+      });
+      fetchInitialData(restored.session.access_token);
     };
 
     restoreAdmin();
     return () => { active = false; };
   }, [navigate]);
 
+  const authHeaders = (t?: string) => ({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${t || token}`,
+  });
 
   const fetchInitialData = async (authToken: string) => {
     try {
@@ -210,16 +217,8 @@ export const AdminDashboardPage: React.FC = () => {
   };
 
   const handleLogout = async () => {
-    try {
-      await fetch('/api/admin/logout', {
-        method: 'POST',
-        headers: authHeaders(),
-      }).catch(() => null);
-    } catch (e) {
-      // ignore
-    }
-    await signOut(token || getAccessToken());
-    navigate('/admin/login');
+    await signOut();
+    navigate('/admin/login', { replace: true });
   };
 
   // Content update handler

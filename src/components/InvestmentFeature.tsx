@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Clock, FileCheck2, Ban } from 'lucide-react';
 import { ServiceType } from '../types';
-const investmentMeetingImage = '/assets/images/african_investment_meeting_1790151240660.webp';
+import investmentMeetingImage from '../assets/images/african_investment_meeting_1790151240660.webp';
 
 interface InvestmentFeatureProps {
   onOpenApply: (service?: ServiceType) => void;
