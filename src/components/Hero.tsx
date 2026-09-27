@@ -44,7 +44,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
     },
   };
 
-  const currentImage = heroData.imageUrl || defaultHeroImg;
+  const currentImage = heroData.imageUrl || defaultHeroImg.src;
 
   return (
     <section className="relative bg-[#e3fff2] text-[#17202A] pt-10 pb-14 lg:pt-14 lg:pb-18 border-b border-[#0d0a64]/10 overflow-hidden">

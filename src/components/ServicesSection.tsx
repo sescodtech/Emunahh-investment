@@ -58,7 +58,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenApply })
               {/* Real African Student Image Asset with Controlled Natural Height */}
               <div className="relative rounded-md overflow-hidden border border-[#0d0a64]/10 h-44 sm:h-52 bg-white">
                 <img
-                  src={studentImage}
+                  src={studentImage.src}
                   alt="Nigerian university scholar studying successfully with Emunahh-Invest loan"
                   className="w-full h-full object-cover object-center"
                   loading="lazy"

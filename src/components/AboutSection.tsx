@@ -34,7 +34,7 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-5 space-y-5">
             <div className="relative rounded-xl overflow-hidden border-2 border-[#0d0a64] bg-[#0d0a64] shadow-md group">
               <img
-                src={hqImage}
+                src={hqImage.src}
                 alt="Emunahh-Invest Limited Headquarters Lagos"
                 className="w-full h-[320px] sm:h-[360px] object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                 loading="lazy"

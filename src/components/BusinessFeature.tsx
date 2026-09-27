@@ -107,7 +107,7 @@ export const BusinessFeature: React.FC<BusinessFeatureProps> = ({ onOpenApply })
           <div className="lg:col-span-5">
             <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
               <img
-                src={commercialEnterpriseImage}
+                src={commercialEnterpriseImage.src}
                 alt="Nigerian business enterprise founders in Lagos"
                 className="w-full h-[400px] sm:h-[450px] object-cover object-center"
               />

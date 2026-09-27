@@ -63,7 +63,7 @@ export const InvestmentFeature: React.FC<InvestmentFeatureProps> = ({ onOpenAppl
           <div className="lg:col-span-6">
             <div className="relative rounded-xl overflow-hidden border-2 border-[#0d0a64] bg-[#0d0a64] shadow-lg">
               <img
-                src={investmentMeetingImage}
+                src={investmentMeetingImage.src}
                 alt="Executive wealth consultation in Lagos boardroom with Emunahh-Invest"
                 className="w-full h-[360px] sm:h-[420px] object-cover object-center"
                 loading="lazy"

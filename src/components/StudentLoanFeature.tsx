@@ -87,7 +87,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
           <div className="lg:col-span-6">
             <div className="relative rounded-xl overflow-hidden border border-white/15 bg-white/5 shadow-2xl">
               <img
-                src={graduateImage}
+                src={graduateImage.src}
                 alt="Proud Nigerian graduate with family supported by Emunahh-Invest student loan"
                 className="w-full h-[420px] sm:h-[480px] object-cover object-center"
               />
