@@ -41,7 +41,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
   ];
 
   return (
-    <section id="student-loans" className="py-16 lg:py-22 bg-[#071A2B] text-white border-b border-white/10 scroll-mt-16 relative overflow-hidden">
+    <section id="student-loans" className="py-16 lg:py-22 bg-[#0d0a64] text-white border-b border-white/10 scroll-mt-16 relative overflow-hidden">
       
       {/* Subtle Ambient Particle Sparkles Field */}
       <div className="w-full absolute inset-0 h-full pointer-events-none opacity-40">
@@ -51,21 +51,21 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
           minSize={0.5}
           maxSize={1.2}
           particleDensity={20}
-          particleColors={['#FFFFFF', '#C6A15B', '#087A5A']}
+          particleColors={['#FFFFFF', '#e3fff2', '#e7020b']}
           className="w-full h-full"
         />
       </div>
 
       {/* Subtle Background Radial Glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#087A5A]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#e7020b]/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Eyebrow and Headline */}
         <div className="max-w-3xl space-y-4 mb-16">
           <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#C6A15B]" />
-            <span className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-[0.2em]">
+            <span className="h-px w-8 bg-[#e3fff2]" />
+            <span className="text-[11px] font-bold text-[#e3fff2] uppercase tracking-[0.2em]">
               EDUCATION FINANCING
             </span>
           </div>
@@ -85,15 +85,15 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
           
           {/* Authentic Nigerian Graduate Image with Navy Framing (6 cols) */}
           <div className="lg:col-span-6">
-            <div className="relative rounded-lg overflow-hidden border border-white/15 bg-white/5 shadow-2xl">
+            <div className="relative rounded-xl overflow-hidden border border-white/15 bg-white/5 shadow-2xl">
               <img
                 src={graduateImage}
                 alt="Proud Nigerian graduate with family supported by Emunahh-Invest student loan"
                 className="w-full h-[420px] sm:h-[480px] object-cover object-center"
               />
-              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#071A2B] via-[#071A2B]/80 to-transparent">
+              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#0d0a64] via-[#0d0a64]/80 to-transparent">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-[#C6A15B]">Direct-to-Institution Remittance</span>
+                  <span className="font-semibold text-[#e3fff2]">Direct-to-Institution Remittance</span>
                   <span className="text-white/60">Zero Fund Diversion</span>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
           {/* Institutional Scope & Requirements (6 cols) */}
           <div className="lg:col-span-6 space-y-7">
             <div className="space-y-3">
-              <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
+              <div className="text-xs font-bold text-[#e7020b] uppercase tracking-wider">
                 Institutional Coverage
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -122,7 +122,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
                   key={idx}
                   className="flex items-center gap-3 p-3.5 rounded-md bg-white/5 border border-white/10 text-xs text-white/90 font-medium"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#087A5A] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#e7020b] shrink-0" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -132,7 +132,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
             <div className="flex flex-col sm:flex-row items-center gap-3.5 pt-2">
               <Link
                 to="/apply"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-md transition-all shadow-md group"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] rounded-md transition-all shadow-md group"
               >
                 <span>APPLY FOR STUDENT LOAN</span>
                 <ArrowUpRight className="w-3.5 h-3.5 ml-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -152,7 +152,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
 
         {/* 4-Step Process Strip: Exactly as requested */}
         <div className="pt-12 border-t border-white/10">
-          <div className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-[0.2em] mb-6">
+          <div className="text-[11px] font-bold text-[#e3fff2] uppercase tracking-[0.2em] mb-6">
             APPLICATION & DISBURSEMENT PROCESS
           </div>
 
@@ -160,10 +160,10 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
             {steps.map((step, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-lg bg-white/5 border border-white/10 relative space-y-3 backdrop-blur-xs"
+                className="p-6 rounded-xl bg-white/5 border border-white/10 relative space-y-3 backdrop-blur-xs"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-base font-bold text-[#087A5A]">
+                  <span className="font-mono text-base font-bold text-[#e7020b]">
                     {step.num}
                   </span>
                   <span className="text-[10px] uppercase font-bold text-white/40 tracking-wider">

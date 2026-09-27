@@ -17,7 +17,7 @@ const PORT = 3000;
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
-// CORS and Preflight Request Handling (vital for iframes, AI Studio preview, and cross-origin admin requests)
+// CORS and Preflight Request Handling (vital for iframes and cross-origin admin requests)
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
@@ -169,6 +169,7 @@ export interface SiteSettings {
   emailSenderName: string;
   replyToEmail: string;
   websiteUrl: string;
+  logoUrl: string;
 }
 
 interface DatabaseSchema {
@@ -407,6 +408,7 @@ const initialData: DatabaseSchema = {
     emailSenderName: 'Emunahh-Invest Advisory Desk',
     replyToEmail: 'contact@emunahhinvest.com',
     websiteUrl: 'https://emunahhinvest.com',
+    logoUrl: '',
   },
   adminTokens: {},
 };
@@ -510,8 +512,8 @@ async function notifyAdminNewEnquiry(type: string, ref: string, name: string, ph
   const subject = `New ${type} Enquiry — ${ref} (${name})`;
   const html = `
     <div style="font-family: Arial, sans-serif; color: #17202A; line-height: 1.6; max-width: 600px; padding: 20px; border: 1px solid #E2E8F0; border-radius: 8px;">
-      <h2 style="color: #087A5A; margin-top: 0;">EMUNAHH-INVEST LIMITED</h2>
-      <h3 style="color: #071A2B;">New ${type} Submission Received</h3>
+      <h2 style="color: #e7020b; margin-top: 0;">EMUNAHH-INVEST LIMITED</h2>
+      <h3 style="color: #0d0a64;">New ${type} Submission Received</h3>
       <p>A new enquiry was just submitted through the public portal:</p>
       <ul>
         <li><strong>Reference:</strong> ${ref}</li>
@@ -520,7 +522,7 @@ async function notifyAdminNewEnquiry(type: string, ref: string, name: string, ph
         <li><strong>Details:</strong> ${details}</li>
         <li><strong>Timestamp:</strong> ${new Date().toLocaleString('en-GB', { timeZone: 'Africa/Lagos' })} WAT</li>
       </ul>
-      <p>Log in to the <a href="${db.settings.websiteUrl}/admin" style="color: #087A5A; font-weight: bold;">Admin Portal</a> to review and reply directly.</p>
+      <p>Log in to the <a href="${db.settings.websiteUrl}/admin" style="color: #e7020b; font-weight: bold;">Admin Portal</a> to review and reply directly.</p>
     </div>
   `;
 
@@ -562,7 +564,7 @@ app.get('/api/services', (req: Request, res: Response) => {
 
 // Get Public Settings
 app.get('/api/settings', (req: Request, res: Response) => {
-  const { companyName, companyEmail, phone, secondaryPhone, whatsapp, officeAddress, websiteUrl } = db.settings;
+  const { companyName, companyEmail, phone, secondaryPhone, whatsapp, officeAddress, websiteUrl, logoUrl } = db.settings;
   res.json({
     companyName,
     companyEmail,
@@ -571,6 +573,7 @@ app.get('/api/settings', (req: Request, res: Response) => {
     whatsapp,
     officeAddress,
     websiteUrl,
+    logoUrl,
   });
 });
 
@@ -609,7 +612,7 @@ app.post('/api/enquiries/student-loans', async (req: Request, res: Response) => 
     if (email) {
       const studentAckHtml = `
         <div style="font-family: Arial, sans-serif; color: #17202A; line-height: 1.6; max-width: 600px; padding: 20px;">
-          <h2 style="color: #087A5A;">EMUNAHH-INVEST LIMITED</h2>
+          <h2 style="color: #e7020b;">EMUNAHH-INVEST LIMITED</h2>
           <p>Dear ${fullName},</p>
           <p>We have received your Student Loan enquiry for <strong>${institution}</strong> (Reference: <strong>${reference}</strong>).</p>
           <p>Our Lagos educational finance desk will review your submission and contact you via phone/WhatsApp within standard business hours.</p>
@@ -1063,7 +1066,7 @@ app.post('/api/admin/emails/send', authenticateAdmin, async (req: Request, res: 
 
     const html = `
       <div style="font-family: Arial, sans-serif; color: #17202A; line-height: 1.6; max-width: 600px; padding: 20px;">
-        <h2 style="color: #087A5A; margin-top: 0;">EMUNAHH-INVEST LIMITED</h2>
+        <h2 style="color: #e7020b; margin-top: 0;">EMUNAHH-INVEST LIMITED</h2>
         <div style="font-size: 15px; color: #17202A; white-space: pre-wrap;">${body}</div>
         <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 24px 0;" />
         <p style="font-size: 12px; color: #64748B;">

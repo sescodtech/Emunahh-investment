@@ -30,7 +30,7 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
   minSize = 0.5,
   maxSize = 1.2,
   particleDensity = 25,
-  particleColor = '#087A5A',
+  particleColor = '#e7020b',
   particleColors,
   speed = 0.6,
 }) => {

@@ -68,6 +68,7 @@ export interface SiteSettings {
   whatsapp: string;
   officeAddress: string;
   websiteUrl: string;
+  logoUrl?: string;
 }
 
 const defaultContent: SiteContent = {
@@ -193,6 +194,7 @@ const defaultSettings: SiteSettings = {
   whatsapp: '0802 319 0807',
   officeAddress: '33, Crossway Plaza, Beside UBA, 3/5 Charity Road, New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.',
   websiteUrl: 'https://emunahhinvest.com',
+  logoUrl: '',
 };
 
 interface ContentContextType {

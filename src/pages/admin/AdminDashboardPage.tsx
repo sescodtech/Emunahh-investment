@@ -113,6 +113,10 @@ export const AdminDashboardPage: React.FC = () => {
   const [isSavingSettings, setIsSavingSettings] = useState(false);
   const [settingsSuccess, setSettingsSuccess] = useState(false);
 
+  // Brand Logo Upload State
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const [logoUploadError, setLogoUploadError] = useState<string | null>(null);
+
   // Verification & Auth check
   useEffect(() => {
     const storedToken = localStorage.getItem('emunahh_admin_token');
@@ -401,6 +405,87 @@ export const AdminDashboardPage: React.FC = () => {
     }
   };
 
+  // Brand Logo Upload Handler — uploads the image, then immediately
+  // persists the returned URL as the live site logo.
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setLogoUploadError('Please choose an image file (PNG, JPG, or SVG).');
+      return;
+    }
+    if (file.size > 4 * 1024 * 1024) {
+      setLogoUploadError('Logo file is too large. Please use an image under 4MB.');
+      return;
+    }
+
+    setLogoUploadError(null);
+    setIsUploadingLogo(true);
+
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        const base64Data = reader.result as string;
+
+        const uploadRes = await fetch('/api/admin/media/upload', {
+          method: 'POST',
+          headers: authHeaders(),
+          body: JSON.stringify({
+            title: 'Brand Logo',
+            filename: file.name,
+            base64Data,
+            category: 'general',
+          }),
+        });
+
+        if (!uploadRes.ok) throw new Error('Upload failed');
+        const uploadData = await uploadRes.json();
+        const newLogoUrl = uploadData.media.url;
+
+        const settingsRes = await fetch('/api/admin/settings', {
+          method: 'PUT',
+          headers: authHeaders(),
+          body: JSON.stringify({ ...settingsForm, logoUrl: newLogoUrl }),
+        });
+
+        if (!settingsRes.ok) throw new Error('Settings update failed');
+        const settingsData = await settingsRes.json();
+
+        setSettingsForm(settingsData.settings);
+        setMediaList((prev) => [uploadData.media, ...prev]);
+        await refreshContent();
+        setSettingsSuccess(true);
+        setTimeout(() => setSettingsSuccess(false), 3000);
+      } catch (err) {
+        setLogoUploadError('Could not upload logo. Please try again.');
+      } finally {
+        setIsUploadingLogo(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveLogo = async () => {
+    try {
+      setIsUploadingLogo(true);
+      const res = await fetch('/api/admin/settings', {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify({ ...settingsForm, logoUrl: '' }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setSettingsForm(data.settings);
+        await refreshContent();
+      }
+    } catch (err) {
+      setLogoUploadError('Could not remove logo. Please try again.');
+    } finally {
+      setIsUploadingLogo(false);
+    }
+  };
+
   // Settings Save Handler
   const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -427,17 +512,17 @@ export const AdminDashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F7F3] text-[#17202A] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#e3fff2] text-[#17202A] flex flex-col font-sans">
       
       {/* Top Header Bar */}
-      <header className="bg-[#071A2B] text-white border-b border-[#071A2B] sticky top-0 z-30 shadow-md">
+      <header className="bg-[#0d0a64] text-white border-b border-[#0d0a64] sticky top-0 z-30 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link to="/" className="inline-block">
               <Logo variant="dark" size="sm" />
             </Link>
             <div className="hidden sm:block h-6 w-px bg-white/20" />
-            <div className="hidden sm:flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#C6A15B]">
+            <div className="hidden sm:flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#e3fff2]">
               <span>Executive Management Control</span>
             </div>
           </div>
@@ -450,7 +535,7 @@ export const AdminDashboardPage: React.FC = () => {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/10 hover:bg-white/20 text-white font-medium transition-colors"
             >
               <span>Live Website</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#087A5A]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#e7020b]" />
             </Link>
 
             <button
@@ -470,26 +555,26 @@ export const AdminDashboardPage: React.FC = () => {
         {/* Sidebar Tabs (3 cols) */}
         <aside className="lg:col-span-3 space-y-2">
           
-          <div className="p-4 bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs mb-4">
-            <div className="text-[10px] uppercase font-bold text-[#087A5A] tracking-wider">
+          <div className="p-4 bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm mb-4">
+            <div className="text-[10px] uppercase font-bold text-[#e7020b] tracking-wider">
               Signed in Officer
             </div>
-            <div className="text-sm font-bold text-[#071A2B] truncate">
+            <div className="text-sm font-bold text-[#0d0a64] truncate">
               {user?.email || 'admin@emunahhinvest.com'}
             </div>
             <div className="text-[11px] text-gray-500">Full Administrator Rights</div>
           </div>
 
-          <nav className="space-y-1 bg-white p-2 rounded-lg border border-[#071A2B]/10 shadow-2xs">
+          <nav className="space-y-1 bg-white p-2 rounded-xl border border-[#0d0a64]/10 shadow-sm">
             <button
               onClick={() => setActiveTab('overview')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'overview'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
-              <LayoutDashboard className="w-4 h-4 text-[#C6A15B]" />
+              <LayoutDashboard className="w-4 h-4 text-[#e3fff2]" />
               <span>Dashboard Overview</span>
             </button>
 
@@ -497,11 +582,11 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('content')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'content'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
-              <FileText className="w-4 h-4 text-[#087A5A]" />
+              <FileText className="w-4 h-4 text-[#e7020b]" />
               <span>Website Content</span>
             </button>
 
@@ -509,11 +594,11 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('services')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'services'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
-              <Briefcase className="w-4 h-4 text-[#087A5A]" />
+              <Briefcase className="w-4 h-4 text-[#e7020b]" />
               <span>Services</span>
             </button>
 
@@ -521,16 +606,16 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('student-loans')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'student-loans'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
               <div className="flex items-center gap-3">
-                <GraduationCap className="w-4 h-4 text-[#087A5A]" />
+                <GraduationCap className="w-4 h-4 text-[#e7020b]" />
                 <span>Student Loans</span>
               </div>
               {stats.newStudentLoans > 0 && (
-                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#087A5A] text-white">
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#e7020b] text-white">
                   {stats.newStudentLoans}
                 </span>
               )}
@@ -540,16 +625,16 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('investments')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'investments'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
               <div className="flex items-center gap-3">
-                <TrendingUp className="w-4 h-4 text-[#C6A15B]" />
+                <TrendingUp className="w-4 h-4 text-[#e3fff2]" />
                 <span>Investments</span>
               </div>
               {stats.newInvestments > 0 && (
-                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#087A5A] text-white">
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#e7020b] text-white">
                   {stats.newInvestments}
                 </span>
               )}
@@ -559,16 +644,16 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('contact')}
               className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'contact'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
               <div className="flex items-center gap-3">
-                <MessageSquare className="w-4 h-4 text-[#087A5A]" />
+                <MessageSquare className="w-4 h-4 text-[#e7020b]" />
                 <span>Contact Messages</span>
               </div>
               {stats.newMessages > 0 && (
-                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#087A5A] text-white">
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#e7020b] text-white">
                   {stats.newMessages}
                 </span>
               )}
@@ -578,11 +663,11 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('emails')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'emails'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
-              <Send className="w-4 h-4 text-[#087A5A]" />
+              <Send className="w-4 h-4 text-[#e7020b]" />
               <span>Email Dispatch</span>
             </button>
 
@@ -590,11 +675,11 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('media')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'media'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
-              <ImageIcon className="w-4 h-4 text-[#087A5A]" />
+              <ImageIcon className="w-4 h-4 text-[#e7020b]" />
               <span>Media Library</span>
             </button>
 
@@ -602,7 +687,7 @@ export const AdminDashboardPage: React.FC = () => {
               onClick={() => setActiveTab('settings')}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md text-xs font-bold transition-colors ${
                 activeTab === 'settings'
-                  ? 'bg-[#071A2B] text-white'
+                  ? 'bg-[#0d0a64] text-white'
                   : 'text-[#17202A] hover:bg-gray-50'
               }`}
             >
@@ -621,35 +706,35 @@ export const AdminDashboardPage: React.FC = () => {
               
               {/* Stat Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="p-5 bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs space-y-1">
+                <div className="p-5 bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm space-y-1">
                   <div className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                     Student Loan Enquiries
                   </div>
-                  <div className="text-2xl font-extrabold text-[#071A2B]">
+                  <div className="text-2xl font-extrabold text-[#0d0a64]">
                     {stats.totalStudentLoans}
                   </div>
-                  <div className="text-xs text-[#087A5A] font-semibold">
+                  <div className="text-xs text-[#e7020b] font-semibold">
                     {stats.newStudentLoans} pending review
                   </div>
                 </div>
 
-                <div className="p-5 bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs space-y-1">
+                <div className="p-5 bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm space-y-1">
                   <div className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                     Investment Enquiries
                   </div>
-                  <div className="text-2xl font-extrabold text-[#071A2B]">
+                  <div className="text-2xl font-extrabold text-[#0d0a64]">
                     {stats.totalInvestments}
                   </div>
-                  <div className="text-xs text-[#087A5A] font-semibold">
+                  <div className="text-xs text-[#e7020b] font-semibold">
                     {stats.newInvestments} pending review
                   </div>
                 </div>
 
-                <div className="p-5 bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs space-y-1">
+                <div className="p-5 bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm space-y-1">
                   <div className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                     Contact Messages
                   </div>
-                  <div className="text-2xl font-extrabold text-[#071A2B]">
+                  <div className="text-2xl font-extrabold text-[#0d0a64]">
                     {stats.totalMessages}
                   </div>
                   <div className="text-xs text-gray-500">
@@ -657,41 +742,41 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-5 bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs space-y-1">
+                <div className="p-5 bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm space-y-1">
                   <div className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                     Emails Delivered
                   </div>
-                  <div className="text-2xl font-extrabold text-[#071A2B]">
+                  <div className="text-2xl font-extrabold text-[#0d0a64]">
                     {stats.totalEmailsSent}
                   </div>
-                  <div className="text-xs text-[#087A5A] font-semibold">
+                  <div className="text-xs text-[#e7020b] font-semibold">
                     Resend gateway online
                   </div>
                 </div>
               </div>
 
               {/* Quick Actions Bar */}
-              <div className="p-6 bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs flex flex-wrap items-center justify-between gap-4">
+              <div className="p-6 bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-sm font-bold text-[#071A2B]">Administrative Shortcuts</h3>
+                  <h3 className="text-sm font-bold text-[#0d0a64]">Administrative Shortcuts</h3>
                   <p className="text-xs text-gray-500">Quickly jump to primary tasks and customer enquiries.</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2.5">
                   <button
                     onClick={() => setActiveTab('student-loans')}
-                    className="px-3.5 py-2 bg-[#087A5A] hover:bg-[#04513E] text-white text-xs font-bold rounded-md transition-colors"
+                    className="px-3.5 py-2 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md transition-colors"
                   >
                     View Student Loans ({stats.newStudentLoans})
                   </button>
                   <button
                     onClick={() => setActiveTab('emails')}
-                    className="px-3.5 py-2 bg-[#071A2B] hover:bg-[#087A5A] text-white text-xs font-bold rounded-md transition-colors"
+                    className="px-3.5 py-2 bg-[#0d0a64] hover:bg-[#e7020b] text-white text-xs font-bold rounded-md transition-colors"
                   >
                     Compose Direct Email
                   </button>
                   <button
                     onClick={() => setActiveTab('content')}
-                    className="px-3.5 py-2 bg-gray-100 hover:bg-gray-200 text-[#071A2B] text-xs font-bold rounded-md transition-colors"
+                    className="px-3.5 py-2 bg-gray-100 hover:bg-gray-200 text-[#0d0a64] text-xs font-bold rounded-md transition-colors"
                   >
                     Edit Website Copy
                   </button>
@@ -699,14 +784,14 @@ export const AdminDashboardPage: React.FC = () => {
               </div>
 
               {/* Recent Activity Table */}
-              <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs overflow-hidden">
+              <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm overflow-hidden">
                 <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-[#071A2B]">Recent Inbound Activity</h3>
+                  <h3 className="text-sm font-bold text-[#0d0a64]">Recent Inbound Activity</h3>
                   <span className="text-xs text-gray-500">Live synchronization</span>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-[#F8F7F3] text-gray-600 font-bold uppercase tracking-wider text-[10px]">
+                    <thead className="bg-[#e3fff2] text-gray-600 font-bold uppercase tracking-wider text-[10px]">
                       <tr>
                         <th className="px-6 py-3">Category</th>
                         <th className="px-6 py-3">Reference</th>
@@ -718,8 +803,8 @@ export const AdminDashboardPage: React.FC = () => {
                     <tbody className="divide-y divide-gray-100">
                       {stats.recentActivity.map((act: any, idx: number) => (
                         <tr key={idx} className="hover:bg-gray-50">
-                          <td className="px-6 py-3 font-semibold text-[#071A2B]">{act.type}</td>
-                          <td className="px-6 py-3 font-mono font-bold text-[#087A5A]">{act.ref}</td>
+                          <td className="px-6 py-3 font-semibold text-[#0d0a64]">{act.type}</td>
+                          <td className="px-6 py-3 font-mono font-bold text-[#e7020b]">{act.ref}</td>
                           <td className="px-6 py-3 font-medium text-gray-800">{act.name}</td>
                           <td className="px-6 py-3">
                             <span
@@ -749,11 +834,11 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* TAB 2: WEBSITE CONTENT (CMS) */}
           {activeTab === 'content' && siteContent && (
-            <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 sm:p-8 space-y-6">
+            <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 sm:p-8 space-y-6">
               
               <div className="flex items-center justify-between pb-4 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg font-bold text-[#071A2B]">Website Content Management</h3>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">Website Content Management</h3>
                   <p className="text-xs text-gray-500">
                     Edits made here update the public website in real-time and persist to the database.
                   </p>
@@ -770,13 +855,13 @@ export const AdminDashboardPage: React.FC = () => {
                 
                 {/* HERO SECTION CMS */}
                 <div className="space-y-4">
-                  <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
+                  <div className="text-xs font-bold text-[#e7020b] uppercase tracking-wider">
                     Hero Section Copy
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Eyebrow Text</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Eyebrow Text</label>
                       <input
                         type="text"
                         value={siteContent.hero.eyebrow}
@@ -786,12 +871,12 @@ export const AdminDashboardPage: React.FC = () => {
                             hero: { ...siteContent.hero, eyebrow: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Highlight Word</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Highlight Word</label>
                       <input
                         type="text"
                         value={siteContent.hero.highlightWord}
@@ -801,13 +886,13 @@ export const AdminDashboardPage: React.FC = () => {
                             hero: { ...siteContent.hero, highlightWord: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#071A2B] mb-1">Main Heading</label>
+                    <label className="block text-xs font-bold text-[#0d0a64] mb-1">Main Heading</label>
                     <input
                       type="text"
                       value={siteContent.hero.heading}
@@ -817,12 +902,12 @@ export const AdminDashboardPage: React.FC = () => {
                           hero: { ...siteContent.hero, heading: e.target.value },
                         })
                       }
-                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#071A2B] mb-1">Supporting Description</label>
+                    <label className="block text-xs font-bold text-[#0d0a64] mb-1">Supporting Description</label>
                     <textarea
                       rows={3}
                       value={siteContent.hero.description}
@@ -832,13 +917,13 @@ export const AdminDashboardPage: React.FC = () => {
                           hero: { ...siteContent.hero, description: e.target.value },
                         })
                       }
-                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Primary CTA Button</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Primary CTA Button</label>
                       <input
                         type="text"
                         value={siteContent.hero.primaryCta}
@@ -848,12 +933,12 @@ export const AdminDashboardPage: React.FC = () => {
                             hero: { ...siteContent.hero, primaryCta: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Secondary CTA Button</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Secondary CTA Button</label>
                       <input
                         type="text"
                         value={siteContent.hero.secondaryCta}
@@ -863,7 +948,7 @@ export const AdminDashboardPage: React.FC = () => {
                             hero: { ...siteContent.hero, secondaryCta: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
                   </div>
@@ -871,12 +956,12 @@ export const AdminDashboardPage: React.FC = () => {
 
                 {/* ABOUT SECTION CMS */}
                 <div className="space-y-4 pt-6 border-t border-gray-100">
-                  <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
+                  <div className="text-xs font-bold text-[#e7020b] uppercase tracking-wider">
                     About Emunahh-Invest Section
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#071A2B] mb-1">Headline</label>
+                    <label className="block text-xs font-bold text-[#0d0a64] mb-1">Headline</label>
                     <input
                       type="text"
                       value={siteContent.about.headline}
@@ -886,12 +971,12 @@ export const AdminDashboardPage: React.FC = () => {
                           about: { ...siteContent.about, headline: e.target.value },
                         })
                       }
-                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#071A2B] mb-1">Company Story Intro</label>
+                    <label className="block text-xs font-bold text-[#0d0a64] mb-1">Company Story Intro</label>
                     <textarea
                       rows={3}
                       value={siteContent.about.intro}
@@ -901,13 +986,13 @@ export const AdminDashboardPage: React.FC = () => {
                           about: { ...siteContent.about, intro: e.target.value },
                         })
                       }
-                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Mission Statement</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Mission Statement</label>
                       <textarea
                         rows={3}
                         value={siteContent.about.mission}
@@ -917,12 +1002,12 @@ export const AdminDashboardPage: React.FC = () => {
                             about: { ...siteContent.about, mission: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Vision Statement</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Vision Statement</label>
                       <textarea
                         rows={3}
                         value={siteContent.about.vision}
@@ -932,7 +1017,7 @@ export const AdminDashboardPage: React.FC = () => {
                             about: { ...siteContent.about, vision: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
                   </div>
@@ -940,12 +1025,12 @@ export const AdminDashboardPage: React.FC = () => {
 
                 {/* CONTACT INFO CMS */}
                 <div className="space-y-4 pt-6 border-t border-gray-100">
-                  <div className="text-xs font-bold text-[#087A5A] uppercase tracking-wider">
+                  <div className="text-xs font-bold text-[#e7020b] uppercase tracking-wider">
                     Office & Contact Information
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#071A2B] mb-1">Office Address</label>
+                    <label className="block text-xs font-bold text-[#0d0a64] mb-1">Office Address</label>
                     <input
                       type="text"
                       value={siteContent.contact.officeAddress}
@@ -955,13 +1040,13 @@ export const AdminDashboardPage: React.FC = () => {
                           contact: { ...siteContent.contact, officeAddress: e.target.value },
                         })
                       }
-                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                      className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Primary Phone</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Primary Phone</label>
                       <input
                         type="text"
                         value={siteContent.contact.phone}
@@ -971,12 +1056,12 @@ export const AdminDashboardPage: React.FC = () => {
                             contact: { ...siteContent.contact, phone: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">Secondary Phone</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">Secondary Phone</label>
                       <input
                         type="text"
                         value={siteContent.contact.secondaryPhone}
@@ -986,12 +1071,12 @@ export const AdminDashboardPage: React.FC = () => {
                             contact: { ...siteContent.contact, secondaryPhone: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">WhatsApp Desk</label>
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">WhatsApp Desk</label>
                       <input
                         type="text"
                         value={siteContent.contact.whatsapp}
@@ -1001,7 +1086,7 @@ export const AdminDashboardPage: React.FC = () => {
                             contact: { ...siteContent.contact, whatsapp: e.target.value },
                           })
                         }
-                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full text-xs p-2.5 border border-gray-200 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
                   </div>
@@ -1011,7 +1096,7 @@ export const AdminDashboardPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSavingContent}
-                    className="px-6 py-3 bg-[#087A5A] hover:bg-[#04513E] text-white text-xs font-bold rounded-md transition-colors shadow-md flex items-center gap-2 cursor-pointer"
+                    className="px-6 py-3 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md transition-colors shadow-md flex items-center gap-2 cursor-pointer"
                   >
                     <Save className="w-4 h-4" />
                     <span>{isSavingContent ? 'Saving Changes...' : 'Save & Publish to Live Site'}</span>
@@ -1024,15 +1109,15 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* TAB 3: SERVICES MANAGEMENT */}
           {activeTab === 'services' && (
-            <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 space-y-6">
+            <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg font-bold text-[#071A2B]">Services Portfolio</h3>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">Services Portfolio</h3>
                   <p className="text-xs text-gray-500">Configure financial services, ordering, and publication state.</p>
                 </div>
                 <button
                   onClick={() => setIsAddingService(true)}
-                  className="px-3.5 py-2 bg-[#087A5A] hover:bg-[#04513E] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1.5"
+                  className="px-3.5 py-2 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1.5"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Add Service</span>
@@ -1043,12 +1128,12 @@ export const AdminDashboardPage: React.FC = () => {
                 {servicesList.map((srv, idx) => (
                   <div
                     key={srv.id}
-                    className="p-4 rounded-md border border-[#071A2B]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-[#087A5A]/40 transition-colors"
+                    className="p-4 rounded-md border border-[#0d0a64]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-[#e7020b]/40 transition-colors"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-[#087A5A]">#{srv.order || idx + 1}</span>
-                        <h4 className="text-sm font-bold text-[#071A2B]">{srv.title}</h4>
+                        <span className="text-xs font-mono font-bold text-[#e7020b]">#{srv.order || idx + 1}</span>
+                        <h4 className="text-sm font-bold text-[#0d0a64]">{srv.title}</h4>
                         <span
                           className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
                             srv.category === 'featured'
@@ -1065,7 +1150,7 @@ export const AdminDashboardPage: React.FC = () => {
                     <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={() => setEditingService(srv)}
-                        className="px-3 py-1.5 text-xs font-semibold text-[#071A2B] hover:bg-gray-100 rounded-md border border-gray-200 flex items-center gap-1"
+                        className="px-3 py-1.5 text-xs font-semibold text-[#0d0a64] hover:bg-gray-100 rounded-md border border-gray-200 flex items-center gap-1"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                         <span>Edit</span>
@@ -1078,9 +1163,9 @@ export const AdminDashboardPage: React.FC = () => {
               {/* Edit Service Modal */}
               {editingService && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-                  <div className="bg-white rounded-lg p-6 max-w-lg w-full shadow-2xl border border-gray-200 space-y-4">
+                  <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-gray-200 space-y-4">
                     <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                      <h4 className="text-sm font-bold text-[#071A2B]">Edit Service: {editingService.title}</h4>
+                      <h4 className="text-sm font-bold text-[#0d0a64]">Edit Service: {editingService.title}</h4>
                       <button onClick={() => setEditingService(null)} className="text-gray-400 hover:text-gray-600">
                         <X className="w-5 h-5" />
                       </button>
@@ -1088,7 +1173,7 @@ export const AdminDashboardPage: React.FC = () => {
 
                     <div className="space-y-3 text-xs">
                       <div>
-                        <label className="block font-bold text-[#071A2B] mb-1">Title</label>
+                        <label className="block font-bold text-[#0d0a64] mb-1">Title</label>
                         <input
                           type="text"
                           value={editingService.title}
@@ -1098,7 +1183,7 @@ export const AdminDashboardPage: React.FC = () => {
                       </div>
 
                       <div>
-                        <label className="block font-bold text-[#071A2B] mb-1">Tagline</label>
+                        <label className="block font-bold text-[#0d0a64] mb-1">Tagline</label>
                         <input
                           type="text"
                           value={editingService.tagline}
@@ -1108,7 +1193,7 @@ export const AdminDashboardPage: React.FC = () => {
                       </div>
 
                       <div>
-                        <label className="block font-bold text-[#071A2B] mb-1">Description</label>
+                        <label className="block font-bold text-[#0d0a64] mb-1">Description</label>
                         <textarea
                           rows={3}
                           value={editingService.description}
@@ -1138,7 +1223,7 @@ export const AdminDashboardPage: React.FC = () => {
                           setEditingService(null);
                           await refreshContent();
                         }}
-                        className="px-4 py-2 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-md"
+                        className="px-4 py-2 text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] rounded-md"
                       >
                         Save Service
                       </button>
@@ -1151,10 +1236,10 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* TAB 4: STUDENT LOAN ENQUIRIES */}
           {activeTab === 'student-loans' && (
-            <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 space-y-6">
+            <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg font-bold text-[#071A2B]">Student Loan Enquiries</h3>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">Student Loan Enquiries</h3>
                   <p className="text-xs text-gray-500">Track and process direct education financing submissions.</p>
                 </div>
 
@@ -1163,7 +1248,7 @@ export const AdminDashboardPage: React.FC = () => {
                   <select
                     value={loanStatusFilter}
                     onChange={(e) => setLoanStatusFilter(e.target.value)}
-                    className="text-xs p-2 border border-gray-200 rounded-md bg-white text-[#071A2B] font-semibold"
+                    className="text-xs p-2 border border-gray-200 rounded-md bg-white text-[#0d0a64] font-semibold"
                   >
                     <option value="ALL">All Statuses</option>
                     <option value="NEW">New</option>
@@ -1201,12 +1286,12 @@ export const AdminDashboardPage: React.FC = () => {
                   .map((item) => (
                     <div
                       key={item.id}
-                      className="p-4 rounded-lg border border-[#071A2B]/10 hover:border-[#087A5A]/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                      className="p-4 rounded-xl border border-[#0d0a64]/10 hover:border-[#e7020b]/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-3">
-                          <span className="font-mono font-bold text-xs text-[#087A5A]">{item.reference}</span>
-                          <span className="font-bold text-sm text-[#071A2B]">{item.fullName}</span>
+                          <span className="font-mono font-bold text-xs text-[#e7020b]">{item.reference}</span>
+                          <span className="font-bold text-sm text-[#0d0a64]">{item.fullName}</span>
                           <span
                             className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                               item.status === 'NEW'
@@ -1221,10 +1306,10 @@ export const AdminDashboardPage: React.FC = () => {
                         </div>
                         <div className="text-xs text-gray-600">
                           <strong>{item.institution}</strong> · {item.course} · Amount:{' '}
-                          <span className="font-semibold text-[#071A2B]">{item.amount || 'Tuition'}</span>
+                          <span className="font-semibold text-[#0d0a64]">{item.amount || 'Tuition'}</span>
                         </div>
                         <div className="text-[11px] text-gray-500">
-                          Phone: <a href={`tel:${item.phone}`} className="text-[#071A2B] font-semibold">{item.phone}</a>
+                          Phone: <a href={`tel:${item.phone}`} className="text-[#0d0a64] font-semibold">{item.phone}</a>
                           {item.email && <> · Email: <span className="font-medium">{item.email}</span></>}
                           {' '}· Submitted: {new Date(item.createdAt).toLocaleDateString('en-GB')}
                         </div>
@@ -1254,7 +1339,7 @@ export const AdminDashboardPage: React.FC = () => {
                               'Student Loan'
                             )
                           }
-                          className="px-3 py-1.5 bg-[#071A2B] hover:bg-[#087A5A] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1"
+                          className="px-3 py-1.5 bg-[#0d0a64] hover:bg-[#e7020b] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1"
                         >
                           <Mail className="w-3.5 h-3.5" />
                           <span>Reply</span>
@@ -1262,7 +1347,7 @@ export const AdminDashboardPage: React.FC = () => {
 
                         <button
                           onClick={() => setSelectedLoan(item)}
-                          className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-[#071A2B] text-xs font-bold rounded-md"
+                          className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-[#0d0a64] text-xs font-bold rounded-md"
                         >
                           Details
                         </button>
@@ -1274,13 +1359,13 @@ export const AdminDashboardPage: React.FC = () => {
               {/* Student Loan Details Modal */}
               {selectedLoan && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-                  <div className="bg-white rounded-lg p-6 max-w-lg w-full shadow-2xl border border-gray-200 space-y-4">
+                  <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-gray-200 space-y-4">
                     <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                       <div>
-                        <span className="font-mono text-xs font-bold text-[#087A5A]">
+                        <span className="font-mono text-xs font-bold text-[#e7020b]">
                           {selectedLoan.reference}
                         </span>
-                        <h4 className="text-base font-bold text-[#071A2B]">{selectedLoan.fullName}</h4>
+                        <h4 className="text-base font-bold text-[#0d0a64]">{selectedLoan.fullName}</h4>
                       </div>
                       <button onClick={() => setSelectedLoan(null)} className="text-gray-400 hover:text-gray-600">
                         <X className="w-5 h-5" />
@@ -1290,11 +1375,11 @@ export const AdminDashboardPage: React.FC = () => {
                     <div className="space-y-3 text-xs">
                       <div>
                         <span className="text-gray-500 block">Institution:</span>
-                        <span className="font-bold text-[#071A2B]">{selectedLoan.institution}</span>
+                        <span className="font-bold text-[#0d0a64]">{selectedLoan.institution}</span>
                       </div>
                       <div>
                         <span className="text-gray-500 block">Course / Programme:</span>
-                        <span className="font-bold text-[#071A2B]">{selectedLoan.course}</span>
+                        <span className="font-bold text-[#0d0a64]">{selectedLoan.course}</span>
                       </div>
                       <div>
                         <span className="text-gray-500 block">Purpose / Invoice Details:</span>
@@ -1302,7 +1387,7 @@ export const AdminDashboardPage: React.FC = () => {
                       </div>
                       <div>
                         <span className="text-gray-500 block">Tuition / Facility Amount:</span>
-                        <span className="font-bold text-[#087A5A]">{selectedLoan.amount || 'Pending invoice validation'}</span>
+                        <span className="font-bold text-[#e7020b]">{selectedLoan.amount || 'Pending invoice validation'}</span>
                       </div>
                       <div>
                         <span className="text-gray-500 block">Student Message:</span>
@@ -1333,7 +1418,7 @@ export const AdminDashboardPage: React.FC = () => {
                             'Student Loan'
                           );
                         }}
-                        className="px-4 py-2 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-md flex items-center gap-1.5"
+                        className="px-4 py-2 text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] rounded-md flex items-center gap-1.5"
                       >
                         <Mail className="w-3.5 h-3.5" />
                         <span>Compose Email</span>
@@ -1348,10 +1433,10 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* TAB 5: INVESTMENT ENQUIRIES */}
           {activeTab === 'investments' && (
-            <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 space-y-6">
+            <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg font-bold text-[#071A2B]">Investment Enquiries</h3>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">Investment Enquiries</h3>
                   <p className="text-xs text-gray-500">Corporate treasury and wealth management client inquiries.</p>
                 </div>
 
@@ -1376,12 +1461,12 @@ export const AdminDashboardPage: React.FC = () => {
                   .map((item) => (
                     <div
                       key={item.id}
-                      className="p-4 rounded-lg border border-[#071A2B]/10 hover:border-[#087A5A]/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                      className="p-4 rounded-xl border border-[#0d0a64]/10 hover:border-[#e7020b]/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-3">
-                          <span className="font-mono font-bold text-xs text-[#087A5A]">{item.reference}</span>
-                          <span className="font-bold text-sm text-[#071A2B]">{item.name}</span>
+                          <span className="font-mono font-bold text-xs text-[#e7020b]">{item.reference}</span>
+                          <span className="font-bold text-sm text-[#0d0a64]">{item.name}</span>
                           <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">
                             {item.status}
                           </span>
@@ -1421,7 +1506,7 @@ export const AdminDashboardPage: React.FC = () => {
                               'Investment'
                             )
                           }
-                          className="px-3 py-1.5 bg-[#071A2B] hover:bg-[#087A5A] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1"
+                          className="px-3 py-1.5 bg-[#0d0a64] hover:bg-[#e7020b] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1"
                         >
                           <Mail className="w-3.5 h-3.5" />
                           <span>Reply</span>
@@ -1435,10 +1520,10 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* TAB 6: CONTACT MESSAGES */}
           {activeTab === 'contact' && (
-            <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 space-y-6">
+            <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg font-bold text-[#071A2B]">General Contact Submissions</h3>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">General Contact Submissions</h3>
                   <p className="text-xs text-gray-500">Inbound inquiries from the Lagos walk-in and contact desk.</p>
                 </div>
               </div>
@@ -1447,12 +1532,12 @@ export const AdminDashboardPage: React.FC = () => {
                 {contactMsgs.map((msg) => (
                   <div
                     key={msg.id}
-                    className="p-4 rounded-lg border border-[#071A2B]/10 hover:border-[#087A5A]/50 transition-all flex flex-col md:flex-row md:items-start justify-between gap-4"
+                    className="p-4 rounded-xl border border-[#0d0a64]/10 hover:border-[#e7020b]/50 transition-all flex flex-col md:flex-row md:items-start justify-between gap-4"
                   >
                     <div className="space-y-1.5 flex-1">
                       <div className="flex items-center gap-3">
-                        <span className="font-mono font-bold text-xs text-[#087A5A]">{msg.reference}</span>
-                        <span className="font-bold text-sm text-[#071A2B]">{msg.name}</span>
+                        <span className="font-mono font-bold text-xs text-[#e7020b]">{msg.reference}</span>
+                        <span className="font-bold text-sm text-[#0d0a64]">{msg.name}</span>
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-700">
                           {msg.service}
                         </span>
@@ -1486,7 +1571,7 @@ export const AdminDashboardPage: React.FC = () => {
                             'General Message'
                           )
                         }
-                        className="px-3 py-1.5 bg-[#087A5A] hover:bg-[#04513E] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1"
+                        className="px-3 py-1.5 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-1"
                       >
                         <Mail className="w-3.5 h-3.5" />
                         <span>Reply</span>
@@ -1503,10 +1588,10 @@ export const AdminDashboardPage: React.FC = () => {
             <div className="space-y-6">
               
               {/* Compose Email Panel */}
-              <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 space-y-4">
+              <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                   <div>
-                    <h3 className="text-base font-bold text-[#071A2B]">Corporate Email Composer</h3>
+                    <h3 className="text-base font-bold text-[#0d0a64]">Corporate Email Composer</h3>
                     <p className="text-xs text-gray-500">Send direct communications to clients via Resend gateway.</p>
                   </div>
                   {emailSuccessMessage && (
@@ -1519,39 +1604,39 @@ export const AdminDashboardPage: React.FC = () => {
                 <form onSubmit={handleSendEmail} className="space-y-4 text-xs">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-bold text-[#071A2B] mb-1">Recipient Email</label>
+                      <label className="block font-bold text-[#0d0a64] mb-1">Recipient Email</label>
                       <input
                         type="email"
                         required
                         placeholder="client@example.com"
                         value={emailTo}
                         onChange={(e) => setEmailTo(e.target.value)}
-                        className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block font-bold text-[#071A2B] mb-1">Subject Line</label>
+                      <label className="block font-bold text-[#0d0a64] mb-1">Subject Line</label>
                       <input
                         type="text"
                         required
                         placeholder="Re: Emunahh-Invest Student Loan Application"
                         value={emailSubject}
                         onChange={(e) => setEmailSubject(e.target.value)}
-                        className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                        className="w-full p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Message Content</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Message Content</label>
                     <textarea
                       rows={6}
                       required
                       placeholder="Dear Client, We have reviewed your invoice..."
                       value={emailBody}
                       onChange={(e) => setEmailBody(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#087A5A] font-mono text-xs"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#e7020b] font-mono text-xs"
                     />
                   </div>
 
@@ -1559,7 +1644,7 @@ export const AdminDashboardPage: React.FC = () => {
                     <button
                       type="submit"
                       disabled={isSendingEmail}
-                      className="px-6 py-2.5 bg-[#087A5A] hover:bg-[#04513E] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
+                      className="px-6 py-2.5 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>{isSendingEmail ? 'Dispatching Message...' : 'Dispatch Email'}</span>
@@ -1569,13 +1654,13 @@ export const AdminDashboardPage: React.FC = () => {
               </div>
 
               {/* Email Sent History */}
-              <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 space-y-4">
-                <h3 className="text-sm font-bold text-[#071A2B]">Dispatched Email Audit Log</h3>
+              <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 space-y-4">
+                <h3 className="text-sm font-bold text-[#0d0a64]">Dispatched Email Audit Log</h3>
                 <div className="space-y-3">
                   {emailLogs.map((log) => (
                     <div key={log.id} className="p-3.5 rounded-md border border-gray-100 text-xs space-y-1">
                       <div className="flex items-center justify-between">
-                        <div className="font-bold text-[#071A2B]">To: {log.to}</div>
+                        <div className="font-bold text-[#0d0a64]">To: {log.to}</div>
                         <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
                           {log.status}
                         </span>
@@ -1595,23 +1680,23 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* TAB 8: MEDIA LIBRARY */}
           {activeTab === 'media' && (
-            <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 space-y-6">
+            <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg font-bold text-[#071A2B]">Media Assets & Image Library</h3>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">Media Assets & Image Library</h3>
                   <p className="text-xs text-gray-500">Upload and assign brand imagery for Hero, Services, and About sections.</p>
                 </div>
               </div>
 
               {/* Image Upload Form */}
-              <form onSubmit={handleMediaUpload} className="p-4 rounded-lg bg-[#F8F7F3] border border-[#071A2B]/10 space-y-4">
-                <div className="text-xs font-bold text-[#071A2B] uppercase tracking-wider">
+              <form onSubmit={handleMediaUpload} className="p-4 rounded-xl bg-[#e3fff2] border border-[#0d0a64]/10 space-y-4">
+                <div className="text-xs font-bold text-[#0d0a64] uppercase tracking-wider">
                   Upload New Visual Asset
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Asset Title</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Asset Title</label>
                     <input
                       type="text"
                       placeholder="e.g. Lagos Corporate Meeting"
@@ -1622,7 +1707,7 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Category Target</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Category Target</label>
                     <select
                       value={uploadCategory}
                       onChange={(e: any) => setUploadCategory(e.target.value)}
@@ -1636,7 +1721,7 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Select File (JPG / PNG)</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Select File (JPG / PNG)</label>
                     <input
                       type="file"
                       accept="image/*"
@@ -1645,7 +1730,7 @@ export const AdminDashboardPage: React.FC = () => {
                           setUploadFile(e.target.files[0]);
                         }
                       }}
-                      className="w-full text-xs text-gray-600 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-[#087A5A] file:text-white"
+                      className="w-full text-xs text-gray-600 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-[#e7020b] file:text-white"
                     />
                   </div>
                 </div>
@@ -1654,7 +1739,7 @@ export const AdminDashboardPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={!uploadFile || isUploadingMedia}
-                    className="px-4 py-2 bg-[#087A5A] hover:bg-[#04513E] text-white text-xs font-bold rounded-md disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
                   >
                     <Upload className="w-3.5 h-3.5" />
                     <span>{isUploadingMedia ? 'Uploading...' : 'Upload Asset'}</span>
@@ -1665,12 +1750,12 @@ export const AdminDashboardPage: React.FC = () => {
               {/* Gallery Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {mediaList.map((item) => (
-                  <div key={item.id} className="rounded-lg border border-[#071A2B]/10 overflow-hidden bg-white shadow-2xs space-y-2">
+                  <div key={item.id} className="rounded-xl border border-[#0d0a64]/10 overflow-hidden bg-white shadow-sm space-y-2">
                     <div className="h-40 bg-gray-100 overflow-hidden">
                       <img src={item.url} alt={item.title} className="w-full h-full object-cover" />
                     </div>
                     <div className="p-3 space-y-1">
-                      <div className="font-bold text-xs text-[#071A2B] truncate">{item.title}</div>
+                      <div className="font-bold text-xs text-[#0d0a64] truncate">{item.title}</div>
                       <div className="text-[10px] text-gray-500 uppercase tracking-wider">{item.category}</div>
                       <div className="flex items-center justify-between pt-2">
                         <button
@@ -1682,7 +1767,7 @@ export const AdminDashboardPage: React.FC = () => {
                             });
                             alert('Assigned as Hero Image! Remember to click "Save & Publish" on the Content tab.');
                           }}
-                          className="text-[11px] font-bold text-[#087A5A] hover:underline"
+                          className="text-[11px] font-bold text-[#e7020b] hover:underline"
                         >
                           Set as Hero Image
                         </button>
@@ -1710,10 +1795,62 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* TAB 9: SETTINGS */}
           {activeTab === 'settings' && settingsForm && (
-            <div className="bg-white rounded-lg border border-[#071A2B]/10 shadow-2xs p-6 sm:p-8 space-y-6">
+            <div className="space-y-6">
+
+              {/* Brand Logo Panel */}
+              <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 sm:p-8 space-y-4">
+                <div>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">Brand Logo</h3>
+                  <p className="text-xs text-gray-500">Upload the official Emunahh-Invest logo. It replaces the icon shown in the navigation bar and footer across the live site immediately.</p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                  <div className="w-full sm:w-auto flex items-center justify-center bg-[#0d0a64] rounded-2xl p-4 border border-[#0d0a64]/10 shrink-0">
+                    <Logo variant="dark" size="lg" showSubtitle={false} logoUrl={settingsForm.logoUrl} />
+                  </div>
+
+                  <div className="flex-1 w-full space-y-2.5">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <label className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md cursor-pointer transition-colors shadow-xs">
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>{isUploadingLogo ? 'Uploading…' : settingsForm.logoUrl ? 'Replace Logo' : 'Upload Logo'}</span>
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/svg+xml,image/webp"
+                          className="hidden"
+                          disabled={isUploadingLogo}
+                          onChange={handleLogoUpload}
+                        />
+                      </label>
+
+                      {settingsForm.logoUrl && (
+                        <button
+                          type="button"
+                          onClick={handleRemoveLogo}
+                          disabled={isUploadingLogo}
+                          className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white border border-gray-300 hover:border-red-300 hover:text-red-600 text-[#17202A] text-xs font-bold rounded-md transition-colors"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span>Reset to Default Mark</span>
+                        </button>
+                      )}
+                    </div>
+
+                    <p className="text-[11px] text-gray-500">PNG, JPG, WEBP or SVG — up to 4MB. Transparent background recommended.</p>
+
+                    {logoUploadError && (
+                      <p className="text-[11px] font-semibold text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+                        {logoUploadError}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl border border-[#0d0a64]/10 shadow-sm p-6 sm:p-8 space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg font-bold text-[#071A2B]">System & Notification Settings</h3>
+                  <h3 className="text-lg font-bold text-[#0d0a64]">System & Notification Settings</h3>
                   <p className="text-xs text-gray-500">Configure administrative notifications, routing, and sender information.</p>
                 </div>
                 {settingsSuccess && (
@@ -1726,7 +1863,7 @@ export const AdminDashboardPage: React.FC = () => {
               <form onSubmit={handleSaveSettings} className="space-y-4 text-xs">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Company Legal Name</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Company Legal Name</label>
                     <input
                       type="text"
                       value={settingsForm.companyName}
@@ -1736,7 +1873,7 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Enquiries Notification Email</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Enquiries Notification Email</label>
                     <input
                       type="email"
                       value={settingsForm.notificationEmail}
@@ -1748,7 +1885,7 @@ export const AdminDashboardPage: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Outbound Email Sender Name</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Outbound Email Sender Name</label>
                     <input
                       type="text"
                       value={settingsForm.emailSenderName}
@@ -1758,7 +1895,7 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block font-bold text-[#071A2B] mb-1">Reply-To Email</label>
+                    <label className="block font-bold text-[#0d0a64] mb-1">Reply-To Email</label>
                     <input
                       type="email"
                       value={settingsForm.replyToEmail}
@@ -1769,7 +1906,7 @@ export const AdminDashboardPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block font-bold text-[#071A2B] mb-1">Registered Corporate Address</label>
+                  <label className="block font-bold text-[#0d0a64] mb-1">Registered Corporate Address</label>
                   <input
                     type="text"
                     value={settingsForm.officeAddress}
@@ -1782,12 +1919,13 @@ export const AdminDashboardPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSavingSettings}
-                    className="px-6 py-2.5 bg-[#087A5A] hover:bg-[#04513E] text-white text-xs font-bold rounded-md transition-colors shadow-xs"
+                    className="px-6 py-2.5 bg-[#e7020b] hover:bg-[#a3140a] text-white text-xs font-bold rounded-md transition-colors shadow-xs"
                   >
                     {isSavingSettings ? 'Saving Settings...' : 'Save Configuration'}
                   </button>
                 </div>
               </form>
+              </div>
             </div>
           )}
 

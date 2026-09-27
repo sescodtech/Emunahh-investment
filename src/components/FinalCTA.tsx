@@ -14,13 +14,13 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenApply }) => {
   const contact = content.contact;
 
   return (
-    <section className="bg-white py-16 lg:py-22 border-b border-[#071A2B]/10">
+    <section className="bg-white py-16 lg:py-22 border-b border-[#0d0a64]/10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="bg-[#087A5A] text-white rounded-xl p-8 sm:p-14 text-center space-y-6 shadow-xl relative overflow-hidden">
+        <div className="bg-[#e7020b] text-white rounded-2xl p-8 sm:p-14 text-center space-y-6 shadow-xl relative overflow-hidden">
           
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 text-xs text-white font-bold tracking-[0.18em] uppercase">
-            <span className="w-2 h-2 rounded-full bg-[#C6A15B]" />
+            <span className="w-2 h-2 rounded-full bg-[#e3fff2]" />
             <span>EMUNAHH-INVEST LIMITED</span>
           </div>
 
@@ -36,15 +36,15 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenApply }) => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
             <Link
               to="/apply"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-[#071A2B] bg-white hover:bg-[#F8F7F3] rounded-md transition-all shadow-md group whitespace-nowrap"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-[#0d0a64] bg-white hover:bg-[#e3fff2] rounded-md transition-all shadow-md group whitespace-nowrap"
             >
               <span>Apply Online Now</span>
-              <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#071A2B] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#0d0a64] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
 
             <Link
               to="/student-loans"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-md transition-all shadow-md whitespace-nowrap"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#a3140a] rounded-md transition-all shadow-md whitespace-nowrap"
             >
               <span>Student Loans Hub</span>
             </Link>
@@ -53,7 +53,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenApply }) => {
               href={`https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Emunahh-Invest,%20I%20would%20like%20to%20inquire%20about%20financing.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold text-white bg-[#04513E] hover:bg-[#071A2B] rounded-md transition-all shadow-md whitespace-nowrap"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold text-white bg-[#a3140a] hover:bg-[#0d0a64] rounded-md transition-all shadow-md whitespace-nowrap"
             >
               <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
               <span>Direct WhatsApp Desk</span>
@@ -62,11 +62,11 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenApply }) => {
 
           <div className="pt-5 border-t border-white/15 flex flex-wrap items-center justify-center gap-6 text-xs text-white/80">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#C6A15B]" />
+              <MapPin className="w-3.5 h-3.5 text-[#e3fff2]" />
               <span>{contact.officeAddress}</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <Phone className="w-3.5 h-3.5 text-[#C6A15B]" />
+              <Phone className="w-3.5 h-3.5 text-[#e3fff2]" />
               <span>{contact.phone}</span>
             </span>
           </div>

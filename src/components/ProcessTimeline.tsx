@@ -44,10 +44,10 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ onOpenApply })
         
         {/* Header */}
         <div className="max-w-3xl space-y-3 mb-14">
-          <div className="text-xs font-bold text-[#087A5A] uppercase tracking-[0.14em]">
+          <div className="text-xs font-bold text-[#e7020b] uppercase tracking-[0.14em]">
             Structured Workflow · How It Works
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#071A2B] tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0d0a64] tracking-tight leading-tight">
             Four Steps from Inquiry to Direct Funding
           </h2>
           <p className="text-base text-gray-600 leading-relaxed font-normal">
@@ -63,18 +63,18 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ onOpenApply })
             return (
               <div
                 key={idx}
-                className="p-7 rounded-xl bg-white border border-gray-200 hover:border-[#087A5A]/50 hover:shadow-xs transition-all space-y-4 group"
+                className="p-7 rounded-xl bg-white border border-gray-200 hover:border-[#e7020b]/50 hover:shadow-xs transition-all space-y-4 group"
               >
                 <div className="flex items-center justify-between pb-3 border-b border-gray-150">
-                  <span className="font-mono text-sm font-bold text-[#087A5A]">{item.step}</span>
-                  <span className="text-[10px] font-bold text-[#C6A15B] uppercase tracking-wider">{item.subtitle}</span>
+                  <span className="font-mono text-sm font-bold text-[#e7020b]">{item.step}</span>
+                  <span className="text-[10px] font-bold text-[#e3fff2] uppercase tracking-wider">{item.subtitle}</span>
                 </div>
 
-                <div className="w-10 h-10 rounded-lg bg-[#087A5A]/10 text-[#087A5A] flex items-center justify-center transition-colors group-hover:bg-[#087A5A] group-hover:text-white">
-                  <Icon className="w-5 h-5 text-[#087A5A] group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 rounded-xl bg-[#e7020b]/10 text-[#e7020b] flex items-center justify-center transition-colors group-hover:bg-[#e7020b] group-hover:text-white">
+                  <Icon className="w-5 h-5 text-[#e7020b] group-hover:text-white transition-colors" />
                 </div>
 
-                <h3 className="text-base font-bold text-[#071A2B]">
+                <h3 className="text-base font-bold text-[#0d0a64]">
                   {item.title}
                 </h3>
 
@@ -89,10 +89,10 @@ export const ProcessTimeline: React.FC<ProcessTimelineProps> = ({ onOpenApply })
         <div className="flex items-center justify-center">
           <button
             onClick={() => onOpenApply()}
-            className="inline-flex items-center gap-2 px-7 py-3 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-colors shadow-xs cursor-pointer group"
+            className="inline-flex items-center gap-2 px-7 py-3 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#a3140a] rounded-xl transition-colors shadow-xs cursor-pointer group"
           >
             <span>Begin Your Application</span>
-            <ArrowUpRight className="w-4 h-4 text-[#C6A15B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-4 h-4 text-[#e3fff2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </div>
 

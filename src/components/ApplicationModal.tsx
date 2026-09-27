@@ -105,9 +105,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Bar */}
-        <div className="bg-[#071A2B] text-white px-6 py-4 flex items-center justify-between border-b border-white/10">
+        <div className="bg-[#0d0a64] text-white px-6 py-4 flex items-center justify-between border-b border-white/10">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#087A5A] flex items-center justify-center text-white text-sm font-bold shadow-xs">
+            <div className="w-8 h-8 rounded-xl bg-[#e7020b] flex items-center justify-center text-white text-sm font-bold shadow-xs">
               E
             </div>
             <div>
@@ -119,7 +119,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           <button
             onClick={handleReset}
             aria-label="Close dialog"
-            className="p-1.5 text-white/70 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+            className="p-1.5 text-white/70 hover:text-white rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -128,31 +128,31 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
         <div className="p-6 sm:p-8 bg-white">
           {isSuccess ? (
             <div className="py-6 text-center space-y-4">
-              <div className="w-14 h-14 rounded-full bg-[#087A5A]/10 text-[#087A5A] flex items-center justify-center mx-auto">
+              <div className="w-14 h-14 rounded-full bg-[#e7020b]/10 text-[#e7020b] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
               <div>
-                <span className="text-xs font-bold text-[#087A5A] tracking-wider uppercase">
+                <span className="text-xs font-bold text-[#e7020b] tracking-wider uppercase">
                   Application Initiated
                 </span>
-                <h3 className="text-2xl font-bold text-[#071A2B] mt-1">
+                <h3 className="text-2xl font-bold text-[#0d0a64] mt-1">
                   Thank You, {formData.fullName}
                 </h3>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#F8F7F3] border border-gray-200 max-w-md mx-auto text-xs space-y-2 text-gray-700 text-left">
+              <div className="p-4 rounded-xl bg-[#e3fff2] border border-gray-200 max-w-md mx-auto text-xs space-y-2 text-gray-700 text-left">
                 <div className="flex justify-between border-b border-gray-200 pb-1.5">
                   <span className="text-gray-500">Application Reference:</span>
-                  <span className="font-mono font-bold text-[#087A5A]">{appReference}</span>
+                  <span className="font-mono font-bold text-[#e7020b]">{appReference}</span>
                 </div>
                 <div className="flex justify-between border-b border-gray-200 pb-1.5">
                   <span className="text-gray-500">Selected Solution:</span>
-                  <span className="font-bold text-[#071A2B]">{getServiceLabel(service)}</span>
+                  <span className="font-bold text-[#0d0a64]">{getServiceLabel(service)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">Review Center:</span>
-                  <span className="text-[#071A2B]">33 Crossway Plaza, New Oko Oba, Lagos</span>
+                  <span className="text-[#0d0a64]">33 Crossway Plaza, New Oko Oba, Lagos</span>
                 </div>
               </div>
 
@@ -166,7 +166,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   href={getWhatsAppContinuationUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] active:scale-95 rounded-lg transition-all shadow-xs"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] active:scale-95 rounded-xl transition-all shadow-xs"
                 >
                   <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                   <span>Fast-Track on WhatsApp (0802 319 0807)</span>
@@ -174,7 +174,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
                 <button
                   onClick={handleReset}
-                  className="w-full sm:w-auto px-5 py-3 text-xs font-bold text-gray-600 hover:text-gray-900 border border-gray-200 rounded-lg transition-colors cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-3 text-xs font-bold text-gray-600 hover:text-gray-900 border border-gray-200 rounded-xl transition-colors cursor-pointer"
                 >
                   Close & Return
                 </button>
@@ -183,7 +183,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <h3 className="text-xl font-bold text-[#071A2B]">
+                <h3 className="text-xl font-bold text-[#0d0a64]">
                   Submit Financing or Advisory Request
                 </h3>
                 <p className="text-xs text-gray-600 mt-1">
@@ -193,7 +193,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
               {/* Service Selection Tabs */}
               <div>
-                <label className="block text-xs font-bold text-[#071A2B] mb-1.5">
+                <label className="block text-xs font-bold text-[#0d0a64] mb-1.5">
                   Select Financial Service *
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -208,14 +208,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                       key={item.id}
                       type="button"
                       onClick={() => setService(item.id)}
-                      className={`p-2.5 text-xs font-bold rounded-lg border text-left flex items-center justify-between transition-colors cursor-pointer ${
+                      className={`p-2.5 text-xs font-bold rounded-xl border text-left flex items-center justify-between transition-colors cursor-pointer ${
                         service === item.id
-                          ? 'bg-[#071A2B] text-white border-[#071A2B]'
+                          ? 'bg-[#0d0a64] text-white border-[#0d0a64]'
                           : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
                       }`}
                     >
                       <span className="truncate">{item.label}</span>
-                      {service === item.id && <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15B]" />}
+                      {service === item.id && <span className="w-1.5 h-1.5 rounded-full bg-[#e3fff2]" />}
                     </button>
                   ))}
                 </div>
@@ -224,7 +224,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
               {/* Personal Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                  <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                     Full Name *
                   </label>
                   <input
@@ -233,12 +233,12 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     placeholder="First & Last Name"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#e7020b] focus:ring-1 focus:ring-[#e7020b]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                  <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                     Phone Number / WhatsApp *
                   </label>
                   <input
@@ -247,7 +247,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     placeholder="0802 319 0807"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#e7020b] focus:ring-1 focus:ring-[#e7020b]"
                   />
                 </div>
               </div>
@@ -255,7 +255,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
               {/* Amount & Academic/Business name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                  <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                     {service === 'student_loan' ? 'Tuition Amount (₦)' : 'Requested Capital (₦)'}
                   </label>
                   <input
@@ -263,12 +263,12 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     placeholder="e.g. ₦400,000"
                     value={formData.amount}
                     onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#e7020b] focus:ring-1 focus:ring-[#e7020b]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                  <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                     {service === 'student_loan'
                       ? 'Academic Institution'
                       : 'Business Name / Sector'}
@@ -284,13 +284,13 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     onChange={(e) =>
                       setFormData({ ...formData, institutionOrBusiness: e.target.value })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#e7020b] focus:ring-1 focus:ring-[#e7020b]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                   Email Address (Optional)
                 </label>
                 <input
@@ -298,12 +298,12 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   placeholder="name@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A]"
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#e7020b] focus:ring-1 focus:ring-[#e7020b]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                   Additional Notes or Timing Requirements
                 </label>
                 <textarea
@@ -311,7 +311,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                   placeholder="e.g. Tuition payment deadline is next Friday; or business inventory order..."
                   value={formData.details}
                   onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-[#087A5A] focus:ring-1 focus:ring-[#087A5A] resize-none"
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#e7020b] focus:ring-1 focus:ring-[#e7020b] resize-none"
                 />
               </div>
 
@@ -328,14 +328,14 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-colors shadow-xs disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#a3140a] rounded-xl transition-colors shadow-xs disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <span>Submitting Application...</span>
                   ) : (
                     <>
                       <span>Submit Application</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 ml-1.5 text-[#C6A15B]" />
+                      <ArrowUpRight className="w-3.5 h-3.5 ml-1.5 text-[#e3fff2]" />
                     </>
                   )}
                 </button>

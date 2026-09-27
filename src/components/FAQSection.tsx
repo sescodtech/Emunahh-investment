@@ -71,16 +71,16 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section id="faqs" className="py-16 lg:py-22 bg-[#F8F7F3] border-b border-[#071A2B]/10 scroll-mt-20">
+    <section id="faqs" className="py-16 lg:py-22 bg-[#e3fff2] border-b border-[#0d0a64]/10 scroll-mt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center space-y-3 mb-10">
-          <div className="inline-flex items-center gap-2 text-[11px] text-[#087A5A] font-bold tracking-[0.2em] uppercase">
+          <div className="inline-flex items-center gap-2 text-[11px] text-[#e7020b] font-bold tracking-[0.2em] uppercase">
             <HelpCircle className="w-4 h-4" />
             <span>TRANSPARENCY & CLARITY</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071A2B] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0d0a64] tracking-tight">
             Frequently Asked Questions
           </h2>
           <p className="text-sm sm:text-base text-[#17202A]/75 max-w-xl mx-auto font-normal">
@@ -96,8 +96,8 @@ export const FAQSection: React.FC = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 text-xs font-bold rounded-md border transition-colors cursor-pointer ${
                 activeCategory === cat
-                  ? 'bg-[#071A2B] text-white border-[#071A2B]'
-                  : 'bg-white text-[#17202A] border-[#071A2B]/15 hover:border-[#087A5A]'
+                  ? 'bg-[#0d0a64] text-white border-[#0d0a64]'
+                  : 'bg-white text-[#17202A] border-[#0d0a64]/15 hover:border-[#e7020b]'
               }`}
             >
               {cat === 'all' ? 'All Questions' : cat === 'student' ? 'Student Loans' : cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -112,10 +112,10 @@ export const FAQSection: React.FC = () => {
             return (
               <div
                 key={index}
-                className={`rounded-lg border transition-all ${
+                className={`rounded-xl border transition-all ${
                   isOpen
-                    ? 'bg-white border-[#087A5A]/60 shadow-xs'
-                    : 'bg-white border-[#071A2B]/10 hover:border-[#071A2B]/25'
+                    ? 'bg-white border-[#e7020b]/60 shadow-xs'
+                    : 'bg-white border-[#0d0a64]/10 hover:border-[#0d0a64]/25'
                 }`}
               >
                 <button
@@ -123,12 +123,12 @@ export const FAQSection: React.FC = () => {
                   className="w-full text-left px-5 py-4 sm:px-6 sm:py-5 flex items-center justify-between gap-4 cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base font-bold text-[#071A2B] tracking-tight">
+                  <span className="text-sm sm:text-base font-bold text-[#0d0a64] tracking-tight">
                     {faq.question}
                   </span>
                   <span
                     className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${
-                      isOpen ? 'bg-[#087A5A] text-white' : 'bg-gray-100 text-gray-600'
+                      isOpen ? 'bg-[#e7020b] text-white' : 'bg-gray-100 text-gray-600'
                     }`}
                   >
                     {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}

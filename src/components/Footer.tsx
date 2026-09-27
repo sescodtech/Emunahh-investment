@@ -10,7 +10,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
-  const { content } = useContent();
+  const { content, settings } = useContent();
   const contact = content.contact;
   const footerData = content.footer;
 
@@ -19,7 +19,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
   };
 
   return (
-    <footer className="bg-[#071A2B] text-white/80 border-t border-white/10 pt-16 pb-12">
+    <footer className="bg-[#0d0a64] text-white/80 border-t border-white/10 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Layout */}
@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
           {/* Column 1: Brand & Full Address (5 cols) */}
           <div className="lg:col-span-5 space-y-5">
             <Link to="/" className="inline-block">
-              <Logo variant="dark" size="lg" />
+              <Logo variant="dark" size="lg" logoUrl={settings.logoUrl} />
             </Link>
 
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm font-normal">
@@ -38,7 +38,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             {/* Complete Approved Office Address */}
             <div className="space-y-3 pt-2 text-xs text-white/85">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#e7020b] shrink-0 mt-0.5" />
                 <div className="leading-relaxed">
                   <span className="font-semibold text-white block">Corporate Headquarters:</span>
                   {contact.officeAddress}
@@ -46,19 +46,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               </div>
 
               {/* Direct Telephone Desk */}
-              <div className="p-4 rounded-lg bg-white/5 border border-white/10 space-y-2 max-w-sm">
-                <div className="text-[10px] font-bold text-[#C6A15B] uppercase tracking-wider">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2 max-w-sm">
+                <div className="text-[10px] font-bold text-[#e3fff2] uppercase tracking-wider">
                   Approved Telephone & Advisory Desk
                 </div>
                 
                 <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#087A5A]" />
+                  <MessageSquare className="w-3.5 h-3.5 text-[#e7020b]" />
                   <span className="text-white/60">Phone / WhatsApp:</span>
                   <a
                     href={`https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-white hover:text-[#087A5A] transition-colors tabular-nums"
+                    className="font-bold text-white hover:text-[#e7020b] transition-colors tabular-nums"
                   >
                     {contact.whatsapp}
                   </a>
@@ -69,7 +69,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                   <span className="text-white/60">Alternative Desk:</span>
                   <a
                     href={`tel:${contact.secondaryPhone.replace(/[^0-9+]/g, '')}`}
-                    className="font-bold text-white hover:text-[#087A5A] transition-colors tabular-nums"
+                    className="font-bold text-white hover:text-[#e7020b] transition-colors tabular-nums"
                   >
                     {contact.secondaryPhone}
                   </a>
@@ -80,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
 
           {/* Column 2: Company (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-wider">
+            <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
               Company
             </div>
             <ul className="space-y-2.5 text-xs">
@@ -119,7 +119,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
 
           {/* Column 3: Resources (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-wider">
+            <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
               Resources
             </div>
             <ul className="space-y-2.5 text-xs">
@@ -134,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/apply" className="hover:text-[#087A5A] font-semibold transition-colors">
+                <Link to="/apply" className="hover:text-[#e7020b] font-semibold transition-colors">
                   Online Intake Portal
                 </Link>
               </li>
@@ -153,12 +153,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
 
           {/* Column 4: Contact & Hours (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <div className="text-xs font-bold text-[#C6A15B] uppercase tracking-wider">
+            <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
               Advisory Hours
             </div>
             <div className="space-y-2 text-xs text-white/70">
               <div className="flex items-start gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#087A5A] shrink-0 mt-0.5" />
+                <Clock className="w-3.5 h-3.5 text-[#e7020b] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-white block font-medium">Mon – Fri:</span>
                   8:30 AM – 5:00 PM (WAT)
@@ -184,7 +184,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
         {/* Regulatory Governance & Legal Statement */}
         <div className="pt-8 pb-6 border-b border-white/10 space-y-2.5 text-[11px] text-white/50 leading-relaxed">
           <div className="flex items-center gap-1.5 text-white/80 font-semibold uppercase tracking-wider text-[10px]">
-            <ShieldCheck className="w-4 h-4 text-[#087A5A]" />
+            <ShieldCheck className="w-4 h-4 text-[#e7020b]" />
             <span>Institutional Governance & Disclosures</span>
           </div>
           <p>
@@ -214,7 +214,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               aria-label="Back to top"
             >
               <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5 text-[#087A5A]" />
+              <ArrowUp className="w-3.5 h-3.5 text-[#e7020b]" />
             </button>
           </div>
         </div>

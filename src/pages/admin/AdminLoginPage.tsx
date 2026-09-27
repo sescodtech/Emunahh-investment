@@ -132,18 +132,18 @@ export const AdminLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F7F3] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#e3fff2] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link to="/" className="inline-block focus:outline-hidden">
           <Logo variant="light" size="md" layout="stacked" />
         </Link>
         
-        <div className="mt-6 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#087A5A]">
-          <ShieldCheck className="w-4 h-4 text-[#087A5A]" />
+        <div className="mt-6 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-[#e7020b]">
+          <ShieldCheck className="w-4 h-4 text-[#e7020b]" />
           <span>Executive Control Portal</span>
         </div>
 
-        <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-[#071A2B] tracking-tight">
+        <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-[#0d0a64] tracking-tight">
           Admin Sign In
         </h2>
         <p className="mt-1 text-xs text-[#17202A]/60">
@@ -152,7 +152,7 @@ export const AdminLoginPage: React.FC = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-6 shadow-xl border border-[#071A2B]/10 sm:rounded-lg sm:px-10">
+        <div className="bg-white py-8 px-6 shadow-xl border border-[#0d0a64]/10 sm:rounded-xl sm:px-10">
           
           {error && (
             <div className="mb-6 p-3.5 rounded-md bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2.5">
@@ -165,10 +165,10 @@ export const AdminLoginPage: React.FC = () => {
             
             {/* Email Field */}
             <div>
-              <label className="block text-xs font-bold text-[#071A2B] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#0d0a64] uppercase tracking-wider mb-1.5">
                 Admin Email
               </label>
-              <div className="relative rounded-md shadow-2xs">
+              <div className="relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                   <Mail className="h-4 w-4 text-gray-400" />
                 </div>
@@ -178,7 +178,7 @@ export const AdminLoginPage: React.FC = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="admin@emunahhinvest.com"
-                  className="block w-full pl-10 pr-3 py-2.5 text-xs text-[#071A2B] bg-white border border-[#071A2B]/20 rounded-md focus:outline-hidden focus:ring-2 focus:ring-[#087A5A] focus:border-[#087A5A]"
+                  className="block w-full pl-10 pr-3 py-2.5 text-xs text-[#0d0a64] bg-white border border-[#0d0a64]/20 rounded-md focus:outline-hidden focus:ring-2 focus:ring-[#e7020b] focus:border-[#e7020b]"
                 />
               </div>
             </div>
@@ -186,18 +186,18 @@ export const AdminLoginPage: React.FC = () => {
             {/* Password Field */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-bold text-[#071A2B] uppercase tracking-wider">
+                <label className="block text-xs font-bold text-[#0d0a64] uppercase tracking-wider">
                   Password
                 </label>
                 <button
                   type="button"
                   onClick={() => setShowForgotModal(true)}
-                  className="text-[11px] font-semibold text-[#087A5A] hover:underline"
+                  className="text-[11px] font-semibold text-[#e7020b] hover:underline"
                 >
                   Forgot password?
                 </button>
               </div>
-              <div className="relative rounded-md shadow-2xs">
+              <div className="relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                   <Lock className="h-4 w-4 text-gray-400" />
                 </div>
@@ -207,7 +207,7 @@ export const AdminLoginPage: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••••••"
-                  className="block w-full pl-10 pr-10 py-2.5 text-xs text-[#071A2B] bg-white border border-[#071A2B]/20 rounded-md focus:outline-hidden focus:ring-2 focus:ring-[#087A5A] focus:border-[#087A5A]"
+                  className="block w-full pl-10 pr-10 py-2.5 text-xs text-[#0d0a64] bg-white border border-[#0d0a64]/20 rounded-md focus:outline-hidden focus:ring-2 focus:ring-[#e7020b] focus:border-[#e7020b]"
                 />
                 <button
                   type="button"
@@ -227,7 +227,7 @@ export const AdminLoginPage: React.FC = () => {
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="h-4 w-4 text-[#087A5A] focus:ring-[#087A5A] border-gray-300 rounded"
+                className="h-4 w-4 text-[#e7020b] focus:ring-[#e7020b] border-gray-300 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-xs text-[#17202A]/80">
                 Keep administrative session active on this device
@@ -238,7 +238,7 @@ export const AdminLoginPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex items-center justify-center py-3 px-4 rounded-md shadow-sm text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#087A5A] transition-all disabled:opacity-50 cursor-pointer"
+              className="w-full flex items-center justify-center py-3 px-4 rounded-md shadow-sm text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#e7020b] transition-all disabled:opacity-50 cursor-pointer"
             >
               {isLoading ? (
                 <span>Authenticating Credentials...</span>
@@ -254,28 +254,28 @@ export const AdminLoginPage: React.FC = () => {
 
           {/* Preset Credentials Hint for Testing */}
           <div className="mt-6 pt-5 border-t border-gray-100">
-            <div className="p-3.5 bg-[#F8F7F3] border border-[#071A2B]/10 rounded-md text-[11px] text-[#17202A]/80 space-y-2">
+            <div className="p-3.5 bg-[#e3fff2] border border-[#0d0a64]/10 rounded-md text-[11px] text-[#17202A]/80 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-[#071A2B]">Authorized Administrator Credentials:</span>
-                <span className="text-[10px] text-[#087A5A] font-bold uppercase">Master Desk</span>
+                <span className="font-bold text-[#0d0a64]">Authorized Administrator Credentials:</span>
+                <span className="text-[10px] text-[#e7020b] font-bold uppercase">Master Desk</span>
               </div>
               <div className="space-y-0.5">
-                <div>Email: <code className="text-[#087A5A] font-semibold bg-white px-1.5 py-0.5 rounded border border-gray-200">admin@emunahhinvest.com</code></div>
-                <div>Password: <code className="text-[#087A5A] font-semibold bg-white px-1.5 py-0.5 rounded border border-gray-200">AdminEmunahh2026!</code></div>
+                <div>Email: <code className="text-[#e7020b] font-semibold bg-white px-1.5 py-0.5 rounded border border-gray-200">admin@emunahhinvest.com</code></div>
+                <div>Password: <code className="text-[#e7020b] font-semibold bg-white px-1.5 py-0.5 rounded border border-gray-200">AdminEmunahh2026!</code></div>
               </div>
               <button
                 type="button"
                 onClick={handleQuickSignIn}
-                className="w-full mt-2 py-2 px-3 bg-[#071A2B] hover:bg-[#04513E] text-white text-[11px] font-bold rounded transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                className="w-full mt-2 py-2 px-3 bg-[#0d0a64] hover:bg-[#a3140a] text-white text-[11px] font-bold rounded transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#C6A15B]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#e3fff2]" />
                 <span>Instant Sign In as Executive Admin</span>
               </button>
             </div>
           </div>
 
           <div className="mt-4 text-center">
-            <Link to="/" className="text-xs font-semibold text-[#071A2B] hover:text-[#087A5A] transition-colors">
+            <Link to="/" className="text-xs font-semibold text-[#0d0a64] hover:text-[#e7020b] transition-colors">
               ← Return to Public Website
             </Link>
           </div>
@@ -286,8 +286,8 @@ export const AdminLoginPage: React.FC = () => {
       {/* Forgot Password Modal */}
       {showForgotModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-2xl border border-gray-200">
-            <h3 className="text-lg font-bold text-[#071A2B]">Reset Administrator Access</h3>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-gray-200">
+            <h3 className="text-lg font-bold text-[#0d0a64]">Reset Administrator Access</h3>
             <p className="text-xs text-gray-600 mt-1 mb-4">
               Enter your registered corporate email. Security instructions will be dispatched.
             </p>
@@ -300,14 +300,14 @@ export const AdminLoginPage: React.FC = () => {
             ) : (
               <form onSubmit={handleResetPassword} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-[#071A2B] mb-1">Corporate Email</label>
+                  <label className="block text-xs font-bold text-[#0d0a64] mb-1">Corporate Email</label>
                   <input
                     type="email"
                     required
                     value={resetEmail}
                     onChange={(e) => setResetEmail(e.target.value)}
                     placeholder="admin@emunahhinvest.com"
-                    className="w-full text-xs p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#087A5A]"
+                    className="w-full text-xs p-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#e7020b]"
                   />
                 </div>
                 <div className="flex justify-end gap-2 pt-2">
@@ -320,7 +320,7 @@ export const AdminLoginPage: React.FC = () => {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 text-xs font-bold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-md"
+                    className="px-4 py-2 text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] rounded-md"
                   >
                     Send Recovery Link
                   </button>

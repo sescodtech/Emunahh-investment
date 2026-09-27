@@ -65,12 +65,12 @@ export const FloatingWhatsApp: React.FC = () => {
       {/* POPUP ADVISORY CARD */}
       {isOpen && (
         <div 
-          className="mb-3 w-[320px] sm:w-[360px] bg-white rounded-xl shadow-2xl border border-[#071A2B]/15 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200 text-[#17202A]"
+          className="mb-3 w-[320px] sm:w-[360px] bg-white rounded-xl shadow-2xl border border-[#0d0a64]/15 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200 text-[#17202A]"
           role="dialog"
           aria-label="Official WhatsApp Advisory Desk"
         >
           {/* Executive Header in Brand Deep Navy */}
-          <div className="bg-[#071A2B] p-4 sm:p-5 text-white relative">
+          <div className="bg-[#0d0a64] p-4 sm:p-5 text-white relative">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 p-1 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
@@ -81,15 +81,15 @@ export const FloatingWhatsApp: React.FC = () => {
 
             <div className="flex items-center gap-3">
               {/* WhatsApp Emblem */}
-              <div className="relative w-10 h-10 rounded-lg bg-[#25D366] flex items-center justify-center shadow-md shrink-0">
+              <div className="relative w-10 h-10 rounded-xl bg-[#25D366] flex items-center justify-center shadow-md shrink-0">
                 <WhatsAppIcon className="w-5 h-5 fill-white" />
-                <span className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#071A2B]" />
+                <span className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0d0a64]" />
               </div>
 
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="font-bold text-sm tracking-tight text-white">Emunahh-Invest Desk</h3>
-                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#087A5A]/30 text-[#C6A15B] border border-[#C6A15B]/30">
+                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#e7020b]/30 text-[#e3fff2] border border-[#e3fff2]/30">
                     <ShieldCheck className="w-2.5 h-2.5" />
                     <span>Official</span>
                   </span>
@@ -114,15 +114,15 @@ export const FloatingWhatsApp: React.FC = () => {
                 <button
                   key={dept.id}
                   onClick={() => handleOpenDepartment(dept.text)}
-                  className="w-full text-left p-2.5 sm:p-3 rounded-lg bg-white border border-[#071A2B]/10 hover:border-[#087A5A]/50 hover:bg-[#F8F7F3] transition-all flex items-start gap-2.5 group cursor-pointer shadow-2xs"
+                  className="w-full text-left p-2.5 sm:p-3 rounded-xl bg-white border border-[#0d0a64]/10 hover:border-[#e7020b]/50 hover:bg-[#e3fff2] transition-all flex items-start gap-2.5 group cursor-pointer shadow-sm"
                 >
-                  <div className="w-7 h-7 rounded-md bg-[#087A5A]/10 text-[#087A5A] flex items-center justify-center shrink-0 group-hover:bg-[#071A2B] group-hover:text-white transition-colors">
+                  <div className="w-7 h-7 rounded-md bg-[#e7020b]/10 text-[#e7020b] flex items-center justify-center shrink-0 group-hover:bg-[#0d0a64] group-hover:text-white transition-colors">
                     <Icon className="w-3.5 h-3.5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs font-bold text-[#071A2B] group-hover:text-[#087A5A] flex items-center justify-between">
+                    <div className="text-xs font-bold text-[#0d0a64] group-hover:text-[#e7020b] flex items-center justify-between">
                       <span>{dept.label}</span>
-                      <ArrowUpRight className="w-3 h-3 text-gray-400 group-hover:text-[#087A5A] transition-colors" />
+                      <ArrowUpRight className="w-3 h-3 text-gray-400 group-hover:text-[#e7020b] transition-colors" />
                     </div>
                     <p className="text-[11px] text-gray-500 truncate mt-0.5">
                       {dept.desc}
@@ -144,7 +144,7 @@ export const FloatingWhatsApp: React.FC = () => {
               href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest,%20I%20would%20like%20to%20make%20an%20inquiry."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[#087A5A] font-bold text-xs hover:underline"
+              className="inline-flex items-center gap-1 text-[#e7020b] font-bold text-xs hover:underline"
             >
               <span>Direct Chat</span>
               <ArrowUpRight className="w-3 h-3" />
@@ -159,10 +159,10 @@ export const FloatingWhatsApp: React.FC = () => {
         
         {/* Subtle Tooltip for Visitors (Hidden when open) */}
         {!isOpen && showNotificationBadge && (
-          <div className="hidden sm:flex items-center gap-2 absolute right-full mr-3 bottom-1/2 translate-y-1/2 px-3 py-1.5 rounded-md bg-[#071A2B] text-white text-xs font-medium whitespace-nowrap shadow-lg border border-white/10 pointer-events-none transition-opacity">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#087A5A] animate-pulse" />
+          <div className="hidden sm:flex items-center gap-2 absolute right-full mr-3 bottom-1/2 translate-y-1/2 px-3 py-1.5 rounded-md bg-[#0d0a64] text-white text-xs font-medium whitespace-nowrap shadow-lg border border-white/10 pointer-events-none transition-opacity">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e7020b] animate-pulse" />
             <span>Chat with Lagos Advisory Desk</span>
-            <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-[#071A2B] rotate-45" />
+            <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-[#0d0a64] rotate-45" />
           </div>
         )}
 
@@ -174,8 +174,8 @@ export const FloatingWhatsApp: React.FC = () => {
           }}
           className={`relative flex items-center gap-2.5 p-2 sm:px-3.5 sm:py-2.5 rounded-full transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl focus:outline-hidden active:scale-95 ${
             isOpen
-              ? 'bg-[#071A2B] text-white border border-[#C6A15B]/50'
-              : 'bg-white text-[#071A2B] border border-[#071A2B]/15 hover:border-[#087A5A]/50'
+              ? 'bg-[#0d0a64] text-white border border-[#e3fff2]/50'
+              : 'bg-white text-[#0d0a64] border border-[#0d0a64]/15 hover:border-[#e7020b]/50'
           }`}
           aria-expanded={isOpen}
           aria-label="Toggle WhatsApp Advisory Desk"
@@ -187,11 +187,11 @@ export const FloatingWhatsApp: React.FC = () => {
 
           {/* Desktop Executive Label */}
           <div className="hidden sm:flex flex-col text-left pr-1">
-            <span className={`text-xs font-bold leading-tight ${isOpen ? 'text-white' : 'text-[#071A2B]'}`}>
+            <span className={`text-xs font-bold leading-tight ${isOpen ? 'text-white' : 'text-[#0d0a64]'}`}>
               {isOpen ? 'Close Advisory' : 'WhatsApp Advisory'}
             </span>
-            <span className="text-[10px] text-[#087A5A] font-semibold flex items-center gap-1 leading-tight mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#087A5A] animate-pulse" />
+            <span className="text-[10px] text-[#e7020b] font-semibold flex items-center gap-1 leading-tight mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#e7020b] animate-pulse" />
               <span>Lagos Desk · Online</span>
             </span>
           </div>
@@ -201,7 +201,7 @@ export const FloatingWhatsApp: React.FC = () => {
             {isOpen ? (
               <X className="w-3.5 h-3.5 text-white" />
             ) : (
-              <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#087A5A] transition-transform group-hover:translate-y-0.5" />
+              <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#e7020b] transition-transform group-hover:translate-y-0.5" />
             )}
           </div>
 

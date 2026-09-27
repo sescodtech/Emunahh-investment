@@ -30,7 +30,7 @@ export const WhyUs: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-22 bg-[#071A2B] text-white border-b border-white/10 relative overflow-hidden">
+    <section className="py-16 lg:py-22 bg-[#0d0a64] text-white border-b border-white/10 relative overflow-hidden">
       
       {/* Editorial Decorative Watermark */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,8 +38,8 @@ export const WhyUs: React.FC = () => {
         {/* Editorial Header */}
         <div className="max-w-3xl space-y-3.5 mb-12">
           <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#C6A15B]" />
-            <span className="text-[11px] font-bold text-[#C6A15B] uppercase tracking-[0.2em]">
+            <span className="h-px w-8 bg-[#e3fff2]" />
+            <span className="text-[11px] font-bold text-[#e3fff2] uppercase tracking-[0.2em]">
               WHY EMUNAHH-INVEST
             </span>
           </div>
@@ -62,7 +62,7 @@ export const WhyUs: React.FC = () => {
               className={`${idx > 0 ? 'md:pl-8 lg:pl-10' : ''} pt-8 md:pt-0 space-y-4 group`}
             >
               <div className="flex items-baseline justify-between">
-                <span className="font-mono text-2xl font-bold text-[#087A5A] group-hover:text-[#C6A15B] transition-colors">
+                <span className="font-mono text-2xl font-bold text-[#e7020b] group-hover:text-[#e3fff2] transition-colors">
                   {item.num}
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-white/40">
@@ -74,7 +74,7 @@ export const WhyUs: React.FC = () => {
                 <h3 className="text-xl font-bold text-white tracking-tight">
                   {item.title}
                 </h3>
-                <div className="text-[11px] font-semibold text-[#C6A15B] uppercase tracking-wider">
+                <div className="text-[11px] font-semibold text-[#e3fff2] uppercase tracking-wider">
                   {item.subtitle}
                 </div>
               </div>
@@ -84,7 +84,7 @@ export const WhyUs: React.FC = () => {
               </p>
 
               <div className="pt-2">
-                <div className="h-0.5 w-10 bg-[#087A5A] group-hover:w-16 transition-all duration-300" />
+                <div className="h-0.5 w-10 bg-[#e7020b] group-hover:w-16 transition-all duration-300" />
               </div>
             </div>
           ))}

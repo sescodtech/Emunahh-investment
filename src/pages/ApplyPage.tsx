@@ -107,17 +107,17 @@ export const ApplyPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-[#F8F7F3] border-b border-[#071A2B]/10 py-12 lg:py-16">
+      <section className="bg-[#e3fff2] border-b border-[#0d0a64]/10 py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-3">
-            <div className="flex items-center gap-2 text-[11px] text-[#087A5A] font-bold tracking-widest uppercase">
+            <div className="flex items-center gap-2 text-[11px] text-[#e7020b] font-bold tracking-widest uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Intake Portal</span>
               <span>/</span>
               <span>Online Application</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071A2B] tracking-[-0.03em] leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d0a64] tracking-[-0.03em] leading-tight">
               Emunahh Financing Portal
             </h1>
             <p className="text-sm sm:text-base text-[#17202A]/80 leading-relaxed font-normal">
@@ -130,8 +130,8 @@ export const ApplyPage: React.FC = () => {
                 onClick={() => setActiveTab('apply')}
                 className={`px-4 py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
                   activeTab === 'apply'
-                    ? 'bg-[#071A2B] text-white shadow-2xs'
-                    : 'bg-white text-[#17202A] border border-[#071A2B]/15 hover:border-[#087A5A]'
+                    ? 'bg-[#0d0a64] text-white shadow-sm'
+                    : 'bg-white text-[#17202A] border border-[#0d0a64]/15 hover:border-[#e7020b]'
                 }`}
               >
                 Start New Application
@@ -140,8 +140,8 @@ export const ApplyPage: React.FC = () => {
                 onClick={() => setActiveTab('track')}
                 className={`px-4 py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
                   activeTab === 'track'
-                    ? 'bg-[#071A2B] text-white shadow-2xs'
-                    : 'bg-white text-[#17202A] border border-[#071A2B]/15 hover:border-[#087A5A]'
+                    ? 'bg-[#0d0a64] text-white shadow-sm'
+                    : 'bg-white text-[#17202A] border border-[#0d0a64]/15 hover:border-[#e7020b]'
                 }`}
               >
                 Track Existing Reference
@@ -157,35 +157,35 @@ export const ApplyPage: React.FC = () => {
           
           {activeTab === 'apply' ? (
             receipt ? (
-              <div className="bg-white rounded-lg border border-[#071A2B]/15 p-8 sm:p-12 text-center space-y-6 shadow-md">
-                <div className="w-14 h-14 rounded-full bg-[#087A5A]/10 text-[#087A5A] flex items-center justify-center mx-auto">
+              <div className="bg-white rounded-xl border border-[#0d0a64]/15 p-8 sm:p-12 text-center space-y-6 shadow-md">
+                <div className="w-14 h-14 rounded-full bg-[#e7020b]/10 text-[#e7020b] flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <div>
-                  <div className="text-[11px] font-bold text-[#087A5A] uppercase tracking-widest">
+                  <div className="text-[11px] font-bold text-[#e7020b] uppercase tracking-widest">
                     Application Recorded Successfully
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071A2B] mt-1">
-                    Reference Code: <span className="font-mono text-[#087A5A]">{receipt.reference}</span>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0d0a64] mt-1">
+                    Reference Code: <span className="font-mono text-[#e7020b]">{receipt.reference}</span>
                   </h2>
                 </div>
 
-                <div className="max-w-md mx-auto bg-[#F8F7F3] p-5 rounded-lg border border-[#071A2B]/10 text-left text-xs space-y-2.5 text-[#17202A]">
-                  <div className="flex justify-between border-b border-[#071A2B]/8 pb-2">
+                <div className="max-w-md mx-auto bg-[#e3fff2] p-5 rounded-xl border border-[#0d0a64]/10 text-left text-xs space-y-2.5 text-[#17202A]">
+                  <div className="flex justify-between border-b border-[#0d0a64]/8 pb-2">
                     <span className="text-[#17202A]/60">Applicant:</span>
-                    <span className="font-bold text-[#071A2B]">{receipt.record.fullName}</span>
+                    <span className="font-bold text-[#0d0a64]">{receipt.record.fullName}</span>
                   </div>
-                  <div className="flex justify-between border-b border-[#071A2B]/8 pb-2">
+                  <div className="flex justify-between border-b border-[#0d0a64]/8 pb-2">
                     <span className="text-[#17202A]/60">Facility Requested:</span>
-                    <span className="font-bold text-[#071A2B]">{receipt.record.service.replace(/_/g, ' ').toUpperCase()}</span>
+                    <span className="font-bold text-[#0d0a64]">{receipt.record.service.replace(/_/g, ' ').toUpperCase()}</span>
                   </div>
-                  <div className="flex justify-between border-b border-[#071A2B]/8 pb-2">
+                  <div className="flex justify-between border-b border-[#0d0a64]/8 pb-2">
                     <span className="text-[#17202A]/60">Amount Proposed:</span>
-                    <span className="font-bold text-[#071A2B]">{receipt.record.amount || 'To be determined'}</span>
+                    <span className="font-bold text-[#0d0a64]">{receipt.record.amount || 'To be determined'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[#17202A]/60">Review Status:</span>
-                    <span className="font-bold text-[#087A5A] bg-[#087A5A]/10 px-2 py-0.5 rounded">
+                    <span className="font-bold text-[#e7020b] bg-[#e7020b]/10 px-2 py-0.5 rounded">
                       {receipt.record.status}
                     </span>
                   </div>
@@ -203,7 +203,7 @@ export const ApplyPage: React.FC = () => {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] rounded-md shadow-2xs transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] rounded-md shadow-sm transition-all"
                   >
                     <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
                     <span>Fast-Track on WhatsApp (0802 319 0807)</span>
@@ -214,7 +214,7 @@ export const ApplyPage: React.FC = () => {
                       setReceipt(null);
                       setFormData({ fullName: '', phone: '', email: '', amount: '', institutionOrBusiness: '', details: '' });
                     }}
-                    className="px-5 py-3 text-xs font-bold text-[#071A2B] border border-[#071A2B]/20 rounded-md hover:bg-[#F8F7F3] cursor-pointer"
+                    className="px-5 py-3 text-xs font-bold text-[#0d0a64] border border-[#0d0a64]/20 rounded-md hover:bg-[#e3fff2] cursor-pointer"
                   >
                     Submit Another Application
                   </button>
@@ -224,17 +224,17 @@ export const ApplyPage: React.FC = () => {
               <form onSubmit={handleApplySubmit} className="space-y-8">
                 
                 {/* Visual Application Journey Step Indicator */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 border-b border-[#071A2B]/10 pb-6">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 border-b border-[#0d0a64]/10 pb-6">
                   {[
                     { num: '01', title: 'SERVICE', desc: 'Select Facility' },
                     { num: '02', title: 'DETAILS', desc: 'Applicant Info' },
                     { num: '03', title: 'REQUEST', desc: 'Amount & Entity' },
                     { num: '04', title: 'SUBMISSION', desc: 'Review & Verify' },
                   ].map((step, idx) => (
-                    <div key={idx} className="p-3 rounded-md bg-[#F8F7F3] border border-[#071A2B]/8">
+                    <div key={idx} className="p-3 rounded-md bg-[#e3fff2] border border-[#0d0a64]/8">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-[#087A5A]">{step.num}</span>
-                        <span className="text-[11px] font-bold text-[#071A2B] tracking-wider">{step.title}</span>
+                        <span className="text-xs font-mono font-bold text-[#e7020b]">{step.num}</span>
+                        <span className="text-[11px] font-bold text-[#0d0a64] tracking-wider">{step.title}</span>
                       </div>
                       <span className="text-[10px] text-[#17202A]/60 block mt-0.5">{step.desc}</span>
                     </div>
@@ -242,10 +242,10 @@ export const ApplyPage: React.FC = () => {
                 </div>
 
                 {/* Step 01: Service Selection */}
-                <div className="bg-white rounded-lg border border-[#071A2B]/12 p-6 sm:p-8 space-y-4 shadow-2xs">
+                <div className="bg-white rounded-xl border border-[#0d0a64]/12 p-6 sm:p-8 space-y-4 shadow-sm">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#071A2B] text-white">01</span>
-                    <h2 className="text-base sm:text-lg font-bold text-[#071A2B]">
+                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#0d0a64] text-white">01</span>
+                    <h2 className="text-base sm:text-lg font-bold text-[#0d0a64]">
                       Select Required Financial Facility
                     </h2>
                   </div>
@@ -258,8 +258,8 @@ export const ApplyPage: React.FC = () => {
                         onClick={() => setService(opt.id)}
                         className={`p-3.5 text-left rounded-md border transition-all cursor-pointer ${
                           service === opt.id
-                            ? 'bg-[#071A2B] text-white border-[#071A2B] shadow-2xs'
-                            : 'bg-[#F8F7F3] text-[#17202A] border-[#071A2B]/10 hover:border-[#087A5A]'
+                            ? 'bg-[#0d0a64] text-white border-[#0d0a64] shadow-sm'
+                            : 'bg-[#e3fff2] text-[#17202A] border-[#0d0a64]/10 hover:border-[#e7020b]'
                         }`}
                       >
                         <div className="text-xs font-bold">{opt.label}</div>
@@ -272,17 +272,17 @@ export const ApplyPage: React.FC = () => {
                 </div>
 
                 {/* Step 02: Applicant Details */}
-                <div className="bg-white rounded-lg border border-[#071A2B]/12 p-6 sm:p-8 space-y-4 shadow-2xs">
+                <div className="bg-white rounded-xl border border-[#0d0a64]/12 p-6 sm:p-8 space-y-4 shadow-sm">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#071A2B] text-white">02</span>
-                    <h2 className="text-base sm:text-lg font-bold text-[#071A2B]">
+                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#0d0a64] text-white">02</span>
+                    <h2 className="text-base sm:text-lg font-bold text-[#0d0a64]">
                       Applicant Identification & Contact
                     </h2>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                         Full Legal Name *
                       </label>
                       <input
@@ -291,12 +291,12 @@ export const ApplyPage: React.FC = () => {
                         placeholder="e.g. Babatunde Emmanuel Adeleke"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#071A2B]/15 focus:outline-hidden focus:border-[#087A5A]"
+                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                         Phone Number (WhatsApp Active) *
                       </label>
                       <input
@@ -305,13 +305,13 @@ export const ApplyPage: React.FC = () => {
                         placeholder="0802 319 0807"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#071A2B]/15 focus:outline-hidden focus:border-[#087A5A]"
+                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                    <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                       Email Address (Optional)
                     </label>
                     <input
@@ -319,23 +319,23 @@ export const ApplyPage: React.FC = () => {
                       placeholder="babatunde@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#071A2B]/15 focus:outline-hidden focus:border-[#087A5A]"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
                     />
                   </div>
                 </div>
 
                 {/* Step 03: Request Parameters */}
-                <div className="bg-white rounded-lg border border-[#071A2B]/12 p-6 sm:p-8 space-y-4 shadow-2xs">
+                <div className="bg-white rounded-xl border border-[#0d0a64]/12 p-6 sm:p-8 space-y-4 shadow-sm">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#071A2B] text-white">03</span>
-                    <h2 className="text-base sm:text-lg font-bold text-[#071A2B]">
+                    <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-[#0d0a64] text-white">03</span>
+                    <h2 className="text-base sm:text-lg font-bold text-[#0d0a64]">
                       Facility Parameters & Institution
                     </h2>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                         Proposed Facility Amount (₦)
                       </label>
                       <input
@@ -343,12 +343,12 @@ export const ApplyPage: React.FC = () => {
                         placeholder="e.g. ₦650,000"
                         value={formData.amount}
                         onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#071A2B]/15 focus:outline-hidden focus:border-[#087A5A]"
+                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                      <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                         {service === 'student_loan' ? 'University / Institution / Exam Body' : 'Registered Business or Enterprise'}
                       </label>
                       <input
@@ -356,13 +356,13 @@ export const ApplyPage: React.FC = () => {
                         placeholder={service === 'student_loan' ? 'e.g. University of Lagos (UNILAG)' : 'e.g. Adeyemi Logistics Ltd'}
                         value={formData.institutionOrBusiness}
                         onChange={(e) => setFormData({ ...formData, institutionOrBusiness: e.target.value })}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#071A2B]/15 focus:outline-hidden focus:border-[#087A5A]"
+                        className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#071A2B] mb-1">
+                    <label className="block text-xs font-bold text-[#0d0a64] mb-1">
                       Deadlines & Specific Requirements
                     </label>
                     <textarea
@@ -370,22 +370,22 @@ export const ApplyPage: React.FC = () => {
                       placeholder="Specify semester fee payment deadline, supplier invoice date, or guarantor schedule..."
                       value={formData.details}
                       onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#071A2B]/15 focus:outline-hidden focus:border-[#087A5A] resize-none"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b] resize-none"
                     />
                   </div>
                 </div>
 
                 {/* Step 04: Submission */}
-                <div className="bg-[#F8F7F3] rounded-lg border border-[#071A2B]/12 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="bg-[#e3fff2] rounded-xl border border-[#0d0a64]/12 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-2.5 text-xs text-[#17202A]/70">
-                    <ShieldCheck className="w-5 h-5 text-[#087A5A] shrink-0" />
+                    <ShieldCheck className="w-5 h-5 text-[#e7020b] shrink-0" />
                     <span>Protected by Emunahh-Invest Limited governance and institutional confidentiality.</span>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#087A5A] active:scale-[0.98] rounded-md shadow-2xs transition-colors disabled:opacity-50 cursor-pointer shrink-0"
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#e7020b] active:scale-[0.98] rounded-md shadow-sm transition-colors disabled:opacity-50 cursor-pointer shrink-0"
                   >
                     {isSubmitting ? 'Registering Intake...' : 'Submit Official Intake Form'}
                   </button>
@@ -395,13 +395,13 @@ export const ApplyPage: React.FC = () => {
             )
           ) : (
             /* Tracking Tab */
-            <div className="bg-white rounded-lg border border-[#071A2B]/12 p-6 sm:p-10 shadow-2xs space-y-6">
+            <div className="bg-white rounded-xl border border-[#0d0a64]/12 p-6 sm:p-10 shadow-sm space-y-6">
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-[#071A2B]">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#0d0a64]">
                   Track Existing Application File
                 </h2>
                 <p className="text-xs sm:text-sm text-[#17202A]/75 mt-1">
-                  Enter your official Emunahh Reference ID (e.g. <code className="font-mono text-[#087A5A] font-bold">EMU-100201</code>) to retrieve status.
+                  Enter your official Emunahh Reference ID (e.g. <code className="font-mono text-[#e7020b] font-bold">EMU-100201</code>) to retrieve status.
                 </p>
               </div>
 
@@ -412,12 +412,12 @@ export const ApplyPage: React.FC = () => {
                   placeholder="e.g. EMU-100201"
                   value={trackRef}
                   onChange={(e) => setTrackRef(e.target.value)}
-                  className="flex-1 px-3.5 py-2.5 text-xs font-mono uppercase rounded-md border border-[#071A2B]/15 focus:outline-hidden focus:border-[#087A5A]"
+                  className="flex-1 px-3.5 py-2.5 text-xs font-mono uppercase rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
                 />
                 <button
                   type="submit"
                   disabled={isTracking}
-                  className="px-6 py-2.5 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#087A5A] rounded-md disabled:opacity-50 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#e7020b] rounded-md disabled:opacity-50 transition-colors cursor-pointer"
                 >
                   {isTracking ? 'Searching...' : 'Lookup Status'}
                 </button>
@@ -430,13 +430,13 @@ export const ApplyPage: React.FC = () => {
               )}
 
               {trackingResult && (
-                <div className="p-6 rounded-lg bg-[#F8F7F3] border border-[#071A2B]/12 space-y-4">
-                  <div className="flex items-center justify-between border-b border-[#071A2B]/10 pb-3">
+                <div className="p-6 rounded-xl bg-[#e3fff2] border border-[#0d0a64]/12 space-y-4">
+                  <div className="flex items-center justify-between border-b border-[#0d0a64]/10 pb-3">
                     <div>
                       <div className="text-[11px] text-[#17202A]/60">Reference File</div>
-                      <div className="font-mono text-base font-bold text-[#071A2B]">{trackingResult.reference}</div>
+                      <div className="font-mono text-base font-bold text-[#0d0a64]">{trackingResult.reference}</div>
                     </div>
-                    <span className="px-3 py-1 text-xs font-bold rounded-md bg-[#087A5A]/15 text-[#087A5A]">
+                    <span className="px-3 py-1 text-xs font-bold rounded-md bg-[#e7020b]/15 text-[#e7020b]">
                       {trackingResult.status}
                     </span>
                   </div>
@@ -444,23 +444,23 @@ export const ApplyPage: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     <div>
                       <span className="text-[#17202A]/60 block">Applicant:</span>
-                      <span className="font-bold text-[#071A2B]">{trackingResult.fullName}</span>
+                      <span className="font-bold text-[#0d0a64]">{trackingResult.fullName}</span>
                     </div>
                     <div>
                       <span className="text-[#17202A]/60 block">Facility:</span>
-                      <span className="font-bold text-[#071A2B]">{trackingResult.service.replace(/_/g, ' ').toUpperCase()}</span>
+                      <span className="font-bold text-[#0d0a64]">{trackingResult.service.replace(/_/g, ' ').toUpperCase()}</span>
                     </div>
                     <div>
                       <span className="text-[#17202A]/60 block">Institution / Business:</span>
-                      <span className="text-[#071A2B]">{trackingResult.institutionOrBusiness || 'N/A'}</span>
+                      <span className="text-[#0d0a64]">{trackingResult.institutionOrBusiness || 'N/A'}</span>
                     </div>
                     <div>
                       <span className="text-[#17202A]/60 block">Registered Date:</span>
-                      <span className="text-[#071A2B]">{new Date(trackingResult.createdAt).toLocaleDateString()}</span>
+                      <span className="text-[#0d0a64]">{new Date(trackingResult.createdAt).toLocaleDateString()}</span>
                     </div>
                   </div>
 
-                  <div className="pt-2 border-t border-[#071A2B]/10 flex items-center justify-between">
+                  <div className="pt-2 border-t border-[#0d0a64]/10 flex items-center justify-between">
                     <span className="text-[11px] text-[#17202A]/60">Physical Review: Lagos Corporate Desk</span>
                     <a
                       href={`https://wa.me/2348023190807?text=${encodeURIComponent(
@@ -468,7 +468,7 @@ export const ApplyPage: React.FC = () => {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-bold text-[#087A5A] hover:underline"
+                      className="text-xs font-bold text-[#e7020b] hover:underline"
                     >
                       Inquire on WhatsApp →
                     </a>

@@ -41,17 +41,17 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
   return (
     <div className="bg-white min-h-screen">
       {/* Page Header */}
-      <section className="bg-[#F8F7F3] border-b border-gray-200 py-14 lg:py-20">
+      <section className="bg-[#e3fff2] border-b border-gray-200 py-14 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs text-[#087A5A] font-bold tracking-wider uppercase">
+            <div className="flex items-center gap-2 text-xs text-[#e7020b] font-bold tracking-wider uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
               <span>Services</span>
               <span>/</span>
               <span>Student Loans</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071A2B] tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d0a64] tracking-tight leading-tight">
               Student Loans & Education Financing
             </h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
@@ -63,17 +63,17 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
             <div className="pt-3 flex flex-wrap gap-3.5">
               <button
                 onClick={() => onOpenApply('student_loan')}
-                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-all shadow-xs cursor-pointer group"
+                className="inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#a3140a] rounded-xl transition-all shadow-xs cursor-pointer group"
               >
                 <span>Apply for Student Loan</span>
-                <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#C6A15B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-4 h-4 ml-1.5 text-[#e3fff2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
 
               <a
                 href="https://wa.me/2348023190807?text=Hello%20Emunahh,%20I%20am%20inquiring%20about%20Student%20Loan%20requirements"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#087A5A] hover:bg-[#04513E] rounded-lg transition-all shadow-xs"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-semibold text-white bg-[#e7020b] hover:bg-[#a3140a] rounded-xl transition-all shadow-xs"
               >
                 <MessageSquare className="w-4 h-4 fill-white" />
                 <span>WhatsApp Desk (0802 319 0807)</span>
@@ -90,10 +90,10 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
           {/* Direct Remittance Principle */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-8 sm:p-10 rounded-xl border border-gray-200 shadow-xs">
             <div className="lg:col-span-7 space-y-4">
-              <div className="text-xs text-[#087A5A] font-bold uppercase tracking-wider">
+              <div className="text-xs text-[#e7020b] font-bold uppercase tracking-wider">
                 The Emunahh Principle
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#071A2B]">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0d0a64]">
                 Direct Institutional Tuition Remittance
               </h2>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal">
@@ -103,43 +103,43 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-gray-700">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#087A5A]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#e7020b]" />
                   <span>Eliminates diversion of tuition funds</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#087A5A]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#e7020b]" />
                   <span>Immediate institution payment receipt</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#087A5A]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#e7020b]" />
                   <span>Predictable monthly sponsor amortizations</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#087A5A]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#e7020b]" />
                   <span>Guaranteed uninterrupted academic term</span>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-[#F8F7F3] border border-gray-200 p-6 sm:p-8 rounded-xl space-y-4">
-              <div className="text-xs text-[#071A2B] uppercase tracking-wider font-bold">
+            <div className="lg:col-span-5 bg-[#e3fff2] border border-gray-200 p-6 sm:p-8 rounded-xl space-y-4">
+              <div className="text-xs text-[#0d0a64] uppercase tracking-wider font-bold">
                 Quick Document Checklist
               </div>
               <ul className="space-y-3 text-xs text-gray-700">
                 <li className="flex items-start gap-2.5">
-                  <FileText className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
+                  <FileText className="w-4 h-4 text-[#e7020b] shrink-0 mt-0.5" />
                   <span>Official Admission Letter or Current Semester Course Registration</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <FileText className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
+                  <FileText className="w-4 h-4 text-[#e7020b] shrink-0 mt-0.5" />
                   <span>School-issued Invoice, Remita Retrieval Reference (RRR), or Fee Breakdown</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <FileText className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
+                  <FileText className="w-4 h-4 text-[#e7020b] shrink-0 mt-0.5" />
                   <span>Valid Student National Identification (NIN, Student ID Card)</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <FileText className="w-4 h-4 text-[#087A5A] shrink-0 mt-0.5" />
+                  <FileText className="w-4 h-4 text-[#e7020b] shrink-0 mt-0.5" />
                   <span>Guarantor/Sponsor Identification & Verifiable Proof of Income</span>
                 </li>
               </ul>
@@ -149,7 +149,7 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
           {/* Eligible Programs Grid */}
           <div className="space-y-8">
             <div className="text-center max-w-2xl mx-auto space-y-2">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#071A2B]">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0d0a64]">
                 Programs & Institutions Covered
               </h2>
               <p className="text-xs sm:text-sm text-gray-600">
@@ -159,9 +159,9 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {eligibleInstitutions.map((item, idx) => (
-                <div key={idx} className="bg-white p-6 rounded-xl border border-gray-200 space-y-2 shadow-2xs hover:border-[#087A5A]/40 transition-colors">
-                  <School className="w-6 h-6 text-[#087A5A] mb-2" />
-                  <h3 className="text-sm font-bold text-[#071A2B]">{item.title}</h3>
+                <div key={idx} className="bg-white p-6 rounded-xl border border-gray-200 space-y-2 shadow-sm hover:border-[#e7020b]/40 transition-colors">
+                  <School className="w-6 h-6 text-[#e7020b] mb-2" />
+                  <h3 className="text-sm font-bold text-[#0d0a64]">{item.title}</h3>
                   <p className="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -171,10 +171,10 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
           {/* Structured Repayment Horizons */}
           <div className="rounded-xl bg-white border border-gray-200 p-7 sm:p-10 shadow-xs">
             <div className="max-w-2xl mb-8 space-y-2">
-              <div className="text-xs text-[#087A5A] font-bold uppercase tracking-wider">
+              <div className="text-xs text-[#e7020b] font-bold uppercase tracking-wider">
                 Repayment Horizons
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#071A2B]">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#0d0a64]">
                 Structured Semester Repayment Options
               </h3>
               <p className="text-xs sm:text-sm text-gray-600">
@@ -184,12 +184,12 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {repaymentOptions.map((opt, idx) => (
-                <div key={idx} className="p-5 rounded-xl border border-gray-200 bg-white space-y-3 flex flex-col justify-between hover:border-[#087A5A]/40 transition-colors">
+                <div key={idx} className="p-5 rounded-xl border border-gray-200 bg-white space-y-3 flex flex-col justify-between hover:border-[#e7020b]/40 transition-colors">
                   <div className="space-y-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#071A2B]/5 text-[#071A2B] flex items-center justify-center text-xs font-bold font-mono">
+                    <div className="w-8 h-8 rounded-xl bg-[#0d0a64]/5 text-[#0d0a64] flex items-center justify-center text-xs font-bold font-mono">
                       0{idx + 1}
                     </div>
-                    <h4 className="text-sm font-bold text-[#071A2B]">
+                    <h4 className="text-sm font-bold text-[#0d0a64]">
                       {opt.tenure}
                     </h4>
                     <p className="text-xs text-gray-600 leading-relaxed">
@@ -209,7 +209,7 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
               </div>
               <button
                 onClick={() => onOpenApply('student_loan')}
-                className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-white bg-[#071A2B] hover:bg-[#04513E] rounded-lg transition-colors cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#a3140a] rounded-xl transition-colors cursor-pointer"
               >
                 Apply for Student Loan Facility
               </button>

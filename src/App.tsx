@@ -42,7 +42,7 @@ const AppLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#17202A] font-sans antialiased selection:bg-[#087A5A]/20 selection:text-[#071A2B]">
+    <div className="min-h-screen flex flex-col bg-white text-[#17202A] font-sans antialiased selection:bg-[#e7020b]/20 selection:text-[#0d0a64]">
       {/* Show Public Header only on non-admin routes */}
       {!isAdminRoute && <Navbar onOpenApply={handleOpenApply} />}
 
