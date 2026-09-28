@@ -10,12 +10,9 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
-  const { content, settings, cmsPages, cmsSections } = useContent() as any;
+  const { content, settings } = useContent();
   const contact = content.contact;
   const footerData = content.footer;
-  const globalPage = cmsPages?.find((p:any)=>p.slug==='global');
-  const globalFooter = cmsSections?.find((s:any)=>s.page_id===globalPage?.id && s.section_key==='footer')?.content || {};
-  const footerStatement = globalFooter.statement || footerData.statement;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -35,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             </Link>
 
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm font-normal">
-              {footerStatement}
+              {footerData.statement}
             </p>
 
             {/* Complete Approved Office Address */}
@@ -84,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
           {/* Column 2: Company (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
             <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
-              {globalFooter.companyHeading || 'Company'}
+              Company
             </div>
             <ul className="space-y-2.5 text-xs">
               <li>
@@ -123,7 +120,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
           {/* Column 3: Resources (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
-              {globalFooter.resourcesHeading || 'Resources'}
+              Resources
             </div>
             <ul className="space-y-2.5 text-xs">
               <li>
@@ -157,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
           {/* Column 4: Contact & Hours (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
-              {globalFooter.hoursHeading || 'Advisory Hours'}
+              Advisory Hours
             </div>
             <div className="space-y-2 text-xs text-white/70">
               <div className="flex items-start gap-1.5">
@@ -188,10 +185,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
         <div className="pt-8 pb-6 border-b border-white/10 space-y-2.5 text-[11px] text-white/50 leading-relaxed">
           <div className="flex items-center gap-1.5 text-white/80 font-semibold uppercase tracking-wider text-[10px]">
             <ShieldCheck className="w-4 h-4 text-[#e7020b]" />
-            <span>{globalFooter.governanceHeading || 'Institutional Governance & Disclosures'}</span>
+            <span>Institutional Governance & Disclosures</span>
           </div>
           <p>
-            {globalFooter.governance || 'Information on this website is general in nature. Applications and facilities are subject to verification, eligibility, formal documentation and approval.'}
+            Emunahh-Invest Limited is an incorporated private limited liability financial and investment company 
+            duly registered under the laws of the Federal Republic of Nigeria. All student loans and enterprise facilities 
+            are subject to institutional verification, underwriting approval, and execution of formal contract terms. 
+            We strictly do not operate speculative cryptocurrency schemes, unauthorized deposits, or payday lending apps.
           </p>
         </div>
 

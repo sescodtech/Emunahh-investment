@@ -497,7 +497,7 @@ async function authenticateAdmin(req: Request, res: Response, next: NextFunction
 
     const profiles = await profileResponse.json() as Array<{ role?: string; full_name?: string | null }>;
     const profile = profiles[0];
-    if (profile?.role !== 'admin') {
+    if (!['super_admin','admin'].includes(profile?.role || '')) {
       return res.status(403).json({ error: 'This account is not authorized for the administrator portal.' });
     }
 
@@ -1260,30 +1260,51 @@ app.put('/api/admin/settings', authenticateAdmin, (req: Request, res: Response) 
   }
 });
 
+// Advanced administrative user management. Supabase Auth remains the credential authority.
+app.get('/api/admin/users', authenticateAdmin, async (req: Request, res: Response) => {
+  try {
+    const supabaseUrl=(process.env.SUPABASE_URL||'').replace(/\/$/,''); const secret=process.env.SUPABASE_SECRET_KEY||'';
+    if(!supabaseUrl||!secret) return res.status(503).json({error:'Supabase server credentials are not configured.'});
+    const response=await fetch(`${supabaseUrl}/rest/v1/profiles?select=id,full_name,role,created_at,updated_at&order=created_at.desc`,{headers:{apikey:secret,Authorization:`Bearer ${secret}`}});
+    if(!response.ok) return res.status(502).json({error:'Unable to load users.'});
+    const profiles=await response.json() as any[];
+    return res.json({users:profiles});
+  }catch(e){return res.status(500).json({error:'Unable to load users.'});}
+});
+
+app.post('/api/admin/users', authenticateAdmin, async (req: Request, res: Response) => {
+  try {
+    const actor=(req as Request & {adminUser?:{id:string}}).adminUser; const {email,password,full_name,role='staff'}=req.body||{};
+    if(!email||!password||!full_name) return res.status(400).json({error:'Full name, email and temporary password are required.'});
+    if(!['super_admin','admin','editor','staff'].includes(role)) return res.status(400).json({error:'Invalid role.'});
+    const supabaseUrl=(process.env.SUPABASE_URL||'').replace(/\/$/,''); const secret=process.env.SUPABASE_SECRET_KEY||'';
+    if(!supabaseUrl||!secret) return res.status(503).json({error:'Supabase server credentials are not configured.'});
+    const create=await fetch(`${supabaseUrl}/auth/v1/admin/users`,{method:'POST',headers:{apikey:secret,Authorization:`Bearer ${secret}`,'Content-Type':'application/json'},body:JSON.stringify({email,password,email_confirm:true,user_metadata:{full_name}})});
+    const created=await create.json() as any; if(!create.ok) return res.status(create.status).json({error:created?.msg||created?.message||'Unable to create authentication user.'});
+    const profile=await fetch(`${supabaseUrl}/rest/v1/profiles`,{method:'POST',headers:{apikey:secret,Authorization:`Bearer ${secret}`,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=representation'},body:JSON.stringify({id:created.id,full_name,role})});
+    if(!profile.ok){await fetch(`${supabaseUrl}/auth/v1/admin/users/${created.id}`,{method:'DELETE',headers:{apikey:secret,Authorization:`Bearer ${secret}`}});return res.status(502).json({error:'User created in Auth but profile creation failed; creation was rolled back.'});}
+    await fetch(`${supabaseUrl}/rest/v1/audit_logs`,{method:'POST',headers:{apikey:secret,Authorization:`Bearer ${secret}`,'Content-Type':'application/json'},body:JSON.stringify({actor_id:actor?.id||null,action:'Created administrative user',entity_type:'profiles',entity_id:created.id,metadata:{email,role}})});
+    return res.status(201).json({success:true,user:{id:created.id,email,full_name,role}});
+  }catch(e){console.error('[Admin Users]',e);return res.status(500).json({error:'Unable to create administrative user.'});}
+});
+
 // ==========================================
-// LOCAL NEXT.JS SERVER
-// In development, Next.js owns the frontend while this Express instance keeps
-// the existing API endpoints available at /api/*. On Vercel, api/[...slug].ts
-// imports this Express app as a serverless function.
-async function setupServer() {
-  const { default: next } = await import('next');
-  const nextApp = next({ dev: process.env.NODE_ENV !== 'production' });
-  await nextApp.prepare();
-  const handle = nextApp.getRequestHandler();
+// VITE / EXPRESS SERVER
+// Vite owns the frontend during development. Express provides the API and
+// serves the built Vite app for a traditional Node deployment. On Vercel,
+// api/[...slug].ts imports this Express app as a serverless function.
+app.use(express.static(path.join(__dirname, 'dist')));
 
-  app.use((req: Request, res: Response) => {
-    void handle(req, res);
-  });
-
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`EMUNAHH-INVEST LIMITED server running on http://0.0.0.0:${PORT}`);
-  });
-}
+app.get('*', (req: Request, res: Response, next: NextFunction) => {
+  if (req.path.startsWith('/api/')) return next();
+  const indexFile = path.join(__dirname, 'dist', 'index.html');
+  if (fs.existsSync(indexFile)) return res.sendFile(indexFile);
+  return res.status(404).send('Frontend build not found. Run npm run build first.');
+});
 
 if (!process.env.VERCEL) {
-  setupServer().catch((error) => {
-    console.error('Failed to start the Next.js server:', error);
-    process.exitCode = 1;
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`EMUNAHH-INVEST API server running on http://0.0.0.0:${PORT}`);
   });
 }
 

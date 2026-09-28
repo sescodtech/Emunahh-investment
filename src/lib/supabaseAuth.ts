@@ -1,7 +1,7 @@
 import { createClient, type Session, type User } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 export const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
@@ -44,7 +44,7 @@ export async function signIn(email: string, password: string): Promise<AdminSess
   }
 
   if (profileError) throw new Error(`Unable to verify administrator permissions: ${profileError.message}`);
-  if (profile?.role !== 'admin') {
+  if (!['super_admin','admin','editor','staff'].includes(profile?.role || '')) {
     await supabase.auth.signOut();
     throw new Error('This account is not authorized for the administrator portal.');
   }
@@ -62,7 +62,7 @@ export async function restoreAdminSession(): Promise<AdminSession | null> {
     .eq('id', session.user.id)
     .maybeSingle();
 
-  if (profile?.role !== 'admin') {
+  if (!['super_admin','admin','editor','staff'].includes(profile?.role || '')) {
     await supabase.auth.signOut();
     return null;
   }
@@ -75,7 +75,7 @@ export async function signOut() {
 }
 
 export async function sendPasswordReset(email: string) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+  const siteUrl = import.meta.env.VITE_SITE_URL || window.location.origin;
   const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
     redirectTo: `${siteUrl}/admin/login`,
   });
