@@ -17,9 +17,11 @@ import { OtherServicesPage } from './views/OtherServicesPage';
 import { AboutPage } from './views/AboutPage';
 import { BlogPage } from './views/BlogPage';
 import { ContactPage } from './views/ContactPage';
+import { CMSContactPage } from './views/CMSContactPage';
 import { ApplyPage } from './views/ApplyPage';
 import { TermsPage } from './views/TermsPage';
 import { PrivacyPage } from './views/PrivacyPage';
+import { CMSPageRenderer } from './components/CMSPageRenderer';
 import { NotFoundPage } from './views/NotFoundPage';
 
 import { AdminLoginPage } from './views/admin/AdminLoginPage';
@@ -50,20 +52,20 @@ const AppLayout: React.FC = () => {
 
       <main className="flex-1">
         <Routes>
-          <Route path="/" element={<HomePage onOpenApply={handleOpenApply} />} />
-          <Route path="/student-loans" element={<StudentLoansPage onOpenApply={handleOpenApply} />} />
-          <Route path="/investments" element={<InvestmentsPage onOpenApply={handleOpenApply} />} />
-          <Route path="/business-financing" element={<BusinessFinancingPage onOpenApply={handleOpenApply} />} />
-          <Route path="/personal-finance" element={<PersonalFinancePage onOpenApply={handleOpenApply} />} />
-          <Route path="/other-services" element={<OtherServicesPage onOpenApply={handleOpenApply} />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/" element={<CMSPageRenderer slug="home" />} />
+          <Route path="/student-loans" element={<CMSPageRenderer slug="student-loans" />} />
+          <Route path="/investments" element={<CMSPageRenderer slug="investments" />} />
+          <Route path="/business-financing" element={<CMSPageRenderer slug="business-financing" />} />
+          <Route path="/personal-finance" element={<CMSPageRenderer slug="personal-finance" />} />
+          <Route path="/other-services" element={<CMSPageRenderer slug="other-services" />} />
+          <Route path="/about" element={<CMSPageRenderer slug="about" />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/contact" element={<CMSContactPage />} />
           <Route path="/apply" element={<ApplyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/terms-of-service" element={<TermsPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/privacy-policy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<CMSPageRenderer slug="terms" />} />
+          <Route path="/terms-of-service" element={<CMSPageRenderer slug="terms" />} />
+          <Route path="/privacy" element={<CMSPageRenderer slug="privacy" />} />
+          <Route path="/privacy-policy" element={<CMSPageRenderer slug="privacy" />} />
 
           {/* Admin Management System */}
           <Route path="/admin/login" element={<AdminLoginPage />} />

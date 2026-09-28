@@ -204,6 +204,8 @@ interface ContentContextType {
   settings: SiteSettings;
   isLoading: boolean;
   refreshContent: () => Promise<void>;
+  cmsPages: any[];
+  cmsSections: any[];
 }
 
 const ContentContext = createContext<ContentContextType>({
@@ -212,6 +214,8 @@ const ContentContext = createContext<ContentContextType>({
   settings: defaultSettings,
   isLoading: false,
   refreshContent: async () => {},
+  cmsPages: [],
+  cmsSections: [],
 });
 
 export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -219,15 +223,18 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [services, setServices] = useState<ServiceRecord[]>(defaultServices);
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [cmsPages, setCmsPages] = useState<any[]>([]);
+  const [cmsSections, setCmsSections] = useState<any[]>([]);
 
   const fetchDynamicData = async () => {
     try {
       setIsLoading(true);
-      const [contentRes, servicesRes, settingsRes, cmsRes] = await Promise.all([
+      const [contentRes, servicesRes, settingsRes, pagesRes, sectionsRes] = await Promise.all([
         supabase.from('site_content').select('content').eq('id',1).maybeSingle(),
         supabase.from('services').select('id,slug,title,category,tagline,description,bullets,image_url,is_published,display_order').eq('is_published',true).order('display_order'),
         supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url').eq('id',1).maybeSingle(),
-        supabase.from('cms_pages').select('slug,status,cms_sections(section_key,content,is_enabled,display_order)').eq('status','published').order('display_order',{foreignTable:'cms_sections'}),
+        supabase.from('cms_pages').select('*').eq('status','published').order('title'),
+        supabase.from('cms_sections').select('*').eq('is_enabled',true).order('display_order'),
       ]);
       if (!contentRes.error && contentRes.data?.content) {
         const data:any = contentRes.data.content;
@@ -236,22 +243,11 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       if (!servicesRes.error && servicesRes.data?.length) {
         setServices(servicesRes.data.map((s:any)=>({...s,imageUrl:s.image_url,isPublished:s.is_published,order:s.display_order})));
       }
+      if (!pagesRes?.error) setCmsPages(pagesRes?.data || []);
+      if (!sectionsRes?.error) setCmsSections(sectionsRes?.data || []);
       if (!settingsRes.error && settingsRes.data) {
         const s:any=settingsRes.data;
         setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||''}));
-      }
-      if (!cmsRes.error && cmsRes.data) {
-        const pages:any = cmsRes.data;
-        const home:any = pages.find((p:any)=>p.slug==='home');
-        const sections:any = Object.fromEntries((home?.cms_sections||[]).filter((s:any)=>s.is_enabled!==false).map((s:any)=>[s.section_key,s.content||{}]));
-        const contactPage:any = pages.find((p:any)=>p.slug==='contact');
-        const contactSections:any = Object.fromEntries((contactPage?.cms_sections||[]).filter((s:any)=>s.is_enabled!==false).map((s:any)=>[s.section_key,s.content||{}]));
-        setContent(prev=>({
-          ...prev,
-          hero:{...prev.hero,...(sections.hero||{}),imageUrl:sections.hero?.imageUrl||sections.hero?.image_url||prev.hero.imageUrl},
-          about:{...prev.about,...(sections.about||{})},
-          contact:{...prev.contact,...(contactSections.contact||{})},
-        }));
       }
     } catch (err) { console.warn('Using bundled default content:', err); }
     finally { setIsLoading(false); }
@@ -269,6 +265,8 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
         settings,
         isLoading,
         refreshContent: fetchDynamicData,
+        cmsPages,
+        cmsSections,
       }}
     >
       {children}

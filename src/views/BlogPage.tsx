@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Search, X, ArrowLeft, BookOpen } from 'lucide-react';
 import { WhatsAppIcon } from '../components/WhatsAppIcon';
-import { supabase } from '../lib/supabase';
 
 interface BlogPost {
   id: string;
@@ -19,15 +18,6 @@ export const BlogPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [cmsPosts, setCmsPosts] = useState<BlogPost[] | null>(null);
-
-  useEffect(() => {
-    let active = true;
-    supabase.from('blog_posts').select('id,category,title,excerpt,author_name,content,published_at,created_at').eq('status','published').order('published_at',{ascending:false}).then(({data,error}) => {
-      if (!error && active && data?.length) setCmsPosts(data.map((p:any) => ({ id:p.id, category:p.category || 'General', readTime:`${Math.max(1, Math.ceil((Array.isArray(p.content) ? p.content.join(' ') : String(p.content || '')).split(/\s+/).filter(Boolean).length / 220))} min read`, date:new Date(p.published_at || p.created_at).toLocaleDateString('en-GB',{month:'long',year:'numeric'}), title:p.title, excerpt:p.excerpt || '', author:p.author_name || 'Emunahh-Invest', content:Array.isArray(p.content) ? p.content : [] })));
-    });
-    return () => { active = false; };
-  }, []);
 
   const posts: BlogPost[] = [
     {
@@ -93,10 +83,9 @@ export const BlogPage: React.FC = () => {
     },
   ];
 
-  const sourcePosts = cmsPosts?.length ? cmsPosts : posts;
-  const categories = ['All', ...Array.from(new Set(sourcePosts.map((p) => p.category).filter(Boolean)))];
+  const categories = ['All', 'Education Financing', 'Wealth & Investment', 'Business Growth'];
 
-  const filteredPosts = sourcePosts.filter((p) => {
+  const filteredPosts = posts.filter((p) => {
     const matchesCat = activeCategory === 'All' || p.category === activeCategory;
     const matchesSearch =
       p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

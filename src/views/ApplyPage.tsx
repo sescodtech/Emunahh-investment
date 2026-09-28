@@ -25,18 +25,16 @@ export const ApplyPage: React.FC = () => {
   const [trackRef, setTrackRef] = useState('');
   const [trackingResult, setTrackingResult] = useState<any | null>(null);
   const [trackingError, setTrackingError] = useState('');
-  const [applicationError, setApplicationError] = useState('');
   const [isTracking, setIsTracking] = useState(false);
 
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setApplicationError('');
     try {
       const data = await submitApplication({ service, ...formData });
       setReceipt(data);
     } catch (err) {
-      setApplicationError(err instanceof Error ? err.message : 'Unable to submit your application. Please try again.');
+      setTrackingError(err instanceof Error ? err.message : 'Unable to submit your application. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -180,12 +178,6 @@ export const ApplyPage: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <>
-              {applicationError && (
-                <div className="mb-5 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs">
-                  {applicationError}
-                </div>
-              )}
               <form onSubmit={handleApplySubmit} className="space-y-8">
                 
                 {/* Visual Application Journey Step Indicator */}
@@ -357,7 +349,6 @@ export const ApplyPage: React.FC = () => {
                 </div>
 
               </form>
-              </>
             )
           ) : (
             /* Tracking Tab */

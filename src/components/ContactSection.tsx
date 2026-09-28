@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { MapPin, Phone, MessageSquare, Send, CheckCircle2, Clock } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { ServiceType } from '../types';
-import { submitContact } from '../lib/publicApi';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -15,22 +14,15 @@ export const ContactSection: React.FC = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-  const [reference, setReference] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError('');
-    try {
-      const result = await submitContact(formData);
-      setReference(result.reference);
-      setIsSubmitted(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to send your inquiry. Please try again.');
-    } finally {
+    
+    setTimeout(() => {
       setIsSubmitting(false);
-    }
+      setIsSubmitted(true);
+    }, 600);
   };
 
   const getWhatsAppMessageUrl = () => {
@@ -148,7 +140,6 @@ export const ContactSection: React.FC = () => {
                   Inquiry Received Successfully
                 </h3>
                 <p className="text-xs sm:text-sm text-[#17202A]/75 max-w-md mx-auto leading-relaxed">
-                  Reference: <span className="font-mono font-bold text-[#e7020b]">{reference}</span><br />
                   Thank you for reaching out to Emunahh-Invest Limited. An assigned investment or credit officer 
                   will review your message and contact you via telephone or WhatsApp.
                 </p>
@@ -165,7 +156,6 @@ export const ContactSection: React.FC = () => {
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
-                      setReference('');
                       setFormData({
                         name: '',
                         phone: '',
@@ -181,8 +171,6 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <>
-              {error && <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs">{error}</div>}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-1">
                   <h3 className="text-base sm:text-lg font-bold text-[#0d0a64]">
@@ -248,9 +236,9 @@ export const ContactSection: React.FC = () => {
                     >
                       <option value="student_loan">Student Loans / Tuition Financing</option>
                       <option value="investment">Investment Services & Wealth Management</option>
-                      <option value="business_financing">Business Financing & SME Working Capital</option>
-                      <option value="personal_finance">Personal Financial Solutions</option>
-                      <option value="other_services">Other Financial Services & Advisory</option>
+                      <option value="business">Business Financing & SME Working Capital</option>
+                      <option value="personal">Personal Financial Solutions</option>
+                      <option value="other">Other Financial Services & Advisory</option>
                     </select>
                   </div>
                 </div>
@@ -296,7 +284,6 @@ export const ContactSection: React.FC = () => {
                   </a>
                 </div>
               </form>
-              </>
             )}
           </div>
 
