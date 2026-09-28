@@ -3,8 +3,8 @@ import { supabase } from './supabase';
 export function applicationType(service:string){
  if(service==='student_loan') return 'student_financing';
  if(service==='investment') return 'investment';
- if(service==='business_financing') return 'business_financing';
- if(service==='personal_finance') return 'personal_finance';
+ if(service==='business_financing' || service==='business') return 'business_financing';
+ if(service==='personal_finance' || service==='personal') return 'personal_finance';
  return 'general_enquiry';
 }
 export function makeReference(prefix='EMU'){

@@ -238,9 +238,9 @@ export const ContactPage: React.FC = () => {
                       >
                         <option value="student_loan">Student Loans / Tuition Financing</option>
                         <option value="investment">Investment Services & Wealth Management</option>
-                        <option value="business">Business Financing & SME Commercial Credit</option>
-                        <option value="personal">Personal Financial Solutions</option>
-                        <option value="other">Other Financial Advisory</option>
+                        <option value="business_financing">Business Financing & SME Commercial Credit</option>
+                        <option value="personal_finance">Personal Financial Solutions</option>
+                        <option value="other_services">Other Financial Advisory</option>
                       </select>
                     </div>
                   </div>

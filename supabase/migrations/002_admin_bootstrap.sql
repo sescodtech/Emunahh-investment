@@ -43,3 +43,6 @@ begin
   return target_id;
 end;
 $$;
+
+-- Never expose the bootstrap helper to browser roles. Run it from Supabase SQL Editor/service role only.
+revoke all on function public.bootstrap_admin(text) from public, anon, authenticated;

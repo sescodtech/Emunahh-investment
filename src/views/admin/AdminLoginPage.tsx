@@ -27,7 +27,7 @@ export const AdminLoginPage: React.FC = () => {
     }
 
     if (!isSupabaseConfigured()) {
-      setError('Supabase authentication is not configured. Add the VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY environment variables.');
+      setError('Supabase authentication is not configured. In Vercel, add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY, then redeploy. Legacy NEXT_PUBLIC_* names are also supported temporarily.');
       return;
     }
 
