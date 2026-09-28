@@ -229,28 +229,53 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const fetchDynamicData = async () => {
     try {
       setIsLoading(true);
-      const [contentRes, servicesRes, settingsRes, pagesRes, sectionsRes] = await Promise.all([
-        supabase.from('site_content').select('content').eq('id',1).maybeSingle(),
-        supabase.from('services').select('id,slug,title,category,tagline,description,bullets,image_url,is_published,display_order').eq('is_published',true).order('display_order'),
-        supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url').eq('id',1).maybeSingle(),
+      const [contentRes, servicesRes, settingsRes] = await Promise.allSettled([
+        fetch('/api/content'),
+        fetch('/api/services'),
+        fetch('/api/settings'),
+      ]);
+
+      if (contentRes.status === 'fulfilled' && contentRes.value.ok) {
+        const data = await contentRes.value.json();
+        if (data.content) {
+          setContent((prev) => ({
+            ...prev,
+            ...data.content,
+            hero: {
+              ...prev.hero,
+              ...data.content.hero,
+              // Fallback to bundled image if imageUrl is empty or invalid
+              imageUrl: data.content.hero?.imageUrl || heroDefaultImage,
+            },
+          }));
+        }
+      }
+
+      if (servicesRes.status === 'fulfilled' && servicesRes.value.ok) {
+        const data = await servicesRes.value.json();
+        if (data.services && Array.isArray(data.services) && data.services.length > 0) {
+          setServices(data.services);
+        }
+      }
+
+      const [pagesRes, sectionsRes] = await Promise.all([
         supabase.from('cms_pages').select('*').eq('status','published').order('title'),
         supabase.from('cms_sections').select('*').eq('is_enabled',true).order('display_order'),
       ]);
-      if (!contentRes.error && contentRes.data?.content) {
-        const data:any = contentRes.data.content;
-        setContent(prev => ({...prev,...data,hero:{...prev.hero,...data.hero,imageUrl:data.hero?.imageUrl||heroDefaultImage.src}}));
+      if (!pagesRes.error) setCmsPages(pagesRes.data || []);
+      if (!sectionsRes.error) setCmsSections(sectionsRes.data || []);
+
+      if (settingsRes.status === 'fulfilled' && settingsRes.value.ok) {
+        const data = await settingsRes.value.json();
+        if (data) {
+          setSettings((prev) => ({ ...prev, ...data }));
+        }
       }
-      if (!servicesRes.error && servicesRes.data?.length) {
-        setServices(servicesRes.data.map((s:any)=>({...s,imageUrl:s.image_url,isPublished:s.is_published,order:s.display_order})));
-      }
-      if (!pagesRes?.error) setCmsPages(pagesRes?.data || []);
-      if (!sectionsRes?.error) setCmsSections(sectionsRes?.data || []);
-      if (!settingsRes.error && settingsRes.data) {
-        const s:any=settingsRes.data;
-        setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||''}));
-      }
-    } catch (err) { console.warn('Using bundled default content:', err); }
-    finally { setIsLoading(false); }
+    } catch (err) {
+      console.warn('Using bundled default content:', err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
