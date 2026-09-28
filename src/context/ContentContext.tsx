@@ -223,10 +223,11 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
   const fetchDynamicData = async () => {
     try {
       setIsLoading(true);
-      const [contentRes, servicesRes, settingsRes] = await Promise.all([
+      const [contentRes, servicesRes, settingsRes, cmsRes] = await Promise.all([
         supabase.from('site_content').select('content').eq('id',1).maybeSingle(),
         supabase.from('services').select('id,slug,title,category,tagline,description,bullets,image_url,is_published,display_order').eq('is_published',true).order('display_order'),
         supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url').eq('id',1).maybeSingle(),
+        supabase.from('cms_pages').select('slug,status,cms_sections(section_key,content,is_enabled,display_order)').eq('status','published').order('display_order',{foreignTable:'cms_sections'}),
       ]);
       if (!contentRes.error && contentRes.data?.content) {
         const data:any = contentRes.data.content;
@@ -238,6 +239,19 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       if (!settingsRes.error && settingsRes.data) {
         const s:any=settingsRes.data;
         setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||''}));
+      }
+      if (!cmsRes.error && cmsRes.data) {
+        const pages:any = cmsRes.data;
+        const home:any = pages.find((p:any)=>p.slug==='home');
+        const sections:any = Object.fromEntries((home?.cms_sections||[]).filter((s:any)=>s.is_enabled!==false).map((s:any)=>[s.section_key,s.content||{}]));
+        const contactPage:any = pages.find((p:any)=>p.slug==='contact');
+        const contactSections:any = Object.fromEntries((contactPage?.cms_sections||[]).filter((s:any)=>s.is_enabled!==false).map((s:any)=>[s.section_key,s.content||{}]));
+        setContent(prev=>({
+          ...prev,
+          hero:{...prev.hero,...(sections.hero||{}),imageUrl:sections.hero?.imageUrl||sections.hero?.image_url||prev.hero.imageUrl},
+          about:{...prev.about,...(sections.about||{})},
+          contact:{...prev.contact,...(contactSections.contact||{})},
+        }));
       }
     } catch (err) { console.warn('Using bundled default content:', err); }
     finally { setIsLoading(false); }
