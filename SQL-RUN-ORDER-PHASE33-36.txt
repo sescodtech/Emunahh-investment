@@ -1,0 +1,29 @@
+EMUNAHH-INVEST — FINAL SQL RUN ORDER
+
+If migrations 001–005 have ALREADY been run successfully, do NOT rerun them just because this source ZIP is being deployed.
+Run only the new migrations that have not already been executed.
+
+For a fresh Supabase database:
+001_initial_schema.sql
+002_admin_bootstrap.sql
+003_cms_rbac_v2.sql
+004_full_visual_cms.sql
+005_global_cms.sql
+006_phase33_security_hardening.sql
+007_phase34_performance.sql
+008_phase35_testing_readiness.sql
+
+For your existing database where 001–005 were already completed:
+006_phase33_security_hardening.sql
+007_phase34_performance.sql
+008_phase35_testing_readiness.sql
+
+Phase 36 is the production release/verification phase and has no additional destructive SQL.
+
+IMPORTANT:
+- Do NOT drop CMS tables.
+- Do NOT delete existing page/section/service/application/contact data.
+- Do NOT run a database reset.
+- Do NOT put SUPABASE_SERVICE_ROLE_KEY in a VITE_* environment variable.
+- VITE_SUPABASE_PUBLISHABLE_KEY is the browser key.
+- Service-role/Resend secrets belong only in Supabase Edge Functions/server-side secrets.

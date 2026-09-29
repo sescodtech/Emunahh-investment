@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ShieldCheck, Lock, Mail, Eye, EyeOff, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Logo } from '../../components/Logo';
 import { isSupabaseConfigured, sendPasswordReset, signIn } from '../../lib/supabaseAuth';
+import { safeInternalPath } from '../../security/runtime';
 
 export const AdminLoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ export const AdminLoginPage: React.FC = () => {
   const [resetEmail, setResetEmail] = useState('');
 
   const navigate = useNavigate();
+  const returnTo = safeInternalPath(new URLSearchParams(window.location.search).get('returnTo') || '/admin', '/admin');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +36,7 @@ export const AdminLoginPage: React.FC = () => {
     try {
       setIsLoading(true);
       await signIn(email, password);
-      navigate('/admin', { replace: true });
+      navigate(returnTo, { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to authenticate this administrator account.');
     } finally {

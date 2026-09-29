@@ -10,7 +10,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenApply }) => {
-  const { settings } = useContent();
+  const { settings, cmsPages, cmsSections } = useContent() as any;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -33,15 +33,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenApply }) => {
     return location.pathname.startsWith(path);
   };
 
-  const navLinks = [
-    { label: 'HOME', to: '/' },
-    { label: 'ABOUT', to: '/about' },
-    { label: 'SOLUTIONS', to: '/#solutions', isHash: true },
-    { label: 'STUDENT LOANS', to: '/student-loans' },
-    { label: 'INVESTMENTS', to: '/investments' },
-    { label: 'RESOURCES', to: '/blog' },
-    { label: 'CONTACT', to: '/contact' },
-  ];
+  const globalPage = cmsPages?.find((p:any)=>p.slug==='global');
+  const headerSection = cmsSections?.find((s:any)=>s.page_id===globalPage?.id && s.section_key==='header');
+  const navLinks = (headerSection?.content?.links?.length ? headerSection.content.links : [
+    { label: 'Home', href: '/' }, { label: 'About', href: '/about' }, { label: 'Services', href: '/services' },
+    { label: 'Insights', href: '/blog' }, { label: 'Contact', href: '/contact' }
+  ]).map((x:any)=>({label:String(x.label).toUpperCase(),to:x.href}));
 
   return (
     <header
@@ -64,33 +61,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenApply }) => {
 
         {/* Corporate Financial Navigation */}
         <nav className="hidden lg:flex items-center gap-7 text-[12px] font-bold text-[#17202A] tracking-[0.04em]">
-          {navLinks.map((link) => {
-            const active = !link.isHash && isActive(link.to);
-            if (link.isHash) {
-              return (
-                <a
-                  key={link.label}
-                  href={link.to}
-                  className="transition-colors hover:text-[#e7020b] py-1 text-[#17202A]/85 hover:text-[#e7020b]"
-                >
-                  {link.label}
-                </a>
-              );
-            }
-            return (
-              <Link
-                key={link.label}
-                to={link.to}
-                className={`relative py-1 transition-colors ${
-                  active ? 'text-[#e7020b]' : 'text-[#17202A]/85 hover:text-[#e7020b]'
-                }`}
-              >
-                <span>{link.label}</span>
-                {active && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#e7020b] rounded-full" />
-                )}
-              </Link>
-            );
+          {navLinks.map((link:any) => {
+            const active = isActive(link.to);
+            return <Link key={link.label} to={link.to} className={`relative py-1 transition-colors ${active?'text-[#e7020b]':'text-[#17202A]/85 hover:text-[#e7020b]'}`}><span>{link.label}</span>{active&&<span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#e7020b] rounded-full"/>}</Link>;
           })}
         </nav>
 
@@ -100,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenApply }) => {
             to="/apply"
             className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] active:scale-[0.98] rounded-md transition-all shadow-xs group cursor-pointer"
           >
-            <span>GET STARTED</span>
+            <span>{headerSection?.content?.ctaLabel || 'GET STARTED'}</span>
             <ArrowUpRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
 
@@ -120,55 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenApply }) => {
       {isMobileMenuOpen && (
         <div className="lg:hidden border-b border-[#0d0a64]/10 bg-white px-5 py-4 space-y-3 shadow-lg animate-in fade-in slide-in-from-top-2 duration-150">
           <nav className="flex flex-col space-y-1 text-xs font-bold text-[#17202A]">
-            <Link
-              to="/"
-              className={`p-2.5 rounded-md transition-colors ${isActive('/') ? 'bg-[#e7020b]/10 text-[#e7020b]' : 'hover:bg-gray-50'}`}
-            >
-              HOME
-            </Link>
-            <Link
-              to="/about"
-              className={`p-2.5 rounded-md transition-colors ${isActive('/about') ? 'bg-[#e7020b]/10 text-[#e7020b]' : 'hover:bg-gray-50'}`}
-            >
-              ABOUT
-            </Link>
-            <a
-              href="/#solutions"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2.5 rounded-md hover:bg-gray-50 transition-colors"
-            >
-              SOLUTIONS
-            </a>
-            <Link
-              to="/student-loans"
-              className={`p-2.5 rounded-md transition-colors ${isActive('/student-loans') ? 'bg-[#e7020b]/10 text-[#e7020b]' : 'hover:bg-gray-50'}`}
-            >
-              STUDENT LOANS
-            </Link>
-            <Link
-              to="/investments"
-              className={`p-2.5 rounded-md transition-colors ${isActive('/investments') ? 'bg-[#e7020b]/10 text-[#e7020b]' : 'hover:bg-gray-50'}`}
-            >
-              INVESTMENTS
-            </Link>
-            <Link
-              to="/business-financing"
-              className={`p-2.5 rounded-md transition-colors ${isActive('/business-financing') ? 'bg-[#e7020b]/10 text-[#e7020b]' : 'hover:bg-gray-50'}`}
-            >
-              BUSINESS FINANCING
-            </Link>
-            <Link
-              to="/blog"
-              className={`p-2.5 rounded-md transition-colors ${isActive('/blog') ? 'bg-[#e7020b]/10 text-[#e7020b]' : 'hover:bg-gray-50'}`}
-            >
-              RESOURCES
-            </Link>
-            <Link
-              to="/contact"
-              className={`p-2.5 rounded-md transition-colors ${isActive('/contact') ? 'bg-[#e7020b]/10 text-[#e7020b]' : 'hover:bg-gray-50'}`}
-            >
-              CONTACT
-            </Link>
+            {navLinks.map((link:any)=><Link key={link.label} to={link.to} onClick={()=>setIsMobileMenuOpen(false)} className={`p-2.5 rounded-md transition-colors ${isActive(link.to)?'bg-[#e7020b]/10 text-[#e7020b]':'hover:bg-gray-50'}`}>{link.label}</Link>)}
           </nav>
 
           <div className="pt-2 border-t border-[#0d0a64]/8 space-y-2">
@@ -177,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenApply }) => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="w-full flex items-center justify-center px-4 py-3 text-xs font-bold text-white bg-[#e7020b] hover:bg-[#a3140a] rounded-md shadow-xs transition-colors"
             >
-              <span>GET STARTED</span>
+              <span>{headerSection?.content?.ctaLabel || 'GET STARTED'}</span>
               <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
             </Link>
             <div className="text-center pt-1">
