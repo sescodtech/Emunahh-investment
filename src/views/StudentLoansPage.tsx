@@ -10,9 +10,9 @@ interface StudentLoansPageProps {
 export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply }) => {
   const eligibleInstitutions = [
     { title: 'Federal Universities', desc: 'UNILAG, UI, OAU, UNN, ABU, FUTA, UNILORIN & other federal tertiary campuses.' },
-    { title: 'State Tertiary Institutions', desc: 'LASU, EKSU, OOU, KWASU, and accredited state universities and polytechnics.' },
+    { title: 'State Tertiary Institutions', desc: 'accredited universities, colleges and professional institutions.' },
     { title: 'Accredited Private Universities', desc: 'Covenant, Babcock, Bowen, Landmark, Pan-Atlantic, and licensed private institutions.' },
-    { title: 'Professional Examinations', desc: 'Nigerian Law School, ICAN, ACCA, CIBN, CITN, and medical board certifications.' },
+    { title: 'Professional Examinations', desc: 'professional certification and examination programmes.' },
   ];
 
   const repaymentOptions = [
@@ -56,7 +56,7 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
             </h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               We ensure tuition deadlines never compromise academic potential. 
-              Emunahh-Invest provides direct-to-institution tuition funding for Nigerian 
+              Emunahh-Invest provides structured tuition funding for eligible 
               undergraduates, postgraduates, and professional candidates.
             </p>
 
@@ -153,7 +153,7 @@ export const StudentLoansPage: React.FC<StudentLoansPageProps> = ({ onOpenApply 
                 Programs & Institutions Covered
               </h2>
               <p className="text-xs sm:text-sm text-gray-600">
-                Financing tailored to the entire Nigerian educational spectrum.
+                Financing tailored to eligible education and professional-development needs.
               </p>
             </div>
 

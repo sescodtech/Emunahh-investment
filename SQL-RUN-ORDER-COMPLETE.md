@@ -34,6 +34,7 @@ This is the cumulative database build for the Vite/React application.
 028_phase33_security_hardening.sql
 029_phase34_performance.sql
 030_phase35_testing_readiness.sql
+031_final_brand_navigation_services.sql
 
 ## Phases 27–32
 Those phases were primarily application/UI/routing/mobile/SEO/form implementation and do not have separate database migrations in the preserved phase package. Their frontend implementation is already included in the source tree.
@@ -47,3 +48,6 @@ Phase 36 is final production integration/verification. It does not introduce a d
 - Do not run only the last few SQL files on a fresh database.
 - Do not delete/drop the CMS or application tables before running this sequence.
 - Do not put SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, or Cloudinary API secrets in VITE_* variables.
+
+### Final correction migration
+`031_final_brand_navigation_services.sql` reconciles the public navigation, Services catalogue, global footer, home CMS copy and international-facing wording without deleting application records.

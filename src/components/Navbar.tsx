@@ -35,10 +35,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenApply }) => {
 
   const globalPage = cmsPages?.find((p:any)=>p.slug==='global');
   const headerSection = cmsSections?.find((s:any)=>s.page_id===globalPage?.id && s.section_key==='header');
-  const navLinks = (headerSection?.content?.links?.length ? headerSection.content.links : [
-    { label: 'Home', href: '/' }, { label: 'About', href: '/about' }, { label: 'Services', href: '/services' },
-    { label: 'Insights', href: '/blog' }, { label: 'Contact', href: '/contact' }
-  ]).map((x:any)=>({label:String(x.label).toUpperCase(),to:x.href}));
+  const allowedNav = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Services', href: '/services' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' },
+  ];
+  const configuredLinks = Array.isArray(headerSection?.content?.links) ? headerSection.content.links : [];
+  const navLinks = allowedNav.map((item) => {
+    const configured = configuredLinks.find((x:any) => x?.href === item.href);
+    return { label: String(configured?.label || item.label).toUpperCase(), to: item.href };
+  });
 
   return (
     <header

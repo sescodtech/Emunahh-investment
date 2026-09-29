@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
-import heroDefaultImage from '../assets/images/nigerian_businesswoman_hero_1790205199974.webp';
-import graduateDefaultImage from '../assets/images/nigerian_graduate_success_1790142702336.webp';
+import heroDefaultImage from '../assets/images/nigerian_professional_hero_1790151218863.webp';
+import graduateDefaultImage from '../assets/images/student_education_loan_1790141403913.webp';
 import meetingDefaultImage from '../assets/images/african_investment_meeting_1790151240660.webp';
 
 export interface SiteContent {
@@ -75,36 +75,36 @@ export interface SiteSettings {
 const defaultContent: SiteContent = {
   hero: {
     eyebrow: 'EMUNAHH-INVEST LIMITED',
-    heading: 'Financial Solutions Designed for Your Next Chapter.',
-    highlightWord: 'Next Chapter.',
-    description: 'Practical financial solutions designed to support students, individuals and businesses in achieving meaningful financial goals.',
-    primaryCta: 'EXPLORE OUR SOLUTIONS',
-    secondaryCta: 'GET STARTED',
+    heading: 'Structured Finance for What Comes Next.',
+    highlightWord: 'What Comes Next.',
+    description: 'Professional financial and investment solutions for individuals, families, professionals and businesses, built around clear objectives, responsible structures and dependable support.',
+    primaryCta: 'EXPLORE SERVICES',
+    secondaryCta: 'START AN ENQUIRY',
     imageUrl: heroDefaultImage.src,
   },
   about: {
-    title: 'CORPORATE HERITAGE & DISCIPLINE',
-    headline: 'An Established Financial Institution Founded on Integrity and Accessibility',
-    intro: 'Emunahh-Invest Limited is a registered Nigerian financial and investment company headquartered in Lagos. Founded on the core conviction that finance should be clear, accountable, and accessible, we bridge critical funding gaps for students, disciplined professionals, and growing commercial enterprises.',
-    secondaryIntro: 'Unlike speculative operations or predatory instant-app lenders, we provide human-centered, structured facilities with legally executed terms, direct institutional settlements, and transparent repayment schedules.',
-    mission: 'To deliver transparent, dependable education financing and disciplined wealth solutions that accelerate academic excellence and commercial progress across Nigeria.',
-    vision: 'To be recognized across Nigeria as the premier trusted private finance house, distinguished by transformative education loans and sound commercial support.',
+    title: 'ABOUT EMUNAHH-INVEST',
+    headline: 'A professional financial partner built around clarity and trust.',
+    intro: 'Emunahh-Invest Limited provides structured financial and investment solutions for clients navigating important personal, educational, commercial and investment decisions.',
+    secondaryIntro: 'Our approach combines clear communication, responsible assessment, documented terms and practical support from enquiry through completion.',
+    mission: 'To provide dependable financial solutions that help clients make progress with confidence.',
+    vision: 'To be a trusted international-facing financial and investment company known for professional service, responsible structures and clear communication.',
     values: [
-      { title: 'Transparency', desc: 'Every repayment schedule and contractual covenant is formalized in clear terms with zero hidden fees.' },
-      { title: 'Professionalism', desc: 'Rigorous institutional underwriting standards and capital preservation disciplines across all portfolios.' },
-      { title: 'Accessibility', desc: 'Direct-to-institution disbursements and responsive advisory support designed to serve real-world timelines.' },
-      { title: 'Customer Focus', desc: 'Long-term partnership built around student academic matriculation, personal stability, and enterprise growth.' },
+      { title: 'Clarity', desc: 'Important requirements, terms and next steps are explained clearly.' },
+      { title: 'Professionalism', desc: 'Every engagement is handled with structure, care and accountability.' },
+      { title: 'Responsibility', desc: 'Solutions are assessed around genuine needs, suitability and documented obligations.' },
+      { title: 'Client Focus', desc: 'We build practical relationships around each client’s objectives and timeline.' },
     ],
   },
   investment: {
-    heading: 'GROW WITH PURPOSE.',
-    tagline: 'Capital Preservation Mandate',
-    description: 'Structured wealth allocation designed for corporate treasuries, Nigerian professionals, and diaspora investors seeking reliable home-country deployment without speculative volatility.',
+    heading: 'INVEST WITH PURPOSE.',
+    tagline: 'Structured Investment Solutions',
+    description: 'Investment opportunities and advisory support designed around defined objectives, time horizons and responsible decision-making.',
   },
   studentLoans: {
-    heading: 'YOUR EDUCATION IS AN INVESTMENT IN YOUR FUTURE.',
-    tagline: 'Tuition Protection Facility',
-    description: 'Direct institutional tuition remittance for accredited Nigerian universities, postgraduate programs, and professional exam bodies—ensuring studies continue without disruption.',
+    heading: 'FUND THE NEXT STAGE OF YOUR EDUCATION.',
+    tagline: 'Education Financing',
+    description: 'Structured education financing for eligible students, families and sponsors, with clear documentation and repayment expectations.',
   },
   contact: {
     officeAddress: '33, Crossway Plaza, Beside UBA, 3/5 Charity Road, New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.',
@@ -117,74 +117,16 @@ const defaultContent: SiteContent = {
     socialLinkedIn: 'https://linkedin.com/company/emunahh-invest',
   },
   footer: {
-    statement: 'Emunahh-Invest Limited is an incorporated financial and investment company in the Federal Republic of Nigeria, dedicated to ethical credit, student advancement, and sound asset deployment.',
+    statement: 'Emunahh-Invest Limited provides structured financial and investment solutions with professional service, clear communication and responsible execution.',
   },
 };
 
 const defaultServices: ServiceRecord[] = [
-  {
-    id: 'srv-1',
-    slug: 'student-loans',
-    title: 'Student Loans / Education Financing',
-    category: 'featured',
-    tagline: 'Direct Tuition Support for Nigerian Scholars',
-    description: 'Structured tuition financing remitted directly to accredited tertiary institutions, law schools, and professional exam bodies with predictable sponsor amortization.',
-    bullets: [
-      'Direct institutional tuition remittance to school bank accounts',
-      'Predictable monthly sponsor amortizations with grace periods',
-      'Coverage across accredited federal, state, and private universities',
-      'Applicable for Nigerian Law School, ICAN, and postgraduate courses',
-    ],
-    imageUrl: graduateDefaultImage.src,
-    isPublished: true,
-    order: 1,
-  },
-  {
-    id: 'srv-2',
-    slug: 'investments',
-    title: 'Investment Services',
-    category: 'supporting',
-    tagline: 'Capital Preservation & Wealth Advisory',
-    description: 'Disciplined wealth placements anchored on real-economy productive assets, formalized legal contracts, and zero speculative crypto or forex exposure.',
-    bullets: [
-      'Principal protection mandate on productive commercial assets',
-      'Goal-aligned tenures (6, 12, and 24-month horizon placements)',
-      'Fully formalized legal contracts and regulatory governance',
-    ],
-    imageUrl: meetingDefaultImage.src,
-    isPublished: true,
-    order: 2,
-  },
-  {
-    id: 'srv-3',
-    slug: 'business-financing',
-    title: 'Business Financing',
-    category: 'supporting',
-    tagline: 'Working Capital for Verified Enterprises',
-    description: 'Commercial credit underwritten on verifiable bank statement turnover and inventory velocity rather than prohibitive property collateral.',
-    bullets: [
-      'Merchant inventory restocking and supply cycle financing',
-      'Revolving operational working capital for established SMEs',
-      'Practical underwriting based on verifiable commercial flow',
-    ],
-    isPublished: true,
-    order: 3,
-  },
-  {
-    id: 'srv-4',
-    slug: 'personal-finance',
-    title: 'Personal Financial Solutions',
-    category: 'supporting',
-    tagline: 'Salary-Backed Liquidity Lines',
-    description: 'Transparent personal facilities engineered for verified corporate professionals to meet milestone commitments without compounding surprises.',
-    bullets: [
-      'Salary-backed liquidity lines for verified employees',
-      'Transparent milestone repayment schedules in plain terms',
-      'No invasive automated data scraping or arbitrary charges',
-    ],
-    isPublished: true,
-    order: 4,
-  },
+  { id:'srv-1', slug:'education-financing', title:'Education Financing', category:'featured', tagline:'Structured support for education costs', description:'Financing designed around eligible tuition and education-related obligations, with clear documentation and structured repayment.', bullets:['Education and tuition-related funding','Clear application and documentation process','Structured repayment expectations','Support from enquiry through completion'], imageUrl:graduateDefaultImage.src, isPublished:true, order:1 },
+  { id:'srv-2', slug:'travel-financing', title:'Travel Financing', category:'supporting', tagline:'Funding for approved travel plans', description:'Structured financing for eligible travel-related expenses, subject to assessment, documentation and approval.', bullets:['Travel and trip-related expenses','Clear eligibility and documentation','Defined repayment structure','Professional application support'], imageUrl:meetingDefaultImage.src, isPublished:true, order:2 },
+  { id:'srv-3', slug:'business-financing', title:'Business Financing', category:'supporting', tagline:'Working capital for growing businesses', description:'Practical financing for verified businesses and commercial operators that need support for working capital and growth.', bullets:['Working-capital support','Inventory and operating needs','Business cash-flow assessment','Structured repayment terms'], imageUrl:'', isPublished:true, order:3 },
+  { id:'srv-4', slug:'personal-finance', title:'Personal Finance', category:'supporting', tagline:'Flexible funding for eligible individuals', description:'Responsible personal financing for eligible clients with clear terms, documentation and repayment expectations.', bullets:['Personal funding needs','Transparent terms','Defined repayment schedules','Human support throughout the process'], imageUrl:heroDefaultImage.src, isPublished:true, order:4 },
+  { id:'srv-5', slug:'investment-services', title:'Investment Services', category:'supporting', tagline:'Structured investment and wealth solutions', description:'Investment solutions designed around objectives, time horizons, documented terms and responsible decision-making.', bullets:['Goal-aligned investment structures','Defined horizons and terms','Professional communication','Ongoing relationship support'], imageUrl:meetingDefaultImage.src, isPublished:true, order:5 },
 ];
 
 const defaultSettings: SiteSettings = {

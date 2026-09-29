@@ -4,8 +4,7 @@ import { ArrowUpRight, ArrowDown, ChevronRight, ShieldCheck } from 'lucide-react
 import { motion } from 'motion/react';
 import { useContent } from '../context/ContentContext';
 import { ServiceType } from '../types';
-import { SparklesCore } from './ui/sparkles';
-import defaultHeroImg from '../assets/images/nigerian_businesswoman_hero_1790205199974.webp';
+import defaultHeroImg from '../assets/images/nigerian_professional_hero_1790151218863.webp';
 
 interface HeroProps {
   onOpenApply: (service?: ServiceType) => void;
@@ -19,28 +18,28 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
 
   const categoryCards = {
     student: {
-      title: 'Student Education Financing',
+      title: 'Education Financing',
       desc: 'Tuition and academic clearance remitted directly to accredited institutions.',
       path: '/student-loans',
-      cta: 'Apply for Student Loan',
+      cta: 'Apply for this service',
     },
     investment: {
-      title: 'Wealth & Capital Preservation',
+      title: 'Investment Services',
       desc: 'Structured placements backed by productive real assets with legal covenants.',
       path: '/investments',
-      cta: 'Inquire on Placements',
+      cta: 'Start an enquiry',
     },
     business: {
-      title: 'Commercial Enterprise Credit',
+      title: 'Business Financing',
       desc: 'Working capital underwritten on verified commercial velocity and turnover.',
       path: '/business-financing',
-      cta: 'Explore SME Credit',
+      cta: 'Apply for this service',
     },
     personal: {
-      title: 'Personal Liquidity Lines',
+      title: 'Personal Finance',
       desc: 'Salary-backed facilities for verified professionals with predictable terms.',
       path: '/personal-finance',
-      cta: 'Personal Facility Terms',
+      cta: 'Apply for this service',
     },
   };
 
@@ -49,23 +48,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
   return (
     <section className="relative bg-[#e3fff2] text-[#17202A] pt-10 pb-14 lg:pt-14 lg:pb-18 border-b border-[#0d0a64]/10 overflow-hidden">
       
-      {/* Subtle Financial Sparkles / Particle Layer: Warm Off-White Ambient */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-40">
-        <SparklesCore
-          id="herosparkles"
-          background="transparent"
-          minSize={0.5}
-          maxSize={1.2}
-          particleDensity={18}
-          particleColors={['#e7020b', '#e3fff2', '#0d0a64']}
-          speed={0.4}
-          className="w-full h-full"
-        />
-      </div>
-
-      {/* Subtle Background Architectural Linework */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#0d0a64_1px,transparent_1px)] [background-size:24px_24px] z-0" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Editorial Eyebrow with Subtle Gold/Navy Line */}
@@ -94,10 +76,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
               transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
               className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold text-[#0d0a64] tracking-[-0.035em] leading-[1.12]"
             >
-              Financial Solutions<br />
-              Designed for Your<br />
+              {heroData.heading.split(heroData.highlightWord)[0]}
               <span className="text-[#e7020b] inline-block font-extrabold relative">
-                Next Chapter.
+                {heroData.highlightWord}
                 {/* Subtle under-accent line in subtle gold */}
                 <span className="absolute -bottom-1.5 left-0 w-full h-[3px] bg-[#e3fff2]/70 rounded-full" />
               </span>
@@ -161,7 +142,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
                         : 'bg-white text-[#17202A] border-[#0d0a64]/15 hover:border-[#e7020b]/40'
                     }`}
                   >
-                    <span className="capitalize">{cat === 'student' ? 'Student Loans' : cat}</span>
+                    <span className="capitalize">{cat === 'student' ? 'Education' : cat === 'investment' ? 'Investment' : cat === 'business' ? 'Business' : 'Personal'}</span>
                   </button>
                 ))}
               </div>
@@ -189,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
 
           </div>
 
-          {/* RIGHT: Professional Nigerian Businesswoman in Corporate Financial Setting (5 cols) */}
+          {/* RIGHT: Professional financial advisory setting (5 cols) */}
           <div className="lg:col-span-5">
             <motion.div 
               initial={{ opacity: 0, scale: 0.98 }}
@@ -204,9 +185,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
               <div className="relative rounded-xl overflow-hidden border-2 border-[#0d0a64] bg-[#0d0a64] shadow-[0_16px_36px_-12px_rgba(7,26,43,0.25)]">
                 <img
                   src={currentImage}
-                  alt="Emunahh-Invest Limited Nigerian executive financial advisory in Lagos"
+                  alt="Emunahh-Invest professional financial advisory"
                   className="w-full h-[380px] sm:h-[440px] object-cover object-top transition-transform duration-700 hover:scale-[1.01]"
                   loading="eager"
+                  onError={(e)=>{ e.currentTarget.onerror=null; e.currentTarget.src=defaultHeroImg.src; }}
                 />
                 
                 {/* Clear, Non-Obstructive Lower Banner (Doesn't cover face) */}
@@ -214,10 +196,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#e3fff2]">
-                        Lagos Corporate Desk
+                        Professional Advisory Desk
                       </div>
                       <div className="text-xs sm:text-sm font-bold text-white tracking-tight">
-                        33, Crossway Plaza, New Oko Oba
+                        Emunahh-Invest Limited
                       </div>
                     </div>
                     <div className="h-7 w-7 rounded-md bg-[#e7020b] text-white flex items-center justify-center shrink-0">

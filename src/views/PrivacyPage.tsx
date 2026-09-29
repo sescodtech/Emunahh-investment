@@ -21,10 +21,10 @@ export const PrivacyPage: React.FC = () => {
             </h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               How Emunahh-Invest Limited collects, verifies, and safeguards the personal and financial data 
-              of Nigerian students, sponsors, investors, and business clients.
+              of clients, applicants, sponsors, investors, and business clients.
             </p>
             <div className="text-xs text-gray-500 pt-1">
-              Compliant with the Nigeria Data Protection Act (NDPA) and NDPR Guidelines
+              Handled in accordance with applicable data-protection requirements
             </div>
           </div>
         </div>
@@ -89,11 +89,11 @@ export const PrivacyPage: React.FC = () => {
               <h2 className="text-xl font-bold text-[#0d0a64]">2. How Your Data Is Used</h2>
               <p>Your information is used strictly to:</p>
               <ul className="space-y-2 pl-4 list-disc text-xs sm:text-sm">
-                <li>Verify matriculation status with Nigerian tertiary institutions and professional boards.</li>
+                <li>Verify submitted education or professional-enrolment information where required.</li>
                 <li>Conduct lawful credit underwriting and sponsor affordability assessment.</li>
                 <li>Directly disburse approved tuition fees to designated university bank accounts.</li>
                 <li>Execute binding legal contracts and provide quarterly wealth advisory reports.</li>
-                <li>Fulfill Nigerian statutory reporting obligations regarding anti-money laundering.</li>
+                <li>Fulfil applicable legal and regulatory reporting obligations.</li>
               </ul>
             </div>
 
@@ -102,14 +102,14 @@ export const PrivacyPage: React.FC = () => {
               <p>
                 All electronic and physical documents are protected by encrypted storage and strict access controls. 
                 Only authorized compliance officers and relationship managers at our Lagos headquarters have access to applicant dossiers. 
-                Data is retained only as long as required by Nigerian financial regulatory statutes.
+                Data is retained only as long as required by applicable financial and regulatory requirements.
               </p>
             </div>
 
             <div className="space-y-3">
               <h2 className="text-xl font-bold text-[#0d0a64]">4. Inquiries & Data Privacy Officer</h2>
               <p>
-                If you have questions about your personal data or wish to exercise your rights under the Nigeria Data Protection Act, 
+                If you have questions about your personal data or wish to exercise your rights under the applicable data-protection requirements, 
                 please contact:
               </p>
               <div className="p-5 rounded-xl bg-[#e3fff2] border border-gray-200 space-y-2 text-xs">

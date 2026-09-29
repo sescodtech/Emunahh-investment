@@ -17,14 +17,14 @@ export const TermsPage: React.FC = () => {
               <span>Terms of Service</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d0a64] tracking-tight leading-tight">
-              Terms of Service & Institutional Disclosures
+              Terms of Service
             </h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               Official operating conditions, credit agreements, educational remittance protocols, 
               and wealth advisory terms governing all transactions with Emunahh-Invest Limited.
             </p>
             <div className="text-xs text-gray-500 pt-1">
-              Effective Date: January 1, 2026 · Registered in Lagos, Federal Republic of Nigeria
+              Effective Date: January 1, 2026 · Operating from Lagos, Nigeria
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@ export const TermsPage: React.FC = () => {
             <div className="space-y-3 pb-8 border-b border-gray-200">
               <h2 className="text-xl font-bold text-[#0d0a64] flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-[#0d0a64]/10 text-[#0d0a64] text-xs flex items-center justify-center font-mono">1</span>
-                <span>Corporate Identity & Scope of Authority</span>
+                <span>Company and Service Scope</span>
               </h2>
               <p>
                 <strong>Emunahh-Invest Limited</strong> is a registered financial and investment company incorporated 
@@ -81,7 +81,7 @@ export const TermsPage: React.FC = () => {
             <div className="space-y-3 pb-8 border-b border-gray-200">
               <h2 className="text-xl font-bold text-[#0d0a64] flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-[#0d0a64]/10 text-[#0d0a64] text-xs flex items-center justify-center font-mono">2</span>
-                <span>Student Loans & Tuition Remittance Protocols</span>
+                <span>Education Financing</span>
               </h2>
               <p>
                 Our specialized education financing is designed to guarantee academic continuity. 
@@ -90,8 +90,8 @@ export const TermsPage: React.FC = () => {
               <ul className="space-y-2 pl-4 list-disc text-xs sm:text-sm">
                 <li>
                   <strong>Direct Remittance Mandate:</strong> Approved tuition capital is disbursed directly into 
-                  the designated bank account or verified Remita payment portal of the accredited Nigerian tertiary institution 
-                  or professional examination body (e.g., Nigerian Law School, ICAN, ACCA). Funds are not disbursed as unverified cash to applicants.
+                  the designated bank account or verified Remita payment portal of the accredited accredited institution 
+                  or professional examination body (e.g., professional institutions, ICAN, ACCA). Funds are not disbursed as unverified cash to applicants.
                 </li>
                 <li>
                   <strong>Documentation Accuracy:</strong> Applicants must present authentic, unaltered admission letters, 
@@ -171,7 +171,7 @@ export const TermsPage: React.FC = () => {
                 </li>
                 <li>
                   Any suspected identity theft, document forgery, or fraudulent activity will be immediately reported to appropriate 
-                  Nigerian law enforcement and financial intelligence authorities.
+                  relevant authorities where legally required.
                 </li>
               </ul>
             </div>

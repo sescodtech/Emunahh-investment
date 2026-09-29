@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUp, Phone, MapPin, MessageSquare, Clock, ShieldCheck } from 'lucide-react';
+import { ArrowUp, Phone, MapPin, MessageSquare, Clock } from 'lucide-react';
 import { Logo } from './Logo';
 import { useContent } from '../context/ContentContext';
 import { ServiceType } from '../types';
@@ -92,31 +92,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
                   About Emunahh-Invest
                 </Link>
               </li>
-              <li>
-                <a href="/#solutions" className="hover:text-white transition-colors">
-                  Solutions Overview
-                </a>
-              </li>
-              <li>
-                <Link to="/student-loans" className="hover:text-white transition-colors">
-                  Student Loans
-                </Link>
-              </li>
-              <li>
-                <Link to="/investments" className="hover:text-white transition-colors">
-                  Investments
-                </Link>
-              </li>
-              <li>
-                <Link to="/business-financing" className="hover:text-white transition-colors">
-                  Business Financing
-                </Link>
-              </li>
-              <li>
-                <Link to="/personal-finance" className="hover:text-white transition-colors">
-                  Personal Finance
-                </Link>
-              </li>
+              <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -126,21 +103,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
               {globalFooter.resourcesHeading || 'Resources'}
             </div>
             <ul className="space-y-2.5 text-xs">
-              <li>
-                <a href="/#faqs" className="hover:text-white transition-colors">
-                  FAQs & Verification
-                </a>
-              </li>
-              <li>
-                <Link to="/blog" className="hover:text-white transition-colors">
-                  Financial Insights
-                </Link>
-              </li>
-              <li>
-                <Link to="/apply" className="hover:text-[#e7020b] font-semibold transition-colors">
-                  Online Intake Portal
-                </Link>
-              </li>
+              <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link to="/apply" className="hover:text-white transition-colors">Start an enquiry</Link></li>
               <li>
                 <Link to="/privacy-policy" className="hover:text-white transition-colors">
                   Privacy Policy
@@ -157,7 +121,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
           {/* Column 4: Contact & Hours (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
-              {globalFooter.hoursHeading || 'Advisory Hours'}
+              Advisory Hours
             </div>
             <div className="space-y-2 text-xs text-white/70">
               <div className="flex items-start gap-1.5">
@@ -182,17 +146,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
             </div>
           </div>
 
-        </div>
-
-        {/* Regulatory Governance & Legal Statement */}
-        <div className="pt-8 pb-6 border-b border-white/10 space-y-2.5 text-[11px] text-white/50 leading-relaxed">
-          <div className="flex items-center gap-1.5 text-white/80 font-semibold uppercase tracking-wider text-[10px]">
-            <ShieldCheck className="w-4 h-4 text-[#e7020b]" />
-            <span>{globalFooter.governanceHeading || 'Institutional Governance & Disclosures'}</span>
-          </div>
-          <p>
-            {globalFooter.governance || 'Information on this website is general in nature. Applications and facilities are subject to verification, eligibility, formal documentation and approval.'}
-          </p>
         </div>
 
         {/* Bottom Credits & Back to Top */}

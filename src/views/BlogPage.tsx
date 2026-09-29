@@ -26,13 +26,13 @@ export const BlogPage: React.FC = () => {
       readTime: '5 min read',
       date: 'September 2026',
       author: 'Emunahh Academic Desk',
-      title: 'How to Navigate Student Loan Applications for Nigerian Universities and Professional Bodies',
+      title: 'How to Approach Education Financing Responsibly',
       excerpt:
-        'A comprehensive guide for Nigerian undergraduates, postgraduates, and professional candidates (ICAN, Law School) preparing documentation for institutional tuition financing.',
+        'A practical guide to understanding education-financing applications, documentation and repayment expectations.',
       content: [
-        'Higher education and professional certifications represent the highest-return investments an individual or family can make in Nigeria. However, university registration deadlines and examination fees frequently coincide with periods of tight household liquidity.',
+        'Education and professional development can require significant upfront funding at important moments. However, university registration deadlines and examination fees frequently coincide with periods of tight household liquidity.',
         'At Emunahh-Invest Limited, our student loan process is designed around institutional remittance. Unlike general cash credit, funds are paid straight to your school or examination body. This guarantees tuition clearance and protects students from academic disruption.',
-        'Key documentation needed for swift approval includes your official admission letter or active semester course registration, the school-issued payment schedule or remita invoice, valid Nigerian identification (NIN or Voter’s Card), and verified documentation of an employed or commercially active guarantor.',
+        'Useful documentation can include admission or enrolment evidence, an official fee invoice, identification and information that helps demonstrate repayment capacity.',
         'When planning your repayment horizon, always align milestone dates with your family sponsor’s cash flow cycles—whether monthly salary disbursement or quarterly commercial trade intervals.',
       ],
     },
@@ -42,13 +42,13 @@ export const BlogPage: React.FC = () => {
       readTime: '6 min read',
       date: 'August 2026',
       author: 'Emunahh Advisory Desk',
-      title: 'Capital Preservation in Nigeria: Structuring Prudent Wealth Against Inflation',
+      title: 'Capital Preservation: Building a Disciplined Investment Approach',
       excerpt:
-        'Why speculative get-rich-quick schemes fail Nigerian investors, and how disciplined, real-economy financial structuring safeguards purchasing power over time.',
+        'Why disciplined investment planning matters and how clear objectives, time horizons and responsible structures can protect long-term capital decisions.',
       content: [
-        'Managing capital in a high-inflation economic environment requires discipline over speculation. Too many individuals fall victim to unverified digital schemes promising improbable double-digit monthly returns, only to suffer catastrophic loss of principal.',
+        'Managing capital in an uncertain economic environment requires discipline over speculation. Too many individuals fall victim to unverified digital schemes promising improbable double-digit monthly returns, only to suffer catastrophic loss of principal.',
         'True wealth management begins with the inviolable principle of capital preservation: ensuring that the nominal principal is anchored in real-economy assets, verified corporate cash-flow, and legal transparency.',
-        'By staggering investment horizons into short-term liquidity buffers and medium-term asset-backed growth vehicles, investors in Lagos and nationwide maintain accessibility while shielding their hard-earned capital from currency erosion.',
+        'By staggering investment horizons into short-term liquidity buffers and medium-term asset-backed growth vehicles, investors maintain accessibility while shielding their hard-earned capital from currency erosion.',
         'Consulting an on-ground, accessible advisory team at a physical office provides legal recourse and transparent reporting that anonymous online platforms can never match.',
       ],
     },
@@ -62,7 +62,7 @@ export const BlogPage: React.FC = () => {
       excerpt:
         'Understanding how to match credit products with your commercial cash-flow cycle to avoid over-leveraging and maintain healthy supplier relationships.',
       content: [
-        'Nigerian retail merchants and service contractors frequently experience growth paradoxes: sales are surging, orders are booked, but cash is trapped in receivables or tied up in inventory replenishment.',
+        'Business owners and service operators frequently experience growth paradoxes: sales are surging, orders are booked, but cash is trapped in receivables or tied up in inventory replenishment.',
         'When evaluating debt financing, business operators must strictly distinguish between operational working capital (short-term cash to fulfill purchase orders or restock high-demand goods) and asset acquisition financing (long-term amortized capital to buy delivery vehicles, commercial generators, or specialized equipment).',
         'Financing seasonal inventory with a multi-year term creates unnecessary interest drag, while purchasing long-term machinery with short-term credit strains daily operations. Emunahh-Invest assesses real bank ledger turnover to match facility duration directly to your commercial cash-conversion cycle.',
       ],
@@ -77,7 +77,7 @@ export const BlogPage: React.FC = () => {
       excerpt:
         'What sponsors and working parents need to know about co-signing student loan facilities and scheduling monthly contributions.',
       content: [
-        'Sponsoring a child or relative through university in Nigeria is a badge of honor, but sudden economic shifts can make lump-sum tuition payments burdensome.',
+        'Supporting a child or relative through education is a badge of honor, but sudden economic shifts can make lump-sum tuition payments burdensome.',
         'By partnering with Emunahh-Invest, sponsors convert large seasonal tuition burdens into predictable monthly installments, maintaining household savings and ensuring academic continuity for their wards.',
       ],
     },
@@ -105,13 +105,13 @@ export const BlogPage: React.FC = () => {
             <div className="flex items-center gap-2 text-[11px] text-[#e7020b] font-bold tracking-widest uppercase">
               <Link to="/" className="hover:underline">Home</Link>
               <span>/</span>
-              <span>Insights & Advisory</span>
+              <span>Blog</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d0a64] tracking-[-0.03em] leading-tight">
-              Financial Knowledge & Education Insights
+              The Emunahh-Invest Blog
             </h1>
             <p className="text-sm sm:text-base text-[#17202A]/80 leading-relaxed font-normal">
-              Practical perspectives on navigating university fees, structured SME financing, and capital preservation in Nigeria.
+              Practical perspectives on education finance, business funding, personal finance and responsible investing.
             </p>
           </div>
         </div>
