@@ -8,25 +8,25 @@ export const TrustStrip: React.FC = () => {
       icon: GraduationCap,
       label: 'STUDENT FINANCING',
       desc: 'Financial support designed around eligible education-related needs and tuition remittance.',
-      link: '/student-loans',
+      link: '/services/education-financing',
     },
     {
       icon: TrendingUp,
       label: 'INVESTMENT SOLUTIONS',
       desc: 'Structured capital solutions designed around customer financial goals and wealth preservation.',
-      link: '/investments',
+      link: '/services/investment-services',
     },
     {
       icon: Building2,
       label: 'BUSINESS FINANCE',
       desc: 'Revolving and term financial support designed for eligible commercial and SME growth.',
-      link: '/business-financing',
+      link: '/services/business-financing',
     },
     {
       icon: Wallet,
       label: 'PERSONAL FINANCE',
       desc: 'Transparent salary-linked facilities designed around verified individual financial needs.',
-      link: '/personal-finance',
+      link: '/services/personal-finance',
     },
   ];
 

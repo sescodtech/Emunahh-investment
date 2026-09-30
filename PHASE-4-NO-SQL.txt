@@ -1,0 +1,5 @@
+PHASE 4 DATABASE NOTE
+
+No new SQL is required for Phase 4.
+The successful Supabase 001-031 database remains the production baseline.
+Do not rerun historical master SQL files.

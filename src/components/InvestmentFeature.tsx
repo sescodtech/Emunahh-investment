@@ -124,7 +124,7 @@ export const InvestmentFeature: React.FC<InvestmentFeatureProps> = ({ onOpenAppl
 
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
             <Link
-              to="/investments"
+              to="/services/investment-services"
               className="w-full sm:w-auto text-center px-5 py-2.5 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#e7020b] rounded-md transition-colors shadow-sm cursor-pointer"
             >
               Explore Investment Services

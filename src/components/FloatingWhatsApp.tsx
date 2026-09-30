@@ -1,216 +1,116 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  X, 
-  ShieldCheck, 
-  Clock, 
-  ArrowUpRight, 
-  GraduationCap, 
-  TrendingUp, 
-  Briefcase, 
-  HelpCircle,
-  ChevronDown
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowUpRight, BriefcaseBusiness, GraduationCap, Landmark, Plane, UserRound, X } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
+import { useContent } from '../context/ContentContext';
+
+const servicePrompts = [
+  {
+    label: 'Education Financing',
+    icon: GraduationCap,
+    text: 'Hello Emunahh-Invest, I would like to enquire about Education Financing.',
+  },
+  {
+    label: 'Travel Financing',
+    icon: Plane,
+    text: 'Hello Emunahh-Invest, I would like to enquire about Travel Financing.',
+  },
+  {
+    label: 'Business Financing',
+    icon: BriefcaseBusiness,
+    text: 'Hello Emunahh-Invest, I would like to enquire about Business Financing.',
+  },
+  {
+    label: 'Personal Finance',
+    icon: UserRound,
+    text: 'Hello Emunahh-Invest, I would like to enquire about Personal Finance.',
+  },
+  {
+    label: 'Investment Services',
+    icon: Landmark,
+    text: 'Hello Emunahh-Invest, I would like to enquire about Investment Services.',
+  },
+];
 
 export const FloatingWhatsApp: React.FC = () => {
+  const { content, settings } = useContent() as any;
   const [isOpen, setIsOpen] = useState(false);
-  const [showNotificationBadge, setShowNotificationBadge] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // Keep badge active for attention
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
+  const rawNumber = settings?.whatsapp || content?.contact?.whatsapp || '';
+  const whatsappNumber = String(rawNumber).replace(/[^0-9]/g, '');
+  if (!whatsappNumber) return null;
 
-  const departmentOptions = [
-    {
-      id: 'student_loans',
-      icon: GraduationCap,
-      label: 'Student Loans & Tuition',
-      desc: 'Tuition remittance & university fee financing',
-      text: 'Hello Emunahh-Invest, I would like to inquire about Student Loan Tuition Remittance.',
-    },
-    {
-      id: 'investments',
-      icon: TrendingUp,
-      label: 'Wealth & Fixed Placements',
-      desc: 'Capital preservation & wealth advisory',
-      text: 'Hello Emunahh-Invest, I would like to inquire about Fixed Placements and Wealth Advisory.',
-    },
-    {
-      id: 'commercial',
-      icon: Briefcase,
-      label: 'Commercial & SME Credit',
-      desc: 'Working capital & inventory restocking',
-      text: 'Hello Emunahh-Invest, I would like to apply for a Commercial SME Credit Facility.',
-    },
-    {
-      id: 'general',
-      icon: HelpCircle,
-      label: 'General Inquiries & Support',
-      desc: 'Speak with a Lagos relationship manager',
-      text: 'Hello Emunahh-Invest, I would like to speak with an Advisory Manager regarding your services.',
-    },
-  ];
-
-  const handleOpenDepartment = (text: string) => {
-    const url = `https://wa.me/2348023190807?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
+  const openWhatsApp = (message: string) => {
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+      '_blank',
+      'noopener,noreferrer',
+    );
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end">
-      
-      {/* POPUP ADVISORY CARD */}
+    <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end sm:bottom-6 sm:right-6">
       {isOpen && (
-        <div 
-          className="mb-3 w-[320px] sm:w-[360px] bg-white rounded-xl shadow-2xl border border-[#0d0a64]/15 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200 text-[#17202A]"
+        <div
+          className="mb-3 w-[min(360px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_24px_60px_rgba(8,6,66,0.18)]"
           role="dialog"
-          aria-label="Official WhatsApp Advisory Desk"
+          aria-label="WhatsApp client support"
         >
-          {/* Executive Header in Brand Deep Navy */}
-          <div className="bg-[#0d0a64] p-4 sm:p-5 text-white relative">
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 p-1 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Close chat window"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="flex items-center gap-3">
-              {/* WhatsApp Emblem */}
-              <div className="relative w-10 h-10 rounded-xl bg-[#25D366] flex items-center justify-center shadow-md shrink-0">
-                <WhatsAppIcon className="w-5 h-5 fill-white" />
-                <span className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0d0a64]" />
-              </div>
-
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <h3 className="font-bold text-sm tracking-tight text-white">Emunahh-Invest Desk</h3>
-                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#e7020b]/30 text-[#e3fff2] border border-[#e3fff2]/30">
-                    <ShieldCheck className="w-2.5 h-2.5" />
-                    <span>Official</span>
-                  </span>
+          <div className="border-b border-slate-100 p-5">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#eaf8ef] text-[#1f9d55]">
+                  <WhatsAppIcon className="h-5 w-5 fill-current" />
                 </div>
-                <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium pt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Online · Lagos Advisory Desk</span>
+                <div>
+                  <h2 className="text-[14px] font-[750] text-[#0d0a64]">Client support</h2>
+                  <p className="mt-0.5 text-[11px] text-slate-500">Continue your enquiry on WhatsApp</p>
                 </div>
               </div>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="grid h-8 w-8 place-items-center rounded-lg text-slate-400 transition-colors hover:bg-slate-50 hover:text-slate-700"
+                aria-label="Close WhatsApp options"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
-
-            <p className="text-xs text-white/75 mt-2.5 leading-relaxed">
-              Direct connection with our Lagos advisory and loan verification officers. Select your inquiry below:
-            </p>
           </div>
 
-          {/* Department Selection Items */}
-          <div className="p-3 sm:p-4 space-y-2 max-h-[280px] overflow-y-auto bg-gray-50/60">
-            {departmentOptions.map((dept) => {
-              const Icon = dept.icon;
+          <div className="p-3">
+            {servicePrompts.map((service) => {
+              const Icon = service.icon;
               return (
                 <button
-                  key={dept.id}
-                  onClick={() => handleOpenDepartment(dept.text)}
-                  className="w-full text-left p-2.5 sm:p-3 rounded-xl bg-white border border-[#0d0a64]/10 hover:border-[#e7020b]/50 hover:bg-[#e3fff2] transition-all flex items-start gap-2.5 group cursor-pointer shadow-sm"
+                  key={service.label}
+                  type="button"
+                  onClick={() => openWhatsApp(service.text)}
+                  className="group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors hover:bg-slate-50"
                 >
-                  <div className="w-7 h-7 rounded-md bg-[#e7020b]/10 text-[#e7020b] flex items-center justify-center shrink-0 group-hover:bg-[#0d0a64] group-hover:text-white transition-colors">
-                    <Icon className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-xs font-bold text-[#0d0a64] group-hover:text-[#e7020b] flex items-center justify-between">
-                      <span>{dept.label}</span>
-                      <ArrowUpRight className="w-3 h-3 text-gray-400 group-hover:text-[#e7020b] transition-colors" />
-                    </div>
-                    <p className="text-[11px] text-gray-500 truncate mt-0.5">
-                      {dept.desc}
-                    </p>
-                  </div>
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-100 text-[#0d0a64] transition-colors group-hover:bg-[#0d0a64] group-hover:text-white">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className="flex-1 text-[13px] font-[650] text-slate-700">{service.label}</span>
+                  <ArrowUpRight className="h-4 w-4 text-slate-300 transition-colors group-hover:text-[#d91c23]" />
                 </button>
               );
             })}
           </div>
-
-          {/* Footer Action */}
-          <div className="p-3 bg-white border-t border-gray-100 flex items-center justify-between text-xs">
-            <div className="text-[10px] text-gray-500 flex items-center gap-1">
-              <Clock className="w-3 h-3 text-gray-400" />
-              <span>Desk: Mon–Fri, 8:30am–5pm</span>
-            </div>
-
-            <a
-              href="https://wa.me/2348023190807?text=Hello%20Emunahh-Invest,%20I%20would%20like%20to%20make%20an%20inquiry."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[#e7020b] font-bold text-xs hover:underline"
-            >
-              <span>Direct Chat</span>
-              <ArrowUpRight className="w-3 h-3" />
-            </a>
-          </div>
-
         </div>
       )}
 
-      {/* SHARP, SMART FLOATING TRIGGER BUTTON */}
-      <div className="relative group">
-        
-        {/* Subtle Tooltip for Visitors (Hidden when open) */}
-        {!isOpen && showNotificationBadge && (
-          <div className="hidden sm:flex items-center gap-2 absolute right-full mr-3 bottom-1/2 translate-y-1/2 px-3 py-1.5 rounded-md bg-[#0d0a64] text-white text-xs font-medium whitespace-nowrap shadow-lg border border-white/10 pointer-events-none transition-opacity">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e7020b] animate-pulse" />
-            <span>Chat with Lagos Advisory Desk</span>
-            <div className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-[#0d0a64] rotate-45" />
-          </div>
-        )}
-
-        {/* Trigger Button: Pill on desktop / branded circle on mobile */}
-        <button
-          onClick={() => {
-            setIsOpen(!isOpen);
-            setShowNotificationBadge(false);
-          }}
-          className={`relative flex items-center gap-2.5 p-2 sm:px-3.5 sm:py-2.5 rounded-full transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl focus:outline-hidden active:scale-95 ${
-            isOpen
-              ? 'bg-[#0d0a64] text-white border border-[#e3fff2]/50'
-              : 'bg-white text-[#0d0a64] border border-[#0d0a64]/15 hover:border-[#e7020b]/50'
-          }`}
-          aria-expanded={isOpen}
-          aria-label="Toggle WhatsApp Advisory Desk"
-        >
-          {/* WhatsApp Crisp Vector Emblem */}
-          <div className="w-9 h-9 sm:w-8 sm:h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-xs">
-            <WhatsAppIcon className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-white" />
-          </div>
-
-          {/* Desktop Executive Label */}
-          <div className="hidden sm:flex flex-col text-left pr-1">
-            <span className={`text-xs font-bold leading-tight ${isOpen ? 'text-white' : 'text-[#0d0a64]'}`}>
-              {isOpen ? 'Close Advisory' : 'WhatsApp Advisory'}
-            </span>
-            <span className="text-[10px] text-[#e7020b] font-semibold flex items-center gap-1 leading-tight mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#e7020b] animate-pulse" />
-              <span>Lagos Desk · Online</span>
-            </span>
-          </div>
-
-          {/* Chevron Indicator */}
-          <div className="hidden sm:block text-gray-400">
-            {isOpen ? (
-              <X className="w-3.5 h-3.5 text-white" />
-            ) : (
-              <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#e7020b] transition-transform group-hover:translate-y-0.5" />
-            )}
-          </div>
-
-          {/* Mobile Active Pulse Badge */}
-          <span className="sm:hidden absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" />
-        </button>
-
-      </div>
-
+      <button
+        type="button"
+        onClick={() => setIsOpen((open) => !open)}
+        className="inline-flex h-12 items-center gap-2.5 rounded-full border border-slate-200 bg-white px-3.5 text-[#0d0a64] shadow-[0_12px_30px_rgba(8,6,66,0.12)] transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_16px_34px_rgba(8,6,66,0.16)]"
+        aria-expanded={isOpen}
+        aria-label="Open WhatsApp client support"
+      >
+        <span className="grid h-8 w-8 place-items-center rounded-full bg-[#25D366] text-white">
+          <WhatsAppIcon className="h-4 w-4 fill-current" />
+        </span>
+        <span className="hidden text-[12px] font-[700] sm:inline">WhatsApp support</span>
+      </button>
     </div>
   );
 };

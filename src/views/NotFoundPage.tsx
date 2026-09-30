@@ -26,13 +26,13 @@ export const NotFoundPage: React.FC = () => {
         <div className="p-4 rounded-xl bg-[#e3fff2] border border-gray-200 text-xs text-left space-y-2">
           <div className="font-bold text-[#0d0a64]">Quick Navigation:</div>
           <div className="grid grid-cols-2 gap-2 text-gray-700">
-            <Link to="/student-loans" className="text-[#e7020b] hover:underline">
+            <Link to="/services/education-financing" className="text-[#e7020b] hover:underline">
               • Student Loans
             </Link>
-            <Link to="/investments" className="text-[#e7020b] hover:underline">
+            <Link to="/services/investment-services" className="text-[#e7020b] hover:underline">
               • Investment Desk
             </Link>
-            <Link to="/business-financing" className="text-[#e7020b] hover:underline">
+            <Link to="/services/business-financing" className="text-[#e7020b] hover:underline">
               • Business Credit
             </Link>
             <Link to="/terms" className="text-[#e7020b] hover:underline">

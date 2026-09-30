@@ -1,177 +1,131 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUp, Phone, MapPin, MessageSquare, Clock } from 'lucide-react';
+import { ArrowUp, ArrowUpRight, Mail } from 'lucide-react';
 import { Logo } from './Logo';
 import { useContent } from '../context/ContentContext';
-import { ServiceType } from '../types';
+import { companyNavigation, legalNavigation, solutionNavigation } from '../config/siteNavigation';
 
-interface FooterProps {
-  onOpenApply: (service?: ServiceType) => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onOpenApply }) => {
+export const Footer: React.FC = () => {
   const { content, settings, cmsPages, cmsSections } = useContent() as any;
-  const contact = content.contact;
-  const footerData = content.footer;
-  const globalPage = cmsPages?.find((p:any)=>p.slug==='global');
-  const globalFooter = cmsSections?.find((s:any)=>s.page_id===globalPage?.id && s.section_key==='footer')?.content || {};
-  const footerStatement = globalFooter.statement || footerData.statement;
+  const globalPage = cmsPages?.find((page: any) => page.slug === 'global');
+  const globalFooter =
+    cmsSections?.find(
+      (section: any) => section.page_id === globalPage?.id && section.section_key === 'footer',
+    )?.content || {};
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const footerStatement =
+    globalFooter.statement ||
+    content?.footer?.statement ||
+    'Structured financial and investment solutions delivered with clarity, professional support and responsible execution.';
+  const email = settings?.companyEmail || content?.contact?.email || 'contact@emunahhinvest.com';
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="bg-[#0d0a64] text-white/80 border-t border-white/10 pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Main Footer Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
-          
-          {/* Column 1: Brand & Full Address (5 cols) */}
-          <div className="lg:col-span-5 space-y-5">
-            <Link to="/" className="inline-block">
-              <Logo variant="dark" size="lg" logoUrl={settings.logoUrl} />
+    <footer className="border-t border-white/8 bg-[#080642] text-white">
+      <div className="ei-container py-14 lg:py-20">
+        <div className="grid gap-12 border-b border-white/10 pb-12 lg:grid-cols-[1.35fr_0.9fr_0.9fr_0.9fr] lg:gap-10">
+          <div className="max-w-md">
+            <Link to="/" className="inline-flex rounded-md" aria-label="Emunahh-Invest Limited home">
+              <Logo variant="dark" size="lg" logoUrl={settings?.logoUrl} />
             </Link>
+            <p className="mt-5 max-w-sm text-[14px] leading-7 text-white/62">{footerStatement}</p>
 
-            <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm font-normal">
-              {footerStatement}
-            </p>
-
-            {/* Complete Approved Office Address */}
-            <div className="space-y-3 pt-2 text-xs text-white/85">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#e7020b] shrink-0 mt-0.5" />
-                <div className="leading-relaxed">
-                  <span className="font-semibold text-white block">Corporate Headquarters:</span>
-                  {contact.officeAddress}
-                </div>
-              </div>
-
-              {/* Direct Telephone Desk */}
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2 max-w-sm">
-                <div className="text-[10px] font-bold text-[#e3fff2] uppercase tracking-wider">
-                  Approved Telephone & Advisory Desk
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-[#e7020b]" />
-                  <span className="text-white/60">Phone / WhatsApp:</span>
-                  <a
-                    href={`https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-bold text-white hover:text-[#e7020b] transition-colors tabular-nums"
-                  >
-                    {contact.whatsapp}
-                  </a>
-                </div>
-
-                <div className="flex items-center gap-2 pt-1 border-t border-white/10">
-                  <Phone className="w-3.5 h-3.5 text-white/60" />
-                  <span className="text-white/60">Alternative Desk:</span>
-                  <a
-                    href={`tel:${contact.secondaryPhone.replace(/[^0-9+]/g, '')}`}
-                    className="font-bold text-white hover:text-[#e7020b] transition-colors tabular-nums"
-                  >
-                    {contact.secondaryPhone}
-                  </a>
-                </div>
-              </div>
+            <div className="mt-7">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/38">
+                Client enquiries
+              </p>
+              <a
+                href={`mailto:${email}`}
+                className="mt-2 inline-flex items-center gap-2 text-[14px] font-[650] text-white transition-colors hover:text-white/70"
+              >
+                <Mail className="h-4 w-4 text-[#d91c23]" />
+                {email}
+              </a>
             </div>
           </div>
 
-          {/* Column 2: Company (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
-              {globalFooter.companyHeading || 'Company'}
-            </div>
-            <ul className="space-y-2.5 text-xs">
-              <li>
-                <Link to="/about" className="hover:text-white transition-colors">
-                  About Emunahh-Invest
-                </Link>
-              </li>
-              <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 3: Resources (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
-              {globalFooter.resourcesHeading || 'Resources'}
-            </div>
-            <ul className="space-y-2.5 text-xs">
-              <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><Link to="/apply" className="hover:text-white transition-colors">Start an enquiry</Link></li>
-              <li>
-                <Link to="/privacy-policy" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="hover:text-white transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Contact & Hours (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <div className="text-xs font-bold text-[#e3fff2] uppercase tracking-wider">
-              Advisory Hours
-            </div>
-            <div className="space-y-2 text-xs text-white/70">
-              <div className="flex items-start gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#e7020b] shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-white block font-medium">Mon – Fri:</span>
-                  8:30 AM – 5:00 PM (WAT)
-                </div>
-              </div>
-              <div className="pt-2 text-white/60">
-                <span className="text-white block font-medium">Weekends & Holidays:</span>
-                Digital intake open 24/7
-              </div>
-              <div className="pt-3">
-                <Link
-                  to="/admin/login"
-                  className="text-[11px] font-semibold text-white/40 hover:text-white transition-colors inline-block"
-                >
-                  Admin Portal →
-                </Link>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom Credits & Back to Top */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <div>
-            © {new Date().getFullYear()} Emunahh-Invest Limited. All rights reserved.
+            <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/42">
+              Solutions
+            </h2>
+            <ul className="mt-4 space-y-3">
+              {solutionNavigation.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.href}
+                    className="text-[13px] font-[550] text-white/68 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="flex items-center gap-6">
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">
-              Privacy
-            </Link>
-            <Link to="/terms" className="hover:text-white transition-colors">
-              Terms
-            </Link>
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
-              aria-label="Back to top"
+          <div>
+            <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/42">
+              Company
+            </h2>
+            <ul className="mt-4 space-y-3">
+              {companyNavigation.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.href}
+                    className="text-[13px] font-[550] text-white/68 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/42">
+              Get started
+            </h2>
+            <p className="mt-4 text-[13px] leading-6 text-white/58">
+              Start with a short enquiry. We will guide you to the appropriate next step.
+            </p>
+            <Link
+              to="/apply"
+              className="mt-5 inline-flex items-center gap-2 text-[13px] font-[700] text-white transition-colors hover:text-white/70"
             >
-              <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5 text-[#e7020b]" />
-            </button>
+              Start an enquiry
+              <ArrowUpRight className="h-4 w-4 text-[#d91c23]" />
+            </Link>
           </div>
         </div>
 
+        <div className="grid gap-6 border-b border-white/10 py-8 lg:grid-cols-[1fr_auto] lg:items-start">
+          <p className="max-w-4xl text-[11px] leading-6 text-white/40">
+            Information on this website is general in nature and does not constitute personalised financial advice or a binding offer. Services may be subject to eligibility, assessment, documentation and approval requirements. Where investment services are discussed, outcomes are not guaranteed and suitability should be considered before making a decision.
+          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 lg:justify-end">
+            {legalNavigation.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href}
+                className="text-[11px] font-[600] text-white/48 transition-colors hover:text-white"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 pt-7 text-[11px] text-white/36 sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} Emunahh-Invest Limited. All rights reserved.</span>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="inline-flex w-fit items-center gap-2 font-[650] text-white/48 transition-colors hover:text-white"
+          >
+            Back to top
+            <ArrowUp className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
     </footer>
   );

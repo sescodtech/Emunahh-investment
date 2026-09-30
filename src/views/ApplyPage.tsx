@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, Search, ArrowRight, ShieldCheck, FileText, Clock } from 'lucide-react';
 import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { ServiceType } from '../types';
 import { submitApplication, trackApplication } from '../lib/publicApi';
+import { useContent } from '../context/ContentContext';
 
 export const ApplyPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const { settings } = useContent();
   const [activeTab, setActiveTab] = useState<'apply' | 'track'>('apply');
   const [service, setService] = useState<ServiceType>('student_loan');
   
@@ -26,6 +29,20 @@ export const ApplyPage: React.FC = () => {
   const [trackingResult, setTrackingResult] = useState<any | null>(null);
   const [trackingError, setTrackingError] = useState('');
   const [isTracking, setIsTracking] = useState(false);
+
+  useEffect(() => {
+    const requested = searchParams.get('service');
+    const mapping: Record<string, ServiceType> = {
+      'education-financing': 'student_loan',
+      'investment-services': 'investment',
+      'business-financing': 'business_financing',
+      'personal-finance': 'personal_finance',
+      'travel-financing': 'other_services',
+    };
+    if (requested && mapping[requested]) setService(mapping[requested]);
+  }, [searchParams]);
+
+  const whatsappNumber = String(settings?.whatsapp || '').replace(/\D/g, '');
 
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,11 +71,11 @@ export const ApplyPage: React.FC = () => {
   };
 
   const serviceOptions = [
-    { id: 'student_loan' as ServiceType, label: 'Student Tuition Loan', subtitle: 'Tuition & Academic Fees' },
-    { id: 'investment' as ServiceType, label: 'Investment Advisory', subtitle: 'Capital Preservation' },
-    { id: 'business_financing' as ServiceType, label: 'SME Commercial Credit', subtitle: 'Working Capital' },
-    { id: 'personal_finance' as ServiceType, label: 'Personal Financial Solution', subtitle: 'Structured Individual Credit' },
-    { id: 'other_services' as ServiceType, label: 'Specialized Advisory', subtitle: 'Institutional Consultation' },
+    { id: 'student_loan' as ServiceType, label: 'Education Financing', subtitle: 'Education and tuition-related needs' },
+    { id: 'investment' as ServiceType, label: 'Investment Services', subtitle: 'Objective, horizon and investment discussions' },
+    { id: 'business_financing' as ServiceType, label: 'Business Financing', subtitle: 'Working capital and commercial requirements' },
+    { id: 'personal_finance' as ServiceType, label: 'Personal Finance', subtitle: 'Structured personal financial requirements' },
+    { id: 'other_services' as ServiceType, label: 'Travel / General Enquiry', subtitle: 'Travel financing and other service requests' },
   ];
 
   return (
@@ -75,10 +92,10 @@ export const ApplyPage: React.FC = () => {
               <span>Online Application</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d0a64] tracking-[-0.03em] leading-tight">
-              Emunahh Financing Portal
+              Client Enquiry & Application
             </h1>
             <p className="text-sm sm:text-base text-[#17202A]/80 leading-relaxed font-normal">
-              Formal intake and application registry for student tuition financing, enterprise working capital, and investment advisory.
+              Start a service enquiry, provide the initial information required for review, or track an existing application reference.
             </p>
 
             {/* Navigation Tabs */}
@@ -149,21 +166,20 @@ export const ApplyPage: React.FC = () => {
                 </div>
 
                 <p className="text-xs text-[#17202A]/75 max-w-md mx-auto leading-relaxed font-normal">
-                  Your application file has been generated for underwriting at 33 Crossway Plaza, New Oko Oba, Lagos. 
-                  Forward your reference code directly to our WhatsApp desk for prompt document submission.
+                  Your application has been recorded for review. Keep your reference code and use it whenever you contact our team about the next steps or supporting information.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                   <a
-                    href={`https://wa.me/2348023190807?text=${encodeURIComponent(
+                    href={whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
                       `Hello Emunahh-Invest, I just submitted application ${receipt.reference} for ${receipt.record.fullName}. Please advise on verification documents.`
-                    )}`}
+                    )}` : '/contact'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] rounded-md shadow-sm transition-all"
                   >
                     <WhatsAppIcon className="w-4 h-4 fill-white shrink-0" />
-                    <span>Fast-Track on WhatsApp (0802 319 0807)</span>
+                    <span>Continue on WhatsApp</span>
                   </a>
 
                   <button
@@ -254,12 +270,12 @@ export const ApplyPage: React.FC = () => {
 
                     <div>
                       <label className="block text-xs font-bold text-[#0d0a64] mb-1">
-                        Phone Number (WhatsApp Active) *
+                        Phone Number *
                       </label>
                       <input
                         type="tel"
                         required
-                        placeholder="0802 319 0807"
+                        placeholder="Country code and phone number"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
@@ -293,11 +309,11 @@ export const ApplyPage: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-[#0d0a64] mb-1">
-                        Proposed Facility Amount (₦)
+                        Indicative Amount / Range
                       </label>
                       <input
                         type="text"
-                        placeholder="e.g. ₦650,000"
+                        placeholder="e.g. 10,000 or preferred range"
                         value={formData.amount}
                         onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                         className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
@@ -306,11 +322,11 @@ export const ApplyPage: React.FC = () => {
 
                     <div>
                       <label className="block text-xs font-bold text-[#0d0a64] mb-1">
-                        {service === 'student_loan' ? 'University / Institution / Exam Body' : 'Registered Business or Enterprise'}
+                        {service === 'student_loan' ? 'Institution / Education Provider' : service === 'business_financing' ? 'Business / Organisation' : service === 'other_services' ? 'Travel Purpose / Destination' : 'Relevant Organisation (Optional)'}
                       </label>
                       <input
                         type="text"
-                        placeholder={service === 'student_loan' ? 'e.g. University of Lagos (UNILAG)' : 'e.g. Adeyemi Logistics Ltd'}
+                        placeholder={service === 'student_loan' ? 'Name of institution or education provider' : service === 'business_financing' ? 'Business or organisation name' : service === 'other_services' ? 'Brief travel purpose or destination' : 'Optional supporting organisation'}
                         value={formData.institutionOrBusiness}
                         onChange={(e) => setFormData({ ...formData, institutionOrBusiness: e.target.value })}
                         className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b]"
@@ -324,7 +340,7 @@ export const ApplyPage: React.FC = () => {
                     </label>
                     <textarea
                       rows={3}
-                      placeholder="Specify semester fee payment deadline, supplier invoice date, or guarantor schedule..."
+                      placeholder="Add any relevant deadline, purpose, context or supporting details that will help us understand the request..."
                       value={formData.details}
                       onChange={(e) => setFormData({ ...formData, details: e.target.value })}
                       className="w-full px-3.5 py-2.5 text-xs rounded-md border border-[#0d0a64]/15 focus:outline-hidden focus:border-[#e7020b] resize-none"
@@ -336,7 +352,7 @@ export const ApplyPage: React.FC = () => {
                 <div className="bg-[#e3fff2] rounded-xl border border-[#0d0a64]/12 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-2.5 text-xs text-[#17202A]/70">
                     <ShieldCheck className="w-5 h-5 text-[#e7020b] shrink-0" />
-                    <span>Protected by Emunahh-Invest Limited governance and institutional confidentiality.</span>
+                    <span>Information submitted through this form is handled for enquiry and application review purposes.</span>
                   </div>
 
                   <button
@@ -418,11 +434,11 @@ export const ApplyPage: React.FC = () => {
                   </div>
 
                   <div className="pt-2 border-t border-[#0d0a64]/10 flex items-center justify-between">
-                    <span className="text-[11px] text-[#17202A]/60">Physical Review: Lagos Corporate Desk</span>
+                    <span className="text-[11px] text-[#17202A]/60">Review channel: Client services team</span>
                     <a
-                      href={`https://wa.me/2348023190807?text=${encodeURIComponent(
+                      href={whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
                         `Hello Emunahh-Invest, I am inquiring about application file ${trackingResult.reference}.`
-                      )}`}
+                      )}` : '/contact'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs font-bold text-[#e7020b] hover:underline"

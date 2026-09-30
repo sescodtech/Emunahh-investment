@@ -43,7 +43,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenApply }) => {
             </Link>
 
             <Link
-              to="/student-loans"
+              to="/services/education-financing"
               className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#a3140a] rounded-md transition-all shadow-md whitespace-nowrap"
             >
               <span>Student Loans Hub</span>

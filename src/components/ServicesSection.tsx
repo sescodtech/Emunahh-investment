@@ -93,7 +93,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenApply })
             {/* Action Bar */}
             <div className="pt-5 mt-5 border-t border-[#0d0a64]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <Link
-                to="/student-loans"
+                to="/services/education-financing"
                 className="inline-flex items-center text-xs font-bold text-[#e7020b] hover:text-[#a3140a] transition-colors group"
               >
                 <span>View Full Student Loan Structure</span>
@@ -144,7 +144,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenApply })
 
               <div className="pt-3.5 mt-3.5 border-t border-[#0d0a64]/8">
                 <Link
-                  to="/investments"
+                  to="/services/investment-services"
                   className="inline-flex items-center text-xs font-bold text-[#e7020b] hover:text-[#a3140a] transition-colors group/link"
                 >
                   <span>Explore Investment Placements</span>
@@ -185,7 +185,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenApply })
 
               <div className="pt-3.5 mt-3.5 border-t border-[#0d0a64]/8">
                 <Link
-                  to="/business-financing"
+                  to="/services/business-financing"
                   className="inline-flex items-center text-xs font-bold text-[#e7020b] hover:text-[#a3140a] transition-colors group/link"
                 >
                   <span>Business Credit Details</span>
@@ -215,7 +215,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenApply })
 
               <div className="pt-3.5 mt-3.5 border-t border-[#0d0a64]/8">
                 <Link
-                  to="/personal-finance"
+                  to="/services/personal-finance"
                   className="inline-flex items-center text-xs font-bold text-[#e7020b] hover:text-[#a3140a] transition-colors group/link"
                 >
                   <span>Personal Finance Options</span>

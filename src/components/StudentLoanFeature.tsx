@@ -139,7 +139,7 @@ export const StudentLoanFeature: React.FC<StudentLoanFeatureProps> = ({ onOpenAp
               </Link>
 
               <Link
-                to="/student-loans"
+                to="/services/education-financing"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-xs font-bold text-white/80 hover:text-white bg-transparent border border-white/20 hover:border-white/40 rounded-md transition-all"
               >
                 <span>Review Full Guidelines</span>

@@ -87,7 +87,7 @@ export const BusinessFeature: React.FC<BusinessFeatureProps> = ({ onOpenApply })
 
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-1">
               <Link
-                to="/business-financing"
+                to="/services/business-financing"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-xs font-bold text-white bg-[#0d0a64] hover:bg-[#a3140a] rounded-xl transition-colors shadow-xs"
               >
                 <span>Explore Business Credit Hub</span>

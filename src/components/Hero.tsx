@@ -20,25 +20,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenApply }) => {
     student: {
       title: 'Education Financing',
       desc: 'Tuition and academic clearance remitted directly to accredited institutions.',
-      path: '/student-loans',
+      path: '/services/education-financing',
       cta: 'Apply for this service',
     },
     investment: {
       title: 'Investment Services',
       desc: 'Structured placements backed by productive real assets with legal covenants.',
-      path: '/investments',
+      path: '/services/investment-services',
       cta: 'Start an enquiry',
     },
     business: {
       title: 'Business Financing',
       desc: 'Working capital underwritten on verified commercial velocity and turnover.',
-      path: '/business-financing',
+      path: '/services/business-financing',
       cta: 'Apply for this service',
     },
     personal: {
       title: 'Personal Finance',
       desc: 'Salary-backed facilities for verified professionals with predictable terms.',
-      path: '/personal-finance',
+      path: '/services/personal-finance',
       cta: 'Apply for this service',
     },
   };
