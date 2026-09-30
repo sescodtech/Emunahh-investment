@@ -1,0 +1,5 @@
+PHASE 5 DOES NOT REQUIRE NEW SQL.
+
+The successful Supabase database state remains migrations 001 through 031.
+Do not rerun the historical master SQL files.
+Phase 5 uses existing applications.details JSONB, service_id, consent_at and source fields.

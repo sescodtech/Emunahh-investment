@@ -27,13 +27,13 @@ export const NotFoundPage: React.FC = () => {
           <div className="font-bold text-[#0d0a64]">Quick Navigation:</div>
           <div className="grid grid-cols-2 gap-2 text-gray-700">
             <Link to="/services/education-financing" className="text-[#e7020b] hover:underline">
-              • Student Loans
+              • Education Financing
             </Link>
             <Link to="/services/investment-services" className="text-[#e7020b] hover:underline">
-              • Investment Desk
+              • Investment Services
             </Link>
             <Link to="/services/business-financing" className="text-[#e7020b] hover:underline">
-              • Business Credit
+              • Business Financing
             </Link>
             <Link to="/terms" className="text-[#e7020b] hover:underline">
               • Terms of Service
@@ -54,7 +54,7 @@ export const NotFoundPage: React.FC = () => {
             className="inline-flex items-center gap-1.5 px-5 py-3 text-xs font-bold text-[#0d0a64] bg-[#e3fff2] border border-gray-300 hover:bg-gray-100 rounded-xl transition-colors"
           >
             <Phone className="w-4 h-4 text-[#e7020b]" />
-            <span>Contact Lagos Desk</span>
+            <span>Contact Client Services</span>
           </Link>
         </div>
       </div>

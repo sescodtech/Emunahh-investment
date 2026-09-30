@@ -30,10 +30,10 @@ export const BlogPage: React.FC = () => {
       excerpt:
         'A practical guide to understanding education-financing applications, documentation and repayment expectations.',
       content: [
-        'Education and professional development can require significant upfront funding at important moments. However, university registration deadlines and examination fees frequently coincide with periods of tight household liquidity.',
-        'At Emunahh-Invest Limited, our student loan process is designed around institutional remittance. Unlike general cash credit, funds are paid straight to your school or examination body. This guarantees tuition clearance and protects students from academic disruption.',
+        'Education and professional development can require significant upfront funding at important moments. Registration deadlines, tuition schedules and examination fees can also arrive before a household has planned for the full cash requirement.',
+        'A responsible education-financing process should begin with a clear understanding of the programme, institution, fee obligation, applicant or sponsor profile and the timing of the commitment. The appropriate structure depends on assessment, documentation and approval.',
         'Useful documentation can include admission or enrolment evidence, an official fee invoice, identification and information that helps demonstrate repayment capacity.',
-        'When planning your repayment horizon, always align milestone dates with your family sponsor’s cash flow cycles—whether monthly salary disbursement or quarterly commercial trade intervals.',
+        'When considering repayment, align the proposed schedule with realistic and documented income or sponsor cash-flow patterns rather than optimistic assumptions.',
       ],
     },
     {
@@ -46,10 +46,10 @@ export const BlogPage: React.FC = () => {
       excerpt:
         'Why disciplined investment planning matters and how clear objectives, time horizons and responsible structures can protect long-term capital decisions.',
       content: [
-        'Managing capital in an uncertain economic environment requires discipline over speculation. Too many individuals fall victim to unverified digital schemes promising improbable double-digit monthly returns, only to suffer catastrophic loss of principal.',
-        'True wealth management begins with the inviolable principle of capital preservation: ensuring that the nominal principal is anchored in real-economy assets, verified corporate cash-flow, and legal transparency.',
-        'By staggering investment horizons into short-term liquidity buffers and medium-term asset-backed growth vehicles, investors maintain accessibility while shielding their hard-earned capital from currency erosion.',
-        'Consulting an on-ground, accessible advisory team at a physical office provides legal recourse and transparent reporting that anonymous online platforms can never match.',
+        'Managing capital in uncertain markets requires discipline, clear objectives and an understanding of risk. Decisions should not be based on promotional return claims without considering the underlying structure, liquidity and downside exposure.',
+        'A disciplined investment process begins by defining the objective, time horizon, liquidity needs and risk tolerance, then reviewing the terms and underlying exposure of any opportunity before making a decision.',
+        'Separating near-term liquidity needs from longer-term investment capital can help investors avoid committing funds that may be required unexpectedly and can support a more deliberate portfolio structure.',
+        'Before committing capital, investors should understand who they are dealing with, what documentation governs the arrangement, how reporting works and what risks or restrictions may apply.',
       ],
     },
     {
@@ -58,13 +58,13 @@ export const BlogPage: React.FC = () => {
       readTime: '4 min read',
       date: 'July 2026',
       author: 'Emunahh Commercial Credit',
-      title: 'Working Capital vs. Asset Loans: Which Financing Fits Your Lagos Enterprise?',
+      title: 'Working Capital vs. Asset Finance: Matching Funding to the Business Need',
       excerpt:
-        'Understanding how to match credit products with your commercial cash-flow cycle to avoid over-leveraging and maintain healthy supplier relationships.',
+        'Understanding how to match financing structure with the business cash-flow cycle can reduce unnecessary strain and support more sustainable borrowing decisions.',
       content: [
         'Business owners and service operators frequently experience growth paradoxes: sales are surging, orders are booked, but cash is trapped in receivables or tied up in inventory replenishment.',
-        'When evaluating debt financing, business operators must strictly distinguish between operational working capital (short-term cash to fulfill purchase orders or restock high-demand goods) and asset acquisition financing (long-term amortized capital to buy delivery vehicles, commercial generators, or specialized equipment).',
-        'Financing seasonal inventory with a multi-year term creates unnecessary interest drag, while purchasing long-term machinery with short-term credit strains daily operations. Emunahh-Invest assesses real bank ledger turnover to match facility duration directly to your commercial cash-conversion cycle.',
+        'When evaluating financing, business operators should distinguish between short-cycle working-capital needs and longer-lived asset or expansion requirements. The financing term should be appropriate for the purpose and expected cash-generation period.',
+        'Using a long-term facility for a short seasonal requirement can increase total financing cost, while relying on very short-term credit for a long-lived asset can pressure operating cash flow. Assessment should consider the purpose, timing and repayment capacity together.',
       ],
     },
     {
@@ -77,8 +77,8 @@ export const BlogPage: React.FC = () => {
       excerpt:
         'What sponsors and working parents need to know about co-signing student loan facilities and scheduling monthly contributions.',
       content: [
-        'Supporting a child or relative through education is a badge of honor, but sudden economic shifts can make lump-sum tuition payments burdensome.',
-        'By partnering with Emunahh-Invest, sponsors convert large seasonal tuition burdens into predictable monthly installments, maintaining household savings and ensuring academic continuity for their wards.',
+        'Supporting a student or learner can require careful planning when large tuition or education commitments fall due at once.',
+        'Sponsors considering education financing should understand the total obligation, repayment schedule and affordability implications before accepting any arrangement.',
       ],
     },
   ];

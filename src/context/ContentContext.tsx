@@ -107,7 +107,7 @@ const defaultContent: SiteContent = {
     description: 'Structured education financing for eligible students, families and sponsors, with clear documentation and repayment expectations.',
   },
   contact: {
-    officeAddress: '33, Crossway Plaza, Beside UBA, 3/5 Charity Road, New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.',
+    officeAddress: '',
     phone: '+234 802 319 0807',
     secondaryPhone: '+234 817 917 1456',
     email: 'contact@emunahhinvest.com',
@@ -135,7 +135,7 @@ const defaultSettings: SiteSettings = {
   phone: '+234 802 319 0807',
   secondaryPhone: '+234 817 917 1456',
   whatsapp: '0802 319 0807',
-  officeAddress: '33, Crossway Plaza, Beside UBA, 3/5 Charity Road, New Oko Oba, Agege/Abule Egba, Lagos, Nigeria.',
+  officeAddress: '',
   websiteUrl: 'https://emunahhinvest.com',
   logoUrl: '',
 };
