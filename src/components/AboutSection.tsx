@@ -1,0 +1,168 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { MapPin, ArrowUpRight, Compass, Eye, ShieldCheck, Check } from 'lucide-react';
+import { useContent } from '../context/ContentContext';
+import { WhatsAppIcon } from './WhatsAppIcon';
+import hqImage from '../assets/images/lagos_financial_hq_1790142688340.webp';
+
+export const AboutSection: React.FC = () => {
+  const { content } = useContent();
+  const about = content.about;
+  const contact = content.contact;
+
+  return (
+    <section id="about" className="py-16 lg:py-22 bg-white border-b border-[#0d0a64]/10 scroll-mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Editorial Section Header */}
+        <div className="max-w-3xl space-y-3 mb-12">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-[#e3fff2]" />
+            <span className="text-[11px] font-bold text-[#e7020b] uppercase tracking-[0.2em]">
+              {about.title}
+            </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0d0a64] tracking-[-0.03em] leading-tight">
+            {about.headline}
+          </h2>
+        </div>
+
+        {/* Balanced Editorial Composition */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          
+          {/* Left Column: Authentic HQ Photography & Walk-In Lagos Desk (5 cols) */}
+          <div className="lg:col-span-5 space-y-5">
+            <div className="relative rounded-xl overflow-hidden border-2 border-[#0d0a64] bg-[#0d0a64] shadow-md group">
+              <img
+                src={hqImage.src}
+                alt="Emunahh-Invest Limited Headquarters Lagos"
+                className="w-full h-[320px] sm:h-[360px] object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                loading="lazy"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#0d0a64] via-[#0d0a64]/85 to-transparent text-white">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-[10px] font-bold text-[#e3fff2] uppercase tracking-[0.16em]">
+                      Corporate Headquarters
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-white tracking-tight">
+                      33, Crossway Plaza, New Oko Oba, Lagos
+                    </div>
+                  </div>
+                  <span className="w-2 h-2 rounded-full bg-[#e7020b] animate-pulse" />
+                </div>
+              </div>
+            </div>
+
+            {/* Walk-In Lagos Advisory Desk Card */}
+            <div className="p-5 rounded-xl bg-[#e3fff2] border border-[#0d0a64]/12 space-y-3.5 shadow-sm">
+              <div className="flex items-center justify-between">
+                <div className="text-xs font-bold text-[#0d0a64] uppercase tracking-wider flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#e7020b]" />
+                  <span>Physical Advisory Desk</span>
+                </div>
+                <span className="text-[10px] font-bold text-[#e7020b] bg-[#e7020b]/10 px-2 py-0.5 rounded">
+                  Open Weekdays
+                </span>
+              </div>
+              
+              <p className="text-xs text-[#17202A]/80 leading-relaxed font-normal">
+                {contact.officeAddress}
+              </p>
+
+              <div className="pt-2 border-t border-[#0d0a64]/8 flex items-center justify-between gap-3 text-xs">
+                <div>
+                  <span className="text-[#17202A]/60 block text-[10px]">Direct Phone:</span>
+                  <a href={`tel:${contact.phone.replace(/[^0-9+]/g, '')}`} className="font-bold text-[#0d0a64] hover:text-[#e7020b] transition-colors">
+                    {contact.phone}
+                  </a>
+                </div>
+                <a
+                  href={`https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Emunahh-Invest,%20I%20would%20like%20to%20schedule%20a%20consultation.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#e7020b] hover:bg-[#a3140a] text-white text-[11px] font-bold rounded-md transition-colors shadow-sm shrink-0"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5 fill-white" />
+                  <span>WhatsApp Desk</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Institutional Heritage, Mission, Vision & Core Values (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            <div className="space-y-3 text-sm sm:text-base text-[#17202A]/85 leading-relaxed font-normal">
+              <p>{about.intro}</p>
+              <p className="text-xs sm:text-sm text-[#17202A]/75">{about.secondaryIntro}</p>
+            </div>
+
+            {/* Mission & Vision Editorial Modules */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+              <div className="p-4 sm:p-5 rounded-xl bg-[#e3fff2] border border-[#0d0a64]/10 space-y-2 shadow-sm hover:border-[#e7020b]/30 transition-colors">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-md bg-[#e7020b] text-white flex items-center justify-center shrink-0">
+                    <Compass className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="text-xs font-bold text-[#e7020b] uppercase tracking-wider">
+                    Our Mission
+                  </span>
+                </div>
+                <p className="text-xs text-[#17202A]/80 leading-relaxed font-normal">
+                  {about.mission}
+                </p>
+              </div>
+
+              <div className="p-4 sm:p-5 rounded-xl bg-[#e3fff2] border border-[#0d0a64]/10 space-y-2 shadow-sm hover:border-[#0d0a64]/30 transition-colors">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-md bg-[#0d0a64] text-white flex items-center justify-center shrink-0">
+                    <Eye className="w-3.5 h-3.5 text-[#e3fff2]" />
+                  </div>
+                  <span className="text-xs font-bold text-[#0d0a64] uppercase tracking-wider">
+                    Our Vision
+                  </span>
+                </div>
+                <p className="text-xs text-[#17202A]/80 leading-relaxed font-normal">
+                  {about.vision}
+                </p>
+              </div>
+            </div>
+
+            {/* Core Values Strip */}
+            <div className="pt-4 border-t border-[#0d0a64]/10">
+              <div className="text-[11px] font-bold text-[#0d0a64] uppercase tracking-[0.16em] mb-3 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#e7020b]" />
+                <span>Core Governance Values</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {about.values.map((v, idx) => (
+                  <div key={idx} className="p-3 rounded-md bg-white border border-[#0d0a64]/8 flex items-start gap-2.5 shadow-sm">
+                    <Check className="w-4 h-4 text-[#e7020b] shrink-0 mt-0.5" />
+                    <div className="text-xs leading-relaxed">
+                      <strong className="text-[#0d0a64] font-bold block">{v.title}</strong>
+                      <span className="text-[#17202A]/70 text-[11px]">{v.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-2 flex items-center justify-between">
+              <Link
+                to="/about"
+                className="inline-flex items-center text-xs font-bold text-[#e7020b] hover:text-[#a3140a] transition-colors group"
+              >
+                <span>Read Full Corporate Profile & Governance</span>
+                <ArrowUpRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
