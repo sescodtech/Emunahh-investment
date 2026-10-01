@@ -1,0 +1,25 @@
+EMUNAHH-INVEST PHASE 7 — SQL RUN INSTRUCTION
+
+Expected live database baseline before Phase 7:
+001 → 032 = SUCCESSFUL
+
+Run ONE new migration only:
+033_phase7_insights_editorial_system.sql
+
+Preferred path inside this package:
+supabase/033_phase7_insights_editorial_system.sql
+
+Migration source is also retained under:
+supabase/migrations/033_phase7_insights_editorial_system.sql
+
+DO NOT rerun 001-032.
+
+Purpose of 033:
+- creates blog_categories
+- creates blog_authors
+- creates blog_posts
+- adds RLS for public/published and admin/editorial access
+- seeds professional initial categories
+- seeds a neutral Emunahh-Invest Editorial Team author
+- migrates the former hard-coded articles into the CMS database
+- updates the Blog CMS page metadata to Insights

@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
-import heroDefaultImage from '../assets/images/nigerian_professional_hero_1790151218863.webp';
-import graduateDefaultImage from '../assets/images/student_education_loan_1790141403913.webp';
-import meetingDefaultImage from '../assets/images/african_investment_meeting_1790151240660.webp';
+import heroDefaultImage from '../assets/images/professional_advisory_hero.webp';
+import graduateDefaultImage from '../assets/images/education_financing.webp';
+import meetingDefaultImage from '../assets/images/investment_advisory_meeting.webp';
 
 export interface SiteContent {
   hero: {
@@ -70,6 +70,11 @@ export interface SiteSettings {
   officeAddress: string;
   websiteUrl: string;
   logoUrl?: string;
+  defaultSeoTitle?: string;
+  defaultSeoDescription?: string;
+  defaultOgImageUrl?: string;
+  socialLinkedInUrl?: string;
+  socialXUrl?: string;
 }
 
 const defaultContent: SiteContent = {
@@ -138,6 +143,11 @@ const defaultSettings: SiteSettings = {
   officeAddress: '',
   websiteUrl: 'https://emunahhinvest.com',
   logoUrl: '',
+  defaultSeoTitle: 'Emunahh-Invest Limited | Structured Financial & Investment Solutions',
+  defaultSeoDescription: 'Structured financial and investment solutions with professional service, clear communication and responsible execution.',
+  defaultOgImageUrl: '',
+  socialLinkedInUrl: '',
+  socialXUrl: '',
 };
 
 interface ContentContextType {
@@ -174,7 +184,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       const [contentRes, servicesRes, settingsRes, pagesRes, sectionsRes] = await Promise.all([
         supabase.from('site_content').select('content').eq('id',1).maybeSingle(),
         supabase.from('services').select('id,slug,title,category,tagline,description,bullets,image_url,is_published,display_order').eq('is_published',true).order('display_order'),
-        supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url').eq('id',1).maybeSingle(),
+        supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url,default_seo_title,default_seo_description,default_og_image_url,social_linkedin_url,social_x_url').eq('id',1).maybeSingle(),
         supabase.from('cms_pages').select('*').eq('status','published').order('title'),
         supabase.from('cms_sections').select('*').eq('is_enabled',true).order('display_order'),
       ]);
@@ -189,7 +199,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       if (!sectionsRes?.error) setCmsSections(sectionsRes?.data || []);
       if (!settingsRes.error && settingsRes.data) {
         const s:any=settingsRes.data;
-        setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||''}));
+        setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||'',defaultSeoTitle:s.default_seo_title||prev.defaultSeoTitle,defaultSeoDescription:s.default_seo_description||prev.defaultSeoDescription,defaultOgImageUrl:s.default_og_image_url||'',socialLinkedInUrl:s.social_linkedin_url||'',socialXUrl:s.social_x_url||''}));
       }
     } catch (err) { console.warn('Using bundled default content:', err); }
     finally { setIsLoading(false); }

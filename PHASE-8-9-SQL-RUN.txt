@@ -1,0 +1,13 @@
+EMUNAHH-INVEST PHASE 8 + 9 DATABASE STEP
+
+Expected database before this phase:
+001 -> 033 completed successfully.
+
+Run only:
+034_phase8_9_admin_seo_professionalisation.sql
+
+If you have NOT yet run Phase 7 SQL 033, run 033 first and confirm success, then run 034.
+Do not rerun 001-032.
+
+After successful 034:
+001 -> 034 COMPLETE.

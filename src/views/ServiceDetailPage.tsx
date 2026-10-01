@@ -18,11 +18,11 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { PageLoader } from '../components/PageLoader';
 import { useContent, type ServiceRecord } from '../context/ContentContext';
 import { serviceArchitectures } from '../config/serviceArchitecture';
-import educationImageImport from '../assets/images/student_education_loan_1790141403913.webp';
-import businessImageImport from '../assets/images/business_financing_growth_1790141424769.webp';
-import personalImageImport from '../assets/images/nigerian_professional_hero_1790151218863.webp';
-import investmentImageImport from '../assets/images/african_investment_meeting_1790151240660.webp';
-import travelImageImport from '../assets/images/hero_financial_growth_1790141391313.webp';
+import educationImageImport from '../assets/images/education_financing.webp';
+import businessImageImport from '../assets/images/business_financing.webp';
+import personalImageImport from '../assets/images/professional_advisory_hero.webp';
+import investmentImageImport from '../assets/images/investment_advisory_meeting.webp';
+import travelImageImport from '../assets/images/financial_growth.webp';
 
 const assetUrl = (value: unknown): string => {
   if (typeof value === 'string') return value;
@@ -168,6 +168,9 @@ export const ServiceDetailPage: React.FC = () => {
               src={imageCandidate}
               alt={`${title} service`}
               className="absolute inset-0 h-full w-full object-cover opacity-[0.78]"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               onError={() => setImageFailed(true)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#080642] via-[#080642]/35 to-transparent" />

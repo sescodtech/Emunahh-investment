@@ -20,6 +20,7 @@ import {
   type ApplicationServiceSlug,
 } from '../config/applicationArchitecture';
 import { submitApplication, trackApplication } from '../lib/publicApi';
+import { getDocumentUploadConfig, type PublicDocumentConfig } from '../lib/documents';
 
 const fieldClass =
   'w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-[14px] text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#0d0a64] focus:ring-4 focus:ring-[#0d0a64]/5';
@@ -63,7 +64,8 @@ export const ApplyPage: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [countryRegion, setCountryRegion] = useState('');
   const [preferredContact, setPreferredContact] = useState<'email' | 'phone' | 'whatsapp'>('email');
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('');
+  const [otherCurrency, setOtherCurrency] = useState('');
   const [amount, setAmount] = useState('');
   const [additionalNotes, setAdditionalNotes] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
@@ -71,6 +73,7 @@ export const ApplyPage: React.FC = () => {
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [receipt, setReceipt] = useState<any | null>(null);
+  const [documentConfig, setDocumentConfig] = useState<PublicDocumentConfig | null>(null);
 
   const [trackRef, setTrackRef] = useState('');
   const [trackingResult, setTrackingResult] = useState<any | null>(null);
@@ -81,6 +84,10 @@ export const ApplyPage: React.FC = () => {
     const next = normaliseRequestedService(searchParams.get('service'));
     setServiceSlug(next);
   }, [searchParams]);
+
+  useEffect(() => {
+    getDocumentUploadConfig().then(setDocumentConfig).catch(() => setDocumentConfig(null));
+  }, []);
 
   const journey = applicationJourneys[serviceSlug];
   const whatsappNumber = String(settings?.whatsapp || '').replace(/\D/g, '');
@@ -99,6 +106,8 @@ export const ApplyPage: React.FC = () => {
     setServiceSlug(slug);
     setAnswers({});
     setAmount('');
+    setCurrency('');
+    setOtherCurrency('');
     setAdditionalNotes('');
     setFormError('');
   };
@@ -114,6 +123,9 @@ export const ApplyPage: React.FC = () => {
     }
 
     if (current === 3) {
+      if (journey.amountRequired && !currency) return 'Select the currency for the indicative amount.';
+      if (journey.amountRequired && !amount.trim()) return `${journey.amountLabel} is required.`;
+      if (currency === 'OTHER' && otherCurrency.trim().length < 2) return 'Enter the currency for the indicative amount.';
       const missing = journey.questions.find((question) => question.required && !String(answers[question.key] || '').trim());
       if (missing) return `${missing.label} is required.`;
     }
@@ -162,6 +174,7 @@ export const ApplyPage: React.FC = () => {
         countryRegion,
         preferredContact,
         currency,
+        currencyDetail: otherCurrency,
         amount,
         answers,
         additionalNotes,
@@ -239,6 +252,15 @@ export const ApplyPage: React.FC = () => {
                     <div><dt className="text-slate-500">Reference</dt><dd className="mt-1 font-mono font-[800] text-[#d91c23]">{receipt.reference}</dd></div>
                     <div><dt className="text-slate-500">Status</dt><dd className="mt-1 font-[700] text-[#0d0a64]">{safeStatus(receipt.record?.status || 'NEW')}</dd></div>
                   </dl>
+                  {documentConfig?.enabled && receipt?.record?.id && receipt?.documentUploadToken && (
+                    <Link
+                      to={`/documents/${receipt.record.id}?token=${encodeURIComponent(receipt.documentUploadToken)}`}
+                      className="ei-btn-primary mt-6 flex w-full justify-center py-3"
+                    >
+                      Continue to supporting documents
+                      <FileCheck2 className="h-4 w-4" />
+                    </Link>
+                  )}
                   <button
                     type="button"
                     onClick={() => {
@@ -246,7 +268,7 @@ export const ApplyPage: React.FC = () => {
                       setReceipt(null);
                       setMode('track');
                     }}
-                    className="ei-btn-secondary mt-6 w-full justify-center py-3"
+                    className={`${documentConfig?.enabled ? 'mt-3' : 'mt-6'} ei-btn-secondary w-full justify-center py-3`}
                   >
                     Track this reference
                     <ArrowRight className="h-4 w-4" />
@@ -371,6 +393,20 @@ export const ApplyPage: React.FC = () => {
                       );
                     })}
                   </div>
+
+                  <div className="mt-7 rounded-2xl border border-slate-200 bg-[#fbfbfc] p-5 sm:p-6">
+                    <div className="text-[11px] font-[800] uppercase tracking-[0.15em] text-slate-500">Before you continue</div>
+                    <h3 className="mt-2 text-[17px] font-[750] text-[#0d0a64]">Useful information for {journey.label}</h3>
+                    <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                      {journey.preparation.map((item) => (
+                        <div key={item} className="flex gap-2 text-[12px] leading-5 text-slate-600">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0d0a64]" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="mt-4 text-[11px] leading-5 text-slate-500">You do not need to upload supporting documents at this stage. If additional documentation is required, the team can request it securely during review.</p>
+                  </div>
                 </div>
               )}
 
@@ -412,13 +448,18 @@ export const ApplyPage: React.FC = () => {
                   <p className="mt-4 ei-copy">The information below helps our team understand the context before any follow-up conversation.</p>
 
                   <div className="mt-9 grid gap-5 sm:grid-cols-2">
-                    <Field label={journey.amountLabel}>
+                    <Field label={journey.amountLabel} required={journey.amountRequired}>
                       <div className="grid grid-cols-[120px_1fr] gap-2">
-                        <select className={fieldClass} value={currency} onChange={(e) => setCurrency(e.target.value)} aria-label="Currency">
+                        <select className={fieldClass} value={currency} onChange={(e) => { setCurrency(e.target.value); if (e.target.value !== 'OTHER') setOtherCurrency(''); }} aria-label="Currency" required={journey.amountRequired}>
+                          <option value="">Currency</option>
                           {currencyOptions.map((code) => <option key={code} value={code}>{code}</option>)}
                         </select>
-                        <input className={fieldClass} inputMode="decimal" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Amount or range" />
+                        <input className={fieldClass} inputMode="decimal" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Amount or range" required={journey.amountRequired} />
                       </div>
+                      {currency === 'OTHER' && (
+                        <input className={`${fieldClass} mt-2`} value={otherCurrency} onChange={(e) => setOtherCurrency(e.target.value)} placeholder="Enter currency name or code" aria-label="Other currency" />
+                      )}
+                      <span className="mt-2 block text-[11px] leading-5 text-slate-500">{journey.amountHelp}</span>
                     </Field>
 
                     {journey.questions.map((question) => (
@@ -447,7 +488,16 @@ export const ApplyPage: React.FC = () => {
                     <SummaryRow label="Phone" value={phone} />
                     <SummaryRow label="Country / region" value={countryRegion} />
                     <SummaryRow label="Preferred contact" value={preferredContact} />
-                    <SummaryRow label="Indicative amount" value={amount ? `${currency === 'OTHER' ? '' : currency + ' '}${amount}`.trim() : 'Not specified'} />
+                    <SummaryRow label="Indicative amount" value={amount ? `${currency === 'OTHER' ? (otherCurrency || 'Other currency') : currency} ${amount}`.trim() : 'Not specified'} />
+                    {journey.questions.map((question) => (
+                      <SummaryRow key={question.key} label={question.label} value={answers[question.key] || 'Not specified'} />
+                    ))}
+                    {additionalNotes.trim() && <SummaryRow label="Additional context" value={additionalNotes.trim()} />}
+                  </div>
+
+                  <div className="mt-7 rounded-2xl border border-slate-200 bg-[#fbfbfc] p-5">
+                    <div className="text-[12px] font-[750] text-[#0d0a64]">Initial enquiry only</div>
+                    <p className="mt-2 text-[12px] leading-6 text-slate-600">Submitting this form starts a review conversation. It is not an approval, credit decision, investment recommendation, offer, guarantee or contractual commitment. Formal terms apply only through approved documentation.</p>
                   </div>
 
                   <div className="mt-7 space-y-4">

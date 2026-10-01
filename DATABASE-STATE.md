@@ -1,21 +1,25 @@
-# Database State — Phase 5 Baseline
+# Emunahh-Invest database state — current master
 
-The live Supabase database has already successfully completed migrations **001–031**, including the repaired 004–005 baseline and the reconciled 006–031 master.
+## Confirmed in this conversation
+The last database chain explicitly confirmed successful by the user is the reconciled installation through migration 031.
 
-## Phase 5
-Phase 5 requires **no new SQL migration**.
+Confirmed:
+- 001–003 base schema/CMS/RBAC
+- repaired/reconciled 004–005
+- reconciled 006–031 master
 
-The smart application experience uses the existing schema:
-- `applications.service_id`
-- `applications.details` JSONB
-- `applications.consent_at`
-- `applications.source`
-- existing public-safe `track_application()` RPC
-- existing contact-message fields and controlled contact workflow RPC
+## Not yet confirmed in this conversation
+Migrations 032, 033, 034 and the new 035 document-storage migration have been supplied, but their PASS results have not yet been reported by the user.
 
-Travel Financing remains compatible with the legacy `application_type` constraint by using `general_enquiry` internally while preserving the actual service as `service_slug = travel-financing`, `service_label = Travel Financing`, and the related service record ID.
+## Safe next step
+Run the read-only checker:
 
-## Important
-Do **not** rerun historical SQL 001–031 on the current live database.
+`supabase/SQL_STATE_CHECK_031-035.sql`
 
-`supabase/EMUNAHH_MASTER_006-031_RECONCILED_V2_SUCCESSFUL.sql` and other historical migration files are retained only as deployment history/reference.
+Then run only the migrations reported MISSING, in numerical order.
+
+If 032, 033, 034 and 035 are ALL missing, you may run:
+
+`supabase/EMUNAHH_POST_031_MASTER_032-035.sql`
+
+If some are PASS and some are MISSING, do not use the combined file; run only the missing individual files in order.

@@ -23,3 +23,19 @@
 7. In Cloudinary create an unsigned upload preset restricted to the required image formats and a sensible max file size.
 8. The production bundle no longer contains duplicate JPG/WebP assets. Upload production media to Cloudinary and store URLs in the CMS.
 9. Vercel build command: `npm run build`; output directory: `dist`.
+
+
+## Secure application documents
+
+Run migration `035_document_storage_controls.sql`, deploy the `document-storage` Edge Function, and configure the provider from Admin → Site Settings.
+
+For Cloudinary protected documents, add these Supabase Edge Function secrets:
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+- optional `CLOUDINARY_CLOUD_NAME`
+
+For Google Drive, add:
+- `GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON`
+- optional `GOOGLE_DRIVE_FOLDER_ID`
+
+Start with Test Mode enabled. Use the Admin **Test storage configuration** action before switching Test Mode off.

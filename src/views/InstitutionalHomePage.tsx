@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -16,8 +16,9 @@ import {
 import { Link } from 'react-router-dom';
 import { useContent, type ServiceRecord } from '../context/ContentContext';
 import { PageLoader } from '../components/PageLoader';
-import professionalImageImport from '../assets/images/nigerian_professional_hero_1790151218863.webp';
-import meetingImageImport from '../assets/images/african_investment_meeting_1790151240660.webp';
+import { fetchPublishedPosts, getPostCategory, type BlogPost } from '../lib/blog';
+import professionalImageImport from '../assets/images/professional_advisory_hero.webp';
+import meetingImageImport from '../assets/images/investment_advisory_meeting.webp';
 
 const assetUrl = (value: unknown): string => {
   if (typeof value === 'string') return value;
@@ -123,6 +124,15 @@ const ServiceIcon = ({ slug }: { slug: string }) => {
 
 export const InstitutionalHomePage: React.FC = () => {
   const { cmsPages, cmsSections, services, isLoading } = useContent() as any;
+  const [publishedInsights, setPublishedInsights] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    fetchPublishedPosts(3)
+      .then((rows) => active && setPublishedInsights(rows))
+      .catch(() => { /* Phase 7 migration may not be installed yet; CMS fallbacks remain available. */ });
+    return () => { active = false; };
+  }, []);
 
   const page = useMemo(() => cmsPages?.find((item: any) => item.slug === 'home'), [cmsPages]);
   const sections: CMSSection[] = useMemo(
@@ -189,13 +199,21 @@ export const InstitutionalHomePage: React.FC = () => {
     ? intro.points.map((point: any) => sanitizeText(typeof point === 'string' ? point : point?.value, '')).filter(Boolean).slice(0, 4)
     : defaultApproach.points;
 
-  const editorialInsights = Array.isArray(insights.items) && insights.items.length
-    ? insights.items.slice(0, 3).map((item: any, index: number) => ({
-        category: sanitizeText(item.category, defaultInsights[index]?.category || 'Insight'),
-        title: sanitizeText(item.title, defaultInsights[index]?.title || 'Financial insight'),
-        description: sanitizeText(item.description, defaultInsights[index]?.description || ''),
+  const editorialInsights = publishedInsights.length
+    ? publishedInsights.slice(0, 3).map((item) => ({
+        category: getPostCategory(item)?.name || 'Insight',
+        title: item.title,
+        description: item.excerpt,
+        href: `/blog/${item.slug}`,
       }))
-    : defaultInsights;
+    : Array.isArray(insights.items) && insights.items.length
+      ? insights.items.slice(0, 3).map((item: any, index: number) => ({
+          category: sanitizeText(item.category, defaultInsights[index]?.category || 'Insight'),
+          title: sanitizeText(item.title, defaultInsights[index]?.title || 'Financial insight'),
+          description: sanitizeText(item.description, defaultInsights[index]?.description || ''),
+          href: '/blog',
+        }))
+      : defaultInsights.map((item) => ({ ...item, href: '/blog' }));
 
   if (isLoading && !page) return <PageLoader label="Loading homepage" />;
 
@@ -241,6 +259,8 @@ export const InstitutionalHomePage: React.FC = () => {
               alt="Professional financial advisory conversation"
               className="absolute inset-0 h-full w-full object-cover"
               loading="eager"
+              fetchPriority="high"
+              decoding="async"
               onError={(event) => {
                 const image = event.currentTarget;
                 if (!image.dataset.fallback) {
@@ -318,6 +338,7 @@ export const InstitutionalHomePage: React.FC = () => {
               alt="Professional consultation and financial planning discussion"
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
+              decoding="async"
               onError={(event) => {
                 const image = event.currentTarget;
                 if (!image.dataset.fallback) {
@@ -425,7 +446,7 @@ export const InstitutionalHomePage: React.FC = () => {
             {editorialInsights.map((item: any, index: number) => (
               <Link
                 key={item.title}
-                to="/blog"
+                to={item.href || '/blog'}
                 className="group border-b border-slate-300 py-8 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
               >
                 <div className="flex items-center justify-between gap-4">

@@ -1,0 +1,19 @@
+EMUNAHH-INVEST PHASE 6 — SQL RUN INSTRUCTION
+
+Current live database baseline:
+001 → 031 = SUCCESSFUL
+
+Run ONE new migration only:
+032_phase6_trust_governance_content.sql
+
+Path inside this package:
+supabase/032_phase6_trust_governance_content.sql
+
+DO NOT rerun 001-031.
+
+Purpose of 032:
+- registers Trust & Security in the CMS
+- registers Disclosures in the CMS
+- reconciles About copy to the institutional brand direction
+- adds richer Privacy and Terms content for the dedicated legal layouts
+- does not drop application, customer, CMS, user, role, media or audit data

@@ -42,6 +42,8 @@ export const solutionNavigation: NavigationItem[] = [
 
 export const companyNavigation: NavigationItem[] = [
   { label: 'About Emunahh-Invest', href: '/about' },
+  { label: 'Trust & Security', href: '/trust-security' },
+  { label: 'Disclosures', href: '/disclosures' },
   { label: 'Insights', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
