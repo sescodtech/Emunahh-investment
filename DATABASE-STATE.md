@@ -23,3 +23,9 @@ If 032, 033, 034 and 035 are ALL missing, you may run:
 `supabase/EMUNAHH_POST_031_MASTER_032-035.sql`
 
 If some are PASS and some are MISSING, do not use the combined file; run only the missing individual files in order.
+
+## Phase 11
+Expected live state before Phase 11: 001–035 PASS.
+New migration: 036_gallery_testimonials_advanced_seo.sql.
+Do not rerun 001–035.
+After migration 036 succeeds, expected live state is 001–036 PASS.

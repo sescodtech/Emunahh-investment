@@ -75,6 +75,9 @@ export interface SiteSettings {
   defaultOgImageUrl?: string;
   socialLinkedInUrl?: string;
   socialXUrl?: string;
+  homepageGalleryEnabled?: boolean;
+  homepageTestimonialsEnabled?: boolean;
+  googleSiteVerification?: string;
 }
 
 const defaultContent: SiteContent = {
@@ -148,6 +151,9 @@ const defaultSettings: SiteSettings = {
   defaultOgImageUrl: '',
   socialLinkedInUrl: '',
   socialXUrl: '',
+  homepageGalleryEnabled: true,
+  homepageTestimonialsEnabled: true,
+  googleSiteVerification: '',
 };
 
 interface ContentContextType {
@@ -184,7 +190,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       const [contentRes, servicesRes, settingsRes, pagesRes, sectionsRes] = await Promise.all([
         supabase.from('site_content').select('content').eq('id',1).maybeSingle(),
         supabase.from('services').select('id,slug,title,category,tagline,description,bullets,image_url,is_published,display_order').eq('is_published',true).order('display_order'),
-        supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url,default_seo_title,default_seo_description,default_og_image_url,social_linkedin_url,social_x_url').eq('id',1).maybeSingle(),
+        supabase.from('site_settings').select('company_name,company_email,phone,secondary_phone,whatsapp,office_address,website_url,logo_url,default_seo_title,default_seo_description,default_og_image_url,social_linkedin_url,social_x_url,homepage_gallery_enabled,homepage_testimonials_enabled,google_site_verification').eq('id',1).maybeSingle(),
         supabase.from('cms_pages').select('*').eq('status','published').order('title'),
         supabase.from('cms_sections').select('*').eq('is_enabled',true).order('display_order'),
       ]);
@@ -199,7 +205,7 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
       if (!sectionsRes?.error) setCmsSections(sectionsRes?.data || []);
       if (!settingsRes.error && settingsRes.data) {
         const s:any=settingsRes.data;
-        setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||'',defaultSeoTitle:s.default_seo_title||prev.defaultSeoTitle,defaultSeoDescription:s.default_seo_description||prev.defaultSeoDescription,defaultOgImageUrl:s.default_og_image_url||'',socialLinkedInUrl:s.social_linkedin_url||'',socialXUrl:s.social_x_url||''}));
+        setSettings(prev=>({...prev,companyName:s.company_name,companyEmail:s.company_email,phone:s.phone,secondaryPhone:s.secondary_phone,whatsapp:s.whatsapp,officeAddress:s.office_address,websiteUrl:s.website_url,logoUrl:s.logo_url||'',defaultSeoTitle:s.default_seo_title||prev.defaultSeoTitle,defaultSeoDescription:s.default_seo_description||prev.defaultSeoDescription,defaultOgImageUrl:s.default_og_image_url||'',socialLinkedInUrl:s.social_linkedin_url||'',socialXUrl:s.social_x_url||'',homepageGalleryEnabled:s.homepage_gallery_enabled!==false,homepageTestimonialsEnabled:s.homepage_testimonials_enabled!==false,googleSiteVerification:s.google_site_verification||''}));
       }
     } catch (err) { console.warn('Using bundled default content:', err); }
     finally { setIsLoading(false); }

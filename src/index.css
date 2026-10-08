@@ -242,3 +242,5 @@
     scroll-behavior: auto !important;
   }
 }
+
+.no-eyebrow-line::before { display: none !important; }

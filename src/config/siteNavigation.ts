@@ -45,6 +45,8 @@ export const companyNavigation: NavigationItem[] = [
   { label: 'Trust & Security', href: '/trust-security' },
   { label: 'Disclosures', href: '/disclosures' },
   { label: 'Insights', href: '/blog' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Testimonials', href: '/testimonials' },
   { label: 'Contact', href: '/contact' },
 ];
 

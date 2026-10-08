@@ -15,6 +15,8 @@ const coreRoutes = [
   ['/services/personal-finance', 'monthly', '0.8'],
   ['/services/investment-services', 'monthly', '0.8'],
   ['/blog', 'weekly', '0.8'],
+  ['/gallery', 'monthly', '0.6'],
+  ['/testimonials', 'monthly', '0.6'],
   ['/contact', 'monthly', '0.7'],
   ['/apply', 'monthly', '0.5'],
   ['/trust-security', 'monthly', '0.6'],

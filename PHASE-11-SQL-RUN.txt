@@ -1,0 +1,10 @@
+LIVE DATABASE EXPECTED BEFORE PHASE 11:
+001 -> 035 PASS
+
+RUN ONLY:
+supabase/036_gallery_testimonials_advanced_seo.sql
+
+THEN VERIFY WITH:
+supabase/SQL_STATE_CHECK_036.sql
+
+DO NOT RERUN 001-035.

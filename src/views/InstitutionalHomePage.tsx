@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { useContent, type ServiceRecord } from '../context/ContentContext';
 import { PageLoader } from '../components/PageLoader';
 import { fetchPublishedPosts, getPostCategory, type BlogPost } from '../lib/blog';
+import { fetchGallery, fetchTestimonials, type GalleryItem, type Testimonial } from '../lib/socialProof';
 import professionalImageImport from '../assets/images/professional_advisory_hero.webp';
 import meetingImageImport from '../assets/images/investment_advisory_meeting.webp';
 
@@ -123,14 +124,28 @@ const ServiceIcon = ({ slug }: { slug: string }) => {
 };
 
 export const InstitutionalHomePage: React.FC = () => {
-  const { cmsPages, cmsSections, services, isLoading } = useContent() as any;
+  const { cmsPages, cmsSections, services, settings, isLoading } = useContent() as any;
   const [publishedInsights, setPublishedInsights] = useState<BlogPost[]>([]);
+  const [homeGallery, setHomeGallery] = useState<GalleryItem[]>([]);
+  const [homeTestimonials, setHomeTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
     let active = true;
     fetchPublishedPosts(3)
       .then((rows) => active && setPublishedInsights(rows))
       .catch(() => { /* Phase 7 migration may not be installed yet; CMS fallbacks remain available. */ });
+    return () => { active = false; };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    Promise.all([fetchGallery({ homepage: true, limit: 4 }), fetchTestimonials({ homepage: true, limit: 3 })])
+      .then(([gallery, testimonials]) => {
+        if (!active) return;
+        setHomeGallery(gallery);
+        setHomeTestimonials(testimonials);
+      })
+      .catch(() => { /* Migration 036 may not be installed yet. */ });
     return () => { active = false; };
   }, []);
 
@@ -150,6 +165,8 @@ export const InstitutionalHomePage: React.FC = () => {
   const why = getSection(sections, 'why');
   const cta = getSection(sections, 'cta');
   const insights = getSection(sections, 'insights');
+  const gallerySection = getSection(sections, 'gallery');
+  const testimonialsSection = getSection(sections, 'testimonials');
 
   const canonicalServices = useMemo(() => {
     const bySlug = new Map<string, ServiceRecord>((services || []).map((service: ServiceRecord) => [service.slug, service]));
@@ -351,7 +368,7 @@ export const InstitutionalHomePage: React.FC = () => {
           </div>
           <div className="flex items-center py-16 lg:px-16 lg:py-24 xl:px-20">
             <div className="max-w-xl px-0">
-              <div className="ei-eyebrow text-[#ff6b70]">{sanitizeText(intro.eyebrow, defaultApproach.eyebrow)}</div>
+              <div className="ei-eyebrow no-eyebrow-line text-[#ff6b70]">{sanitizeText(intro.eyebrow, defaultApproach.eyebrow)}</div>
               <h2 className="mt-5 text-[clamp(2.3rem,4.4vw,4.2rem)] leading-[1.05] text-white">
                 {sanitizeText(intro.heading, defaultApproach.heading)}
               </h2>
@@ -426,6 +443,33 @@ export const InstitutionalHomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {settings?.homepageGalleryEnabled !== false && homeGallery.length > 0 && <section className="ei-section bg-white">
+        <div className="ei-container">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="ei-eyebrow">{sanitizeText(gallerySection.eyebrow, 'Inside Emunahh-Invest')}</div>
+              <h2 className="mt-5 max-w-2xl text-[clamp(2.15rem,4vw,3.55rem)] text-[#080642]">{sanitizeText(gallerySection.heading, 'A closer look at our engagements and activities.')}</h2>
+              <p className="ei-copy mt-5 max-w-2xl">{sanitizeText(gallerySection.description, 'Selected moments from our professional engagements and company activities.')}</p>
+            </div>
+            <Link to="/gallery" className="inline-flex items-center gap-2 text-[13px] font-[700] text-[#0d0a64] hover:text-[#d91c23]">View gallery<ArrowRight className="h-4 w-4"/></Link>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {homeGallery.map((item,index)=><Link to="/gallery" key={item.id} className={`group overflow-hidden border border-slate-200 bg-slate-50 ${index===0?'sm:col-span-2 lg:col-span-2':''}`}>
+              <img src={item.image_url} alt={item.alt_text||item.title} loading="lazy" decoding="async" className={`w-full object-cover transition duration-500 group-hover:scale-[1.02] ${index===0?'aspect-[16/8]':'aspect-[4/3]'}`}/>
+              <div className="p-4"><div className="text-[10px] font-bold uppercase tracking-[.14em] text-[#d91c23]">{item.gallery_categories?.name||'Gallery'}</div><div className="mt-1 text-sm font-extrabold text-[#0d0a64]">{item.title}</div></div>
+            </Link>)}
+          </div>
+        </div>
+      </section>}
+
+      {settings?.homepageTestimonialsEnabled !== false && homeTestimonials.length > 0 && <section className="border-y border-slate-200 bg-[#fbfbfc]">
+        <div className="ei-container py-16 lg:py-20">
+          <div className="max-w-3xl"><div className="ei-eyebrow">{sanitizeText(testimonialsSection.eyebrow, 'Client experiences')}</div><h2 className="mt-5 text-[clamp(2.1rem,4vw,3.45rem)] text-[#080642]">{sanitizeText(testimonialsSection.heading, 'What clients say about working with us.')}</h2><p className="ei-copy mt-5">{sanitizeText(testimonialsSection.description, 'Approved experiences shared by clients who have worked with Emunahh-Invest.')}</p></div>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">{homeTestimonials.map((item)=><article key={item.id} className="bg-white border border-slate-200 p-6"><div className="text-4xl leading-none text-[#d91c23]">“</div><p className="mt-3 text-sm leading-7 text-slate-700">{item.review}</p><div className="mt-6 border-t border-slate-100 pt-4 flex items-center gap-3">{item.image_url?<img src={item.image_url} alt={`${item.customer_name} testimonial`} className="h-11 w-11 rounded-full object-cover" loading="lazy"/>:<div className="grid h-11 w-11 place-items-center rounded-full bg-[#eef0ff] text-sm font-extrabold text-[#0d0a64]">{item.customer_name.slice(0,1)}</div>}<div><div className="text-sm font-extrabold text-[#0d0a64]">{item.customer_name}</div><div className="text-[10px] text-slate-400">{[item.customer_role,item.company,item.service_label].filter(Boolean).join(' · ')}</div></div></div></article>)}</div>
+          <div className="mt-8"><Link to="/testimonials" className="inline-flex items-center gap-2 text-[13px] font-[700] text-[#0d0a64] hover:text-[#d91c23]">View client experiences<ArrowRight className="h-4 w-4"/></Link></div>
+        </div>
+      </section>}
 
       <section className="ei-section bg-white">
         <div className="ei-container">

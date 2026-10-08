@@ -8,6 +8,8 @@ const routeToCmsSlug = (pathname: string) => {
   if (pathname === '/services') return 'services';
   if (pathname === '/about') return 'about';
   if (pathname === '/blog') return 'blog';
+  if (pathname === '/gallery') return 'gallery';
+  if (pathname === '/testimonials') return 'testimonials';
   if (pathname === '/contact') return 'contact';
   if (pathname === '/apply') return 'apply';
   if (pathname === '/trust-security') return 'trust-security';
@@ -33,6 +35,14 @@ const fallbackMeta: Record<string, { title: string; description: string }> = {
   blog: {
     title: 'Insights | Emunahh-Invest Limited',
     description: 'Read practical insights on financing, investment perspectives, business finance and responsible financial decision-making.',
+  },
+  gallery: {
+    title: 'Gallery | Emunahh-Invest Limited',
+    description: 'View selected Emunahh-Invest company activities, professional engagements and approved visual highlights.',
+  },
+  testimonials: {
+    title: 'Client Testimonials | Emunahh-Invest Limited',
+    description: 'Read approved client experiences shared about working with Emunahh-Invest Limited.',
   },
   contact: {
     title: 'Contact | Emunahh-Invest Limited',
@@ -125,16 +135,36 @@ export const RouteMetadata: React.FC = () => {
     node.setAttribute('type', 'application/ld+json');
     node.textContent = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: settings.companyName || 'Emunahh-Invest Limited',
-      url: baseUrl,
-      email: settings.companyEmail || undefined,
-      telephone: settings.phone || undefined,
-      logo: settings.logoUrl || undefined,
-      sameAs: [settings.socialLinkedInUrl, settings.socialXUrl].filter(Boolean),
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': `${baseUrl}/#organization`,
+          name: settings.companyName || 'Emunahh-Invest Limited',
+          url: baseUrl,
+          email: settings.companyEmail || undefined,
+          telephone: settings.phone || undefined,
+          logo: settings.logoUrl || undefined,
+          sameAs: [settings.socialLinkedInUrl, settings.socialXUrl].filter(Boolean),
+        },
+        {
+          '@type': 'WebSite',
+          '@id': `${baseUrl}/#website`,
+          url: baseUrl,
+          name: settings.companyName || 'Emunahh-Invest Limited',
+          publisher: { '@id': `${baseUrl}/#organization` },
+        },
+      ],
     });
     if (!existing) document.head.appendChild(node);
-  }, [baseUrl, pathname, settings.companyEmail, settings.companyName, settings.logoUrl, settings.phone, settings.socialLinkedInUrl, settings.socialXUrl]);
+
+    let verification = document.head.querySelector('meta[name="google-site-verification"]') as HTMLMetaElement | null;
+    if (settings.googleSiteVerification) {
+      if (!verification) { verification = document.createElement('meta'); verification.name = 'google-site-verification'; document.head.appendChild(verification); }
+      verification.content = settings.googleSiteVerification;
+    } else if (verification) {
+      verification.remove();
+    }
+  }, [baseUrl, pathname, settings.companyEmail, settings.companyName, settings.logoUrl, settings.phone, settings.socialLinkedInUrl, settings.socialXUrl, settings.googleSiteVerification]);
 
   return null;
 };

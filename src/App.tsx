@@ -55,6 +55,12 @@ const ServicesPage = React.lazy(() =>
 const ServiceDetailPage = React.lazy(() =>
   import('./views/ServiceDetailPage').then((module) => ({ default: module.ServiceDetailPage })),
 );
+const GalleryPage = React.lazy(() =>
+  import('./views/GalleryPage').then((module) => ({ default: module.GalleryPage })),
+);
+const TestimonialsPage = React.lazy(() =>
+  import('./views/TestimonialsPage').then((module) => ({ default: module.TestimonialsPage })),
+);
 
 const LoadingScreen = () => <PageLoader label="Loading page" />;
 
@@ -112,6 +118,8 @@ const AppLayout: React.FC = () => {
             <Route path="/about" element={<InstitutionalAboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogArticlePage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/contact" element={<CMSContactPage />} />
             <Route path="/apply" element={<ApplyPage />} />
             <Route path="/documents/:applicationId" element={<DocumentUploadPage />} />
