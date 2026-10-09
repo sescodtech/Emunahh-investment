@@ -213,6 +213,16 @@ export const ContentProvider: React.FC<{ children: ReactNode }> = ({ children })
 
   useEffect(() => {
     fetchDynamicData();
+    const refresh = () => { void fetchDynamicData(); };
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === 'emunahh-content-revision') refresh();
+    };
+    window.addEventListener('emunahh-content-updated', refresh as EventListener);
+    window.addEventListener('storage', onStorage);
+    return () => {
+      window.removeEventListener('emunahh-content-updated', refresh as EventListener);
+      window.removeEventListener('storage', onStorage);
+    };
   }, []);
 
   return (

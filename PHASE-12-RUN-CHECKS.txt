@@ -1,0 +1,22 @@
+EMUNAHH-INVEST — PHASE 12 QUICK RUN CHECKS
+
+NO NEW SQL IS REQUIRED FOR THIS PACKAGE.
+Current database target: migrations 001 through 036 already applied.
+
+1. Deploy this full source package.
+2. Confirm Admin -> Site Settings save persists after refresh.
+3. Confirm Website CMS save persists and public content refreshes.
+4. Confirm Services save persists and public service content updates.
+5. Test Gallery create/edit/publish/archive/homepage visibility.
+6. Test Testimonials create/edit/consent/publish/archive/homepage visibility.
+7. Test all 5 application types end to end.
+8. Test application status changes and transactional email where configured.
+9. Deploy/test Supabase Edge Functions.
+10. Configure Cloudinary and Resend production secrets.
+11. Test secure document upload and access.
+12. Validate Users, Staff, Roles and Permissions.
+13. Validate responsive admin sidebar on short laptop, tablet and mobile screens.
+14. Add Google Search Console verification token, deploy, and submit sitemap.xml.
+15. Run final live browser/mobile smoke test before launch.
+
+See docs/PHASE-12-PRODUCTION-INTEGRATION-QA.md for the full checklist.
